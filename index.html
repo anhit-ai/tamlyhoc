@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tâm lý học đại cương – Góc ôn tập & Tự học tương tác</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F9; --surface:#FFFFFF; --surface2:#EAEEF5; --ink:#1A2340; --muted:#5E6785; --line:#D6DCE8;
+  --myelin:#E9A23B; --myelin-soft:#FBEBD0; --axon:#1E8C86; --axon-soft:#D7EEEC; --rose:#C8366E; --rose-soft:#F7DCE6;
+  --indigo:#3B4A8C; --shadow:0 1px 3px rgba(26,35,64,.08);
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --font:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:20px; height:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100%}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--myelin); outline-offset:2px; border-radius:6px}
+b{font-weight:650}
+.app{display:grid; grid-template-columns:300px 1fr; min-height:100vh}
+
+/* Sidebar */
+.side{background:var(--surface); border-right:1px solid var(--line); padding:22px 16px 28px; position:sticky; top:0; height:100vh; overflow-y:auto; display:flex; flex-direction:column}
+.brand{display:flex; gap:12px; align-items:center; padding:4px 8px 18px; border-bottom:1px solid var(--line); margin-bottom:14px; background:none; border-left:0; border-right:0; border-top:0; width:100%; text-align:left; cursor:pointer}
+.brand-mark{width:42px; height:42px; flex:none; border-radius:12px; background:linear-gradient(135deg,var(--indigo),var(--axon)); display:grid; place-items:center; color:#fff}
+.brand-mark svg{width:24px; height:24px; fill:currentColor}
+.brand h1{font-size:15px; line-height:1.25; margin:0; font-weight:750; color:var(--ink)}
+.brand small{display:block; color:var(--muted); font-size:12px; font-weight:500; margin-top:2px}
+.nav-home{display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border-radius:var(--r-md); border:0; background:none; text-align:left; font-weight:650; font-size:14.5px}
+.nav-home:hover{background:var(--surface2)}
+.nav-home.on{background:var(--ink); color:var(--paper)}
+.part-label{font-size:12px; color:var(--muted); margin:18px 10px 6px; font-weight:700; text-transform:uppercase; letter-spacing:.05em}
+.lesson-btn{display:grid; grid-template-columns:42px 1fr; align-items:center; gap:4px 8px; width:100%; padding:10px 12px; border:0; border-radius:var(--r-md); background:none; text-align:left; margin-bottom:3px}
+.lesson-btn:hover{background:var(--surface2)}
+.lesson-btn.on{background:var(--myelin-soft)}
+.lesson-btn .code{font-weight:800; font-size:13px; color:var(--indigo)}
+.lesson-btn .name{font-size:13.5px; font-weight:600; line-height:1.3}
+.lesson-btn .mini{grid-column:2; height:4px; border-radius:4px; background:var(--surface2); overflow:hidden; margin-top:4px}
+.lesson-btn.on .mini{background:rgba(0,0,0,.15)}
+.mini i{display:block; height:100%; background:var(--axon); border-radius:4px; transition:width .3s}
+.side-foot{margin-top:auto; padding:16px 8px 0; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap}
+.chip-btn{border:1px solid var(--line); background:var(--surface2); border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px}
+.chip-btn:hover{border-color:var(--ink)}
+
+/* Main Container */
+.main{padding:30px clamp(16px,4vw,48px) 64px; max-width:1120px; width:100%}
+.topbar{display:none}
+
+/* Hero & Exam Dashboard */
+.hero{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:stretch; margin-bottom:26px}
+.hero-card{background:var(--ink); color:var(--paper); border-radius:var(--r-lg); padding:26px 28px; position:relative; overflow:hidden; box-shadow:var(--shadow)}
+.hero-card h2{font-size:clamp(22px,3vw,32px); line-height:1.2; margin:0 0 10px; font-weight:800; letter-spacing:-.01em}
+.hero-card p{margin:0; opacity:.85; font-size:14.5px; line-height:1.55}
+.hero-card .lead-q{margin-top:18px; font-size:13.5px; opacity:.92; border-left:3px solid var(--myelin); padding-left:12px; font-style:italic}
+.exam-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px; display:flex; flex-direction:column; gap:14px; box-shadow:var(--shadow)}
+.exam-card h3{margin:0; font-size:16px; font-weight:750}
+.exam-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+.fact{background:var(--surface2); border-radius:var(--r-md); padding:10px 12px}
+.fact strong{display:block; font-size:20px; font-weight:800; line-height:1.1; color:var(--indigo)}
+.fact span{font-size:12px; color:var(--muted); font-weight:550}
+
+.btn{border:0; border-radius:var(--r-md); padding:10px 16px; font-weight:650; font-size:14px; background:var(--surface2); color:var(--ink); transition:all .2s; display:inline-flex; align-items:center; justify-content:center; gap:6px}
+.btn:hover{filter:brightness(.95)}
+.btn.primary{background:var(--myelin); color:#1A2340; font-weight:750}
+.btn.dark{background:var(--ink); color:var(--paper)}
+.btn.ghost{background:none; border:1px solid var(--line)}
+.btn:disabled{opacity:.45; cursor:not-allowed}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+/* Axon Map */
+.map{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px 18px; margin-bottom:26px; box-shadow:var(--shadow)}
+.map-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.map-head h3{margin:0; font-size:16px; font-weight:750}
+.map-head p{margin:0; color:var(--muted); font-size:13px}
+.axon-wrap{overflow-x:auto; padding-bottom:6px}
+.axon{display:flex; align-items:center; min-width:600px; padding:8px 4px}
+.soma{width:44px; height:44px; border-radius:50%; background:var(--indigo); flex:none; position:relative; box-shadow:0 0 0 6px var(--surface2)}
+.soma::after{content:""; position:absolute; inset:14px; border-radius:50%; background:var(--surface)}
+.seg{flex:1; height:32px; margin:0 4px; border-radius:16px; background:var(--surface2); position:relative; overflow:hidden; border:0; padding:0; min-width:70px; cursor:pointer}
+.seg .fill{position:absolute; inset:0 auto 0 0; background:var(--myelin); border-radius:16px; transition:width .4s ease}
+.seg .lbl{position:relative; font-size:12.5px; font-weight:800; color:var(--ink); line-height:32px; display:block; text-align:center}
+.seg:hover{outline:2px solid var(--ink); outline-offset:1px}
+.terminal{width:26px; height:26px; flex:none; border-radius:50%; border:5px solid var(--axon); margin-left:4px}
+
+/* Grid Lessons Cards */
+.grid-lessons{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px}
+.lcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px; text-align:left; display:flex; flex-direction:column; gap:8px; min-height:140px; cursor:pointer; transition:border-color .2s}
+.lcard:hover{border-color:var(--ink); transform:translateY(-2px); box-shadow:var(--shadow)}
+.lcard .code{font-weight:800; color:var(--indigo); font-size:13px}
+.lcard .t{font-weight:700; font-size:15px; line-height:1.35; margin:2px 0}
+.lcard .meta{font-size:12px; color:var(--muted); margin-top:auto; display:flex; justify-content:space-between}
+.bar{height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-top:4px}
+.bar i{display:block; height:100%; background:var(--axon); transition:width .3s}
+
+/* Lesson Detail View */
+.lhead{display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; margin-bottom:8px}
+.lhead .bigcode{font-size:clamp(44px,6vw,68px); font-weight:850; line-height:.9; color:var(--myelin); letter-spacing:-.03em}
+.lhead .part{color:var(--muted); font-size:13px; font-weight:600}
+.lhead h2{margin:2px 0 0; font-size:clamp(22px,3vw,30px); line-height:1.2; font-weight:800}
+.goals{background:var(--axon-soft); border-radius:var(--r-md); padding:14px 18px; margin:16px 0; border-left:4px solid var(--axon)}
+.goals h4{margin:0 0 6px; font-size:13.5px; font-weight:750}
+.goals ul{margin:0; padding-left:18px; font-size:14px}
+.goals li{margin:3px 0}
+
+/* Mindmap Tree Wrapper & SVG */
+.mm-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); margin:18px 0 24px; overflow:hidden; box-shadow:var(--shadow)}
+.mm-head{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap; background:var(--surface2)}
+.mm-head h4{margin:0; font-size:14.5px; font-weight:750}
+.mm-scroll{overflow-x:auto; padding:14px 16px; -webkit-overflow-scrolling:touch}
+.tree{padding:12px 6px; border-bottom:1px dashed var(--line)}
+.tree:last-child{border-bottom:0}
+.mm-scroll svg{display:block; height:auto}
+
+/* Tabs */
+.tabs{display:flex; gap:6px; margin:20px 0 22px; border-bottom:1px solid var(--line); overflow-x:auto}
+.tab{border:0; background:none; padding:10px 16px 12px; font-weight:650; font-size:15px; color:var(--muted); border-bottom:3px solid transparent; margin-bottom:-1px; white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink); border-bottom-color:var(--myelin)}
+.tab .count{font-size:11.5px; background:var(--surface2); border-radius:999px; padding:1px 8px; margin-left:6px; color:var(--muted)}
+
+/* Toolbar */
+.toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:14px 0}
+.muted{color:var(--muted)}
+
+/* Content Blocks (Details / Accordion) */
+.block{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); margin-bottom:12px; overflow:hidden}
+.block summary{list-style:none; cursor:pointer; padding:14px 18px; font-weight:700; font-size:15.5px; display:flex; justify-content:space-between; align-items:center; gap:10px}
+.block summary::-webkit-details-marker{display:none}
+.block summary::after{content:"+"; font-size:22px; font-weight:400; color:var(--muted); line-height:1}
+.block[open] summary::after{content:"–"}
+.block ul{margin:0; padding:0 22px 16px 36px}
+.block li{margin:7px 0; max-width:82ch; font-size:14.5px}
+.block li b{color:var(--indigo)}
+
+/* Tables */
+.tblwrap{overflow-x:auto; margin:18px 0; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface)}
+.tblwrap h4{margin:0; padding:12px 16px; font-size:14.5px; font-weight:750; border-bottom:1px solid var(--line); background:var(--surface2)}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:540px}
+th,td{padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+th{font-size:12.5px; color:var(--muted); font-weight:700; background:var(--surface2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:650}
+
+/* Tips */
+.tips{border:2px dashed var(--myelin); border-radius:var(--r-md); padding:16px 20px; margin:18px 0; background:var(--myelin-soft)}
+.tips h4{margin:0 0 8px; font-size:14.5px; font-weight:750}
+.tips ul{margin:0; padding-left:20px}
+.tips li{margin:6px 0; font-size:14.5px}
+
+/* Flashcards */
+.fc-stage{perspective:1400px; margin:12px 0 18px}
+.fc{position:relative; width:100%; min-height:280px; border:0; padding:0; background:none; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.2,.7,.2,1); display:block; cursor:pointer}
+.fc.flip{transform:rotateY(180deg)}
+.face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--r-lg); padding:32px 36px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; border:1px solid var(--line); box-shadow:var(--shadow)}
+.face.front{background:var(--surface)}
+.face.back{background:var(--ink); color:var(--paper); transform:rotateY(180deg)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .face.back{background:#232A4B; color:var(--ink)} }
+:root[data-theme="dark"] .face.back{background:#232A4B; color:var(--ink)}
+.face .term{font-size:clamp(22px,3.2vw,30px); font-weight:800; line-height:1.25}
+.face .def{font-size:clamp(15.5px,2vw,18.5px); max-width:56ch; line-height:1.6}
+.face .hint{position:absolute; bottom:14px; font-size:12px; opacity:.65}
+.fc-tag{position:absolute; top:14px; left:16px; font-size:11.5px; font-weight:700; padding:2px 10px; border-radius:999px}
+.fc-tag.known{background:var(--axon-soft); color:var(--axon)}
+.fc-tag.learning{background:var(--rose-soft); color:var(--rose)}
+.fc-controls{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:10px}
+.btn.know{background:var(--axon); color:#fff; font-weight:700}
+.btn.again{background:var(--rose); color:#fff; font-weight:700}
+
+/* Quiz Practice */
+.qcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:24px clamp(16px,3vw,30px); box-shadow:var(--shadow)}
+.qmeta{display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--muted); font-weight:650; margin-bottom:12px; flex-wrap:wrap}
+.qtext{font-size:clamp(16.5px,2.2vw,19.5px); font-weight:700; line-height:1.45; margin:0 0 18px; max-width:76ch}
+.opts{display:grid; gap:10px}
+.opt{display:grid; grid-template-columns:32px 1fr; align-items:center; gap:12px; text-align:left; padding:12px 16px; border-radius:var(--r-md); border:1.5px solid var(--line); background:var(--surface); font-size:14.5px; transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt .k{width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:var(--surface2); font-weight:750; font-size:13px}
+.opt.sel{border-color:var(--indigo); background:var(--surface2)}
+.opt.ok{border-color:var(--axon); background:var(--axon-soft)}
+.opt.ok .k{background:var(--axon); color:#fff}
+.opt.bad{border-color:var(--rose); background:var(--rose-soft)}
+.opt.bad .k{background:var(--rose); color:#fff}
+.opt:disabled{cursor:default}
+.explain{margin-top:16px; padding:14px 18px; border-radius:var(--r-md); background:var(--surface2); border-left:4px solid var(--axon); font-size:14px}
+.explain.wrong{border-left-color:var(--rose)}
+.explain strong{display:block; margin-bottom:4px}
+.qnav{display:flex; justify-content:space-between; gap:10px; margin-top:20px; flex-wrap:wrap}
+.seg-ctrl{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--surface)}
+.seg-ctrl button{border:0; background:none; padding:7px 14px; font-size:13px; font-weight:600; color:var(--muted)}
+.seg-ctrl button.on{background:var(--ink); color:var(--paper)}
+.progress{height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-bottom:14px}
+.progress i{display:block; height:100%; background:var(--myelin); transition:width .3s}
+
+/* Exam Mode */
+.exam-setup{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:26px; box-shadow:var(--shadow)}
+.checks{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; margin:14px 0 20px}
+.check{display:flex; gap:10px; align-items:center; padding:10px 14px; border:1px solid var(--line); border-radius:var(--r-sm); font-size:14px; cursor:pointer}
+.check input{accent-color:var(--myelin); width:18px; height:18px}
+.timer{font-variant-numeric:tabular-nums; font-weight:800; font-size:20px; color:var(--indigo)}
+.timer.low{color:var(--rose)}
+.qgrid{display:flex; flex-wrap:wrap; gap:6px; margin-top:18px}
+.qgrid button{width:36px; height:34px; border-radius:8px; border:1px solid var(--line); background:var(--surface); font-size:12.5px; font-weight:700}
+.qgrid button.done{background:var(--surface2); border-color:var(--indigo)}
+.qgrid button.cur{outline:2px solid var(--myelin)}
+.qgrid button.ok{background:var(--axon-soft); border-color:var(--axon)}
+.qgrid button.bad{background:var(--rose-soft); border-color:var(--rose)}
+.score{display:flex; gap:24px; align-items:center; flex-wrap:wrap; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 26px; margin-bottom:18px}
+.score .big{font-size:54px; font-weight:850; line-height:1; color:var(--axon)}
+.breakdown{display:grid; gap:8px; margin:8px 0 20px}
+.brow{display:grid; grid-template-columns:52px 1fr 70px; gap:10px; align-items:center; font-size:13.5px}
+.review-item{border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; margin-bottom:12px; background:var(--surface)}
+.review-item .q{font-weight:700; margin-bottom:6px; font-size:14.5px}
+.review-item .a-ok{color:var(--axon); font-weight:650}
+.review-item .a-bad{color:var(--rose); font-weight:650; text-decoration:line-through}
+
+/* Search */
+.search{width:100%; padding:12px 14px; border-radius:var(--r-md); border:1px solid var(--line); background:var(--surface); color:var(--ink); font:inherit; font-size:15px; margin-bottom:14px}
+.sres{display:grid; gap:10px}
+.sres .item{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; cursor:pointer}
+.sres .item:hover{border-color:var(--ink)}
+.sres .item .w{font-weight:700; font-size:15px}
+.sres .item .from{font-size:12px; color:var(--muted); margin-top:4px}
+mark{background:var(--myelin-soft); color:inherit; padding:0 2px; border-radius:3px}
+
+/* Responsive */
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed; inset:0 auto 0 0; width:min(86vw,320px); z-index:30; transform:translateX(-105%); transition:transform .25s; box-shadow:0 0 20px rgba(0,0,0,.25)}
+  .side.open{transform:none}
+  .topbar{display:flex; position:sticky; top:0; z-index:20; background:var(--surface); align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line)}
+  .topbar .t{font-weight:750; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .hero{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="chip-btn" id="menuBtn">☰ Danh mục bài</button>
+  <div class="t" id="topTitle">Tâm lý học đại cương</div>
+</div>
+<div class="app">
+  <aside class="side" id="side" aria-label="Danh mục học tập">
+    <button class="brand" data-go="home">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 0 0-9 9c0 3.6 2.1 6.7 5.2 8.1v1.9c0 .6.4 1 1 1h5.6c.6 0 1-.4 1-1v-1.9c3.1-1.4 5.2-4.5 5.2-8.1a9 9 0 0 0-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z"/></svg>
+      </div>
+      <div>
+        <h1>Tâm lý học ĐC</h1>
+        <small>Góc ôn tập & Tự học</small>
+      </div>
+    </button>
+    <button class="nav-home on" id="navHome" data-go="home">🏠 Tổng quan môn học</button>
+    <div id="sideLessons"></div>
+    <div class="side-foot">
+      <button class="chip-btn" data-go="exam">📝 Thi thử</button>
+      <button class="chip-btn" data-go="wrong">⚠️ Câu sai (<span id="wrongCount">0</span>)</button>
+      <button class="chip-btn" data-go="search">🔍 Tìm kiếm</button>
+      <button class="chip-btn" id="themeBtn">🌓 Giao diện</button>
+    </div>
+  </aside>
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<script>
+const LESSONS = [{"id": "b1", "part": "Phần I: Nhập môn", "code": "B.1", "title": "Tổng quan về Tâm lý học", "goals": ["Hiểu đúng định nghĩa và bản chất khoa học của Tâm lý học hiện đại.", "Nắm vững 4 mục tiêu kinh điển: Mô tả, Giải thích, Dự đoán, Can thiệp.", "Phân biệt tâm lý học với triết học, tâm linh học, giáo dục học và xã hội học.", "Nắm các phân nhánh, cơ hội nghề nghiệp và 5 năng lực của người làm nghề."], "sections": [{"h": "Tâm lý học hiện đại là gì?", "items": ["<b>Tâm lý học hiện đại (Psychology)</b> là ngành khoa học nghiên cứu về <b>hành vi (behavior)</b> và các <b>quá trình tâm trí (mental processes)</b> của con người và các sinh vật khác.", "<b>Hành vi (Behavior):</b> Là những gì có thể <i>quan sát và đo lường trực tiếp</i>, chẳng hạn như cách một người nói, lựa chọn, phản ứng, học tập, làm việc hoặc tương tác xã hội.", "<b>Quá trình tâm trí (Mental processes):</b> Là các hiện tượng diễn ra <i>bên trong dòng ý thức</i> như cảm giác, tri giác, chú ý, trí nhớ, suy nghĩ, cảm xúc, động cơ, niềm tin và việc ra quyết định.", "<b>Điểm quan trọng cần nhớ:</b> Tâm lý học không phải là 'đọc ý nghĩ' hay 'hiểu lòng người'; không đơn thuần là kinh nghiệm sống hay lời khuyên; mà là một <b>ngành khoa học thực nghiệm</b> dựa trên phương pháp nghiên cứu có hệ thống và kiểm chứng bằng số liệu."]}, {"h": "Bốn mục tiêu kinh điển của Tâm lý học", "items": ["<b>1. Mô tả (Describe):</b> <i>Điều gì đang xảy ra?</i> Ghi nhận và phân loại hiện tượng một cách khách quan (vd: sinh viên mất ngủ, lo âu, giảm tập trung).", "<b>2. Giải thích (Explain):</b> <i>Tại sao hiện tượng đó xảy ra?</i> Tìm hiểu các nguyên nhân và cơ chế tương tác (vd: do stress thi cử, thói quen sinh hoạt, xung đột gia đình).", "<b>3. Dự đoán (Predict):</b> <i>Trong điều kiện nhất định, điều gì có khả năng xảy ra tiếp theo?</i> Dự đoán trong tâm lý học là <b>dự đoán theo xác suất</b>, tuyệt đối không phải 'tiên tri tương lai'.", "<b>4. Can thiệp / Thay đổi (Influence / Change):</b> <i>Chúng ta có thể làm gì để cải thiện?</i> Ứng dụng khoa học giúp con người hiểu mình, thích nghi tốt hơn, phát triển tiềm năng và sống hạnh phúc hơn (không phải để kiểm soát con người)."]}, {"h": "Phân biệt Tâm lý học với các ngành liên quan", "items": ["<b>vs. Tâm linh học:</b> Tâm lý học dựa trên quan sát, thực nghiệm và dữ liệu khoa học (CBT, DASS-21); Tâm linh học dựa trên niềm tin, trực giác, huyền học (Tarot, bói toán, luân xa, cúng giải hạn).", "<b>vs. Triết học:</b> Tâm lý học nghiên cứu con người từ bên trong và kiểm chứng bằng số liệu; Triết học tập trung lý luận bản thể, logic thuần túy không cần thí nghiệm kiểm chứng.", "<b>vs. Giáo dục học:</b> Tâm lý học nghiên cứu quá trình tâm lý ở mọi lứa tuổi và bối cảnh (lâm sàng, tổ chức, học đường); Giáo dục học tập trung vào phương pháp dạy và học trong hệ thống nhà trường.", "<b>vs. Xã hội học:</b> Tâm lý học tập trung vi mô (cá nhân, nhóm nhỏ, nội tâm, cảm xúc); Xã hội học tập trung vĩ mô (cơ cấu xã hội, văn hóa, giai cấp, thể chế)."]}, {"h": "Các phân nhánh và cơ hội nghề nghiệp", "items": ["<b>Nhánh lý thuyết:</b> Tâm lý học đại cương, Tâm lý học bất thường, Tâm lý học phát triển, Tâm lý học xã hội, Tâm lý học sinh lý/thần kinh, Tâm lý học thực nghiệm, Tâm lý học so sánh.", "<b>Nhánh ứng dụng:</b> Tâm lý học lâm sàng (Clinical), Tâm lý học tham vấn (Counseling), Tâm lý học tổ chức - nhân sự (I/O), Tâm lý học giáo dục/học đường, Tâm lý học hành vi người tiêu dùng (Consumer/UX), Tâm lý học pháp y/tội phạm, Tâm lý học thể thao, Tâm lý học sức khỏe.", "<b>Nguyên tắc nghề nghiệp quan trọng:</b> Học ngành Tâm lý học <b>không đồng nghĩa mặc nhiên trở thành nhà tâm lý lâm sàng hay tham vấn</b>. Mỗi lĩnh vực đòi hỏi bằng cấp, chuẩn mực đào tạo và giám sát chuyên môn riêng."]}, {"h": "5 Tố chất và Năng lực cốt lõi của người làm nghề", "items": ["<b>1. Lắng nghe sâu (Deep Listening):</b> Hiện diện trọn vẹn, tiếp nhận cả điều được nói và chưa nói; không ngắt lời, không phán xét hay vội đưa lời khuyên.", "<b>2. Tư duy phản biện & Suy luận logic:</b> Không vội tin cảm xúc nhất thời; ra quyết định dựa trên dữ liệu và lý thuyết khoa học.", "<b>3. Tự nhận thức (Self-Awareness):</b> Hiểu rõ giới hạn, điểm mù, thiên kiến bản thân; phân biệt rõ 'vấn đề của mình' và 'vấn đề của thân chủ'.", "<b>4. Lòng trắc ẩn & Không phán xét:</b> Đón nhận sự khác biệt của con người, xây dựng mối quan hệ an toàn và nhân bản.", "<b>5. Chính trực & Đạo đức nghề nghiệp:</b> Giữ bảo mật tuyệt đối, tôn trọng ranh giới nghề nghiệp, không hành nghề vượt quá năng lực được đào tạo."]}, {"h": "Quy tắc an toàn trong lớp học (Safe Place)", "items": ["Lớp học là <b>không gian học tập</b>, không phải phòng trị liệu cá nhân.", "Người học có quyền <b>giữ riêng trải nghiệm</b> của mình, không bắt buộc phải kể chuyện riêng tư.", "Biết một vài khái niệm tâm lý <b>không đồng nghĩa</b> có đủ năng lực chuyên môn để đánh giá hay dán nhãn người khác.", "Bảo mật chia sẻ: 'Những gì diễn ra và được chia sẻ trong lớp học sẽ ở lại trong lớp học'."]}], "tables": [{"title": "So sánh Tâm lý học với các lĩnh vực đối sánh", "head": ["Lĩnh vực đối sánh", "Bản chất tiếp cận", "Phương pháp chủ yếu", "Ví dụ cụ thể"], "rows": [["Tâm linh học", "Dựa trên niềm tin, trực giác, huyền học", "Chiêm nghiệm, bói toán, giải hạn", "Bói bài Tarot, xem tử vi giải tỏa nỗi buồn"], ["Triết học", "Tập trung lý luận bản thể, chân lý, đạo đức", "Lập luận logic thuần suy tưởng", "Mệnh đề Descartes: 'Tôi tư duy, nên tôi tồn tại'"], ["Giáo dục học", "Tập trung vào quá trình dạy và học học đường", "Thiết kế giáo trình, phương pháp sư phạm", "Xây dựng chương trình kỹ năng sống lớp 6"], ["Xã hội học", "Nghiên cứu thể chế, văn hóa, giai cấp vĩ mô", "Điều tra xã hội học diện rộng, thống kê vĩ mô", "Phân tích bất bình đẳng xã hội trong tiếp cận y tế"], ["Tâm lý học", "Khoa học thực nghiệm nghiên cứu hành vi & tâm trí", "Thí nghiệm, đo lường, thang đo, quan sát có hệ thống", "Trị liệu trầm cảm bằng CBT, đo lường bằng DASS-21"]]}, {"title": "Vị trí việc làm và Lĩnh vực ứng dụng của ngành Tâm lý", "head": ["Phân ngành ứng dụng", "Vị trí việc làm tiêu biểu", "Mục tiêu trọng tâm"], "rows": [["Lâm sàng (Clinical)", "Nhà trị liệu tâm lý, chuyên viên chẩn đoán đánh giá", "Đánh giá, can thiệp và hỗ trợ phục hồi sức khỏe tinh thần"], ["Tham vấn (Counseling)", "Chuyên viên tham vấn trường học, trung tâm cộng đồng", "Hỗ trợ cá nhân giải quyết khó khăn đời sống, phát triển kỹ năng"], ["Tổ chức - Nhân sự (I/O)", "Chuyên viên tuyển dụng, đào tạo L&D, tư vấn văn hóa tổ chức", "Tăng hiệu suất, gắn kết nhân viên và cải thiện môi trường làm việc"], ["Nhận thức & Trải nghiệm (UX)", "UX Researcher, nghiên cứu viên AI/sản phẩm công nghệ", "Phân tích hành vi, sự chú ý và trí nhớ để tối ưu sản phẩm"], ["Pháp y & Tội phạm (Forensic)", "Chuyên viên đánh giá tâm lý phạm nhân, giám định tư pháp", "Phân tích hồ sơ hành vi, hỗ trợ điều tra và chính sách cải tạo"]]}], "tips": ["Hành vi thì quan sát được, nhưng <b>ý nghĩa phía sau hành vi</b> luôn cần được tìm hiểu thận trọng.", "Dự đoán trong tâm lý học là <b>dự đoán theo xác suất</b> trong những điều kiện nhất định, không phải đọc trước tương lai.", "Học tâm lý học không phải để 'đọc vị' người khác, mà để <b>hiểu mình, thương mình và đồng hành tử tế</b> với người khác.", "Biết một khái niệm tâm lý không biến ta thành chuyên gia: <b>Tuyệt đối không tự chẩn đoán và không dán nhãn người khác!</b>"], "cards": [["Tâm lý học hiện đại", "Ngành khoa học nghiên cứu về hành vi (behavior) và các quá trình tâm trí (mental processes) của con người và sinh vật."], ["Hành vi (Behavior)", "Những hoạt động, phản ứng có thể quan sát và đo lường trực tiếp từ bên ngoài (nói, vận động, tương tác)."], ["Quá trình tâm trí (Mental processes)", "Các hiện tượng diễn ra bên trong dòng ý thức như cảm giác, tri giác, chú ý, trí nhớ, tư duy, cảm xúc, động cơ."], ["Mô tả (Describe)", "Mục tiêu trả lời câu hỏi 'Điều gì đang xảy ra?' bằng cách quan sát và ghi nhận hiện tượng khách quan."], ["Giải thích (Explain)", "Mục tiêu trả lời câu hỏi 'Tại sao hiện tượng đó xảy ra?' bằng cách tìm hiểu nguyên nhân và cơ chế."], ["Dự đoán (Predict)", "Mục tiêu dự đoán xác suất xuất hiện của hành vi hoặc trạng thái trong những điều kiện nhất định."], ["Can thiệp (Influence / Change)", "Mục tiêu ứng dụng kiến thức khoa học để giúp con người thích nghi tốt hơn và nâng cao chất lượng đời sống."], ["Lắng nghe sâu (Deep Listening)", "Khả năng hiện diện trọn vẹn, tiếp nhận cả điều được nói và chưa nói mà không vội phán xét hay đưa lời khuyên."], ["Tự nhận thức (Self-Awareness)", "Năng lực quan sát nội tâm, hiểu rõ điểm mù, cảm xúc và thiên kiến cá nhân của bản thân."], ["Tâm lý học lâm sàng", "Nhánh ứng dụng chuyên đánh giá, chẩn đoán và can thiệp các rối loạn tâm thần và khó khăn cảm xúc nặng."], ["Tâm lý học tham vấn", "Nhánh hỗ trợ cá nhân giải quyết các khó khăn trong đời sống, mối quan hệ và phát triển tiềm năng."], ["Tâm lý học I/O", "Tâm lý học tổ chức và lao động, nghiên cứu hành vi con người tại nơi làm việc và môi trường doanh nghiệp."], ["Không gian an toàn (Safe Place)", "Nguyên tắc lớp học tôn trọng bảo mật, không phán xét, không ép buộc chia sẻ và không phải phòng trị liệu."], ["Tâm lý học vs Tâm linh học", "Tâm lý học là khoa học thực nghiệm có kiểm chứng; Tâm linh học dựa trên niềm tin và huyền học."], ["Tâm lý học vs Triết học", "Tâm lý học dùng thực nghiệm và số liệu; Triết học dùng lập luận logic thuần lý thuyết."]], "qs": [["Tâm lý học hiện đại chủ yếu nghiên cứu những hiện tượng tâm trí bên trong con người, còn hành vi quan sát được thuộc về các ngành khoa học khác.", ["True", "False"], 1, "Tâm lý học hiện đại nghiên cứu CẢ hành vi (behavior) lẫn các quá trình tâm trí (mental processes)."], ["Khi một nội dung trong môn học khiến sinh viên liên tưởng mạnh đến trải nghiệm cá nhân, sinh viên có quyền không chia sẻ trải nghiệm đó trước lớp.", ["True", "False"], 0, "Lớp học tâm lý học là không gian học tập an toàn, không phải phòng trị liệu cá nhân; người học có quyền bảo vệ sự riêng tư."], ["Một người tốt nghiệp cử nhân ngành Tâm lý học mặc nhiên có đủ năng lực để thực hành tham vấn hoặc tâm lý lâm sàng.", ["True", "False"], 1, "Mỗi lĩnh vực thực hành đòi hỏi đào tạo chuyên sâu, tích lũy giờ thực hành lâm sàng và có giám sát chuyên môn phù hợp."], ["Đâu là mô tả phù hợp nhất về tâm lý học hiện đại?", ["Ngành nghiên cứu cách đọc suy nghĩ và dự đoán tương lai con người", "Ngành khoa học nghiên cứu hành vi và các quá trình tâm trí", "Ngành chuyên nghiên cứu các rối loạn tâm thần và bệnh lý", "Hệ thống kiến thức giúp con người đọc vị tính cách người khác"], 1, "Tâm lý học là ngành khoa học nghiên cứu hành vi (quan sát được) và các quá trình tâm trí (nội tâm)."], ["Một nhà nghiên cứu phát hiện rằng nhân viên thiếu ngủ thường có mức tập trung thấp hơn vào ngày hôm sau. Hoạt động này gần nhất với mục tiêu nào?", ["Mô tả", "Giải thích", "Dự đoán", "Can thiệp"], 2, "Từ mối liên hệ đã quan sát được, nhà nghiên cứu có thể dự đoán khả năng xuất hiện trạng thái giảm tập trung."], ["Nhánh tâm lý học nào phù hợp nhất với việc nghiên cứu động lực làm việc, sự gắn kết công việc và sức khỏe tinh thần của nhân viên?", ["Tâm lý học phát triển", "Tâm lý học tổ chức và lao động (I/O)", "Tâm lý học pháp y", "Tâm lý học nhận thức"], 1, "I/O Psychology chuyên nghiên cứu hành vi con người trong môi trường công việc và tổ chức."], ["Điều nào sau đây thể hiện tốt nhất thái độ khoa học khi tiếp cận một nhận định tâm lý?", ["Nhận định này rất đúng vì tôi đã từng trải qua trong quá khứ", "Nhiều người trên mạng chia sẻ điều này nên có lẽ nó đúng", "Một chuyên gia nổi tiếng đã nói như vậy nên chắc chắn tin được", "Tôi muốn biết bằng chứng nào hỗ trợ nhận định này và bằng chứng đó có giới hạn gì"], 3, "Thái độ khoa học đòi hỏi luôn đặt câu hỏi về bằng chứng thực nghiệm và giới hạn của nghiên cứu."], ["Sau khi học về một rối loạn tâm lý, Minh thấy mình có 3 đặc điểm giống mô tả và kết luận: 'Có lẽ mình mắc rối loạn này'. Phản ứng nào phù hợp nhất?", ["Minh có thể tự chẩn đoán vì đã học giáo trình chuyên ngành", "Minh nên làm thêm bài test trắc nghiệm trên mạng để khẳng định", "Minh có thể ghi nhận sự tương đồng để quan sát nhưng không nên tự chẩn đoán; nếu ảnh hưởng cần tìm chuyên gia", "Minh nên hỏi bạn bè xem họ có thấy biểu hiện tương tự ở mình không"], 2, "Tự quan sát khác với tự chẩn đoán; chẩn đoán lâm sàng đòi hỏi quy trình đánh giá chuyên môn toàn diện."], ["Lan nói: 'Tôi đã làm quản lý 15 năm nên tôi hiểu tâm lý nhân viên hơn những nghiên cứu trong sách'. Phản hồi nào thể hiện tư duy khoa học tốt nhất?", ["Kinh nghiệm lâu năm luôn đáng tin hơn nghiên cứu vì phản ánh thực tế", "Nghiên cứu khoa học luôn đúng, kinh nghiệm cá nhân hoàn toàn vô giá trị", "Kinh nghiệm của Lan có giá trị gợi mở, nhưng không thể tự động khái quát thành quy luật nếu chưa được kiểm chứng", "Chỉ những người có bằng tâm lý học mới hiểu được hành vi con người"], 2, "Kinh nghiệm là nguồn thông tin quý giá nhưng có giới hạn và không thể thay thế bằng chứng khoa học có kiểm chứng."], ["Một người giới thiệu phương pháp 'xác định chính xác tính cách và nghề nghiệp chỉ từ ngày sinh'. Câu hỏi nào sinh viên tâm lý nên đặt ra trước tiên?", ["Phương pháp này đang được bao nhiêu người áp dụng?", "Người giới thiệu phương pháp có nổi tiếng trên mạng xã hội không?", "Kết quả có giống với cảm nhận chủ quan của tôi về bản thân không?", "Phương pháp này dựa trên lý thuyết nào, có bằng chứng thực nghiệm về độ tin cậy và độ giá trị không?"], 3, "Khoa học tâm lý luôn đòi hỏi kiểm tra cơ sở lý thuyết, độ tin cậy (reliability) và độ giá trị (validity)."], ["Tâm lý học khác với Triết học ở điểm mấu chốt nào?", ["Tâm lý học quan tâm đến đạo đức còn triết học thì không", "Tâm lý học sử dụng phương pháp thực nghiệm và kiểm chứng số liệu", "Triết học nghiên cứu hành vi còn tâm lý học nghiên cứu ý niệm", "Cả hai có phương pháp nghiên cứu hoàn toàn giống nhau"], 1, "Tâm lý học là khoa học thực nghiệm dựa trên dữ liệu, còn triết học dựa trên lập luận lý tính thuần túy."], ["Khái niệm 'Mental processes' (Quá trình tâm trí) KHÔNG bao gồm hiện tượng nào sau đây?", ["Cảm giác và tri giác", "Hành vi đi lại và cử chỉ tay", "Trí nhớ và suy nghĩ", "Cảm xúc và ra quyết định"], 1, "Hành vi đi lại và cử chỉ tay là 'Behavior' (hành vi quan sát được từ bên ngoài)."], ["Trong các tố chất của người làm nghề tâm lý, 'Lắng nghe sâu' có nghĩa là:", ["Nghe để tìm lỗi sai trong lời nói của thân chủ", "Biết hiện diện trọn vẹn và tiếp nhận cả điều được nói lẫn chưa nói", "Vừa nghe vừa nghĩ ngay ra giải pháp khuyên bảo", "Chỉ tập trung vào những lời nói tích cực"], 1, "Lắng nghe sâu là hiện diện, thấu cảm và tiếp nhận trọn vẹn mà không phán xét."], ["Tâm lý học nghiên cứu những hiện tượng không thấy được như suy nghĩ, cảm xúc bằng cách nào?", ["Đoán mò dựa trên trực giác cá nhân", "Xây dựng các phương pháp và công cụ đo lường có hệ thống để kiểm tra giả thuyết", "Hỏi ý kiến của số đông quần chúng", "Quy chụp tất cả về một công thức chung"], 1, "Tính khoa học nằm ở phương pháp đặt câu hỏi và kiểm tra câu trả lời bằng bằng chứng có hệ thống."], ["Phương châm nào sau đây thể hiện đúng tinh thần học môn Tâm lý học?", ["Học để đọc vị và thao túng suy nghĩ người khác", "Học để tự chữa lành mọi căn bệnh mà không cần y khoa", "Học để hiểu mình, thương mình rồi mới hiểu, thương và đồng hành cùng người khác", "Học để biết cách phán xét tính cách người xung quanh"], 2, "Tâm lý học là hành trình học về chính mình để hiểu và đối xử tử tế hơn với con người."]], "trees": [["Tâm lý học hiện đại", "nghiên cứu khoa học", "gồm", [["Hành vi (Behavior)", "quan sát và đo lường trực tiếp", "biểu hiện qua", [["Hành vi công khai", "lời nói, cử chỉ, vận động", "", []], ["Hành vi tương tác", "học tập, làm việc, hợp tác", "", []]]], ["Quá trình tâm trí", "diễn ra bên trong ý thức", "gồm", [["Nhận thức", "cảm giác, tri giác, chú ý, trí nhớ, tư duy", "", []], ["Cảm xúc & Động cơ", "tình cảm, ước muốn, niềm tin, ra quyết định", "", []]]]]], ["4 Mục tiêu kinh điển", "định hướng nghiên cứu", "gồm", [["Mô tả (Describe)", "Điều gì đang xảy ra?", "", []], ["Giải thích (Explain)", "Tại sao hiện tượng đó xảy ra?", "", []], ["Dự đoán (Predict)", "Điều gì có khả năng xảy ra theo xác suất?", "", []], ["Can thiệp (Influence)", "Làm gì để nâng cao chất lượng đời sống?", "", []]]], ["Phân biệt với các ngành", "ranh giới khoa học", "chia thành", [["vs. Tâm linh học", "thực nghiệm, kiểm chứng số liệu", "đối lập", [["Huyền học, niềm tin", "Tarot, bói toán, tử vi, cúng giải hạn", "", []]]], ["vs. Triết học", "thí nghiệm và đo lường khách quan", "đối lập", [["Lập luận logic thuần suy tưởng", "bản thể, đạo đức, chân lý", "", []]]], ["vs. Giáo dục học", "quá trình tâm lý ở mọi lứa tuổi & bối cảnh", "đối lập", [["Dạy và học trong nhà trường", "thiết kế giáo trình & sư phạm", "", []]]], ["vs. Xã hội học", "vi mô: cá nhân, nhóm nhỏ, nội tâm", "đối lập", [["Vĩ mô: giai cấp, thể chế, cơ cấu xã hội", "bất bình đẳng xã hội", "", []]]]]], ["Phân nhánh & Nghề nghiệp", "lĩnh vực hoạt động", "chia thành", [["Nhánh lý thuyết", "xây dựng quy luật", "gồm", [["Đại cương & Bất thường", "quá trình cơ bản & rối loạn tâm thần", "", []], ["Phát triển & Xã hội", "suốt vòng đời & ảnh hưởng xã hội", "", []], ["Sinh lý & Thực nghiệm", "não bộ & kiểm nghiệm giả thuyết", "", []]]], ["Nhánh ứng dụng", "giải quyết thực tiễn", "gồm", [["Lâm sàng & Tham vấn", "chẩn đoán rối loạn & hỗ trợ đời sống", "", []], ["Tổ chức - Nhân sự (I/O)", "tuyển dụng, L&D, văn hóa doanh nghiệp", "", []], ["UX & Người tiêu dùng", "trải nghiệm người dùng & tiếp thị hành vi", "", []], ["Học đường, Pháp y, Thể thao", "trường học, tư pháp & vận động viên", "", []]]]]], ["5 Năng lực & Đạo đức nghề", "chuẩn mực hành nghề", "gồm", [["Lắng nghe sâu", "tiếp nhận điều nói và chưa nói, không phán xét", "", []], ["Tư duy phản biện", "dựa trên bằng chứng, không cảm tính", "", []], ["Tự nhận thức", "phân biệt vấn đề của mình và của thân chủ", "", []], ["Lòng trắc ẩn", "tôn trọng sự khác biệt, tiếp cận nhân bản", "", []], ["Chính trực & Giới hạn", "bảo mật, không hành nghề vượt thẩm quyền đào tạo", "", []]]]]}, {"id": "b2", "part": "Phần I: Nhập môn", "code": "B.2", "title": "Học Tâm lý học & Kỹ năng Phản tư", "goals": ["Hiểu rõ 5 đặc trưng riêng và chu trình học sâu của ngành Tâm lý học.", "Rèn luyện tư duy khoa học: phân biệt Quan sát vs Diễn giải, Tương quan vs Nhân quả.", "Nắm vững La bàn đạo đức 5T khi học và tiếp cận người khác.", "Phân biệt Journaling và Reflection; thành thạo 4 cấp độ phản tư theo Kember (2008).", "Ứng dụng thành thạo mô hình phản tư DEAL và Gibbs (1988)."], "sections": [{"h": "Học tâm lý học là học về chính mình", "items": ["Học tâm lý học diễn ra đồng thời trên <b>3 hành trình</b>: <i>Hiểu con người</i> (nhận thức, cảm xúc, nhân cách) $\\rightarrow$ <i>Hiểu khoa học về con người</i> (phân biệt trực giác và bằng chứng) $\\rightarrow$ <i>Hiểu chính mình</i> (quan sát cảm xúc, định kiến, điểm mù của bản thân).", "Một người học tâm lý học tốt không nhất thiết là người có nhiều câu trả lời nhất, mà là người ngày càng <b>biết đặt những câu hỏi tốt hơn</b> về con người."]}, {"h": "Tư duy khoa học: Những bài học then chốt", "items": ["<b>Phân biệt Quan sát và Diễn giải:</b> 'Minh không nói gì' là quan sát khách quan. 'Minh thiếu tự tin' là diễn giải chủ quan. Cùng một hành vi im lặng có thể do mệt mỏi, lạ lẫm, thận trọng hoặc đang lắng nghe.", "<b>Tương quan không đồng nghĩa với Nhân quả:</b> Hai hiện tượng xuất hiện cùng nhau (vd: dùng mạng xã hội nhiều và cô đơn) chưa chứng minh hiện tượng này gây ra hiện tượng kia. Có thể quan hệ ngược lại hoặc do biến số thứ ba.", "<b>Một nghiên cứu không phải là toàn bộ sự thật:</b> Khoa học diễn đạt thận trọng ('kết quả gợi ý rằng...') thay vì khẳng định tuyệt đối ('đã chứng minh 100%')."]}, {"h": "Thang bằng chứng 6 cấp & Cảnh giác mạng xã hội", "items": ["<b>Thang bằng chứng:</b> Mức 1: Ý kiến cá nhân $\\rightarrow$ Mức 2: Trải nghiệm/câu chuyện cá nhân $\\rightarrow$ Mức 3: Quan sát có hệ thống $\\rightarrow$ Mức 4: Một nghiên cứu khoa học $\\rightarrow$ Mức 5: Nhiều nghiên cứu độc lập $\\rightarrow$ Mức 6: Tổng quan hệ thống (Systematic Review / Meta-analysis).", "<b>Cảnh giác tâm lý học trên mạng xã hội:</b> Cẩn trọng với các video giật gân giản lược hóa con người ('5 dấu hiệu bạn yêu người ái kỷ', 'overthinking vì tổn thương tuổi thơ'). Luôn đặt câu hỏi: <i>Ai là người nói? Cơ sở bằng chứng ở đâu? Có đang dán nhãn bệnh lý không?</i>"]}, {"h": "La bàn đạo đức 5T", "items": ["<b>1. Tôn trọng:</b> Phẩm giá, quyền riêng tư, quyền tự quyết và sự khác biệt cá nhân.", "<b>2. Thật thà & Trách nhiệm:</b> Không phóng đại năng lực; chịu trách nhiệm với tri thức mình sử dụng.", "<b>3. Thỏa thuận & Đồng thuận:</b> Không tự ý phân tích, can thiệp hay chia sẻ thông tin khi chưa được cho phép.", "<b>4. Thiện ích & Tránh tổn hại:</b> Không dùng tâm lý để thao túng, kiểm soát hay làm nhục người khác.", "<b>5. Thẩm quyền & Năng lực:</b> Chỉ thực hành trong giới hạn được đào tạo; biết khi nào cần chuyển gửi chuyên gia."]}, {"h": "Phân biệt Journaling vs. Reflection", "items": ["<b>Journaling (Nhật ký):</b> Ghi lại sự kiện, suy nghĩ, cảm xúc một cách tự do nhằm giải tỏa và ghi nhớ. Đây là <i>nguyên liệu thô</i>.", "<b>Reflection (Phản tư):</b> Quá trình suy ngẫm có cấu trúc, có kết nối với lý thuyết nhằm rút ra bài học và chuyển hóa nhận thức/hành vi. Đây là <i>quá trình chưng cất tri thức</i>.", "Phản tư không phải là tự chẩn đoán bệnh hay tự trị liệu tâm lý."]}, {"h": "4 Cấp độ phản tư (Kember et al., 2008)", "items": ["<b>Cấp 1 - Non-reflection (Không phản tư):</b> Liệt kê cơ học sự việc đã làm, như nhật ký hành vi, không có phân tích hay kết nối lý thuyết.", "<b>Cấp 2 - Understanding (Hiểu lý thuyết):</b> Hiểu và mô tả đúng khái niệm lý thuyết nhưng chưa liên hệ sâu sắc với bản thân hay hoàn cảnh.", "<b>Cấp 3 - Reflection (Phản tư có chiều sâu):</b> Phân tích lý do vì sao sự việc diễn ra, nhận diện cảm xúc nội tâm, kết nối lý thuyết và xác định điểm cần cải thiện.", "<b>Cấp 4 - Critical Reflection (Phản tư phê phán/chuyển hóa):</b> Nhìn lại giả định ngầm ẩn, cơ chế phòng vệ cá nhân; tạo ra bước ngoặt thay đổi niềm tin, giá trị và hành vi lâu dài."]}, {"h": "Các mô hình phản tư ứng dụng: DEAL và Gibbs", "items": ["<b>Mô hình DEAL (Ash & Clayton, 2009):</b><br>• <i>Describe:</i> Mô tả khách quan điều đã xảy ra.<br>• <i>Examine:</i> Phân tích dưới góc nhìn tâm lý và cảm xúc.<br>• <i>Articulate Learning:</i> Diễn đạt bài học: Học được gì? Thay đổi thế nào? Lần sau sẽ làm gì?", "<b>Vòng phản tư Gibbs (1988):</b> Gồm 6 bước chi tiết: <i>Description (Mô tả) $\\rightarrow$ Feelings (Cảm xúc) $\\rightarrow$ Evaluation (Đánh giá tốt/chưa tốt) $\\rightarrow$ Analysis (Phân tích tại sao) $\\rightarrow$ Conclusion (Kết luận) $\\rightarrow$ Action Plan (Kế hoạch hành động)</i>."]}], "tables": [{"title": "So sánh Journaling (Nhật ký) và Reflection (Phản tư)", "head": ["Tiêu chí", "Journaling (Nhật ký)", "Reflection (Phản tư)"], "rows": [["Mục đích chính", "Ghi lại, giải tỏa cảm xúc, quan sát bản thân", "Phân tích, học hỏi, thay đổi nhận thức và hành vi"], ["Mức độ chiều sâu", "Nông – vừa", "Vừa – sâu"], ["Cấu trúc", "Tự do, phi cấu trúc", "Có cấu trúc rõ ràng (DEAL, Gibbs...)"], ["Kết nối lý thuyết", "Thường không có", "Có kết nối chặt chẽ với khái niệm học thuật"], ["Tác động phát triển", "Ghi nhận tiến trình", "Dẫn đến chuyển hóa nhận thức và hành động"]]}, {"title": "4 Cấp độ phản tư theo Kember et al. (2008)", "head": ["Cấp độ", "Tên cấp độ", "Đặc điểm nhận diện", "Ý nghĩa học tập"], "rows": [["1", "Non-reflection", "Chỉ kể lại sự việc, liệt kê hành động cơ học", "Mức thấp nhất, chỉ là ghi chép sự kiện"], ["2", "Understanding", "Diễn giải đúng lý thuyết nhưng chưa cá nhân hóa", "Có hiểu biết học thuật nhưng chưa soi vào mình"], ["3", "Reflection", "Kết nối hành vi – cảm xúc – lý thuyết, nhận diện điểm cần sửa", "Phản tư tốt, phát triển tư duy phản biện"], ["4", "Critical Reflection", "Truy nguyên căn nguyên nội tâm, thay đổi niềm tin cốt lõi", "Cấp độ cao nhất, mang tính chuyển hóa con người"]]}], "tips": ["Công thức ghi nhớ DEAL: <b>What happened? $\\rightarrow$ What does it mean? $\\rightarrow$ What did I learn?</b>", "Mẹo phân biệt: Quan sát là cái camera quay được; Diễn giải là câu chuyện não bạn tự bịa ra sau đó.", "Tương quan không phải nhân quả: Nhìn thấy gà gáy và mặt trời mọc cùng lúc không có nghĩa là tiếng gà làm mặt trời mọc!", "La bàn 5T: <b>Tôn trọng – Thật thà – Thỏa thuận – Thiện ích – Thẩm quyền</b>."], "cards": [["Journaling", "Việc ghi chép tự do các sự kiện, cảm xúc hằng ngày nhằm giải tỏa và ghi nhớ (nguyên liệu thô)."], ["Reflection", "Quá trình suy ngẫm có hệ thống, kết nối lý thuyết để rút ra bài học và chuyển hóa nhận thức (chưng cất tri thức)."], ["Non-reflection (Mức 1)", "Cấp độ phản tư thấp nhất: chỉ kể lại sự việc đơn thuần, không phân tích, không cảm xúc."], ["Understanding (Mức 2)", "Cấp độ hiểu và nhắc lại đúng khái niệm lý thuyết nhưng chưa liên hệ sâu sắc với bản thân."], ["Reflection (Mức 3)", "Cấp độ phân tích được nguyên nhân, nhận diện cảm xúc, kết nối lý thuyết và thấy điểm cần thay đổi."], ["Critical Reflection (Mức 4)", "Cấp độ cao nhất: nhận diện niềm tin giới hạn, cơ chế phòng vệ, dẫn đến chuyển hóa sâu sắc về giá trị và hành vi."], ["DEAL Model", "Khung phản tư 3 bước: Describe (Mô tả) – Examine (Xem xét) – Articulate Learning (Diễn đạt điều học được)."], ["Gibbs Reflective Cycle", "Vòng phản tư 6 bước: Description – Feelings – Evaluation – Analysis – Conclusion – Action Plan."], ["Quan sát (Observation)", "Ghi nhận sự kiện thực tế khách quan mà giác quan hoặc thiết bị ghi lại được."], ["Diễn giải (Interpretation)", "Gán ghép ý nghĩa, phán đoán chủ quan của cá nhân lên hành vi quan sát được."], ["Tương quan (Correlation)", "Hai biến số có xu hướng biến thiên cùng nhau nhưng chưa chứng minh quan hệ nhân quả."], ["Thang bằng chứng Mức 6", "Mức cao nhất của bằng chứng khoa học: Tổng quan hệ thống (Systematic Review) hoặc Phân tích tổng hợp (Meta-analysis)."], ["Free Writing", "Kỹ thuật viết liên tục 5–10 phút không dừng bút, không chỉnh sửa để giải phóng dòng suy nghĩ nội tâm."], ["Double-Column Journaling", "Nhật ký hai cột song song: Cột 1 ghi sự kiện thực tế, Cột 2 ghi phản ứng nội tâm và câu hỏi nảy sinh."], ["La bàn đạo đức 5T", "5 nguyên tắc đạo đức: Tôn trọng – Thật thà – Thỏa thuận – Thiện ích – Thẩm quyền."]], "qs": [["Một trải nghiệm cá nhân có thể giúp chúng ta hình thành câu hỏi nghiên cứu, nhưng chưa đủ để trở thành bằng chứng khoa học.", ["Đúng", "Sai"], 0, "Trải nghiệm cá nhân chỉ giúp mở ra câu hỏi; khoa học giúp kiểm tra câu trả lời bằng phương pháp có hệ thống."], ["Nếu hai biến có tương quan mạnh với nhau, ta có thể kết luận biến này là nguyên nhân trực tiếp gây ra biến kia.", ["Đúng", "Sai"], 1, "Tương quan không chứng minh nhân quả; có thể tồn tại chiều tác động ngược lại hoặc biến thứ ba ảnh hưởng cả hai."], ["Học về các rối loạn tâm lý giúp sinh viên tự chẩn đoán chính xác tình trạng bản thân nếu thấy vài biểu hiện giống sách.", ["Đúng", "Sai"], 1, "Tự quan sát khác với tự chẩn đoán; việc tự chẩn đoán dễ dẫn đến sai lệch và lo âu không cần thiết."], ["Mô hình DEAL gồm 3 bước: Describe (Mô tả), Examine (Xem xét) và Articulate Learning (Diễn đạt điều học được).", ["Đúng", "Sai"], 0, "Đúng, mô hình DEAL của Ash & Clayton gồm 3 bước cốt lõi này."], ["Sinh viên nói: 'Trong buổi thảo luận, Nam gần như không phát biểu. Nam chắc chắn là người thiếu tự tin'. Vấn đề chính là gì?", ["Sinh viên dùng sai thuật ngữ tâm lý", "Sinh viên đã biến một quan sát thành diễn giải mà chưa xem xét các cách giải thích khác", "Sinh viên không được phép nhận xét bạn bè", "Sự im lặng không phải là hành vi"], 1, "'Nam không phát biểu' là quan sát khách quan; 'Nam thiếu tự tin' là diễn giải chủ quan vội vàng."], ["Nghiên cứu thấy sinh viên ngủ ít có mức stress cao hơn. Kết luận nào phù hợp nhất?", ["Thiếu ngủ chắc chắn gây ra stress", "Stress chắc chắn làm sinh viên ngủ ít", "Có mối liên hệ giữa thời lượng ngủ và stress, nhưng cần thêm bằng chứng để xác định quan hệ nhân quả", "Giấc ngủ và stress không liên quan gì nhau"], 2, "Nghiên cứu tương quan chỉ ghi nhận sự liên hệ đồng biến/nghịch biến, chưa khẳng định chiều nhân quả."], ["Xem video mạng '5 dấu hiệu bạn đang sống cùng người ái kỷ', phản ứng nào thể hiện tư duy khoa học nhất?", ["Kiểm tra xem bản thân mình có đủ 5 dấu hiệu hay không", "Chia sẻ video ngay cho người thân để cảnh giác", "Tìm hiểu người tạo nội dung là ai, khái niệm được định nghĩa ra sao và có bằng chứng nghiên cứu hỗ trợ không", "Không bao giờ xem bất cứ video tâm lý nào trên mạng"], 2, "Tư duy khoa học đòi hỏi kiểm tra nguồn phát ngôn, định nghĩa thuật ngữ và bằng chứng nghiên cứu."], ["Nghiên cứu thấy người tập mindfulness thường xuyên có mức wellbeing cao hơn. Nhà nghiên cứu kết luận: 'Mindfulness làm cho con người hạnh phúc hơn'. Phản biện nào chuẩn xác nhất?", ["Kết luận sai vì mindfulness không thuộc tâm lý học", "Kết luận quá mạnh vì từ mối liên hệ quan sát chưa loại trừ người vốn hạnh phúc dễ tập mindfulness hơn hoặc có biến thứ ba", "Kết luận đúng vì ai tập cũng thấy thoải mái", "Chỉ đúng nếu cỡ mẫu trên 100.000 người"], 1, "Đây là lỗi suy diễn quan hệ nhân quả từ nghiên cứu tương quan."], ["Sau khi học về attachment, một bạn thấy mình hay lo lắng khi người yêu chậm nhắn tin và tự nhủ: 'Tôi có anxious attachment'. Cách phản tư nào trưởng thành nhất?", ["Tôi đã đủ dấu hiệu để tự xác định phong cách gắn bó của mình", "Khái niệm attachment giúp tôi chú ý đến một kiểu phản ứng của mình; tôi cần quan sát thêm hoàn cảnh trước khi vội dán nhãn", "Tất cả sự lo âu trong đời tôi đều bắt nguồn từ kiểu gắn bó này", "Tôi không nên liên hệ bài học với bản thân"], 1, "Sử dụng tri thức để tự quan sát với sự khiêm tốn, tránh vội vã dán nhãn bản thân."], ["Một sinh viên muốn dùng kỹ thuật tâm lý thuyết phục bạn làm điều bạn không thích. Theo La bàn đạo đức, câu hỏi quan trọng nhất là gì?", ["Kỹ thuật này có tỷ lệ thành công cao không?", "Có nghiên cứu nào chứng minh kỹ thuật này hiệu quả?", "Tôi có thể nói khéo léo đến mức nào?", "Hành vi này có tôn trọng quyền tự quyết của bạn và có nguy cơ thao túng, gây hại không?"], 3, "Đạo đức nghề nghiệp đặt phẩm giá, quyền tự quyết và nguyên tắc không gây hại lên trên hết."], ["Theo Kember et al. (2008), cấp độ phản tư nào thể hiện sự thay đổi sâu sắc về niềm tin cốt lõi và hành vi tương lai?", ["Non-reflection", "Understanding", "Reflection", "Critical Reflection"], 3, "Critical Reflection (Phản tư phê phán/chuyển hóa) là cấp độ cao nhất dẫn đến thay đổi niềm tin và hành vi."], ["Sự khác biệt cốt lõi giữa Journaling và Reflection là gì?", ["Journaling luôn dài hơn Reflection", "Journaling là ghi chép tự do giải tỏa, Reflection là suy ngẫm có cấu trúc gắn lý thuyết để chuyển hóa", "Journaling chỉ dành cho chuyên gia", "Reflection không bao giờ được viết ra giấy"], 1, "Journaling là nguyên liệu thô, còn Reflection là quá trình chưng cất bài học có cấu trúc."], ["Vòng phản tư Gibbs (1988) KHÔNG bao gồm bước nào sau đây?", ["Feelings (Cảm xúc)", "Diagnosis (Chẩn đoán bệnh lý)", "Evaluation (Đánh giá)", "Action Plan (Kế hoạch hành động)"], 1, "Gibbs gồm 6 bước: Description, Feelings, Evaluation, Analysis, Conclusion, Action Plan; không có chẩn đoán bệnh lý."], ["Đỉnh cao nhất của chiếc 'Thang bằng chứng' trong nghiên cứu tâm lý học là gì?", ["Ý kiến của chuyên gia nổi tiếng nhất", "Một bài báo khoa học đơn lẻ", "Tổng quan hệ thống (Systematic Review) hoặc Phân tích tổng hợp (Meta-analysis)", "Kinh nghiệm thực tiễn 20 năm của bác sĩ"], 2, "Mức 6 cao nhất là Systematic Review và Meta-analysis tổng hợp bằng chứng từ nhiều nghiên cứu độc lập."], ["Kỹ thuật viết nhật ký nào yêu cầu chia làm 2 cột: một cột sự kiện thực tế và một cột phản ứng nội tâm?", ["Free Writing", "Prompted Journaling", "Double-Column Journaling", "Letter Writing"], 2, "Double-Column Journaling giúp rèn luyện khả năng siêu nhận thức (metacognition) bằng cách tách thực tế và cảm xúc."]], "trees": [["Tư duy khoa học", "nền tảng nhận thức", "chia thành", [["Phân biệt nhận thức", "tách bạch thực tế và suy đoán", "gồm", [["Quan sát (Observation)", "dữ liệu khách quan giác quan ghi nhận", "", []], ["Diễn giải (Interpretation)", "suy đoán chủ quan gán ghép ý nghĩa", "", []]]], ["Mối quan hệ biến số", "thận trọng kết luận", "gồm", [["Tương quan (Correlation)", "hai biến xuất hiện cùng nhau", "", []], ["Nhân quả (Causation)", "biến này sinh ra biến kia (cần thực nghiệm)", "", []]]], ["Thang bằng chứng 6 bậc", "từ ý kiến đến tổng hợp", "gồm", [["Bậc 1-2: Chủ quan", "quan điểm cá nhân, giai thoại", "", []], ["Bậc 3-4: Nghiên cứu đơn", "quan sát hệ thống, 1 nghiên cứu", "", []], ["Bậc 5-6: Hệ thống hóa", "nhiều nghiên cứu độc lập, Meta-analysis", "", []]]]]], ["Kỹ năng Phản tư (Reflection)", "chuyển hóa tri thức", "chia thành", [["Bản chất", "quá trình chưng cất tri thức", "khác với", [["Journaling (Nhật ký)", "ghi chép tự do, giải tỏa cảm xúc (nguyên liệu thô)", "", []]]], ["4 Cấp độ Kember (2008)", "độ sâu phản tư", "gồm", [["Mức 1: Non-reflection", "liệt kê cơ học sự việc đã xảy ra", "", []], ["Mức 2: Understanding", "hiểu lý thuyết nhưng chưa gắn với bản thân", "", []], ["Mức 3: Reflection", "nhận diện cảm xúc, nguyên nhân và điểm cần sửa", "", []], ["Mức 4: Critical Reflection", "nhận ra niềm tin giới hạn, chuyển hóa hành vi", "", []]]], ["Mô hình thực hành", "khung cấu trúc", "gồm", [["DEAL Model", "Describe → Examine → Articulate Learning", "", []], ["Gibbs Cycle (1988)", "Description → Feelings → Evaluation → Analysis → Conclusion → Action Plan", "", []]]]]], ["La bàn đạo đức 5T", "nguyên tắc ứng xử", "gồm", [["Tôn trọng", "phẩm giá, quyền riêng tư và quyền tự quyết", "", []], ["Thật thà & Trách nhiệm", "không phóng đại năng lực bản thân", "", []], ["Thỏa thuận & Đồng thuận", "tôn trọng sự tự nguyện của thân chủ", "", []], ["Thiện ích & Tránh tổn hại", "không dùng tâm lý để thao túng người khác", "", []], ["Thẩm quyền & Năng lực", "chỉ làm việc trong giới hạn được đào tạo", "", []]]]]}, {"id": "b3", "part": "Phần II: Lịch sử & Nền tảng", "code": "B.3", "title": "Lịch sử Tâm lý học & Các Trường phái", "goals": ["Hiểu cột mốc năm 1879 của Wilhelm Wundt và quá trình tâm lý học tách khỏi triết học.", "Nắm vững các trường phái lớn: Cấu trúc luận, Chức năng luận, Phân tâm học, Hành vi luận, Gestalt, Nhân văn & Hiện sinh, Nhận thức.", "Hiểu rõ tiến trình 3 làn sóng trị liệu tâm lý (Hành vi -> CBT -> Third Wave).", "Thấu hiểu thông điệp cốt lõi: 'No single lens is the whole person' (Không một lăng kính đơn lẻ nào bao trọn một con người)."], "sections": [{"h": "Từ triết học đến phòng thí nghiệm (Mốc 1879)", "items": ["Trước thế kỷ XIX, các câu hỏi về tâm trí thuộc về triết học: <i>Bẩm sinh vs Nuôi dưỡng (Nature vs Nurture)</i> giữa Plato (tri thức có sẵn) và Aristotle (tri thức từ kinh nghiệm giác quan).", "<b>Năm 1879:</b> <b>Wilhelm Wundt</b> thành lập phòng thí nghiệm tâm lý học thực nghiệm đầu tiên tại Leipzig (Đức). Đây là cột mốc biểu tượng đánh dấu tâm lý học chính thức tách khỏi triết học để trở thành ngành khoa học thực nghiệm độc lập."]}, {"h": "Cấu trúc luận vs. Chức năng luận", "items": ["<b>Cấu trúc luận (Structuralism - Edward Titchener):</b> Đặt câu hỏi <i>'What is the mind made of?'</i> (Tâm trí cấu tạo từ gì?). Dùng phương pháp <b>Nội quan có kiểm soát (Introspection)</b> để chia trải nghiệm ý thức thành các phần tử cơ bản (cảm giác, hình ảnh, cảm xúc). Hạn chế: quá chủ quan, khó lặp lại.", "<b>Chức năng luận (Functionalism - William James):</b> Đặt câu hỏi <i>'What does the mind do?'</i> (Tâm trí giúp ta làm gì?). Chịu ảnh hưởng thuyết tiến hóa Darwin, xem tâm trí như một <b>dòng ý thức liên tục (Stream of Consciousness)</b> giúp con người thích nghi và sinh tồn."]}, {"h": "Phân tâm học (Sigmund Freud)", "items": ["Đặt câu hỏi: <i>'Điều gì nằm ngoài nhận thức của chúng ta?'</i>.", "Đời sống tâm lý như tảng băng trôi: Phần ý thức rất nhỏ nổi lên trên, phần khổng lồ chìm bên dưới là <b>Vô thức (Unconscious)</b> chứa đựng xung năng bản năng, mong muốn bị dồn nén và trải nghiệm tuổi thơ.", "Cấu trúc nhân cách gồm 3 phần: <b>Id (Bản năng)</b> đòi thỏa mãn tức thì; <b>Superego (Siêu ngã)</b> đại diện chuẩn mực đạo đức xã hội; <b>Ego (Bản ngã)</b> là người điều đình giữa Id, Superego và thực tại khắc nghiệt.", "Các cơ chế phòng vệ của Ego: Chối bỏ (Denial), Hợp lý hóa (Rationalization), Phóng chiếu (Projection), Thăng hoa (Sublimation)."]}, {"h": "Hành vi luận (Watson, Skinner)", "items": ["Phản ứng lại các khái niệm vô hình khó đo lường của phân tâm học. <b>John B. Watson</b> khẳng định: Tâm lý học chỉ nên nghiên cứu <b>hành vi quan sát được</b>.", "<b>Điều kiện hóa cổ điển (Classical Conditioning):</b> Pavlov (chó tiết nước bọt), Watson & Rayner (thí nghiệm Little Albert tạo ra nỗi sợ chuột trắng).", "<b>Điều kiện hóa tạo tác (Operant Conditioning - B.F. Skinner):</b> Hành vi được định hình bởi <i>hậu quả xảy ra sau nó</i> (Skinner Box).", "<b>Ma trận hậu quả:</b><br>• <i>Củng cố dương tính:</i> Thêm điều dễ chịu $\\rightarrow$ Hành vi tăng.<br>• <i>Củng cố âm tính:</i> Bỏ điều khó chịu $\\rightarrow$ Hành vi tăng.<br>• <i>Trừng phạt dương tính:</i> Thêm điều khó chịu $\\rightarrow$ Hành vi giảm.<br>• <i>Trừng phạt âm tính:</i> Tước bỏ điều dễ chịu $\\rightarrow$ Hành vi giảm."]}, {"h": "Gestalt, Nhân văn & Cuộc cách mạng Nhận thức", "items": ["<b>Tâm lý học Gestalt (Wertheimer, Köhler, Koffka):</b> <i>'Tổng thể không đơn giản là tổng các thành phần'</i>. Con người tri giác thế giới theo những cấu trúc và chỉnh thể có ý nghĩa.", "<b>Tâm lý học Nhân văn & Hiện sinh (Carl Rogers, Abraham Maslow, Viktor Frankl):</b> Nhìn con người với tiềm năng phát triển, tự do lựa chọn và khát vọng tự hiện thực hóa (Self-actualization). Rogers nhấn mạnh Thấu cảm (Empathy), Chân thực (Congruence) và Chấp nhận tích cực vô điều kiện.", "<b>Cách mạng Nhận thức (Cognitive Revolution - giữa TK 20):</b> Đưa tâm trí trở lại nghiên cứu khoa học với mô hình xử lý thông tin (mã hóa, lưu trữ, truy xuất, niềm tin, giải quyết vấn đề)."]}, {"h": "Ba làn sóng trị liệu tâm lý (Three Waves)", "items": ["<b>Làn sóng 1 (Behavioral):</b> Trị liệu hành vi thuần túy (phơi nhiễm, củng cố, dập tắt hành vi né tránh).", "<b>Làn sóng 2 (Cognitive - CBT - Beck & Ellis):</b> Trị liệu Nhận thức - Hành vi. Xem xét mối liên hệ tương hỗ: <i>Thoughts $\\leftrightarrow$ Emotions $\\leftrightarrow$ Behaviors</i>. Mục tiêu là nhận diện và tái cấu trúc các suy nghĩ sai lệch tự động.", "<b>Làn sóng 3 (Context, Mindfulness, Acceptance & Values):</b> Gồm ACT, DBT, MBCT, CFT. Không cố gắng tranh luận hay xóa bỏ suy nghĩ tiêu cực, mà thay đổi mối quan hệ với suy nghĩ (nhận biết, chấp nhận) và hành động hướng theo giá trị sống.", "<b>Lưu ý:</b> Ba làn sóng chỉ mô tả truyền thống hành vi - nhận thức, không đại diện toàn bộ lịch sử trị liệu (song song đó có Tâm động học, Nhân văn, Hiện sinh, Gia đình hệ thống)."]}, {"h": "Thông điệp cốt lõi: No single lens is the whole person", "items": ["Tâm lý học hiện đại không còn là cuộc chiến giữa các trường phái. Mỗi trường phái là một **lăng kính (lens)**:", "• Phân tâm học nhìn vào chiều sâu vô thức.<br>• Hành vi nhìn vào tương tác với môi trường bên ngoài.<br>• Nhân văn nhìn lên phía trước tiềm năng.<br>• Nhận thức nhìn vào bộ máy xử lý thông tin.", "Một người học tâm lý học trưởng thành cần nhận ra khi nào chính lý thuyết của mình đang khiến mình nhìn thấy ít đi về con người."]}], "tables": [{"title": "Bảng đối chiếu các trường phái lớn của Tâm lý học", "head": ["Trường phái", "Đại diện tiêu biểu", "Câu hỏi trung tâm", "Phương pháp cốt lõi"], "rows": [["Cấu trúc luận", "Edward Titchener, Wilhelm Wundt", "What is the mind made of? (Tâm trí tạo từ gì?)", "Nội quan có kiểm soát (Introspection)"], ["Chức năng luận", "William James", "What does the mind do? (Tâm trí giúp ta làm gì?)", "Quan sát hành vi thích nghi & dòng ý thức"], ["Phân tâm học", "Sigmund Freud", "What lies beneath consciousness? (Dưới vô thức có gì?)", "Phân tích ca lâm sàng, giải mã giấc mơ"], ["Hành vi luận", "John B. Watson, B.F. Skinner", "What can we learn from observable behavior?", "Thí nghiệm kích thích – phản ứng (S - R)"], ["Gestalt", "Wertheimer, Köhler, Koffka", "How do we organize experience? (Nhận thức chỉnh thể?)", "Thí nghiệm tri giác hình – nền"], ["Nhân văn", "Carl Rogers, Abraham Maslow", "How can a person grow? (Làm sao vươn tới tiềm năng?)", "Trị liệu thân chủ trọng tâm, thấu cảm"], ["Nhận thức", "Ulric Neisser, George Miller, Aaron Beck", "How does the mind process information?", "Thực nghiệm nhận thức, mô hình hóa thông tin"]]}, {"title": "Ma trận củng cố và trừng phạt của B.F. Skinner", "head": ["Hành vi / Tác động", "Thêm vào (+)", "Lấy đi (-)"], "rows": [["Hành vi TĂNG (Củng cố)", "Củng cố dương tính (+) (vd: Thưởng kẹo khi làm bài tập)", "Củng cố âm tính (-) (vd: Thắt dây an toàn để tắt tiếng 'bíp')"], ["Hành vi GIẢM (Trừng phạt)", "Trừng phạt dương tính (+) (vd: Phạt quỳ gối, mắng)", "Trừng phạt âm tính (-) (vd: Tịch thu điện thoại)"]]}, {"title": "Tiến trình Ba làn sóng trị liệu tâm lý", "head": ["Làn sóng", "Trọng tâm", "Câu hỏi định hướng", "Đại diện & Kỹ thuật"], "rows": [["Làn sóng 1", "Behavior (Hành vi)", "Hành vi này được học thế nào và điều gì duy trì nó?", "Behavior Therapy, Phơi nhiễm (Exposure), Giải mẫn cảm"], ["Làn sóng 2", "Cognition + Behavior", "Người này đang diễn giải tình huống này như thế nào?", "CBT (Aaron Beck), REBT (Albert Ellis), Tái cấu trúc nhận thức"], ["Làn sóng 3", "Context, Acceptance, Values", "Tôi đang có mối quan hệ như thế nào với tâm trí mình?", "ACT, DBT, MBCT, Chánh niệm, Tâm lý linh hoạt"]]}], "tips": ["Wundt 1879 = cột mốc mở phòng thí nghiệm đầu tiên tại Leipzig, khai sinh tâm lý học khoa học.", "Trong ma trận Skinner: 'Dương tính' là <b>thêm vào</b>, 'Âm tính' là <b>lấy đi</b> (không phải là tốt hay xấu!).", "Củng cố luôn làm <b>tăng</b> tần suất hành vi; Trừng phạt luôn làm <b>giảm</b> tần suất hành vi.", "Làn sóng 2 CBT cố gắng <b>thay đổi nội dung</b> suy nghĩ; Làn sóng 3 (ACT/Mindfulness) học cách <b>thay đổi mối quan hệ</b> với suy nghĩ."], "cards": [["Wilhelm Wundt (1879)", "Nhà sáng lập phòng thí nghiệm tâm lý học thực nghiệm đầu tiên ở Leipzig (Đức), đưa tâm lý học thành khoa học độc lập."], ["Cấu trúc luận (Structuralism)", "Trường phái phân tích trải nghiệm ý thức thành các phần tử cơ bản bằng phương pháp nội quan (Titchener)."], ["Nội quan (Introspection)", "Phương pháp người tham gia tự quan sát và mô tả có hệ thống trải nghiệm ý thức của bản thân."], ["Chức năng luận (Functionalism)", "Trường phái nghiên cứu chức năng thích nghi và sinh tồn của các quá trình tâm lý (William James)."], ["Dòng ý thức (Stream of Consciousness)", "Khái niệm của William James: Ý thức là một dòng chảy liên tục, luôn biến đổi, không thể cắt rời thành từng mảnh."], ["Phân tâm học (Psychoanalysis)", "Lý thuyết của Freud nhấn mạnh vai trò của vô thức, xung đột nội tâm và trải nghiệm thời thơ ấu."], ["Cơ chế phòng vệ (Defense Mechanism)", "Chiến lược vô thức của cái Tôi (Ego) nhằm giảm lo âu trước các xung đột giữa Id và Superego."], ["Hành vi luận (Behaviorism)", "Trường phái cho rằng tâm lý học chỉ nên nghiên cứu các hành vi có thể quan sát và đo lường khách quan."], ["Củng cố âm tính (Negative Reinforcement)", "Việc loại bỏ một kích thích khó chịu làm TĂNG khả năng lặp lại của hành vi đó."], ["Trừng phạt âm tính (Negative Punishment)", "Việc tước bỏ một kích thích dễ chịu làm GIẢM khả năng lặp lại của hành vi đó."], ["Tâm lý học Gestalt", "Trường phái khẳng định tổng thể nhận thức không đơn giản là phép cộng cơ học của các bộ phận riêng lẻ."], ["Tự hiện thực hóa (Self-actualization)", "Khái niệm nhân văn: Động lực bẩm sinh của con người nhằm phát huy tối đa tiềm năng và bản sắc của mình."], ["Cách mạng Nhận thức (Cognitive Revolution)", "Giai đoạn phục hưng nghiên cứu tâm trí giữa thế kỷ 20 với trọng tâm là mô hình xử lý thông tin."], ["Trị liệu CBT (Làn sóng 2)", "Liệu pháp nhận thức - hành vi xem xét mối quan hệ giữa Suy nghĩ <-> Cảm xúc <-> Hành vi."], ["Trị liệu Làn sóng 3 (Third Wave)", "Nhóm liệu pháp (ACT, DBT, MBCT) tập trung vào chánh niệm, chấp nhận, bối cảnh và giá trị sống."], ["No single lens is the whole person", "Nguyên tắc: Không một trường phái đơn lẻ nào có thể chứa đựng trọn vẹn sự phức tạp của một con người."]], "qs": [["Năm 1879 được xem là cột mốc quan trọng vì Wilhelm Wundt lập phòng thí nghiệm tâm lý học thực nghiệm tại Leipzig.", ["True", "False"], 0, "Cột mốc 1879 tại Leipzig đánh dấu sự phát triển của tâm lý học như một khoa học thực nghiệm độc lập."], ["Cuộc cách mạng Nhận thức đã thay thế hoàn toàn Hành vi luận vì hành vi quan sát được không còn quan trọng.", ["True", "False"], 1, "Cách mạng Nhận thức không phủ nhận giá trị của hành vi; nó mở rộng phạm vi sang nghiên cứu xử lý thông tin."], ["Điểm khác biệt cơ bản giữa Structuralism và Functionalism là gì?", ["Structuralism nghiên cứu hành vi, Functionalism nghiên cứu vô thức", "Structuralism tìm hiểu cấu trúc trải nghiệm ý thức, Functionalism tìm hiểu chức năng thích nghi", "Structuralism nghiên cứu não bộ, Functionalism nghiên cứu văn hóa", "Structuralism tập trung trị liệu, Functionalism tập trung lý thuyết"], 1, "Structuralism hỏi 'What is the mind made of?', còn Functionalism hỏi 'What does the mind do?'."], ["Tìm hiểu vì sao sinh viên ngày càng kiểm tra điện thoại thường xuyên hơn khi thỉnh thoảng nhận được tin nhắn thú vị (reinforcement) thuộc trường phái nào?", ["Psychoanalytic approach", "Humanistic approach", "Behavioral approach", "Gestalt approach"], 2, "Trường phái hành vi (Behaviorism) tập trung vào nguyên tắc củng cố (reinforcement) và điều kiện hóa tạo tác."], ["Sinh viên nhận email mời gặp của thầy, lập tức nghĩ 'Chắc mình làm sai nghiêm trọng' dẫn đến lo lắng và né tránh; lăng kính nào phân tích rõ nhất?", ["Structuralism", "Cognitive Behavioral approach (CBT)", "Functionalism", "Biological approach"], 1, "CBT tập trung vào mối quan hệ giữa Cách diễn giải (Thoughts) -> Cảm xúc (Emotions) -> Hành vi (Behaviors)."], ["Phát biểu nào dưới đây mô tả chính xác nhất về 'ba làn sóng' trị liệu?", ["Ba làn sóng mô tả toàn bộ lịch sử tâm lý trị liệu thế giới", "Khi làn sóng mới xuất hiện, các phương pháp cũ bị xóa bỏ hoàn toàn", "Ba làn sóng chủ yếu mô tả những bước phát triển trong truyền thống hành vi và nhận thức hành vi", "Phân tâm học, Nhân văn và ACT lần lượt là ba làn sóng"], 2, "Khái niệm ba làn sóng dùng để mô tả sự tiến hóa trong truyền thống Hành vi và Nhận thức - Hành vi."], ["Trường phái nào nhấn mạnh câu châm ngôn: 'Tổng thể không đơn giản là tổng các thành phần'?", ["Behaviorism", "Gestalt Psychology", "Structuralism", "Psychoanalysis"], 1, "Gestalt khẳng định con người tri giác thế giới theo những cấu trúc và mẫu hình có tổ chức trọn vẹn."], ["Theo Skinner, việc thắt dây an toàn trên xe ô tô để làm tắt tiếng chuông cảnh báo khó chịu là ví dụ của:", ["Củng cố dương tính", "Củng cố âm tính", "Trừng phạt dương tính", "Trừng phạt âm tính"], 1, "Loại bỏ kích thích khó chịu (tiếng chuông) làm tăng hành vi (thắt dây an toàn) là củng cố âm tính (negative reinforcement)."], ["Đặc điểm nào KHÔNG thuộc về trường phái Tâm lý học Nhân văn của Carl Rogers?", ["Xem con người như cỗ máy phản xạ bị chi phối hoàn toàn bởi môi trường", "Nhấn mạnh tiềm năng phát triển và tự hiện thực hóa", "Đề cao sự thấu cảm (empathy) trong mối quan hệ trị liệu", "Tin vào sự tự do lựa chọn và trải nghiệm chủ quan"], 0, "Xem con người như cỗ máy phản xạ là quan điểm của Thuyết hành vi máy móc cổ điển, đối lập với Nhân văn."], ["Khái niệm 'Dòng ý thức' (Stream of Consciousness) gắn liền với nhà tâm lý học nào?", ["Wilhelm Wundt", "William James", "John B. Watson", "Sigmund Freud"], 1, "William James đề xuất dòng ý thức để phản bác việc Cấu trúc luận cố gắng chia nhỏ ý thức thành các mảnh vụn."], ["Trong cấu trúc nhân cách của Freud, thành phần nào hoạt động theo 'Nguyên tắc thực tại' để điều đình các xung đột?", ["Id (Bản năng)", "Ego (Bản ngã)", "Superego (Siêu ngã)", "Libido"], 1, "Ego (Bản ngã) là người trung gian thực tế điều hòa ham muốn vô thức của Id và sự khắt khe của Superego."], ["Sự khác biệt căn bản giữa CBT làn sóng 2 và các liệu pháp làn sóng 3 (ACT, Mindfulness) là:", ["Làn sóng 2 dùng thuốc, làn sóng 3 không dùng thuốc", "Làn sóng 2 cố gắng thay đổi nội dung suy nghĩ sai lệch; làn sóng 3 thay đổi mối quan hệ với suy nghĩ và tập trung vào giá trị sống", "Làn sóng 3 quay lại với Phân tâm học cổ điển", "Làn sóng 2 chỉ áp dụng cho trẻ em"], 1, "Làn sóng 3 không tranh biện đúng/sai với suy nghĩ mà rèn luyện sự chấp nhận, chánh niệm và hành động theo giá trị."], ["Thí nghiệm nổi tiếng 'Skinner Box' được thiết kế để nghiên cứu hình thức học tập nào?", ["Điều kiện hóa cổ điển (Classical Conditioning)", "Điều kiện hóa tạo tác (Operant Conditioning)", "Nội quan có kiểm soát (Introspection)", "Học tập thông qua bắt chước"], 1, "Skinner Box nghiên cứu mối quan hệ giữa hành vi vận động ngẫu nhiên và các hậu quả củng cố/trừng phạt."], ["Một người học tâm lý học sau khi học xong lý thuyết gắn bó (attachment) bắt đầu đi chẩn đoán mọi người xung quanh. Lỗi này gọi là:", ["Tư duy khoa học sắc bén", "Lạm dụng lý thuyết như một chiếc nhãn đóng khung con người", "Ứng dụng thực hành chuẩn mực", "Tư duy phản biện xuất sắc"], 1, "Lý thuyết chỉ là lăng kính để hiểu; vội vàng dán nhãn là biến con người thành một cái nhãn hạn hẹp."], ["Thông điệp 'No single lens is the whole person' muốn nhắc nhở điều gì?", ["Không nên học bất kỳ lý thuyết tâm lý nào", "Mỗi lý thuyết chỉ phản ánh một khía cạnh; con người luôn phức tạp và lớn hơn bất kỳ lý thuyết nào", "Tất cả các lý thuyết tâm lý học đều sai", "Chỉ có khoa học thần kinh mới giải thích được con người"], 1, "Mỗi lý thuyết là một góc nhìn hữu ích; một người học trưởng thành phải biết tích hợp đa lăng kính."]], "trees": [["Tiến trình Lịch sử", "từ triết học đến khoa học", "chia thành", [["Thời kỳ Triết học", "suy tưởng lý tính", "gồm", [["Bẩm sinh (Nature)", "Plato: tri thức có sẵn, học là hồi tưởng", "", []], ["Kinh nghiệm (Nurture)", "Aristotle: tri thức từ giác quan", "", []], ["Nhị nguyên", "Descartes: tôi tư duy nên tôi tồn tại", "", []]]], ["Khoa học Thực nghiệm", "mốc 1879 tại Leipzig", "gồm", [["Wilhelm Wundt (1879)", "thành lập PTN thực nghiệm đầu tiên", "", []], ["Flourens & Sechenov", "cắt não bồ câu & ức chế TKTW", "", []], ["Fritsch & Hitzig (1870)", "kích thích điện tìm vùng vận động", "", []]]]]], ["Các Trường phái Cổ điển & Hiện đại", "những lăng kính lớn", "gồm", [["Cấu trúc luận (Structuralism)", "Titchener: What is the mind made of?", "phương pháp", [["Nội quan (Introspection)", "chia ý thức thành cảm giác, hình ảnh, cảm xúc", "", []]]], ["Chức năng luận (Functionalism)", "William James: What does the mind do?", "khái niệm", [["Dòng ý thức (Stream of consciousness)", "chức năng thích nghi sinh tồn", "", []]]], ["Phân tâm học (Psychoanalysis)", "Freud: Vô thức & Xung đột nội tâm", "gồm", [["Cấu trúc nhân cách", "Id (bản năng) – Ego (bản ngã) – Superego (siêu ngã)", "", []], ["Cơ chế phòng vệ", "chối bỏ, hợp lý hóa, phóng chiếu, thăng hoa", "", []]]], ["Hành vi luận (Behaviorism)", "Watson & Skinner: Hành vi quan sát được", "cơ chế", [["Điều kiện hóa cổ điển", "Pavlov (chó tiết nước bọt), Little Albert", "", []], ["Điều kiện hóa tạo tác", "Skinner Box: củng cố (+/-) & trừng phạt (+/-)", "", []]]], ["Gestalt", "Wertheimer, Köhler: Tổng thể lớn hơn tổng bộ phận", "", []], ["Nhân văn & Hiện sinh", "Rogers & Maslow: Tiềm năng & Ý nghĩa", "nguyên tắc", [["Tự hiện thực hóa", "vươn tới phiên bản trọn vẹn của chính mình", "", []], ["Mối quan hệ trị liệu", "thấu cảm, chân thực, chấp nhận vô điều kiện", "", []]]], ["Cách mạng Nhận thức", "giữa TK 20: Tâm trí là bộ xử lý thông tin", "", []]]], ["Ba Làn sóng Trị liệu Tâm lý", "tiến trình can thiệp", "gồm", [["Làn sóng 1 (Behavioral)", "trị liệu hành vi", "kỹ thuật", [["Phơi nhiễm & Điều kiện hóa", "thay đổi hành vi quan sát được", "", []]]], ["Làn sóng 2 (Cognitive - CBT)", "nhận thức hành vi (Beck & Ellis)", "cơ chế", [["Thoughts ↔ Emotions ↔ Behaviors", "tái cấu trúc nhận thức sai lệch", "", []]]], ["Làn sóng 3 (Third Wave)", "chấp nhận, chánh niệm & giá trị", "gồm", [["ACT & DBT", "chấp nhận cam kết & biện chứng hành vi", "", []], ["MBCT & CFT", "chánh niệm nhận thức & tập trung lòng trắc ẩn", "", []]]]]]]}, {"id": "b4", "part": "Phần II: Lịch sử & Nền tảng", "code": "B.4", "title": "Khoa học Thần kinh & Mô hình Tâm – Sinh – Xã", "goals": ["Hiểu cấu trúc neuron, cơ chế dẫn truyền điện/hóa học và các chất dẫn truyền thần kinh.", "Nắm vững các bộ phận của hệ thần kinh và chức năng các cấu trúc não bộ trọng yếu.", "Nhận thức đúng về mô hình Ba não (Triune Brain) và tính mềm dẻo thần kinh (Neuroplasticity).", "Vận dụng thành thạo Mô hình Sinh học – Tâm lý – Xã hội (Biopsychosocial Model) và mở rộng Tâm linh/Ý nghĩa sống."], "sections": [{"h": "Vì sao sinh viên tâm lý cần hiểu não bộ?", "items": ["Mọi trải nghiệm tâm lý đều diễn ra trong một cơ thể sống. Não bộ và hệ thần kinh tham gia trực tiếp vào suy nghĩ, cảm xúc, hành vi.", "Tuy nhiên, <b>con người không chỉ là một bộ não</b>. Tránh chủ nghĩa giản lược sinh học (<b>Reductionism</b> - 'tất cả chỉ là hóa chất trong não'). Trạng thái tâm lý luôn nằm trong sự tương tác giữa cơ thể, kinh nghiệm sống, gia đình và bối cảnh xã hội."]}, {"h": "Neuron và Cơ chế truyền dẫn thần kinh", "items": ["<b>Cấu trúc Neuron:</b><br>• <i>Soma (Thân tế bào):</i> Trung tâm chuyển hóa, duy trì sự sống (CPU).<br>• <i>Dendrites (Sợi nhánh/Đuôi gai):</i> Tiếp nhận tín hiệu từ neuron khác gửi về thân (Ăng-ten).<br>• <i>Axon (Sợi trục):</i> Dẫn truyền xung điện từ thân đi xa đến cúc tận cùng (Dây dẫn).", "<b>Dẫn truyền:</b> Bên trong sợi trục là tín hiệu <b>Điện</b> (Điện thế hoạt động tuân theo quy luật <i>Tất-cả-hoặc-Không</i>). Giữa các neuron qua khe <b>Synapse</b> là tín hiệu <b>Hóa học</b> nhờ các chất dẫn truyền thần kinh.", "<b>Các chất dẫn truyền chính:</b><br>• <i>Dopamine:</i> Động lực, học từ phần thưởng, vận động, chú ý.<br>• <i>Serotonin:</i> Điều hòa khí sắc, giấc ngủ, chức năng cơ thể.<br>• <i>Norepinephrine:</i> Cảnh giác, chú ý, phản ứng trước stress.<br>• <i>GABA:</i> Sứ giả ức chế chính (giúp hệ thần kinh thư giãn).<br>• <i>Glutamate:</i> Sứ giả kích thích chính (học tập, trí nhớ)."]}, {"h": "Hệ thần kinh & Phản ứng Stress", "items": ["<b>Hệ Thần kinh Trung ương (CNS):</b> Não và tủy sống.", "<b>Hệ Thần kinh Ngoại biên (PNS):</b> Thần kinh thân thể (Somatic - ý thức) và Thần kinh tự chủ (Autonomic - vô thức).", "<b>Hệ thần kinh tự chủ gồm 2 nhánh đối kháng:</b><br>• <i>Giao cảm (Sympathetic):</i> 'Chiến hay Biến' (Fight or Flight) - tăng nhịp tim, thở gấp, tiết mồ hôi, ức chế tiêu hóa khi gặp nguy hiểm.<br>• <i>Đối giao cảm (Parasympathetic):</i> 'Nghỉ ngơi và Phục hồi' (Rest and Digest) - làm dịu cơ thể, tái tạo năng lượng.", "<b>Trục HPA (Hypothalamus - Pituitary - Adrenal):</b> Tuyến thượng thận tiết cortisol khi stress kéo dài."]}, {"h": "Các cấu trúc não bộ quan trọng", "items": ["<b>Vỏ não trước trán (Prefrontal Cortex - PFC):</b> Lập kế hoạch, kiểm soát xung động, ra quyết định, điều hòa cảm xúc.", "<b>Hạch hạnh nhân (Amygdala):</b> Xử lý ý nghĩa cảm xúc, phát hiện tín hiệu đe dọa, phản ứng sợ hãi.", "<b>Hồi hải mã (Hippocampus):</b> Hình thành và củng cố ký ức dài hạn, định hướng không gian.", "<b>Vùng dưới đồi (Hypothalamus):</b> Cân bằng nội môi (đói, khát, thân nhiệt, kích hoạt stress, hormone).", "<b>Đồi thị (Thalamus):</b> Trạm trung chuyển thông tin cảm giác lên vỏ não.", "<b>Thân não & Tiểu não:</b> Thân não điều hòa sinh tồn cơ bản (nhịp tim, thở); Tiểu não phối hợp vận động và thăng bằng."]}, {"h": "Đính chính khoa học: Triune Brain & Neuroplasticity", "items": ["<b>Mô hình 'Ba não' (Triune Brain - Paul MacLean):</b> Chia não thành Não bò sát, Não cảm xúc (limbic) và Não lý trí (neocortex). Khoa học thần kinh hiện đại khẳng định: Mô hình này <b>không chính xác về giải phẫu và tiến hóa</b>; não không tiến hóa bằng cách xếp chồng 3 bộ não độc lập, mà là mạng lưới tích hợp liên tục. Mô hình chỉ có giá trị <i>ẩn dụ sư phạm</i>.", "<b>Neuroplasticity (Tính mềm dẻo thần kinh):</b> Não bộ không cố định sau khi trưởng thành mà có thể tái tổ chức và thay đổi các kết nối thông qua học tập, trải nghiệm và trị liệu suốt cuộc đời."]}, {"h": "Mô hình Sinh học – Tâm lý – Xã hội (George Engel, 1977)", "items": ["<b>Bản chất:</b> Sức khỏe và bệnh tật là kết quả của sự tương tác liên tục giữa 3 yếu tố: <b>Bio $\\leftrightarrow$ Psycho $\\leftrightarrow$ Social</b>.", "<b>Biological:</b> Di truyền, não bộ, hormone, bệnh lý cơ thể, giấc ngủ, dinh dưỡng, thuốc men.", "<b>Psychological:</b> Nhận thức, cảm xúc, niềm tin, kỹ năng coping, lịch sử học tập, suy nghĩ nhai đi nhai lại (rumination).", "<b>Social:</b> Gia đình, mối quan hệ, công việc, điều kiện kinh tế, bối cảnh văn hóa, sự kỳ thị.", "<b>Mở rộng Tâm linh / Ý nghĩa (Biopsychosocial-Spiritual):</b> Bổ sung chiều kích ý nghĩa sống, mục đích tồn tại, đức tin và nguồn lực tinh thần nâng đỡ cá nhân khi gặp đau khổ."]}, {"h": "Ứng dụng khoa học thần kinh trong can thiệp tâm lý", "items": ["<b>CBT:</b> Tác động lên vùng vỏ não trước trán (PFC) và amygdala giúp tăng khả năng kiểm soát cảm xúc.", "<b>Mindfulness / MBCT:</b> Tăng kết nối PFC và hệ viền, kích hoạt hệ đối giao cảm làm dịu amygdala.", "<b>EMDR:</b> Hỗ trợ tái xử lý ký ức chấn thương bị kẹt lại ở hippocampus và amygdala.", "<b>Somatic therapy & Biofeedback:</b> Làm việc trực tiếp với phản ứng sinh lý cơ thể và hệ thần kinh tự chủ."]}], "tables": [{"title": "So sánh Hệ Thần kinh Giao cảm và Đối giao cảm", "head": ["Cơ quan / Chức năng", "Hệ Giao cảm (Chiến hay Biến)", "Hệ Đối giao cảm (Nghỉ ngơi & Phục hồi)"], "rows": [["Đồng tử mắt", "Giãn ra (tăng thu nhận ánh sáng)", "Co lại bình thường"], ["Nhịp tim & Huyết áp", "Đập nhanh, huyết áp tăng vọt", "Đập chậm lại, huyết áp hạ về mức ổn định"], ["Đường thở / Phổi", "Giãn phế quản (hút nhiều oxy)", "Co phế quản về mức bình thường"], ["Hệ tiêu hóa", "Ức chế hoạt động tiêu hóa", "Kích thích tiết dịch vị và nhu động ruột"], ["Tuyến thượng thận", "Kích thích tiết Adrenaline / Noradrenaline", "Ngừng kích thích tiết hormone stress"]]}, {"title": "So sánh Mô hình Y sinh học và Mô hình Tâm – Sinh – Xã", "head": ["Tiêu chí so sánh", "Mô hình Y Sinh học (Biomedical)", "Mô hình Tâm – Sinh – Xã (Biopsychosocial)"], "rows": [["Cái nhìn về bệnh tật", "Bệnh thuần túy do rối loạn sinh lý, nhiễm trùng, di truyền", "Bệnh là kết quả tương tác phức tạp giữa sinh học, tâm lý và xã hội"], ["Cách tiếp cận", "Giảm triệu chứng bằng thuốc men hoặc phẫu thuật", "Hiểu toàn diện con người trong toàn cảnh bối cảnh sống"], ["Vai trò thân chủ", "Thụ động tiếp nhận điều trị từ bác sĩ", "Chủ động hợp tác cùng nhà chuyên môn và hệ thống hỗ trợ"], ["Ví dụ trầm cảm", "Chỉ coi là do mất cân bằng nồng độ serotonin trong não", "Tương tác: gen/mất ngủ (Bio) + tự chỉ trích (Psycho) + mất việc (Social)"]]}], "tips": ["PFC = 'Tổng thống' ra quyết định và kiểm soát; Amygdala = 'Còi báo động' đe dọa; Hippocampus = 'Thư viện ký ức'.", "Mô hình Ba não MacLean: Chỉ là ẩn dụ dạy học, không phải bản đồ giải phẫu hiện đại!", "Giản lược sinh học (Reductionism): Nói 'trầm cảm chỉ là do thiếu serotonin' giống như nói 'bức tranh nàng Mona Lisa chỉ là vài gram phẩm màu trên vải'!", "Cảm xúc và lý trí không tách rời; chúng là mạng lưới phối hợp nhịp nhàng giữa PFC và hệ viền."], "cards": [["Neuron", "Đơn vị cấu tạo cơ bản của hệ thần kinh, có tính hưng phấn và dẫn truyền xung điện/hóa học."], ["Soma (Thân tế bào)", "Trung tâm điều khiển, xử lý thông tin và duy trì sự sống của tế bào thần kinh."], ["Dendrite (Sợi nhánh)", "Nhánh tiếp nhận thông tin từ các neuron khác truyền về thân tế bào."], ["Axon (Sợi trục)", "Phần kéo dài truyền tín hiệu điện từ thân tế bào đi đến neuron hoặc cơ quan đáp ứng."], ["Synapse", "Khớp nối tiếp xúc giữa hai neuron, nơi tín hiệu hóa học được truyền qua chất dẫn truyền thần kinh."], ["Vỏ não trước trán (PFC)", "Vùng não phụ trách các chức năng điều hành: lập kế hoạch, kiểm soát xung động, ra quyết định."], ["Hạch hạnh nhân (Amygdala)", "Cấu trúc hệ viền chuyên xử lý ý nghĩa cảm xúc, phát hiện đe dọa và phản ứng sợ hãi."], ["Hồi hải mã (Hippocampus)", "Cấu trúc quan trọng đối với học tập, hình thành và chuyển đổi ký ức dài hạn."], ["Hệ giao cảm (Sympathetic)", "Nhánh thần kinh tự chủ kích hoạt phản ứng 'Chiến hay Biến' khi cơ thể gặp đe dọa."], ["Hệ đối giao cảm (Parasympathetic)", "Nhánh thần kinh tự chủ đưa cơ thể về trạng thái 'Nghỉ ngơi và Phục hồi'."], ["Neuroplasticity", "Tính mềm dẻo thần kinh: khả năng thay đổi cấu trúc và kết nối của não theo học tập và trải nghiệm."], ["Mô hình Ba não (Triune Brain)", "Mô hình MacLean chia não thành Não bò sát - Não viền - Não vỏ; hiện nay chỉ xem là ẩn dụ sư phạm."], ["Chủ nghĩa giản lược (Reductionism)", "Xu hướng sai lầm khi quy toàn bộ trải nghiệm phức tạp của con người về một yếu tố sinh học đơn lẻ."], ["Biopsychosocial Model", "Mô hình George Engel (1977): sức khỏe tâm lý là sự tương tác giữa Sinh học, Tâm lý và Xã hội."], ["Biopsychosocial-Spiritual", "Mô hình mở rộng thêm chiều kích tâm linh, ý nghĩa sống và hệ giá trị tinh thần nâng đỡ con người."], ["Trục HPA", "Trục Hypothalamus - Pituitary - Adrenal điều phối phản ứng stress dài hạn của cơ thể."]], "qs": [["Theo khoa học thần kinh hiện đại, mỗi cảm xúc tương ứng một vùng não riêng biệt hoạt động hoàn toàn độc lập.", ["True", "False"], 1, "Cảm xúc là kết quả hoạt động của nhiều mạng lưới thần kinh phức tạp liên kết với nhau."], ["Mô hình ba não của Paul MacLean có giá trị sư phạm nhưng hiện nay không được xem là bản đồ giải phẫu/tiến hóa chính xác.", ["True", "False"], 0, "Đúng, khoa học thần kinh hiện đại xem não là mạng lưới tích hợp, không phải 3 bộ não xếp chồng độc lập."], ["Tính mềm dẻo thần kinh (Neuroplasticity) có nghĩa là não có thể thay đổi theo ý muốn bất kể tuổi tác và hoàn cảnh.", ["True", "False"], 1, "Neuroplasticity có thật nhưng vẫn chịu giới hạn bởi độ tuổi, sinh học, sức khỏe và môi trường."], ["Trong mô hình Sinh học - Tâm lý - Xã hội - Tâm linh, yếu tố tâm linh nhất thiết phải gắn với tôn giáo hay thượng đế.", ["True", "False"], 1, "Spirituality rộng hơn tôn giáo; bao gồm ý nghĩa sống, mục đích, giá trị sâu sắc và cảm giác kết nối."], ["Chức năng nào dưới đây phù hợp nhất với vai trò của Vỏ não trước trán (Prefrontal Cortex - PFC)?", ["Điều hòa nhịp tim và hô hấp sinh tồn", "Lập kế hoạch, kiểm soát hành vi và ra quyết định", "Nơi duy nhất tạo ra cảm xúc sợ hãi", "Nơi duy nhất lưu trữ toàn bộ ký ức dài hạn"], 1, "PFC phụ trách các chức năng điều hành bậc cao: lập kế hoạch, kiểm soát xung động, chú ý, ra quyết định."], ["Sinh viên nói: 'Bạn ấy bị trầm cảm chắc chắn là do thiếu serotonin trong não'. Vấn đề chính trong cách giải thích này là gì?", ["Trầm cảm hoàn toàn không liên quan đến sinh học", "Serotonin không phải chất dẫn truyền thần kinh", "Đã giản lược một hiện tượng phức tạp thành một nguyên nhân sinh học đơn lẻ (Reductionism)", "Các rối loạn tâm lý chỉ do xã hội gây ra"], 2, "Trầm cảm là rối loạn đa yếu tố tương tác (Tâm - Sinh - Xã); quy về một chất là chủ nghĩa giản lược sinh học."], ["Sinh viên lo âu trước kỳ thi: ngủ 4 tiếng/đêm, nghĩ 'mình là kẻ thất bại', gia đình đặt kỳ vọng lớn. Phân loại theo Tâm - Sinh - Xã?", ["Ngủ 4 tiếng: tâm lý; Suy nghĩ thất bại: xã hội; Kỳ vọng gia đình: sinh học", "Ngủ 4 tiếng: sinh học; Suy nghĩ thất bại: tâm lý; Kỳ vọng gia đình: xã hội", "Ngủ 4 tiếng: xã hội; Suy nghĩ thất bại: sinh học; Kỳ vọng gia đình: tâm lý", "Cả 3 đều là yếu tố tâm lý"], 1, "Thiếu ngủ thuộc Sinh học; Niềm tin thất bại thuộc Tâm lý; Áp lực gia đình thuộc Xã hội."], ["Một người mất việc, mất ngủ, nghĩ 'mình vô dụng' và tự hỏi 'Cuộc đời mình còn ý nghĩa gì nữa?'. Câu hỏi cuối hướng đến chiều kích nào?", ["Sinh học", "Tâm lý", "Xã hội", "Tâm linh và Ý nghĩa sống (Spiritual)"], 3, "Ý nghĩa cuộc sống, mục đích tồn tại trực tiếp thuộc về chiều kích Spiritual."], ["Nhà tâm lý muốn hiểu tình trạng kiệt sức (burnout). Câu hỏi nào thể hiện trọn vẹn tư duy Biopsychosocial?", ["Vùng não nào đang bị teo lại do kiệt sức?", "Người này có suy nghĩ tiêu cực nào cần thay đổi?", "Những yếu tố cơ thể, cảm xúc, công việc và các mối quan hệ đang tương tác với nhau như thế nào?", "Nguyên nhân quan trọng nhất nằm ở cá nhân hay công ty?"], 2, "Tư duy Biopsychosocial tìm hiểu sự tương tác đa chiều giữa Sinh học, Tâm lý và Môi trường xã hội."], ["Thân chủ trải qua mất mát và tìm thấy hy vọng từ việc cầu nguyện trong cộng đồng tôn giáo. Nhà tâm lý nên tiếp cận thế nào?", ["Không đề cập vì tôn giáo không thuộc tâm lý học", "Khuyên thân chủ cầu nguyện nhiều hơn vì tôn giáo luôn tốt", "Tìm hiểu ý nghĩa của việc cầu nguyện và cộng đồng đối với thân chủ và xem đó có phải nguồn lực nâng đỡ họ không", "Giải thích rằng tôn giáo chỉ là ảo tưởng ứng phó"], 2, "Tiếp cận tôn trọng thế giới quan của thân chủ, nhận diện nguồn lực tinh thần nâng đỡ họ mà không áp đặt."], ["Bộ phận nào của neuron đóng vai trò nhận tín hiệu từ các tế bào khác truyền về thân tế bào?", ["Sợi trục (Axon)", "Sợi nhánh (Dendrites)", "Eo Ranvier", "Bao Myelin"], 1, "Dendrites (sợi nhánh) hoạt động như ăng-ten thu nhận tín hiệu từ các neuron khác."], ["Xung điện thế hoạt động (Action potential) lan truyền dọc theo sợi trục tuân theo nguyên tắc nào?", ["Tất-cả-hoặc-Không (All-or-None)", "Tăng dần theo khoảng cách", "Ngẫu nhiên tùy cảm xúc", "Chậm dần khi tới cúc tận cùng"], 0, "Nếu kích thích đạt ngưỡng, xung điện sẽ phát ra toàn bộ với biên độ tối đa; không đạt ngưỡng thì không phát ra."], ["Chất dẫn truyền thần kinh đóng vai trò là chất ức chế chính giúp làm dịu hệ thần kinh là:", ["Glutamate", "Dopamine", "GABA", "Acetylcholine"], 2, "GABA là chất dẫn truyền thần kinh ức chế chính trong não bộ, giúp giảm lo âu và căng thẳng."], ["Hệ thần kinh giao cảm (Sympathetic) kích hoạt phản ứng nào của cơ thể khi đối mặt mối nguy hiểm?", ["Giảm nhịp tim và tăng tiết dịch tiêu hóa", "Đồng tử co nhỏ và giảm hô hấp", "Phản ứng 'Chiến hay Biến': tăng nhịp tim, thở gấp, giãn đồng tử", "Tạo cảm giác buồn ngủ sâu"], 2, "Hệ giao cảm kích hoạt trạng thái sẵn sàng chiến đấu hoặc tháo chạy (Fight or Flight)."], ["Bệnh nhân Betty bị đột quỵ nhẹ ở bán cầu phải, thị lực tốt nhưng không thể nhận ra khuôn mặt của chồng con. Hội chứng này là:", ["Alzheimer", "Prosopagnosia (Mù nhận diện khuôn mặt)", "ADHD", "Aphasia (Mất ngôn ngữ)"], 1, "Prosopagnosia là chứng mất khả năng nhận diện khuôn mặt quen thuộc do tổn thương vùng hồi thoi (fusiform gyrus)."]], "trees": [["Tế bào Thần kinh (Neuron)", "đơn vị cơ bản của não", "chia thành", [["Cấu tạo Neuron", "3 thành phần chính", "gồm", [["Thân (Soma)", "trung tâm điều khiển & chuyển hóa (CPU)", "", []], ["Sợi nhánh (Dendrites)", "nhận tín hiệu từ neuron khác (Ăng-ten)", "", []], ["Sợi trục (Axon)", "dẫn truyền xung điện đi xa (Dây điện)", "", []]]], ["Dẫn truyền tín hiệu", "kết nối mạng lưới", "gồm", [["Điện thế hoạt động", "trong sợi trục: nguyên tắc Tất-cả-hoặc-Không", "", []], ["Khớp nối Synapse", "giữa 2 neuron: giải phóng chất dẫn truyền hóa học", "", []]]], ["Chất dẫn truyền thần kinh", "sứ giả hóa học", "gồm", [["Dopamine & Serotonin", "động lực, phần thưởng & điều hòa khí sắc", "", []], ["Norepinephrine", "cảnh giác, kích hoạt phản ứng stress", "", []], ["GABA & Glutamate", "sứ giả ức chế chính & sứ giả kích thích chính", "", []]]]]], ["Cấu trúc Hệ Thần kinh & Não bộ", "bản đồ giải phẫu", "chia thành", [["Hệ Thần kinh Trung ương (CNS)", "trung tâm chỉ huy", "gồm", [["Não bộ", "bán cầu đại não, não trung gian, thân não, tiểu não", "", []], ["Tủy sống", "phản xạ tủy & đường dẫn truyền xung", "", []]]], ["Hệ Thần kinh Ngoại biên (PNS)", "đường truyền thông tin", "gồm", [["Thần kinh thân thể (Somatic)", "vận động cơ xương có ý thức", "", []], ["Thần kinh tự chủ (Autonomic)", "điều hòa cơ trơn, nội tạng, tuyến", "chia thành", [["Giao cảm (Sympathetic)", "Chiến hay Biến (Fight or Flight): tim đập nhanh, thở gấp", "", []], ["Đối giao cảm (Parasympathetic)", "Nghỉ ngơi & Phục hồi (Rest & Digest): làm dịu cơ thể", "", []]]]]], ["Các cấu trúc não trọng yếu", "chức năng tâm lý", "gồm", [["Vỏ não trước trán (PFC)", "chức năng điều hành: lập kế hoạch, kiểm soát, ra quyết định", "", []], ["Hạch hạnh nhân (Amygdala)", "xử lý ý nghĩa cảm xúc, phát hiện đe dọa, sợ hãi", "", []], ["Hồi hải mã (Hippocampus)", "hình thành và củng cố ký ức dài hạn", "", []], ["Vùng dưới đồi (Hypothalamus)", "cân bằng nội môi & kích hoạt trục stress HPA", "", []]]]]], ["Hiệu chỉnh Khoa học & Mô hình BPS", "góc nhìn toàn diện", "chia thành", [["Phản biện Mô hình Ba não", "Triune Brain (Paul MacLean)", "bản chất", [["Ẩn dụ sư phạm", "não là mạng lưới tích hợp, không xếp chồng 3 não độc lập", "", []]]], ["Neuroplasticity", "tính mềm dẻo thần kinh", "ý nghĩa", [["Não có thể thay đổi", "tái cấu trúc qua học tập, trải nghiệm và trị liệu", "", []]]], ["Tránh giản lược (Reductionism)", "con người không chỉ là bộ não", "đối lập", [["Không quy kết về một hóa chất", "trầm cảm không chỉ do thiếu serotonin", "", []]]], ["Mô hình Tâm – Sinh – Xã (Engel, 1977)", "Bio ↔ Psycho ↔ Social", "gồm", [["Biological (Sinh học)", "gen, não bộ, hormone, giấc ngủ, dinh dưỡng", "", []], ["Psychological (Tâm lý)", "nhận thức, cảm xúc, niềm tin, coping, tự thoại", "", []], ["Social (Xã hội)", "gia đình, bạn bè, việc làm, kinh tế, văn hóa", "", []], ["Mở rộng: Spiritual", "ý nghĩa cuộc sống, mục đích tồn tại, đức tin", "", []]]]]]]}];
+const BYID = {};
+LESSONS.forEach(l => { BYID[l.id] = l; });
+
+/* ---------- Storage & State ---------- */
+const STORE_KEY = "tamlyhoc_review_v2";
+let S = { q: {}, c: {}, exam: [] };
+try {
+  const saved = localStorage.getItem(STORE_KEY);
+  if(saved) S = JSON.parse(saved);
+} catch(e) {}
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch(e){}
+}
+
+let state = { view: "home", tab: "sum" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function mastery(l) {
+  let ok = 0, done = 0;
+  l.qs.forEach((q, idx) => {
+    const st = S.q[l.id + "-" + idx];
+    if(st && st.done) { done++; if(st.ok) ok++; }
+  });
+  return { ok, done, total: l.qs.length, pct: l.qs.length ? Math.round(ok / l.qs.length * 100) : 0 };
+}
+
+function wrongIds() {
+  const res = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      const qid = l.id + "-" + idx;
+      if(S.q[qid] && S.q[qid].done && !S.q[qid].ok) res.push(qid);
+    });
+  });
+  return res;
+}
+
+function cardStats(l) {
+  let known = 0;
+  l.cards.forEach((c, idx) => {
+    if(S.c[l.id + "-" + idx] === "known") known++;
+  });
+  return { known, total: l.cards.length };
+}
+
+/* ---------- Navigation & Router ---------- */
+function go(view, tab) {
+  stopTimer();
+  state.view = view;
+  if(tab) state.tab = tab;
+  else if(BYID[view] && view !== state.lastLesson) state.tab = "sum";
+  if(BYID[view]) state.lastLesson = view;
+
+  renderSide();
+  const m = $("#main");
+  if(view === "home") renderHome(m);
+  else if(view === "exam") renderExamSetup(m);
+  else if(view === "wrong") renderWrong(m);
+  else if(view === "search") renderSearch(m);
+  else if(BYID[view]) renderLesson(m, BYID[view]);
+
+  $("#topTitle").textContent = BYID[view] ? BYID[view].code + " " + BYID[view].title : 
+    ({ home: "Tổng quan môn học", exam: "Thi thử trắc nghiệm", wrong: "Ôn tập câu đã sai", search: "Tra cứu kiến thức" }[view] || "Tâm lý học đại cương");
+  window.scrollTo(0, 0);
+  $("#side").classList.remove("open");
+}
+
+/* ---------- Render Sidebar ---------- */
+function renderSide() {
+  $("#navHome").classList.toggle("on", state.view === "home");
+  $("#wrongCount").textContent = wrongIds().length;
+
+  let html = "", curPart = "";
+  LESSONS.forEach(l => {
+    if(l.part !== curPart) {
+      curPart = l.part;
+      html += `<div class="part-label">${esc(curPart)}</div>`;
+    }
+    const s = mastery(l);
+    const on = state.view === l.id ? " on" : "";
+    html += `
+    <button class="lesson-btn${on}" data-go="${l.id}" data-tab="sum">
+      <span class="code">${l.code}</span>
+      <span class="name">${esc(l.title)}</span>
+      <span class="mini"><i style="width:${s.pct}%"></i></span>
+    </button>`;
+  });
+  $("#sideLessons").innerHTML = html;
+  bindNavClicks(document);
+}
+
+function bindNavClicks(root) {
+  root.querySelectorAll("[data-go]").forEach(el => {
+    el.onclick = (e) => {
+      e.stopPropagation();
+      go(el.dataset.go, el.dataset.tab);
+    };
+  });
+}
+
+/* ---------- Home View ---------- */
+function renderHome(m) {
+  const totQ = LESSONS.reduce((a, l) => a + l.qs.length, 0);
+  const totC = LESSONS.reduce((a, l) => a + l.cards.length, 0);
+  let ok = 0, done = 0;
+  LESSONS.forEach(l => { const s = mastery(l); ok += s.ok; done += s.done; });
+
+  let segs = LESSONS.map(l => {
+    const s = mastery(l);
+    return `<button class="seg" data-go="${l.id}" data-tab="sum" title="${esc(l.code + ' ' + l.title)}: ${s.pct}% đúng">
+      <span class="fill" style="width:${s.pct}%"></span>
+      <span class="lbl">${l.code}</span>
+    </button>`;
+  }).join("");
+
+  m.innerHTML = `
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Tâm lý học đại cương – Góc ôn tập & Tự học</h2>
+      <p>Nền tảng ôn tập tương tác hoàn chỉnh dựa trên 4 bộ bài giảng và tài liệu Learning Note của <b>ThS. Dương Trần Minh Đoàn</b> (Khoa Tâm lý học, ĐH KHXH&NV TP.HCM): ${LESSONS.length} bài học, tích hợp <b>Sơ đồ tư duy SVG</b>, ${totC} thẻ flashcards và ${totQ} câu hỏi trắc nghiệm có giải thích chi tiết.</p>
+      <div class="lead-q">“Học tâm lý không phải để 'đọc vị' người khác, mà để hiểu – thương – và sống tử tế hơn với chính mình và cuộc đời.”</div>
+    </div>
+    <div class="exam-card">
+      <h3>Cấu trúc môn học & Đánh giá</h3>
+      <div class="exam-facts">
+        <div class="fact"><strong>30%</strong><span>Giữa kỳ (Trắc nghiệm)</span></div>
+        <div class="fact"><strong>70%</strong><span>Cuối kỳ (Trắc nghiệm)</span></div>
+        <div class="fact"><strong>≥ 80%</strong><span>Chuyên cần điều kiện dự thi</span></div>
+        <div class="fact"><strong>${totQ}</strong><span>Câu trắc nghiệm toàn khóa</span></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" data-go="exam">📝 Vào thi thử ngay</button>
+        <button class="btn ghost" data-go="wrong">⚠️ Ôn câu đã sai (${wrongIds().length})</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="map">
+    <div class="map-head">
+      <h3>Sợi trục tiến độ học tập</h3>
+      <p>Mỗi đoạn bao Myelin đại diện cho 1 bài học. Độ đầy hiển thị % câu trắc nghiệm bạn đã làm đúng (Đã làm: ${done}/${totQ} câu, đúng ${ok} câu).</p>
+    </div>
+    <div class="axon-wrap">
+      <div class="axon">
+        <div class="soma" title="Điểm xuất phát: Thân neuron"></div>
+        ${segs}
+        <div class="terminal" title="Đích đến: Cúc tận cùng thần kinh"></div>
+      </div>
+    </div>
+  </section>
+
+  <h3 style="font-size:18px; margin:32px 0 14px; font-weight:750">Danh sách bài học</h3>
+  <div class="grid-lessons">
+    ${LESSONS.map(l => {
+      const s = mastery(l);
+      const cs = cardStats(l);
+      return `
+      <div class="lcard" data-go="${l.id}" data-tab="sum">
+        <span class="code">${l.code}</span>
+        <div class="t">${esc(l.title)}</div>
+        <div class="meta">
+          <span>${l.qs.length} câu hỏi • ${cs.known}/${cs.total} thẻ nhớ</span>
+          <strong>${s.pct}%</strong>
+        </div>
+        <div class="bar"><i style="width:${s.pct}%"></i></div>
+      </div>`;
+    }).join("")}
+  </div>`;
+  bindNavClicks(m);
+}
+
+/* ---------- Mindmap SVG Engine ---------- */
+const MMC = ["#3B4A8C", "#D98A1F", "#1E8C86", "#C8366E", "#7A5BC7", "#2A7FB8", "#6F8A2E", "#B0683A", "#4F6D7A"];
+
+function treeSVG(root, ci0) {
+  const LH = 36, PX = 14, NX = 12;
+  const tw = (t, px, b) => t.length * px * (b ? 0.6 : 0.53);
+  let leaves = 0, cc = 0;
+  const nodes = [];
+
+  (function walk(n, d, parent, ci) {
+    if (d === 1 || d === 2) ci = cc++;
+    const o = { t: n[0], note: n[1] || "", rel: n[2] || "", d, parent, ci, kids: [] };
+    o.w = tw(o.t, PX, 1) + (o.note ? tw(" – " + o.note, NX) : 0) + 28;
+    o.rw = o.rel ? tw(o.rel, 12) + 20 : 0;
+    nodes.push(o);
+
+    const ch = n[3] || [];
+    if (!ch.length) {
+      o.y = leaves * LH + LH / 2 + 8;
+      leaves++;
+    }
+    ch.forEach(c => o.kids.push(walk(c, d + 1, o, ci)));
+    if (ch.length) o.y = (o.kids[0].y + o.kids[o.kids.length - 1].y) / 2;
+    return o;
+  })(root, 0, null, 0);
+
+  const maxD = Math.max(...nodes.map(n => n.d));
+  const colX = [12];
+  for (let d = 0; d < maxD; d++) {
+    const at = nodes.filter(n => n.d === d);
+    colX[d + 1] = colX[d] + Math.max(...at.map(n => n.w)) + Math.max(56, Math.max(...at.map(n => n.rw)) + 44);
+  }
+
+  const W = Math.max(...nodes.map(n => colX[n.d] + n.w)) + 24;
+  const H = Math.max(leaves * LH + 24, 70);
+
+  let edges = "", body = "";
+  nodes.forEach(n => {
+    const x = colX[n.d], col = MMC[(n.ci + ci0) % MMC.length];
+    if (n.kids.length) {
+      const sx = x + n.w;
+      let ex = sx;
+      if (n.rel) {
+        const px = sx + 8;
+        body += `<rect x="${px}" y="${n.y - 11}" width="${n.rw}" height="22" rx="11" fill="var(--surface)" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="1.2"/><text x="${px + n.rw / 2}" y="${n.y + 4.3}" text-anchor="middle" font-size="11.5" font-style="italic" fill="${n.d === 0 ? "var(--muted)" : col}">${esc(n.rel)}</text>`;
+        edges += `<path d="M${sx},${n.y} H${px}" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="2"/>`;
+        ex = px + n.rw;
+      }
+      n.kids.forEach(k => {
+        const kc = MMC[(k.ci + ci0) % MMC.length];
+        const kx = colX[k.d];
+        const mx = (ex + kx) / 2;
+        edges += `<path d="M${ex},${n.y} C${mx},${n.y} ${mx},${k.y} ${kx},${k.y}" fill="none" stroke="${kc}" stroke-width="2" opacity=".75"/>`;
+      });
+    }
+
+    const fill = n.d === 0 ? "var(--ink)" : n.d === 1 ? col : "var(--surface)";
+    const tcol = n.d === 0 ? "var(--paper)" : n.d === 1 ? "#fff" : "var(--ink)";
+    body += `<rect x="${x}" y="${n.y - 14}" width="${n.w}" height="28" rx="${n.d < 2 ? 14 : 8}" fill="${fill}" ${n.d >= 2 ? `stroke="${col}" stroke-width="1.5"` : ""}/>`;
+    body += `<text x="${x + 14}" y="${n.y + 5}" font-size="${PX}" fill="${tcol}"><tspan font-weight="700">${esc(n.t)}</tspan>${n.note ? `<tspan font-size="${NX}" ${n.d >= 2 ? `fill="var(--muted)"` : `fill-opacity=".85"`}> – ${esc(n.note)}</tspan>` : ""}</text>`;
+  });
+
+  return `<svg viewBox="0 0 ${Math.ceil(W)} ${H}" style="min-width:${Math.round(W * 0.72)}px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ tư duy: ${esc(root[0])}" font-family="inherit">${edges}${body}</svg>`;
+}
+
+function renderTrees(l) {
+  if (!l.trees || !l.trees.length) return "";
+  return l.trees.map((t, i) => `
+    <div class="tree">
+      <div class="mm-scroll">${treeSVG(t, i * 2)}</div>
+    </div>
+  `).join("");
+}
+
+/* ---------- Lesson Detail View ---------- */
+function renderLesson(m, l) {
+  const cs = cardStats(l);
+  const s = mastery(l);
+
+  m.innerHTML = `
+  <div class="lhead">
+    <div class="bigcode">${l.code}</div>
+    <div>
+      <div class="part">${esc(l.part)}</div>
+      <h2>${esc(l.title)}</h2>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab ${state.tab==="sum"?"on":""}" data-tab="sum">📖 Tóm tắt</button>
+    <button class="tab ${state.tab==="fc"?"on":""}" data-tab="fc">🗂️ Thẻ nhớ <span class="count">${cs.known}/${cs.total}</span></button>
+    <button class="tab ${state.tab==="quiz"?"on":""}" data-tab="quiz">🎯 Luyện tập <span class="count">${s.ok}/${s.total}</span></button>
+  </div>
+  <div id="pane"></div>`;
+
+  const tabs = m.querySelectorAll(".tabs button");
+  tabs.forEach(t => {
+    t.onclick = () => {
+      tabs.forEach(x => x.classList.remove("on"));
+      t.classList.add("on");
+      state.tab = t.dataset.tab;
+      drawPane(l);
+    };
+  });
+  drawPane(l);
+}
+
+function drawPane(l) {
+  const p = $("#pane");
+  if(state.tab === "sum") renderSummary(p, l);
+  else if(state.tab === "fc") renderCards(p, l);
+  else renderPractice(p, l);
+}
+
+/* Tab: Tóm tắt (Summary + Mindmap Trees + Content Blocks + Tables + Tips) */
+function renderSummary(p, l) {
+  p.innerHTML = `
+  <div class="goals">
+    <h4>Mục tiêu bài giảng</h4>
+    <ul>${l.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+  </div>
+
+  <div class="mm-wrap">
+    <div class="mm-head">
+      <h4>🌳 Sơ đồ tư duy: Quan hệ giữa các khái niệm</h4>
+      <span class="muted" style="font-size:12.5px">Đọc từ trái sang phải; chữ nghiêng biểu thị mối quan hệ</span>
+    </div>
+    ${renderTrees(l)}
+  </div>
+
+  <div class="toolbar">
+    <span class="muted" style="font-size:14px">${l.sections.length} phần lý thuyết, bấm tiêu đề để thu gọn/mở rộng</span>
+    <div class="row">
+      <button class="btn ghost" id="collapseAll">Thu gọn tất cả</button>
+      <button class="btn ghost" id="expandAll">Mở tất cả</button>
+    </div>
+  </div>
+
+  ${l.sections.map((s, i) => `
+    <details class="block" open>
+      <summary>${esc(s.h)}</summary>
+      <ul>${s.items.map(it => `<li>${it}</li>`).join("")}</ul>
+    </details>
+  `).join("")}
+
+  ${(l.tables || []).map(t => `
+    <div class="tblwrap">
+      <h4>📊 ${esc(t.title)}</h4>
+      <table>
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("")}
+
+  <div class="tips">
+    <h4>💡 Mẹo nhớ nhanh</h4>
+    <ul>${l.tips.map(t => `<li>${t}</li>`).join("")}</ul>
+  </div>
+
+  <div class="row" style="margin-top:24px">
+    <button class="btn dark" data-go="${l.id}" data-tab="fc">🗂️ Chuyển sang Học thẻ nhớ</button>
+    <button class="btn primary" data-go="${l.id}" data-tab="quiz">🎯 Làm câu hỏi luyện tập</button>
+  </div>`;
+
+  bindNavClicks(p);
+  $("#collapseAll").onclick = () => p.querySelectorAll("details").forEach(d => d.open = false);
+  $("#expandAll").onclick = () => p.querySelectorAll("details").forEach(d => d.open = true);
+}
+
+/* Tab: Thẻ nhớ (Flashcard) */
+let FC = { list: [], i: 0 };
+function renderCards(p, l) {
+  FC.list = l.cards.map((c, i) => i);
+  FC.i = 0;
+
+  const draw = () => {
+    const ci = FC.list[FC.i];
+    const card = l.cards[ci];
+    const st = S.c[l.id + "-" + ci];
+    const cs = cardStats(l);
+
+    p.innerHTML = `
+    <div class="toolbar">
+      <div style="font-size:14px; font-weight:600; color:var(--muted)">
+        Thẻ ${FC.i + 1} / ${FC.list.length} (Đã thuộc: ${cs.known}/${cs.total})
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="fcShuf">🔀 Xáo trộn</button>
+      </div>
+    </div>
+
+    <div class="fc-stage">
+      <button class="fc" id="fcCard" aria-label="Lật thẻ">
+        <div class="face front">
+          <span class="fc-tag ${st||'learning'}">${st==='known'?'Đã thuộc':'Đang học'}</span>
+          <div class="term">${esc(card[0])}</div>
+          <div class="hint">Nhấn vào thẻ hoặc bấm phím Cách (Space) để xem định nghĩa</div>
+        </div>
+        <div class="face back">
+          <span class="fc-tag ${st||'learning'}">${st==='known'?'Đã thuộc':'Đang học'}</span>
+          <div class="def">${esc(card[1])}</div>
+          <div class="hint">Nhấn lại để quay về mặt trước</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="fc-controls">
+      <button class="btn again" id="fcAgain">❌ Chưa thuộc (Phím 1)</button>
+      <div class="row">
+        <button class="btn" id="fcPrev">← Trước</button>
+        <button class="btn" id="fcNext">Sau →</button>
+      </div>
+      <button class="btn know" id="fcKnow">✅ Đã thuộc (Phím 2)</button>
+    </div>`;
+
+    const cardEl = $("#fcCard");
+    cardEl.onclick = () => cardEl.classList.toggle("flip");
+
+    $("#fcPrev").onclick = () => { if(FC.i > 0) { FC.i--; draw(); } };
+    $("#fcNext").onclick = () => { if(FC.i < FC.list.length - 1) { FC.i++; draw(); } };
+    $("#fcShuf").onclick = () => {
+      for (let j = FC.list.length - 1; j > 0; j--) {
+        const k = Math.floor(Math.random() * (j + 1));
+        [FC.list[j], FC.list[k]] = [FC.list[k], FC.list[j]];
+      }
+      FC.i = 0; draw();
+    };
+
+    const mark = (v) => {
+      S.c[l.id + "-" + ci] = v;
+      save();
+      if(FC.i < FC.list.length - 1) FC.i++;
+      draw();
+    };
+    $("#fcAgain").onclick = () => mark("learning");
+    $("#fcKnow").onclick = () => mark("known");
+  };
+  draw();
+}
+
+/* Tab: Luyện tập (Quiz Practice) */
+let QZ = {};
+const LETTERS = ["A", "B", "C", "D"];
+function renderPractice(p, l) {
+  let mode = "all";
+  const start = (m) => {
+    mode = m;
+    let list = l.qs.map((q, idx) => ({ q, idx, pick: null }));
+    if(m === "new") list = list.filter(item => !S.q[l.id + "-" + item.idx]);
+    else if(m === "wrong") list = list.filter(item => S.q[l.id + "-" + item.idx] && !S.q[l.id + "-" + item.idx].ok);
+
+    if(!list.length) {
+      p.innerHTML = `
+      <div class="toolbar">
+        <div class="seg-ctrl" id="qzModes">
+          <button data-m="all" class="${mode==='all'?'on':''}">Tất cả (${l.qs.length})</button>
+          <button data-m="new" class="${mode==='new'?'on':''}">Chưa làm</button>
+          <button data-m="wrong" class="${mode==='wrong'?'on':''}">Câu làm sai</button>
+        </div>
+      </div>
+      <div class="empty" style="padding:40px; text-align:center; background:var(--surface); border-radius:var(--r-md); margin-top:14px">
+        🎉 Không có câu hỏi nào trong danh mục này!
+      </div>`;
+      bindModes();
+      return;
+    }
+
+    QZ = { list, i: 0, okCount: 0 };
+    draw();
+  };
+
+  const bindModes = () => {
+    p.querySelectorAll("#qzModes button").forEach(b => {
+      b.onclick = () => start(b.dataset.m);
+    });
+  };
+
+  const draw = () => {
+    const it = QZ.list[QZ.i];
+    if(!it) {
+      const pct = Math.round(QZ.okCount / QZ.list.length * 100);
+      p.innerHTML = `
+      <div class="score">
+        <div class="big">${pct}%</div>
+        <div>
+          <h3>Hoàn thành đợt luyện tập!</h3>
+          <p style="margin:4px 0; color:var(--muted)">Bạn đã trả lời đúng <b>${QZ.okCount} / ${QZ.list.length}</b> câu.</p>
+        </div>
+        <div style="margin-left:auto"><button class="btn primary" id="qzRetry">Luyện tập lại</button></div>
+      </div>`;
+      $("#qzRetry").onclick = () => start(mode);
+      return;
+    }
+
+    const q = it.q;
+    const answered = it.pick !== null;
+
+    p.innerHTML = `
+    <div class="toolbar">
+      <div class="seg-ctrl" id="qzModes">
+        <button data-m="all" class="${mode==='all'?'on':''}">Tất cả (${l.qs.length})</button>
+        <button data-m="new" class="${mode==='new'?'on':''}">Chưa làm</button>
+        <button data-m="wrong" class="${mode==='wrong'?'on':''}">Câu làm sai</button>
+      </div>
+      <div style="font-size:13.5px; font-weight:600; color:var(--muted)">
+        Câu ${QZ.i + 1} / ${QZ.list.length}
+      </div>
+    </div>
+    <div class="progress"><i style="width:${(QZ.i)/QZ.list.length*100}%"></i></div>
+
+    <div class="qcard">
+      <div class="qmeta">
+        <span>${l.code} • ${esc(l.title)}</span>
+        <span>Câu hỏi trắc nghiệm</span>
+      </div>
+      <div class="qtext">${esc(q[0])}</div>
+      <div class="opts">
+        ${q[1].map((opt, oi) => {
+          let cls = "";
+          if(answered) {
+            if(oi === q[2]) cls = " ok";
+            else if(oi === it.pick) cls = " bad";
+          }
+          return `
+          <button class="opt${cls}" data-oi="${oi}" ${answered?'disabled':''}>
+            <span class="k">${LETTERS[oi]}</span>
+            <span>${esc(opt)}</span>
+          </button>`;
+        }).join("")}
+      </div>
+
+      ${answered ? `
+      <div class="explain ${it.pick===q[2]?'':'wrong'}">
+        <strong>${it.pick===q[2]?'✅ Chính xác!':'❌ Chưa chính xác!'} (Đáp án đúng: ${LETTERS[q[2]]})</strong>
+        <div>${esc(q[3])}</div>
+      </div>
+      <div class="qnav">
+        <div></div>
+        <button class="btn primary" id="qzNext">Câu tiếp theo →</button>
+      </div>` : ''}
+    </div>`;
+
+    bindModes();
+
+    p.querySelectorAll(".opt").forEach(btn => {
+      btn.onclick = () => {
+        const oi = parseInt(btn.dataset.oi, 10);
+        it.pick = oi;
+        const isOk = oi === q[2];
+        if(isOk) QZ.okCount++;
+        S.q[l.id + "-" + it.idx] = { done: true, ok: isOk, time: Date.now() };
+        save();
+        renderSide();
+        draw();
+      };
+    });
+
+    const nextBtn = $("#qzNext");
+    if(nextBtn) nextBtn.onclick = () => { QZ.i++; draw(); };
+  };
+
+  start("all");
+}
+
+/* ---------- Exam Mode ---------- */
+let TIMER = null;
+function stopTimer() { if(TIMER) { clearInterval(TIMER); TIMER = null; } }
+
+function renderExamSetup(m) {
+  m.innerHTML = `
+  <div class="exam-setup">
+    <h2>Thi thử Trắc nghiệm Tâm lý học đại cương</h2>
+    <p style="color:var(--muted)">Đề thi sẽ tổng hợp ngẫu nhiên các câu hỏi từ các bài học được chọn, bấm giờ làm bài và chấm điểm như kỳ thi thật.</p>
+    
+    <h4 style="margin:20px 0 8px">1. Chọn bài học đưa vào đề thi:</h4>
+    <div class="checks">
+      ${LESSONS.map(l => `
+        <label class="check">
+          <input type="checkbox" value="${l.id}" checked>
+          <span><b>${l.code}</b> – ${esc(l.title)} (${l.qs.length} câu)</span>
+        </label>
+      `).join("")}
+    </div>
+
+    <h4 style="margin:16px 0 8px">2. Chọn số lượng câu hỏi & thời gian:</h4>
+    <div class="row" id="examSizeRow" style="margin-bottom:24px">
+      <button class="btn ghost on" data-n="20" data-t="20">20 câu (20 phút)</button>
+      <button class="btn ghost" data-n="40" data-t="40">40 câu (40 phút)</button>
+      <button class="btn ghost" data-n="60" data-t="60">Tất cả 60 câu (60 phút)</button>
+    </div>
+
+    <button class="btn primary" id="startExamBtn" style="padding:12px 24px; font-size:15px">🚀 Bắt đầu làm bài thi</button>
+  </div>`;
+
+  let selectedN = 20, selectedT = 20;
+  m.querySelectorAll("#examSizeRow button").forEach(b => {
+    b.onclick = () => {
+      m.querySelectorAll("#examSizeRow button").forEach(x => x.classList.remove("on", "primary"));
+      b.classList.add("primary");
+      selectedN = parseInt(b.dataset.n, 10);
+      selectedT = parseInt(b.dataset.t, 10);
+    };
+  });
+
+  $("#startExamBtn").onclick = () => {
+    const checkedIds = [...m.querySelectorAll(".checks input:checked")].map(i => i.value);
+    if(!checkedIds.length) { alert("Vui lòng chọn ít nhất 1 bài học!"); return; }
+
+    let pool = [];
+    checkedIds.forEach(lid => {
+      BYID[lid].qs.forEach((q, idx) => pool.push({ q, lid, idx }));
+    });
+
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    const examList = pool.slice(0, Math.min(selectedN, pool.length)).map(item => ({
+      ...item, pick: null
+    }));
+
+    runExam(m, examList, selectedT);
+  };
+}
+
+function runExam(m, list, minutes) {
+  let cur = 0;
+  let remaining = minutes * 60;
+
+  const tick = () => {
+    remaining--;
+    const el = $("#examTimer");
+    if(el) {
+      const min = Math.floor(remaining / 60);
+      const sec = remaining % 60;
+      el.textContent = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+      if(remaining < 300) el.classList.add("low");
+    }
+    if(remaining <= 0) {
+      stopTimer();
+      finishExam(m, list);
+    }
+  };
+  TIMER = setInterval(tick, 1000);
+
+  const drawQ = () => {
+    const it = list[cur];
+    const q = it.q;
+    const l = BYID[it.lid];
+
+    m.innerHTML = `
+    <div class="toolbar">
+      <div>
+        <h3 style="margin:0">Đề thi thử Trắc nghiệm</h3>
+        <span style="font-size:13px; color:var(--muted)">Đang làm câu ${cur + 1} / ${list.length}</span>
+      </div>
+      <div class="row">
+        <span class="timer" id="examTimer">--:--</span>
+        <button class="btn dark" id="finishExamBtn">Nộp bài thi</button>
+      </div>
+    </div>
+
+    <div class="qcard" style="margin-top:14px">
+      <div class="qmeta">
+        <span>${l.code} • ${esc(l.title)}</span>
+        <span>Câu ${cur + 1}</span>
+      </div>
+      <div class="qtext">${esc(q[0])}</div>
+      <div class="opts">
+        ${q[1].map((opt, oi) => `
+          <button class="opt${it.pick===oi?' sel':''}" data-oi="${oi}">
+            <span class="k">${LETTERS[oi]}</span>
+            <span>${esc(opt)}</span>
+          </button>
+        `).join("")}
+      </div>
+      <div class="qnav">
+        <button class="btn ghost" id="exPrev" ${cur===0?'disabled':''}>← Câu trước</button>
+        <button class="btn ghost" id="exNext" ${cur===list.length-1?'disabled':''}>Câu sau →</button>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; font-weight:700; font-size:14px">Danh sách câu hỏi:</div>
+    <div class="qgrid" id="examGrid">
+      ${list.map((item, idx) => `
+        <button class="${idx===cur?'cur':''} ${item.pick!==null?'done':''}" data-jump="${idx}">${idx + 1}</button>
+      `).join("")}
+    </div>`;
+
+    tick();
+
+    m.querySelectorAll(".opt").forEach(btn => {
+      btn.onclick = () => {
+        it.pick = parseInt(btn.dataset.oi, 10);
+        drawQ();
+      };
+    });
+
+    $("#exPrev").onclick = () => { if(cur > 0) { cur--; drawQ(); } };
+    $("#exNext").onclick = () => { if(cur < list.length - 1) { cur++; drawQ(); } };
+
+    m.querySelectorAll("#examGrid button").forEach(b => {
+      b.onclick = () => { cur = parseInt(b.dataset.jump, 10); drawQ(); };
+    });
+
+    $("#finishExamBtn").onclick = () => {
+      const unans = list.filter(x => x.pick === null).length;
+      if(unans > 0) {
+        if(!confirm(`Bạn còn ${unans} câu chưa trả lời. Bạn có chắc chắn muốn nộp bài?`)) return;
+      }
+      stopTimer();
+      finishExam(m, list);
+    };
+  };
+
+  drawQ();
+}
+
+function finishExam(m, list) {
+  let ok = 0;
+  const byLesson = {};
+  list.forEach(it => {
+    const isOk = it.pick === it.q[2];
+    if(isOk) ok++;
+    if(!byLesson[it.lid]) byLesson[it.lid] = { ok: 0, tot: 0 };
+    byLesson[it.lid].tot++;
+    if(isOk) byLesson[it.lid].ok++;
+
+    S.q[it.lid + "-" + it.idx] = { done: true, ok: isOk, time: Date.now() };
+  });
+  save();
+
+  const score10 = (ok / list.length * 10).toFixed(1);
+  const wrongList = list.filter(it => it.pick !== it.q[2]);
+
+  m.innerHTML = `
+  <div class="score">
+    <div class="big">${score10}</div>
+    <div>
+      <h2 style="margin:0 0 6px">Kết quả bài thi</h2>
+      <p style="margin:0; color:var(--muted)">Đạt <b>${ok} / ${list.length}</b> câu đúng (${Math.round(ok/list.length*100)}%).</p>
+    </div>
+    <div style="margin-left:auto" class="row">
+      <button class="btn primary" data-go="exam">Làm đề mới</button>
+      <button class="btn ghost" data-go="home">Về trang chủ</button>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px; margin:24px 0 10px">Kết quả theo từng bài học:</h3>
+  <div class="breakdown">
+    ${Object.keys(byLesson).map(lid => {
+      const b = byLesson[lid];
+      const l = BYID[lid];
+      const pct = Math.round(b.ok / b.tot * 100);
+      return `
+      <div class="brow">
+        <b>${l.code}</b>
+        <div class="bar"><i style="width:${pct}%"></i></div>
+        <span style="text-align:right">${b.ok}/${b.tot} (${pct}%)</span>
+      </div>`;
+    }).join("")}
+  </div>
+
+  <h3 style="font-size:16px; margin:30px 0 12px">Xem lại các câu làm sai (${wrongList.length} câu):</h3>
+  ${wrongList.length === 0 ? `<div class="empty">🎉 Xuất sắc! Bạn không làm sai câu nào!</div>` : 
+    wrongList.map(it => {
+      const q = it.q;
+      const l = BYID[it.lid];
+      return `
+      <div class="review-item">
+        <div style="font-size:12px; color:var(--muted); margin-bottom:4px">${l.code} – ${esc(l.title)}</div>
+        <div class="q">${esc(q[0])}</div>
+        <div style="font-size:14px; margin-bottom:4px">
+          Bạn chọn: <span class="a-bad">${it.pick!==null?LETTERS[it.pick]+'. '+esc(q[1][it.pick]):'Chưa chọn'}</span>
+        </div>
+        <div style="font-size:14px; margin-bottom:8px">
+          Đáp án đúng: <span class="a-ok">${LETTERS[q[2]]}. ${esc(q[1][q[2]])}</span>
+        </div>
+        <div style="font-size:13px; color:var(--muted); background:var(--surface2); padding:8px 12px; border-radius:6px">
+          💡 <b>Giải thích:</b> ${esc(q[3])}
+        </div>
+      </div>`;
+    }).join("")
+  }`;
+
+  bindNavClicks(m);
+}
+
+/* ---------- Wrong Questions View ---------- */
+function renderWrong(m) {
+  const ids = wrongIds();
+  if(!ids.length) {
+    m.innerHTML = `
+    <div class="empty" style="padding:60px 20px; text-align:center">
+      <h2>🎉 Chúc mừng bạn!</h2>
+      <p style="color:var(--muted)">Bạn hiện không có câu hỏi nào bị làm sai. Hãy tiếp tục luyện tập các bài học hoặc làm đề thi thử!</p>
+      <button class="btn primary" data-go="home" style="margin-top:14px">Về danh sách bài học</button>
+    </div>`;
+    bindNavClicks(m);
+    return;
+  }
+
+  const list = ids.map(id => {
+    const [lid, qidx] = id.split("-");
+    return { q: BYID[lid].qs[parseInt(qidx,10)], lid, idx: parseInt(qidx,10), pick: null };
+  });
+
+  let cur = 0, okCount = 0;
+  const draw = () => {
+    if(cur >= list.length) {
+      m.innerHTML = `
+      <div class="score">
+        <div class="big">${Math.round(okCount/list.length*100)}%</div>
+        <div>
+          <h3>Hoàn thành đợt ôn câu sai!</h3>
+          <p style="margin:4px 0; color:var(--muted)">Bạn đã sửa đúng <b>${okCount} / ${list.length}</b> câu.</p>
+        </div>
+        <div style="margin-left:auto"><button class="btn primary" data-go="wrong">Ôn tiếp câu sai còn lại</button></div>
+      </div>`;
+      bindNavClicks(m);
+      return;
+    }
+
+    const it = list[cur];
+    const q = it.q;
+    const l = BYID[it.lid];
+    const answered = it.pick !== null;
+
+    m.innerHTML = `
+    <div class="toolbar">
+      <h3 style="margin:0">Ôn tập các câu làm sai (${ids.length} câu cần ôn)</h3>
+      <span style="font-size:13.5px; color:var(--muted)">Câu ${cur + 1} / ${list.length}</span>
+    </div>
+    <div class="progress"><i style="width:${cur/list.length*100}%"></i></div>
+
+    <div class="qcard">
+      <div class="qmeta">
+        <span>${l.code} • ${esc(l.title)}</span>
+        <span>Ôn câu sai</span>
+      </div>
+      <div class="qtext">${esc(q[0])}</div>
+      <div class="opts">
+        ${q[1].map((opt, oi) => {
+          let cls = "";
+          if(answered) {
+            if(oi === q[2]) cls = " ok";
+            else if(oi === it.pick) cls = " bad";
+          }
+          return `
+          <button class="opt${cls}" data-oi="${oi}" ${answered?'disabled':''}>
+            <span class="k">${LETTERS[oi]}</span>
+            <span>${esc(opt)}</span>
+          </button>`;
+        }).join("")}
+      </div>
+
+      ${answered ? `
+      <div class="explain ${it.pick===q[2]?'':'wrong'}">
+        <strong>${it.pick===q[2]?'✅ Đã sửa đúng!':'❌ Vẫn chưa đúng!'} (Đáp án đúng: ${LETTERS[q[2]]})</strong>
+        <div>${esc(q[3])}</div>
+      </div>
+      <div class="qnav">
+        <div></div>
+        <button class="btn primary" id="wrongNext">Câu tiếp theo →</button>
+      </div>` : ''}
+    </div>`;
+
+    m.querySelectorAll(".opt").forEach(btn => {
+      btn.onclick = () => {
+        const oi = parseInt(btn.dataset.oi, 10);
+        it.pick = oi;
+        const isOk = oi === q[2];
+        if(isOk) {
+          okCount++;
+          S.q[it.lid + "-" + it.idx] = { done: true, ok: true, time: Date.now() };
+        }
+        save();
+        renderSide();
+        draw();
+      };
+    });
+
+    const nextBtn = $("#wrongNext");
+    if(nextBtn) nextBtn.onclick = () => { cur++; draw(); };
+  };
+
+  draw();
+}
+
+/* ---------- Search View ---------- */
+function renderSearch(m) {
+  m.innerHTML = `
+  <div>
+    <h2>Tra cứu toàn diện kiến thức</h2>
+    <input type="search" class="search" id="searchInput" placeholder="Nhập từ khóa (ví dụ: vô thức, CBT, neuron, amygdala, DEAL, Pavlov, 1879...)" autofocus>
+    <div class="sres" id="searchResults"></div>
+  </div>`;
+
+  const input = $("#searchInput");
+  const res = $("#searchResults");
+
+  const run = () => {
+    const q = input.value.trim().toLowerCase();
+    if(q.length < 2) {
+      res.innerHTML = `<div style="color:var(--muted); font-size:14px">Nhập từ khóa ít nhất 2 ký tự để tìm kiếm...</div>`;
+      return;
+    }
+
+    const matches = [];
+    LESSONS.forEach(l => {
+      l.sections.forEach(s => {
+        s.items.forEach(it => {
+          if(it.toLowerCase().includes(q) || s.h.toLowerCase().includes(q)) {
+            matches.push({ type: "Lý thuyết", title: s.h, desc: it.replace(/<[^>]+>/g, ''), lid: l.id });
+          }
+        });
+      });
+      l.cards.forEach(c => {
+        if(c[0].toLowerCase().includes(q) || c[1].toLowerCase().includes(q)) {
+          matches.push({ type: "Thẻ nhớ", title: c[0], desc: c[1], lid: l.id });
+        }
+      });
+      l.qs.forEach(question => {
+        if(question[0].toLowerCase().includes(q) || question[3].toLowerCase().includes(q)) {
+          matches.push({ type: "Câu trắc nghiệm", title: question[0], desc: "Giải thích: " + question[3], lid: l.id });
+        }
+      });
+    });
+
+    if(!matches.length) {
+      res.innerHTML = `<div class="empty">Không tìm thấy nội dung nào chứa từ khóa "${esc(q)}".</div>`;
+      return;
+    }
+
+    res.innerHTML = matches.slice(0, 30).map(m => `
+      <div class="item" data-go="${m.lid}" data-tab="sum">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px">
+          <span class="w">${esc(m.title)}</span>
+          <span class="chip-btn" style="padding:2px 8px; font-size:11px">${m.type}</span>
+        </div>
+        <div style="font-size:13.5px; line-height:1.45; color:var(--ink)">${esc(m.desc)}</div>
+        <div class="from">Thuộc bài: <b>${BYID[m.lid].code} – ${esc(BYID[m.lid].title)}</b></div>
+      </div>
+    `).join("");
+
+    bindNavClicks(res);
+  };
+
+  input.oninput = run;
+  run();
+}
+
+/* ---------- Theme toggle & Mobile menu ---------- */
+$("#menuBtn").onclick = () => $("#side").classList.toggle("open");
+$("#themeBtn").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("psy_theme", next); } catch(e){}
+};
+try {
+  const savedTheme = localStorage.getItem("psy_theme");
+  if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+} catch(e){}
+
+// Keyboard shortcuts for flashcard
+window.addEventListener("keydown", (e) => {
+  if(state.tab === "fc") {
+    if(e.code === "Space") {
+      const f = $("#fcCard");
+      if(f) { e.preventDefault(); f.classList.toggle("flip"); }
+    } else if(e.key === "1") {
+      const b = $("#fcAgain"); if(b) b.click();
+    } else if(e.key === "2") {
+      const b = $("#fcKnow"); if(b) b.click();
+    } else if(e.code === "ArrowRight") {
+      const b = $("#fcNext"); if(b) b.click();
+    } else if(e.code === "ArrowLeft") {
+      const b = $("#fcPrev"); if(b) b.click();
+    }
+  }
+});
+
+// Initial boot
+go("home");
+</script>
+</body>
+</html>
