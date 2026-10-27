@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tâm lý học Nhân cách – Góc ôn tập & Tự học tương tác</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F9; --surface:#FFFFFF; --surface2:#EAEEF5; --ink:#1A2340; --muted:#5E6785; --line:#D6DCE8;
+  --myelin:#E9A23B; --myelin-soft:#FBEBD0; --axon:#1E8C86; --axon-soft:#D7EEEC; --rose:#C8366E; --rose-soft:#F7DCE6;
+  --indigo:#3B4A8C; --shadow:0 1px 3px rgba(26,35,64,.08);
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --font:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:20px; height:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100%}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--myelin); outline-offset:2px; border-radius:6px}
+b{font-weight:650}
+.app{display:grid; grid-template-columns:300px 1fr; min-height:100vh}
+
+/* Sidebar */
+.side{background:var(--surface); border-right:1px solid var(--line); padding:22px 16px 28px; position:sticky; top:0; height:100vh; overflow-y:auto; display:flex; flex-direction:column}
+.brand{display:flex; gap:12px; align-items:center; padding:4px 8px 18px; border-bottom:1px solid var(--line); margin-bottom:14px; background:none; border-left:0; border-right:0; border-top:0; width:100%; text-align:left; cursor:pointer}
+.brand-mark{width:42px; height:42px; flex:none; border-radius:12px; background:linear-gradient(135deg,var(--indigo),var(--axon)); display:grid; place-items:center; color:#fff}
+.brand-mark svg{width:24px; height:24px; fill:currentColor}
+.brand h1{font-size:15px; line-height:1.25; margin:0; font-weight:750; color:var(--ink)}
+.brand small{display:block; color:var(--muted); font-size:12px; font-weight:500; margin-top:2px}
+.nav-home{display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border-radius:var(--r-md); border:0; background:none; text-align:left; font-weight:650; font-size:14.5px}
+.nav-home:hover{background:var(--surface2)}
+.nav-home.on{background:var(--ink); color:var(--paper)}
+.part-label{font-size:12px; color:var(--muted); margin:18px 10px 6px; font-weight:700; text-transform:uppercase; letter-spacing:.05em}
+.lesson-btn{display:grid; grid-template-columns:46px 1fr; align-items:center; gap:4px 8px; width:100%; padding:10px 12px; border:0; border-radius:var(--r-md); background:none; text-align:left; margin-bottom:3px}
+.lesson-btn:hover{background:var(--surface2)}
+.lesson-btn.on{background:var(--myelin-soft)}
+.lesson-btn .code{font-weight:800; font-size:13px; color:var(--indigo)}
+.lesson-btn .name{font-size:13.5px; font-weight:600; line-height:1.3}
+.lesson-btn .mini{grid-column:2; height:4px; border-radius:4px; background:var(--surface2); overflow:hidden; margin-top:4px}
+.lesson-btn.on .mini{background:rgba(0,0,0,.15)}
+.mini i{display:block; height:100%; background:var(--axon); border-radius:4px; transition:width .3s}
+.side-foot{margin-top:auto; padding:16px 8px 0; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap}
+.chip-btn{border:1px solid var(--line); background:var(--surface2); border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px}
+.chip-btn:hover{border-color:var(--ink)}
+
+/* Main Container */
+.main{padding:30px clamp(16px,4vw,48px) 64px; max-width:1120px; width:100%}
+.topbar{display:none}
+
+/* Hero & Exam Dashboard */
+.hero{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:stretch; margin-bottom:26px}
+.hero-card{background:var(--ink); color:var(--paper); border-radius:var(--r-lg); padding:26px 28px; position:relative; overflow:hidden; box-shadow:var(--shadow)}
+.hero-card h2{font-size:clamp(22px,3vw,32px); line-height:1.2; margin:0 0 10px; font-weight:800; letter-spacing:-.01em}
+.hero-card p{margin:0; opacity:.85; font-size:14.5px; line-height:1.55}
+.hero-card .lead-q{margin-top:18px; font-size:13.5px; opacity:.92; border-left:3px solid var(--myelin); padding-left:12px; font-style:italic}
+.exam-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px; display:flex; flex-direction:column; gap:14px; box-shadow:var(--shadow)}
+.exam-card h3{margin:0; font-size:16px; font-weight:750}
+.exam-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+.fact{background:var(--surface2); border-radius:var(--r-md); padding:10px 12px}
+.fact strong{display:block; font-size:20px; font-weight:800; line-height:1.1; color:var(--indigo)}
+.fact span{font-size:12px; color:var(--muted); font-weight:550}
+
+.btn{border:0; border-radius:var(--r-md); padding:10px 16px; font-weight:650; font-size:14px; background:var(--surface2); color:var(--ink); transition:all .2s; display:inline-flex; align-items:center; justify-content:center; gap:6px}
+.btn:hover{filter:brightness(.95)}
+.btn.primary{background:var(--myelin); color:#1A2340; font-weight:750}
+.btn.dark{background:var(--ink); color:var(--paper)}
+.btn.ghost{background:none; border:1px solid var(--line)}
+.btn:disabled{opacity:.45; cursor:not-allowed}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+/* Axon Map */
+.map{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px 18px; margin-bottom:26px; box-shadow:var(--shadow)}
+.map-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.map-head h3{margin:0; font-size:16px; font-weight:750}
+.map-head p{margin:0; color:var(--muted); font-size:13px}
+.axon-wrap{overflow-x:auto; padding-bottom:6px}
+.axon{display:flex; align-items:center; min-width:600px; padding:8px 4px}
+.soma{width:44px; height:44px; border-radius:50%; background:var(--indigo); flex:none; position:relative; box-shadow:0 0 0 6px var(--surface2)}
+.soma::after{content:""; position:absolute; inset:14px; border-radius:50%; background:var(--surface)}
+.seg{flex:1; height:32px; margin:0 4px; border-radius:16px; background:var(--surface2); position:relative; overflow:hidden; border:0; padding:0; min-width:70px; cursor:pointer}
+.seg .fill{position:absolute; inset:0 auto 0 0; background:var(--myelin); border-radius:16px; transition:width .4s ease}
+.seg .lbl{position:relative; font-size:12.5px; font-weight:800; color:var(--ink); line-height:32px; display:block; text-align:center}
+.seg:hover{outline:2px solid var(--ink); outline-offset:1px}
+.terminal{width:26px; height:26px; flex:none; border-radius:50%; border:5px solid var(--axon); margin-left:4px}
+
+/* Grid Lessons Cards */
+.grid-lessons{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px}
+.lcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px; text-align:left; display:flex; flex-direction:column; gap:8px; min-height:140px; cursor:pointer; transition:border-color .2s}
+.lcard:hover{border-color:var(--ink); transform:translateY(-2px); box-shadow:var(--shadow)}
+.lcard .code{font-weight:800; color:var(--indigo); font-size:13px}
+.lcard .t{font-weight:700; font-size:15px; line-height:1.35; margin:2px 0}
+.lcard .meta{font-size:12px; color:var(--muted); margin-top:auto; display:flex; justify-content:space-between}
+.bar{height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-top:4px}
+.bar i{display:block; height:100%; background:var(--axon); transition:width .3s}
+
+/* Lesson Detail View */
+.lhead{display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; margin-bottom:8px}
+.lhead .bigcode{font-size:clamp(44px,6vw,68px); font-weight:850; line-height:.9; color:var(--myelin); letter-spacing:-.03em}
+.lhead .part{color:var(--muted); font-size:13px; font-weight:600}
+.lhead h2{margin:2px 0 0; font-size:clamp(22px,3vw,30px); line-height:1.2; font-weight:800}
+.goals{background:var(--axon-soft); border-radius:var(--r-md); padding:14px 18px; margin:16px 0; border-left:4px solid var(--axon)}
+.goals h4{margin:0 0 6px; font-size:13.5px; font-weight:750}
+.goals ul{margin:0; padding-left:18px; font-size:14px}
+.goals li{margin:3px 0}
+
+/* Mindmap Tree Wrapper & SVG */
+.mm-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); margin:18px 0 24px; overflow:hidden; box-shadow:var(--shadow)}
+.mm-head{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap; background:var(--surface2)}
+.mm-head h4{margin:0; font-size:14.5px; font-weight:750}
+.mm-scroll{overflow-x:auto; padding:14px 16px; -webkit-overflow-scrolling:touch}
+.tree{padding:12px 6px; border-bottom:1px dashed var(--line)}
+.tree:last-child{border-bottom:0}
+.mm-scroll svg{display:block; height:auto}
+
+/* Tabs */
+.tabs{display:flex; gap:6px; margin:20px 0 22px; border-bottom:1px solid var(--line); overflow-x:auto}
+.tab{border:0; background:none; padding:10px 16px 12px; font-weight:650; font-size:15px; color:var(--muted); border-bottom:3px solid transparent; margin-bottom:-1px; white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink); border-bottom-color:var(--myelin)}
+.tab .count{font-size:11.5px; background:var(--surface2); border-radius:999px; padding:1px 8px; margin-left:6px; color:var(--muted)}
+
+/* Toolbar */
+.toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:14px 0}
+.muted{color:var(--muted)}
+
+/* Content Blocks (Details / Accordion) */
+.block{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); margin-bottom:12px; overflow:hidden}
+.block summary{list-style:none; cursor:pointer; padding:14px 18px; font-weight:700; font-size:15.5px; display:flex; justify-content:space-between; align-items:center; gap:10px}
+.block summary::-webkit-details-marker{display:none}
+.block summary::after{content:"+"; font-size:22px; font-weight:400; color:var(--muted); line-height:1}
+.block[open] summary::after{content:"–"}
+.block ul{margin:0; padding:0 22px 16px 36px}
+.block li{margin:7px 0; max-width:82ch; font-size:14.5px}
+.block li b{color:var(--indigo)}
+
+/* Tables */
+.tblwrap{overflow-x:auto; margin:18px 0; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface)}
+.tblwrap h4{margin:0; padding:12px 16px; font-size:14.5px; font-weight:750; border-bottom:1px solid var(--line); background:var(--surface2)}
+table.data{width:100%; border-collapse:collapse; font-size:14px; text-align:left}
+table.data th, table.data td{padding:10px 16px; border-bottom:1px solid var(--line); vertical-align:top}
+table.data th{background:var(--surface2); font-weight:700; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.03em}
+table.data tr:last-child td{border-bottom:0}
+
+/* Pro Tips */
+.tips-wrap{display:grid; gap:12px; margin:18px 0}
+.tip-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 18px; display:flex; gap:14px; align-items:flex-start}
+.tip-badge{flex:none; background:var(--myelin-soft); color:#8B5A10; font-weight:800; font-size:12px; border-radius:6px; padding:3px 8px; text-transform:uppercase}
+.tip-body{font-size:14.5px; line-height:1.55}
+
+/* Flashcard Component */
+.fc-stage{display:flex; flex-direction:column; align-items:center; gap:16px; margin:20px 0}
+.fc{perspective:1000px; width:100%; max-width:560px; height:280px; cursor:pointer}
+.fc-inner{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .4s ease; border-radius:var(--r-lg); box-shadow:var(--shadow)}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--r-lg); border:1px solid var(--line); background:var(--surface); padding:26px 28px; display:flex; flex-direction:column; justify-content:space-between}
+.fc-face.back{transform:rotateY(180deg); background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.fc-tag{font-size:12px; font-weight:750; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+.fc-face.back .fc-tag{color:var(--myelin)}
+.fc-text{font-size:clamp(16px,2.2vw,20px); font-weight:700; line-height:1.45; margin:auto 0}
+.fc-hint{font-size:12.5px; color:var(--muted)}
+.fc-face.back .fc-hint{color:rgba(255,255,255,.65)}
+.fc-controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+/* Quiz Question Cards */
+.qcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; margin-bottom:14px}
+.qcard.answered{border-color:var(--line)}
+.qcard .qtxt{font-weight:700; font-size:15px; margin-bottom:12px; line-height:1.45}
+.qnum{display:inline-block; font-size:12px; font-weight:800; color:var(--indigo); margin-right:6px}
+.opts{display:grid; gap:8px}
+.opt{border:1px solid var(--line); background:var(--surface2); border-radius:var(--r-sm); padding:10px 14px; text-align:left; font-size:14px; display:flex; gap:10px; align-items:center; transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.correct{background:var(--axon-soft); border-color:var(--axon); color:#0B4A45; font-weight:650}
+.opt.wrong{background:var(--rose-soft); border-color:var(--rose); color:#6E163B; font-weight:650}
+.exp{margin-top:12px; padding:10px 14px; border-radius:var(--r-sm); background:var(--surface2); font-size:13.5px; line-height:1.5; border-left:3px solid var(--indigo)}
+
+/* Search Modal */
+.modal-mask{position:fixed; inset:0; background:rgba(17,22,42,.6); backdrop-filter:blur(4px); display:grid; place-items:center; z-index:999; padding:16px}
+.modal{background:var(--surface); border-radius:var(--r-lg); width:100%; max-width:640px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--line); box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.modal-head{display:flex; gap:10px; padding:16px; border-bottom:1px solid var(--line)}
+.modal-input{flex:1; border:1px solid var(--line); border-radius:var(--r-md); padding:10px 14px; font:inherit; background:var(--surface2); color:var(--ink)}
+.modal-input:focus{outline:2px solid var(--myelin); background:var(--surface)}
+.modal-results{overflow-y:auto; padding:12px; display:grid; gap:8px}
+.modal-results .item{padding:10px 14px; border-radius:var(--r-md); border:1px solid var(--line); cursor:pointer; background:var(--surface)}
+.modal-results .item:hover{border-color:var(--ink); background:var(--surface2)}
+.modal-results .w{font-weight:750; color:var(--indigo); font-size:14px}
+.modal-results .from{font-size:12px; color:var(--muted); margin-top:2px}
+.empty{padding:30px; text-align:center; color:var(--muted); font-size:14px}
+
+/* Mobile Topbar */
+@media (max-width:880px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed; inset:0 auto 0 0; width:290px; transform:translateX(-100%); transition:transform .3s ease; z-index:100; box-shadow:4px 0 16px rgba(0,0,0,.15)}
+  .side.open{transform:translateX(0)}
+  .topbar{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--surface); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:90}
+  .hero{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="btn ghost" id="menuBtn">☰ Mục lục</button>
+  <span style="font-weight:750; font-size:14.5px">Tâm lý học Nhân cách</span>
+  <button class="btn ghost" id="searchBtnTop">🔍</button>
+</div>
+
+<div class="app">
+  <aside class="side" id="side">
+    <button class="brand" data-go="home">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 0 0-9 9c0 3.6 2.1 6.7 5.2 8.1v1.9c0 .6.4 1 1 1h5.6c.6 0 1-.4 1-1v-1.9c3.1-1.4 5.2-4.5 5.2-8.1a9 9 0 0 0-9-9zm-1 18h-2v-1h2v1zm4 0h-2v-1h2v1zm1.2-2.8l-.2.1v.7h-8v-.7l-.2-.1C5.1 16.6 3.5 13.9 3.5 11 3.5 6.3 7.3 2.5 12 2.5s8.5 3.8 8.5 8.5c0 2.9-1.6 5.6-4.3 6.2z"/></svg>
+      </div>
+      <div>
+        <h1>Tâm lý học Nhân cách</h1>
+        <small>Góc ôn tập & Tự học tương tác</small>
+      </div>
+    </button>
+        <a href="./index.html" class="nav-dashboard" style="display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:var(--r-md); background:var(--surface2); color:var(--ink); font-weight:700; font-size:13px; text-decoration:none; margin-bottom:8px; border:1px solid var(--line); transition:all .15s ease;">
+      <span style="font-size:16px;">🏛️</span>
+      <span>Cổng Dashboard</span>
+      <span style="margin-left:auto; font-size:10.5px; padding:2px 6px; border-radius:4px; background:var(--axon); color:#fff; font-weight:800;">HUB</span>
+    </a>
+    <button class="nav-home" data-go="home">🏠 Tổng quan môn học</button>
+    <div id="sideLessons"></div>
+    <div class="side-foot">
+      <button class="chip-btn" data-go="exam">📝 Thi thử</button>
+      <button class="chip-btn" data-go="wrong">⚠️ Câu sai (<span id="wrongCount">0</span>)</button>
+      <button class="chip-btn" id="searchBtn">🔍 Tra cứu</button>
+      <button class="chip-btn" id="themeBtn">🌓 Giao diện</button>
+      <button class="chip-btn" id="goalsBtn" style="border-color:var(--myelin); color:var(--ink); font-weight:700">🎯 Chuẩn đầu ra (CLO1-3)</button>
+    </div>
+  </aside>
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<!-- Modal Chuẩn đầu ra (CLO1 - CLO3) -->
+<div id="goalsModal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:9999; overflow-y:auto; padding:20px; align-items:center; justify-content:center;">
+  <div class="modal-card" style="background:var(--surface); color:var(--ink); border-radius:var(--r-lg); max-width:920px; width:100%; max-height:90vh; overflow-y:auto; padding:28px 32px; box-shadow:0 12px 36px rgba(0,0,0,.25); border:1px solid var(--line); position:relative; margin:auto;">
+    <button id="closeGoalsModal" style="position:absolute; top:20px; right:20px; background:var(--surface2); border:0; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:18px; font-weight:bold; color:var(--muted); display:flex; align-items:center; justify-content:center;">✕</button>
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px">
+      <span style="background:var(--rose-soft); color:var(--rose); font-weight:800; padding:4px 10px; border-radius:6px; font-size:13px">KHUNG NĂNG LỰC CHUẨN ĐẦU RA</span>
+      <span style="font-size:13px; color:var(--muted)">ĐH KHXH&NV – ĐHQG TP.HCM (Mã HP: TLH025)</span>
+    </div>
+    <h2 style="font-size:24px; font-weight:800; margin:0 0 14px; color:var(--ink)">Đối chiếu Mục tiêu Môn học Tâm lý học Nhân cách</h2>
+    <p style="font-size:14.5px; color:var(--muted); line-height:1.55; margin-bottom:24px">Hệ thống ôn tập được thiết kế bao phủ 100% các chuẩn đầu ra (CLO1 – CLO3) và chỉ số kết quả thực hiện (PI 5.1, 6.1, 6.2, 6.3) của đề cương đào tạo cử nhân:</p>
+    
+    <div style="display:flex; flex-direction:column; gap:18px;">
+      <div style="background:var(--surface2); border-radius:var(--r-md); padding:16px 20px; border-left:4px solid var(--rose);">
+        <h3 style="margin:0 0 10px; font-size:16px; font-weight:750; color:var(--rose)">CHUẨN ĐẦU RA HỌC PHẦN (CLOs & PIs)</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+          <thead>
+            <tr style="text-align:left; border-bottom:1px solid var(--line); color:var(--muted);">
+              <th style="padding:8px 6px; width:70px">Mã CĐR</th>
+              <th style="padding:8px 6px">Nội dung chuẩn đầu ra</th>
+              <th style="padding:8px 6px; width:220px">Đáp ứng trên nền tảng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO1</td>
+              <td style="padding:10px 6px">Nắm được các điểm trọng yếu trong các lý thuyết chủ đạo về nhân cách: khái niệm chính, yếu tố quyết định, quá trình phát triển và bất thường nhân cách.</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bao phủ 6 bài học, 18 sơ đồ tư duy SVG & 96 flashcards)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO2</td>
+              <td style="padding:10px 6px">Đánh giá ưu điểm và hạn chế của mỗi tiếp cận trong tương quan với các tiếp cận khác.</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bảng đối sánh chuyên sâu giữa 5 trường phái, ma trận phân tích)</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO3</td>
+              <td style="padding:10px 6px">Áp dụng phân tích ca tâm lý và đặc điểm nhân cách của bản thân hoặc nhân vật cụ thể.</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (90 câu hỏi trắc nghiệm tình huống lâm sàng, cơ chế phòng vệ, ca bệnh)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:24px; text-align:right">
+      <button class="btn primary" id="okGoalsBtn" style="padding:10px 24px">Đã hiểu – Bắt đầu học</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const LESSONS = [{"id": "nc1", "part": "Phần I: Đại cương & Cơ sở Khoa học", "code": "NC.1", "title": "Tổng quan về Nhân cách & Phương pháp Đo lường", "goals": ["Hiểu nguồn gốc từ nguyên 'Persona' và định nghĩa nhân cách theo Hiệp hội Tâm lý học Hoa Kỳ (APA).", "Phân biệt rõ ràng giữa Nét nhân cách (Trait - bền vững) và Trạng thái tâm lý (State - tạm thời).", "Nắm vững 6 câu hỏi kinh điển về bản chất con người trong nghiên cứu nhân cách.", "Phân biệt và đánh giá ưu - nhược điểm của Trắc nghiệm khách quan (Objective) và Trắc nghiệm phóng chiếu (Projective)."], "sections": [{"h": "Nhân cách là gì? Định nghĩa & Nguồn gốc từ nguyên", "items": ["<b>Từ nguyên học:</b> Từ 'Personality' trong tiếng Anh bắt nguồn từ tiếng Latinh <b>Persona</b> — chiếc mặt nạ mà các diễn viên kịch La Mã cổ đại đeo để thể hiện vai diễn hoặc che giấu con người thật phía sau.", "<b>Định nghĩa theo APA (2018):</b> Nhân cách là <b>mô thức lâu dài và kiên định</b> của các đặc điểm tâm lý, suy nghĩ, cảm xúc và hành vi mà cá nhân mang theo, tạo nên cách thức thích ứng và tương tác độc đáo của riêng người đó với môi trường tâm lý, thể chất và xã hội.", "<b>Hai mục tiêu trọng tâm của nghiên cứu nhân cách:</b>", "• <i>Tìm hiểu sự khác biệt cá nhân (Individual differences):</i> Nhận diện các đặc điểm tâm lý cụ thể (vd: tính hướng ngoại, mức độ lo âu, tính tận tâm) phân biệt người này với người khác.", "• <i>Tìm hiểu tính toàn vẹn (Psychological coherence):</i> Làm sáng tỏ cách thức các thành phần khác nhau bên trong một con người liên kết, tổ chức thành một chỉnh thể thống nhất ('Tại sao bạn lại là chính bạn?').", "<b>Nhân cách vs. Tính khí (Temperament) vs. Tính cách (Character):</b> Tính khí mang tính sinh học bẩm sinh (xuất hiện rất sớm từ sơ sinh); Tính cách gắn liền với chuẩn mực đạo đức, giá trị xã hội; còn Nhân cách là khái niệm rộng lớn nhất bao hàm cả hai."]}, {"h": "Nét nhân cách (Trait) vs. Trạng thái tâm lý (State)", "items": ["<b>Nét nhân cách (Trait):</b> Đặc tính tâm lý tương đối <b>bền vững, nhất quán xuyên suốt thời gian và qua nhiều bối cảnh khác nhau</b>. Ví dụ: Tính dễ cáu giận (cá nhân thường xuyên có khuynh hướng bực bội trong hầu hết các hoàn cảnh).", "<b>Trạng thái tâm lý (State):</b> Phản ứng tâm lý mang tính <b>tạm thời, biến đổi nhanh chóng theo tình huống cụ thể</b>. Ví dụ: Cơn giận dữ bùng phát khi bị xe khác tạt đầu bất ngờ (sẽ tan biến khi tình huống kết thúc).", "<b>Nguyên tắc nhận diện:</b> Không thể kết luận một người có 'nhân cách hung hăng' chỉ vì thấy họ nổi giận một lần; cần quan sát tính lặp lại và tính xuyên tình huống."]}, {"h": "Sáu câu hỏi kinh điển về Bản chất Con người", "items": ["Mỗi học thuyết nhân cách đều trả lời 6 câu hỏi triết học - tâm lý học nền tảng sau:", "<b>1. Tự do ý chí vs. Quyết định luận (Free will vs. Determinism):</b> Chúng ta có quyền tự quyết định cuộc đời mình hay hành vi bị định đoạt bởi vô thức, sinh học hoặc môi trường?", "<b>2. Di truyền vs. Nuôi dưỡng (Nature vs. Nurture):</b> Nhân cách hình thành do bộ gen bẩm sinh hay do giáo dục gia đình và trải nghiệm xã hội?", "<b>3. Quá khứ vs. Hiện tại (Past vs. Present):</b> Nhân cách bị đông cứng bởi những trải nghiệm 5 năm đầu đời (Freud) hay liên tục phát triển và hướng tới tương lai (Allport, Rogers)?", "<b>4. Độc nhất vs. Phổ quát (Uniqueness vs. Universality):</b> Mỗi cá nhân là một cấu trúc độc nhất vô nhị hay nhân cách con người tuân theo các quy luật phổ quát chung?", "<b>5. Cân bằng nội môi vs. Tăng trưởng (Equilibrium vs. Growth):</b> Con người chỉ hành động để giải tỏa căng thẳng (giảm xung năng) hay luôn khao khát tự hiện thực hóa và vươn lên tầm cao mới?", "<b>6. Lạc quan vs. Bi quan (Optimism vs. Pessimism):</b> Bản chất con người cơ bản là lương thiện, có tiềm năng phát triển hay mang bản chất đen tối, ích kỷ và xung đột triền miên?"]}, {"h": "Các Phương pháp Đo lường & Đánh giá Nhân cách", "items": ["<b>1. Trắc nghiệm khách quan (Objective Tests / Self-Report Inventories):</b>", "• <i>Bản chất:</i> Các câu hỏi trắc nghiệm tự lượng giá với các phương án trả lời chuẩn hóa (Đúng/Sai, thang đo Likert 1-5).", "• <i>Công cụ tiêu biểu:</i> <b>MMPI-2</b> (Bộ trắc nghiệm Đa diện Minnesota chẩn đoán bệnh lý), <b>16PF</b> (Cattell), <b>NEO-PI-R / Big Five Inventory</b>, <b>HEXACO-PI</b>.", "• <i>Ưu điểm:</i> Độ tin cậy (reliability) và độ hiệu lực (validity) cao, dễ chấm điểm tự động, chuẩn hóa trên mẫu lớn.", "• <i>Hạn chế:</i> Dễ bị bóp méo do người làm bài trả lời theo hướng xã hội mong muốn (Social Desirability) hoặc thiếu hiểu biết về bản thân.", "<b>2. Trắc nghiệm phóng chiếu (Projective Tests):</b>", "• <i>Bản chất:</i> Dựa trên cơ chế phóng chiếu của tâm động học; cung cấp các kích thích mơ hồ (vết mực, bức tranh không lời) để thân chủ vô thức 'phóng chiếu' nhu cầu, xung đột nội tâm và nỗi sợ thầm kín vào đó.", "• <i>Công cụ tiêu biểu:</i> <b>Trắc nghiệm vết mực Rorschach</b> (10 thẻ vết mực đối xứng), <b>TAT (Thematic Apperception Test)</b> của Murray (kể chuyện qua tranh vẽ).", "• <i>Ưu điểm:</i> Khó giả vờ/nói dối, tiếp cận được các tầng vô thức sâu kín của tâm trí.", "• <i>Hạn chế:</i> Độ tin cậy và hiệu lực thấp hơn; cách chấm điểm phụ thuộc nặng nề vào chủ quan của nhà tâm lý học.", "<b>3. Phỏng vấn lâm sàng & Quan sát hành vi:</b> Thu thập thông tin trực tiếp về ngôn ngữ cơ thể, phản ứng cảm xúc và lịch sử cuộc đời."]}], "tables": [{"title": "So sánh Trắc nghiệm Khách quan và Trắc nghiệm Phóng chiếu", "head": ["Tiêu chí đối sánh", "Trắc nghiệm Khách quan (Objective)", "Trắc nghiệm Phóng chiếu (Projective)"], "rows": [["Bản chất kích thích", "Rõ ràng, chuẩn hóa (câu hỏi trắc nghiệm, thang đo)", "Mơ hồ, không có cấu trúc cố định (vết mực, tranh vẽ)"], ["Cơ sở lý thuyết", "Thuyết Nét tính cách, Đo lường tâm lý thực nghiệm", "Tâm động học & Cơ chế phóng chiếu vô thức"], ["Phương thức trả lời", "Chọn phương án có sẵn (Đúng/Sai, Thang Likert 1-5)", "Tự do diễn giải, mô tả, sáng tạo câu chuyện"], ["Độ tin cậy & Hiệu lực", "Cao, có thang kiểm tra tính trung thực (Lie scale)", "Trung bình - thấp, phụ thuộc kỹ năng nhà phân tích"], ["Mục tiêu đánh giá", "Mô tả nét tính cách, mức độ ổn định, tầm soát bệnh lý", "Khám phá xung đột nội tâm vô thức, sang chấn dồn nén"], ["Ví dụ kinh điển", "MMPI-2, Big Five (NEO-PI-R), 16PF, HEXACO", "Vết mực Rorschach, TAT (Thematic Apperception Test)"]]}, {"title": "Phân biệt Nét nhân cách (Trait) và Trạng thái tâm lý (State)", "head": ["Đặc điểm", "Nét nhân cách (Personality Trait)", "Trạng thái tâm lý (Psychological State)"], "rows": [["Tính bền vững", "Kéo dài suốt nhiều năm hoặc cả đời người", "Kéo dài vài phút, vài giờ hoặc vài ngày"], ["Mức độ phụ thuộc bối cảnh", "Ổn định xuyên suốt nhiều bối cảnh khác nhau", "Gắn chặt với một kích thích / biến cố tức thời"], ["Khả năng dự đoán", "Dự đoán xu hướng hành vi dài hạn của cá nhân", "Dự đoán phản ứng nhất thời trong tình huống cụ thể"], ["Ví dụ so sánh", "Người có nét Bất ổn cảm xúc (Neuroticism cao)", "Cảm giác hồi hộp, toát mồ hôi trước khi thi 15 phút"]]}], "tips": ["Mẹo ghi nhớ: Persona = Chiếc mặt nạ kịch nghệ La Mã. Học nhân cách là học cách chiếc mặt nạ bên ngoài tương tác với bản chất bên trong.", "Muốn phân biệt Trait vs State: Hãy tự hỏi 'Đặc điểm này xuất hiện cả năm nay trong mọi việc (Trait) hay chỉ xảy ra khi gặp chuyện xui xẻo sáng nay (State)?'", "Trắc nghiệm phóng chiếu Rorschach không có đáp án đúng/sai: Giá trị nằm ở cách tư duy, tốc độ phản ứng và chủ đề vô thức thân chủ gán cho vết mực.", "Khi thân chủ trả lời bài test: Luôn cảnh giác với 'Hiệu ứng mong muốn xã hội' (Social desirability) — xu hướng tự tô vẽ bản thân tốt đẹp hơn thực tế."], "cards": [["Persona", "Từ nguyên tiếng Latinh có nghĩa là chiếc mặt nạ kịch nghệ; nguồn gốc của thuật ngữ Personality (Nhân cách)."], ["Nhân cách (Personality)", "Mô thức lâu dài và kiên định của các đặc điểm tâm lý, suy nghĩ, cảm xúc và hành vi định hình cách cá nhân thích ứng với cuộc sống."], ["Nét nhân cách (Trait)", "Đặc tính tâm lý tương đối bền vững và kiên định theo thời gian và xuyên suốt các tình huống khác nhau."], ["Trạng thái tâm lý (State)", "Phản ứng cảm xúc, nhận thức mang tính tạm thời, xuất hiện theo kích thích tình huống cụ thể."], ["Tính khí (Temperament)", "Nền tảng sinh học bẩm sinh của nhân cách, thể hiện qua mức độ phản ứng và hoạt động ngay từ giai đoạn sơ sinh."], ["Quyết định luận (Determinism)", "Quan điểm cho rằng hành vi con người hoàn toàn bị quy định bởi các nguyên nhân sinh học, vô thức hoặc môi trường."], ["Tự do ý chí (Free Will)", "Quan điểm cho rằng con người có khả năng tự nhận thức, tự định đoạt và chịu trách nhiệm về số phận của chính mình."], ["Trắc nghiệm khách quan", "Phương pháp đo lường nhân cách sử dụng bảng câu hỏi tự lượng giá chuẩn hóa với các lựa chọn cố định."], ["MMPI-2", "Bộ trắc nghiệm Đa diện Minnesota gồm 567 câu Đúng/Sai, là công cụ đo lường tâm lý lâm sàng phổ biến nhất thế giới."], ["Trắc nghiệm phóng chiếu", "Phương pháp đánh giá nhân cách đưa ra các kích thích mơ hồ để cá nhân vô thức bộc lộ cấu trúc tâm trí ẩn giấu."], ["Rorschach Inkblot Test", "Trắc nghiệm phóng chiếu gồm 10 thẻ in vết mực đối xứng của Hermann Rorschach dùng khảo sát vô thức."], ["TAT (Thematic Apperception Test)", "Trắc nghiệm thấu cảm chủ đề của Henry Murray, yêu cầu người tham gia kể lại câu chuyện đằng sau bức tranh."], ["Độ tin cậy (Reliability)", "Mức độ nhất quán, ổn định và lặp lại được của kết quả đo lường tâm lý qua nhiều lần thử."], ["Độ hiệu lực (Validity)", "Mức độ mà một công cụ trắc nghiệm thực sự đo lường được đúng khái niệm mà nó tuyên bố đo lường."], ["Social Desirability", "Khuynh hướng người trả lời trắc nghiệm bóp méo câu trả lời để tạo hình ảnh tốt đẹp, phù hợp với chuẩn mực xã hội."], ["Individual Differences", "Nghiên cứu về sự khác biệt cá nhân — lĩnh vực cốt lõi nhằm xác định tại sao người này khác biệt với người khác."]], "qs": [["Từ 'Personality' (Nhân cách) có nguồn gốc từ nguyên từ chữ 'Persona' trong tiếng Latinh, ban đầu dùng để chỉ:", ["Trái tim và tâm hồn con người", "Mặt nạ diễn viên kịch nghệ La Mã cổ đại", "Lý trí và tư duy logic", "Dòng máu và thể dịch cơ thể"], 1, "Persona nguyên thủy là chiếc mặt nạ mà các diễn viên đeo trên sân khấu kịch cổ đại để biểu đạt vai diễn."], ["Theo định nghĩa của Hiệp hội Tâm lý học Hoa Kỳ (APA), nhân cách được đặc trưng bởi:", ["Các hành vi thay đổi liên tục theo cảm xúc nhất thời", "Mô thức lâu dài và kiên định của suy nghĩ, cảm xúc và hành vi", "Số lượng tài sản và địa vị xã hội của một người", "Sự tuân thủ tuyệt đối các quy định pháp luật"], 1, "Nhân cách là mô thức tương đối ổn định, bền vững của các đặc điểm tâm lý và hành vi của cá nhân qua thời gian."], ["Hiện tượng một sinh viên vốn rất hòa đồng bỗng nổi giận và gắt gỏng khi bị trễ chuyến xe buýt sáng nay là ví dụ của:", ["Nét nhân cách hung tính (Trait)", "Trạng thái tâm lý tạm thời (State)", "Rối loạn nhân cách ranh giới", "Sự suy giảm nhận thức vĩnh viễn"], 1, "Đây là phản ứng mang tính nhất thời do hoàn cảnh gây ra (State), không phải nét nhân cách ổn định lâu dài (Trait)."], ["Câu hỏi triết học: 'Hành vi con người bị chi phối bởi các xung năng vô thức quá khứ hay do con người tự quyết định mục tiêu tương lai?' phản ánh trục đối lập nào?", ["Di truyền vs Nuôi dưỡng (Nature vs Nurture)", "Quyết định luận vs Tự do ý chí (Determinism vs Free Will)", "Độc nhất vs Phổ quát (Uniqueness vs Universality)", "Cân bằng nội môi vs Tăng trưởng"], 1, "Trục đối lập giữa Determinism (hành vi bị quy định trước) và Free will (con người có tự do lựa chọn và tự định đoạt)."], ["Trắc nghiệm Đa diện Minnesota (MMPI-2) thuộc nhóm phương pháp đánh giá nhân cách nào?", ["Trắc nghiệm phóng chiếu", "Trắc nghiệm khách quan tự lượng giá", "Phương pháp phân tâm giấc mơ", "Trắc nghiệm giải phẫu thần kinh"], 1, "MMPI-2 là trắc nghiệm khách quan chuẩn hóa (Objective Test) với 567 câu Đúng/Sai."], ["Cơ sở lý luận nền tảng của các bài trắc nghiệm phóng chiếu (như Rorschach và TAT) bắt nguồn từ trường phái nào?", ["Thuyết Hành vi cổ điển", "Tâm động học (Psychodynamic)", "Thuyết Nét tính cách", "Tâm lý học Nhận thức"], 1, "Dựa trên cơ chế phòng vệ 'Phóng chiếu' (Projection) do Freud phát hiện: người ta gán cảm xúc vô thức của mình vào kích thích mơ hồ."], ["Hạn chế lớn nhất của các bảng hỏi nhân cách tự lượng giá (Self-Report) như Big Five hay 16PF là:", ["Quá tốn kém và mất nhiều ngày để chấm điểm", "Hiện tượng người làm bài trả lời theo hướng xã hội mong muốn (Social Desirability)", "Hoàn toàn không có độ tin cậy khoa học", "Chỉ áp dụng được cho trẻ em dưới 6 tuổi"], 1, "Người trả lời có xu hướng tô vẽ bản thân để có hình ảnh tích cực hơn trong mắt người khác hoặc nhà tuyển dụng."], ["Thí nghiệm yêu cầu thân chủ nhìn vào 10 thẻ in vết mực đối xứng và trả lời 'Bạn nhìn thấy gì ở đây?' là bài trắc nghiệm nào?", ["TAT (Thematic Apperception Test)", "Rorschach Inkblot Test", "MMPI-2", "BDI (Beck Depression Inventory)"], 1, "Đó chính là trắc nghiệm vết mực Rorschach do nhà tâm thần học Hermann Rorschach sáng tạo năm 1921."], ["Đặc điểm nào dưới đây phân biệt rõ nhất giữa Tính khí (Temperament) và Nhân cách (Personality)?", ["Tính khí xuất hiện từ rất sớm ở trẻ sơ sinh và gắn liền với nền tảng sinh học thần kinh bẩm sinh", "Tính khí do giáo dục gia đình quyết định 100%", "Nhân cách không bao giờ thay đổi còn tính khí đổi theo từng ngày", "Tính khí chỉ có ở người trưởng thành"], 0, "Tính khí là cốt lõi sinh học bẩm sinh, bộc lộ ngay từ những tháng đầu đời (mức độ hoạt động, khả năng dỗ nín)."], ["Một bài trắc nghiệm nhân cách cho ra kết quả gần như giống hệt nhau khi một người làm lại sau 3 tháng. Bài kiểm tra đó có:", ["Độ hiệu lực nội dung cao", "Độ tin cậy kiểm tra - kiểm tra lại (Test-retest reliability) cao", "Độ phóng chiếu cao", "Nguy cơ thiên kiến cao"], 1, "Độ tin cậy kiểm tra lại (Test-retest reliability) đo lường tính ổn định của kết quả trắc nghiệm qua thời gian."], ["Khi nhà tâm lý học Henry Murray đưa ra bức tranh vẽ một cậu bé đang nhìn cây đàn vĩ cầm và bảo người tham gia kể một câu chuyện, ông đang sử dụng công cụ nào?", ["Bản kiểm kê 16PF", "Trắc nghiệm TAT (Thematic Apperception Test)", "Thang đo Trầm cảm Hamilton", "Trắc nghiệm MBTI"], 1, "TAT (Trắc nghiệm thấu cảm chủ đề) của Murray yêu cầu kể câu chuyện về quá khứ, hiện tại và tương lai của nhân vật trong tranh."], ["Nếu một bài test nhân cách khẳng định đo lường tính hướng ngoại nhưng thực chất chỉ đo lường chỉ số thông minh IQ, bài test đó bị vi phạm về:", ["Độ tin cậy (Reliability)", "Độ hiệu lực (Validity)", "Độ dài câu hỏi", "Độ phổ biến"], 1, "Độ hiệu lực (Validity) là mức độ bài trắc nghiệm đo lường đúng cái mà nó tuyên bố đo lường."], ["Khái niệm 'Mô thức hành vi kiên định xuyên tình huống' (Cross-situational consistency) có nghĩa là:", ["Một người luôn có cùng một cử chỉ thể xác trong mọi giây phút", "Một người có xu hướng bộc lộ nét tính cách tương tự nhau ở nhiều hoàn cảnh sống khác nhau", "Tính cách con người hoàn toàn do môi trường nhào nặn ngẫu nhiên", "Hành vi chỉ phụ thuộc vào thời tiết"], 1, "Tính xuyên tình huống là đặc trưng của nét nhân cách: người hướng ngoại có xu hướng cởi mở ở cả trường học, công ty lẫn tiệc tùng."], ["Hai định hướng cơ bản trong nghiên cứu nhân cách: Nghiên cứu cá biệt (Idiographic) và Nghiên cứu quy luật chung (Nomothetic) khác nhau ở chỗ nào?", ["Nomothetic tìm quy luật chung áp dụng cho mọi người; Idiographic tập trung vào cấu trúc độc nhất vô nhị của từng cá nhân", "Nomothetic chỉ nghiên cứu động vật; Idiographic nghiên cứu người", "Nomothetic dùng cho phân tâm; Idiographic dùng cho trắc nghiệm số liệu", "Không có điểm khác biệt"], 0, "Nomothetic tìm kiếm các chiều kích/quy luật phổ quát; Idiographic đi sâu vào lịch sử cuộc đời và tính độc nhất của một cá nhân."], ["Phát biểu nào sau đây là ĐÚNG NHẤT về việc sử dụng các công cụ trắc nghiệm nhân cách trong thực hành tâm lý học?", ["Trắc nghiệm cho đáp án tuyệt đối 100% về tương lai một con người", "Nên kết hợp đa phương pháp: trắc nghiệm chuẩn hóa, phỏng vấn lâm sàng và quan sát hành vi thực tế", "Chỉ cần dùng trắc nghiệm online trên mạng xã hội là đủ đánh giá nhân cách", "Trắc nghiệm phóng chiếu hoàn toàn vô giá trị trong lâm sàng"], 1, "Đánh giá nhân cách chuẩn mực luôn cần tiếp cận đa chiều (Triangulation): kết hợp trắc nghiệm khách quan, phỏng vấn và quan sát."]], "trees": [["Đại cương Nhân cách", "bản chất khoa học", "chia thành", [["Từ nguyên & Định nghĩa", "Persona (mặt nạ kịch La Mã)", "gồm", [["Định nghĩa APA", "mô thức kiên định lâu dài của suy nghĩ, cảm xúc, hành vi", "", []], ["2 Mục tiêu nghiên cứu", "khác biệt cá nhân & tính toàn vẹn tâm lý", "", []]]], ["Nét vs. Trạng thái", "bền vững vs tạm thời", "gồm", [["Nét nhân cách (Trait)", "kiên định xuyên thời gian và bối cảnh", "", []], ["Trạng thái (State)", "biến đổi tức thời theo tình huống kích thích", "", []]]], ["Phân biệt thuật ngữ", "cốt lõi & đạo đức", "gồm", [["Tính khí (Temperament)", "nền tảng sinh học bẩm sinh từ sơ sinh", "", []], ["Tính cách (Character)", "gắn liền giá trị đạo đức và chuẩn mực xã hội", "", []]]]]], ["6 Câu hỏi Bản chất Con người", "trục triết học đối lập", "chia thành", [["Tự do vs Định mệnh", "Free will vs Determinism: tự quyết hay tiền định", "", []], ["Di truyền vs Nuôi dưỡng", "Nature vs Nurture: bộ gen hay giáo dục gia đình", "", []], ["Quá khứ vs Hiện tại", "Đông cứng 5 năm đầu đời hay hướng tới tương lai", "", []], ["Độc nhất vs Phổ quát", "Idiographic (độc nhất) vs Nomothetic (quy luật chung)", "", []], ["Cân bằng vs Tăng trưởng", "Giải tỏa xung năng căng thẳng hay vươn lên hoàn thiện", "", []], ["Lạc quan vs Bi quan", "Bản chất hướng thiện tiềm năng hay ích kỷ phá hoại", "", []]]], ["Phương pháp Đo lường", "đánh giá nhân cách", "chia thành", [["Trắc nghiệm Khách quan", "tự lượng giá chuẩn hóa", "gồm", [["MMPI-2", "567 câu Đúng/Sai tầm soát bệnh lý lâm sàng", "", []], ["Big Five, 16PF, HEXACO", "thang đo Likert mô tả nét tính cách", "", []], ["Hạn chế", "hiệu ứng mong muốn xã hội (Social Desirability)", "", []]]], ["Trắc nghiệm Phóng chiếu", "thăm dò vô thức", "gồm", [["Vết mực Rorschach", "10 thẻ mực đối xứng diễn giải tâm trí", "", []], ["TAT (Murray)", "kể câu chuyện đằng sau bức tranh mơ hồ", "", []], ["Hạn chế", "chấm điểm phụ thuộc chủ quan nhà chuyên môn", "", []]]], ["Độ tin cậy & Hiệu lực", "chuẩn mực đo lường", "gồm", [["Reliability", "tính nhất quán, ổn định qua các lần đo", "", []], ["Validity", "đo lường chuẩn xác đúng khái niệm cần đo", "", []]]]]]]}, {"id": "nc2", "part": "Phần I: Đại cương & Cơ sở Khoa học", "code": "NC.2", "title": "Quan điểm Thể chất, Di truyền & Sinh học về Nhân cách", "goals": ["Hiểu lịch sử thuyết 4 thể dịch của Hippocrates - Galen và thuyết tạng người của Sheldon.", "Nắm vững các bằng chứng từ Di truyền học hành vi (Nghiên cứu sinh đôi, hệ số di truyền h²).", "Giải thích cơ chế tương tác Gen và Môi trường (G x E: thụ động, kích thích, chủ động).", "Phân tích cơ sở thần kinh của khí chất: Hệ hoạt hóa lưới (ARAS) của Eysenck và Hệ BAS/BIS của Gray."], "sections": [{"h": "Thuyết Bốn Thể dịch Cổ đại (Hippocrates & Galen)", "items": ["<b>Khởi nguồn y học Hy Lạp cổ đại (Hippocrates, 460–370 TCN):</b> Cơ thể con người chứa 4 loại dịch lỏng tương ứng với 4 nguyên tố tự nhiên và quy định khí chất:", "• <b>Máu đỏ (Sanguis / Đa huyết):</b> Thuộc tính <i>Nóng & Ẩm</i> (Không khí) → <b>Khí chất Linh hoạt (Sanguine):</b> Lạc quan, vui vẻ, nhiệt tình, thích giao thiệp, nhiều năng lượng nhưng dễ mau chán, nông nổi.", "• <b>Mật vàng (Chole / Hoàng đảm):</b> Thuộc tính <i>Nóng & Khô</i> (Lửa) → <b>Khí chất Nóng nảy (Choleric):</b> Quyết đoán, hăng hái, dũng cảm, say mê công việc nhưng dễ cáu gắt, độc đoán, bốc đồng.", "• <b>Mật đen (Melas Chole / Hắc đảm):</b> Thuộc tính <i>Lạnh & Khô</i> (Đất) → <b>Khí chất U sầu (Melancholic):</b> Trầm ngâm, sâu sắc, chu đáo, giàu cảm xúc và khiếu nghệ thuật nhưng nhút nhát, dễ bi quan, lo âu, cô độc.", "• <b>Đờm dãi (Phlegma / Niêm dịch):</b> Thuộc tính <i>Lạnh & Ẩm</i> (Nước) → <b>Khí chất Điềm tĩnh (Phlegmatic):</b> Điềm đạm, kiên nhẫn, đáng tin cậy, bình thản trước biến cố nhưng thụ động, chậm chạp, khó thích nghi hoàn cảnh mới.", "<b>Claudius Galen (130–200 SCN):</b> Hoàn thiện học thuyết và khẳng định sức khỏe tinh thần là sự cân bằng (*Eucrasia*) giữa 4 thể dịch; mất cân bằng dẫn đến bệnh tật và lệch lạc khí chất."]}, {"h": "Thuyết Tạng người & Thể chất (Kretschmer & Sheldon)", "items": ["<b>William Sheldon (1898–1977)</b> chia con người thành 3 kiểu tạng hình thể (*Somatotypes*) và gắn với khí chất tương ứng:", "• <b>Tạng gầy còm (Ectomorph):</b> Xương nhỏ, thân gầy, ít cơ mỡ → <i>Khí chất Não năng (Cerebrotonia):</i> Kín đáo, nhạy cảm, hướng nội, ức chế xã hội, thiên về hoạt động trí óc.", "• <b>Tạng cơ bắp (Mesomorph):</b> Khung xương to, cơ bắp cuồn cuộn, vạm vỡ → <i>Khí chất Thân năng (Somatotonia):</i> Thích mạo hiểm, dũng cảm, quyết đoán, hiếu động, thích chỉ huy và đôi khi hung hăng.", "• <b>Tạng tròn béo (Endomorph):</b> Cơ thể tròn trịa, nhiều mỡ, tiêu hóa tốt → <i>Khí chất Tạng năng (Viscerotonia):</i> Thích ăn uống, chuộng sự thoải mái tiện nghi, hòa đồng, thân thiện, thích giao tiếp xã hội.", "<b>Đánh giá hiện đại:</b> Mối liên hệ giữa hình thể và nhân cách chỉ là tương quan bề ngoài; tâm lý học hiện đại không chấp nhận thuyết thể chất như một chân lý cơ chế."]}, {"h": "Di truyền học Hành vi & Tương tác Gen – Môi trường (G x E)", "items": ["<b>Phương pháp nghiên cứu:</b> So sánh các cặp sinh đôi cùng trứng (MZ - chia sẻ 100% gen) và khác trứng (DZ - chia sẻ 50% gen), đặc biệt là các cặp sinh đôi bị tách rời từ nhỏ và nuôi ở hai gia đình khác nhau (Thí nghiệm Minnesota Twin Study).", "<b>Hệ số di truyền (Heritability - $h^2$):</b> Các nghiên cứu quy mô lớn chứng minh <b>khoảng 40% – 50% sự biến thiên của các nét nhân cách chính (Big Five) là do di truyền</b>; 50% còn lại do môi trường không chia sẻ (Non-shared environment) và kinh nghiệm sống độc nhất của cá nhân.", "<b>Ba mô hình tương tác Gen và Môi trường (G x E) của Scarr & McCartney:</b>", "• <i>Tương tác Thụ động (Passive):</i> Cha mẹ truyền gen cho con và đồng thời tạo dựng môi trường gia đình phù hợp với bộ gen đó (vd: cha mẹ thông minh di truyền gen thích đọc sách và mua đầy giá sách cho con).", "• <i>Tương tác Kích thích / Khơi gợi (Evocative):</i> Gen của đứa trẻ tạo ra các đặc điểm hành vi khiến môi trường xung quanh phản ứng đáp lại theo cách riêng biệt (vd: em bé hay cười nhận được nhiều nụ cười và sự âu yếm từ người lớn hơn em bé hay quấy khóc).", "• <i>Tương tác Chủ động (Active / Niche-picking):</i> Khi lớn lên, đứa trẻ tự chủ động tìm kiếm, lựa chọn môi trường và bạn bè phù hợp với thiên hướng di truyền của mình (vd: đứa trẻ thích mạo hiểm sẽ tham gia các môn thể thao mạo hiểm)."]}, {"h": "Cơ sở Sinh học Thần kinh: ARAS của Eysenck & BAS/BIS của Gray", "items": ["<b>Mô hình Hệ hoạt hóa lưới (ARAS) của Hans Eysenck:</b>", "• Vỏ não của <b>người Hướng nội (Introverts)</b> có <i>mức kích thích nền (Baseline arousal) cao bẩm sinh</i> → Họ chỉ cần kích thích nhẹ từ môi trường là đã đủ tối ưu; quá nhiều kích thích xã hội sẽ gây quá tải → Họ rút lui để tìm sự yên tĩnh.", "• Vỏ não của <b>người Hướng ngoại (Extraverts)</b> có <i>mức kích thích nền thấp bẩm sinh</i> → Họ liên tục tìm kiếm kích thích mạnh từ bên ngoài (tiệc tùng, âm nhạc, giao lưu đông người) để nâng mức kích thích vỏ não lên trạng thái tối ưu.", "<b>Mô hình Tiếp cận / Ức chế Hành vi (BAS & BIS) của Jeffrey Gray:</b>", "• <b>Hệ thống Tiếp cận Hành vi (BAS - Behavioral Approach System):</b> Điều phối bởi hệ thống Dopamine; nhạy cảm với phần thưởng và tín hiệu tích cực → Thúc đẩy hành vi tìm kiếm phần thưởng, lạc quan, hướng ngoại và bốc đồng.", "• <b>Hệ thống Ức chế Hành vi (BIS - Behavioral Inhibition System):</b> Điều phối bởi Serotonin và hệ viền (Amygdala/Hippocampus); nhạy cảm với hình phạt, sự đe dọa và rủi ro → Kích hoạt sự dừng lại, cảnh giác, lo âu và tránh né rủi ro (liên quan đến nét Nhiễu tâm - Neuroticism).", "<b>Tâm lý học Tiến hóa (David Buss):</b> Các nét nhân cách khác nhau tồn tại vì chúng mang lại các lợi thế thích nghi sinh tồn và sinh sản khác nhau trong các hoàn cảnh môi trường lịch sử biến đổi."]}], "tables": [{"title": "Bảng tổng hợp Bốn Thể dịch Cổ đại (Hippocrates & Galen)", "head": ["Khí chất", "Thể dịch & Cơ quan", "Nguyên tố & Thuộc tính", "Đặc điểm tâm lý nổi bật", "Ưu điểm & Nhược điểm"], "rows": [["Linh hoạt (Sanguine)", "Máu đỏ (Tim)", "Không khí (Nóng & Ẩm)", "Vui tươi, lạc quan, sôi nổi, thích kết bạn, hướng ngoại", "Nhiệt huyết, thích nghi nhanh / Mau nản, dễ nông nổi, thiếu sâu sắc"], ["Nóng nảy (Choleric)", "Mật vàng (Gan / Mật)", "Lửa (Nóng & Khô)", "Hăng hái, quyết liệt, tự tin, tham vọng, chỉ huy", "Ý chí cao, quyết đoán / Độc đoán, nóng giận, khó kiềm chế bốc đồng"], ["U sầu (Melancholic)", "Mật đen (Lá lách)", "Đất (Lạnh & Khô)", "Trầm tư, sâu lắng, nhạy cảm, chu đáo, nghệ sĩ", "Cẩn trọng, trung thành, chung thủy / Nhút nhát, bi quan, dễ tổn thương"], ["Điềm tĩnh (Phlegmatic)", "Đờm dãi (Phổi / Não)", "Nước (Lạnh & Ẩm)", "Bình tĩnh, ôn hòa, kiên nhẫn, ít dao động cảm xúc", "Đáng tin, chịu áp lực tốt / Thụ động, chậm chạp, ngại đổi mới"]]}, {"title": "So sánh Hệ thống BAS và BIS của Jeffrey Gray", "head": ["Đặc điểm đối sánh", "Hệ thống Tiếp cận Hành vi (BAS)", "Hệ thống Ức chế Hành vi (BIS)"], "rows": [["Tín hiệu kích hoạt", "Phần thưởng (Reward), thức ăn, tình dục, lời khen", "Hình phạt (Punishment), nguy hiểm, mới lạ đe dọa"], ["Chất dẫn truyền chính", "Dopamine (hệ thống phần thưởng não bộ)", "Serotonin, Norepinephrine (hệ thống viền cảnh báo)"], ["Cảm xúc đi kèm", "Phấn khích, vui sướng, hy vọng, say mê", "Lo âu, sợ hãi, e ngại, cẩn trọng quá mức"], ["Hành vi biểu hiện", "Tiến tới, khám phá, tìm kiếm mục tiêu mới", "Dừng lại (Freeze), rút lui, lùi bước, né tránh"], ["Nét nhân cách tương ứng", "Tính Hướng ngoại (Extraversion), Tính bốc đồng", "Tính Bất ổn cảm xúc (Neuroticism), Tính lo âu"]]}], "tips": ["Mẹo Eysenck: Người hướng nội KHÔNG PHẢI thiếu kỹ năng xã hội, mà là do vỏ não họ đã có mức kích thích tự nhiên quá cao nên cần sự yên tĩnh để cân bằng!", "Nhớ cơ chế Gray: BAS là bàn đạp ga (tiến về phần thưởng); BIS là bàn đạp phanh (dừng lại khi thấy biển báo nguy hiểm).", "Gen không phải là định mệnh tuyệt đối: Gen thiết lập biên độ tiềm năng (Reaction range), còn môi trường quyết định điểm rơi cụ thể trong biên độ đó.", "Tương tác GxE khơi gợi (Evocative): Con người chúng ta đối xử với nhau một phần do chính tín hiệu tính cách mà đối phương phát ra khơi gợi nên."], "cards": [["Hippocrates", "Y tổ Hy Lạp cổ đại, người đầu tiên đề xướng thuyết 4 thể dịch giải thích khí chất con người."], ["Khí chất Linh hoạt (Sanguine)", "Kiểu khí chất gắn với máu đỏ: vui vẻ, lạc quan, thích nghi nhanh, sôi nổi nhưng dễ thay đổi."], ["Khí chất Nóng nảy (Choleric)", "Kiểu khí chất gắn với mật vàng: năng động, quyết liệt, có tài lãnh đạo nhưng dễ cáu gắt và bộc phát."], ["Khí chất U sầu (Melancholic)", "Kiểu khí chất gắn với mật đen: nhạy cảm, sâu sắc, cẩn thận, giàu cảm xúc nhưng dễ bi quan và lo âu."], ["Khí chất Điềm tĩnh (Phlegmatic)", "Kiểu khí chất gắn với niêm dịch: điềm đạm, kiên định, bình thản nhưng đôi khi chậm chạp và thụ động."], ["William Sheldon", "Nhà tâm lý học đề xuất thuyết 3 tạng người (Ectomorph, Mesomorph, Endomorph) tương ứng với 3 khí chất."], ["Hệ số di truyền (h²)", "Tỷ lệ phần trăm sự khác biệt của một nét nhân cách trong quần thể có thể giải thích được bằng yếu tố di truyền."], ["Môi trường không chia sẻ", "Những trải nghiệm sống độc nhất vô nhị của từng cá nhân (bạn bè riêng, tai nạn, thầy cô) tạo nên sự khác biệt giữa anh em."], ["Tương tác GxE thụ động", "Tình huống cha mẹ vừa di truyền gen vừa kiến tạo môi trường gia đình thuận lợi cho gen đó phát triển."], ["Tương tác GxE kích thích", "Tình huống các đặc điểm di truyền của cá nhân kích hoạt những phản ứng đối xử đặc thù từ những người xung quanh."], ["Tương tác GxE chủ động", "Hiện tượng cá nhân tự tìm kiếm và chọn lựa những môi trường sống, bạn bè phù hợp với khuynh hướng gen của mình (Niche-picking)."], ["ARAS (Hệ hoạt hóa lưới)", "Cấu trúc thân não điều hòa mức độ thức tỉnh của vỏ não; Eysenck cho rằng người hướng nội có mức kích thích ARAS nền cao hơn."], ["BAS (Tiếp cận Hành vi)", "Hệ thống thần kinh điều khiển bởi Dopamine thúc đẩy hành vi tiến tới phần thưởng và cơ hội."], ["BIS (Ức chế Hành vi)", "Hệ thống thần kinh điều hòa bởi Serotonin/hệ viền giúp phát hiện mối đe dọa, kích hoạt lo âu và hành vi tránh né."], ["David Buss", "Nhà tâm lý học tiến hóa hàng đầu chứng minh nhân cách là các chiến lược giải quyết vấn đề thích nghi sinh tồn trong lịch sử loài người."], ["Tính mềm dẻo thần kinh", "Khả năng các mạch nơ-ron thay đổi cấu trúc và chức năng để thích ứng với trải nghiệm sống và rèn luyện."]], "qs": [["Theo thuyết bốn thể dịch của Hippocrates, người có nhiều 'Mật vàng' (Yellow bile) sẽ tương ứng với kiểu khí chất nào?", ["Linh hoạt (Sanguine)", "Nóng nảy (Choleric)", "U sầu (Melancholic)", "Điềm tĩnh (Phlegmatic)"], 1, "Mật vàng gắn liền với khí chất Choleric (Nóng nảy, quyết liệt, dễ cáu gắt)."], ["Đặc điểm nào dưới đây là nhược điểm điển hình của người thuộc khí chất Linh hoạt (Sanguine)?", ["Chậm chạp, khó thích nghi hoàn cảnh mới", "Dễ nản lòng, nông nổi, khó duy trì hứng thú lâu dài", "Quá bi quan và khép kín", "Độc đoán và hung hăng"], 1, "Người linh hoạt nhiệt tình nhanh nhưng cũng mau chán, khó kiên trì lâu với một việc thiếu đổi mới."], ["Theo William Sheldon, người có vóc dáng cơ bắp cuồn cuộn, khung xương to (Mesomorph) thường đi kèm với kiểu khí chất nào?", ["Não năng (Cerebrotonia - nhút nhát, khép kín)", "Thân năng (Somatotonia - mạo hiểm, quyết đoán, thích chỉ huy)", "Tạng năng (Viscerotonia - thích ăn ngon, hòa đồng)", "U sầu trầm lặng"], 1, "Tạng Mesomorph (cơ bắp) gắn với Somatotonia: ưa hoạt động mạnh, mạo hiểm, quyết đoán và thích lãnh đạo."], ["Các nghiên cứu sinh đôi quy mô lớn (như Minnesota Twin Study) chỉ ra rằng mức độ di truyền của các nét nhân cách chính là khoảng:", ["0% (hoàn toàn do môi trường nuôi dạy)", "Khoảng 40% - 50%", "90% - 100% (hoàn toàn do bộ gen)", "Chỉ khoảng 5%"], 1, "Các nghiên cứu thực nghiệm nhất quán cho thấy khoảng 40% - 50% sự khác biệt về các nét nhân cách là do di truyền."], ["Một đứa trẻ có năng khiếu âm nhạc bẩm sinh tự mình xin cha mẹ vào học trường nhạc và kết bạn với nhóm chơi đàn. Đây là ví dụ của:", ["Tương tác GxE thụ động (Passive)", "Tương tác GxE kích thích (Evocative)", "Tương tác GxE chủ động (Active / Niche-picking)", "Đột biến gen"], 2, "Tương tác chủ động (Active) xảy ra khi cá nhân tự chủ động chọn lọc môi trường (niche-picking) phù hợp với gen của mình."], ["Theo lý thuyết kích hoạt sinh học thần kinh của Hans Eysenck, vì sao người Hướng nội (Introverts) thường có xu hướng tránh nơi đông người?", ["Vì hệ thần kinh của họ bị tổn thương thùy chẩm", "Vì mức độ kích thích vỏ não nền (Baseline arousal) của họ bẩm sinh đã ở mức cao", "Vì họ không có chất dẫn truyền thần kinh Dopamine", "Vì họ hoàn toàn thiếu các kỹ năng giao tiếp cơ bản"], 1, "Người hướng nội có mức kích thích vỏ não nền cao bẩm sinh qua hệ ARAS; thêm quá nhiều kích thích xã hội sẽ gây khó chịu/quá tải."], ["Theo Jeffrey Gray, hệ thống nào trong não bộ chịu trách nhiệm thúc đẩy hành vi tiến tới phần thưởng và kích hoạt cảm xúc hào hứng?", ["Hệ thống Ức chế Hành vi (BIS)", "Hệ thống Tiếp cận Hành vi (BAS)", "Thùy đỉnh sau", "Hệ thống giao cảm"], 1, "BAS (Behavioral Approach System) phụ trách việc nhận diện và hướng hành vi tới phần thưởng."], ["Một người luôn lo lắng thái quá về các rủi ro, sợ mắc lỗi và hay ngần ngại không dám nắm bắt cơ hội mới thường có:", ["Hệ BAS hoạt động cực mạnh", "Hệ BIS (Behavioral Inhibition System) có độ nhạy cảm cao", "Khí chất Linh hoạt thuần túy", "Chỉ số kích hoạt vỏ não bằng không"], 1, "Hệ BIS nhạy cảm cao khiến cá nhân luôn chú ý tới dấu hiệu trừng phạt, nguy cơ, dẫn đến lo âu và né tránh."], ["Một bé gái xinh xắn, hay cười luôn nhận được sự chú ý, cưng chiều và khen ngợi từ mọi người xung quanh. Hiện tượng này minh họa cho:", ["Tương tác GxE kích thích / khơi gợi (Evocative)", "Tương tác GxE thụ động (Passive)", "Tương tác GxE chủ động (Active)", "Quy luật di truyền Mendel"], 0, "Tương tác kích thích/khơi gợi (Evocative): đặc điểm của cá nhân kích hoạt phản ứng môi trường tương ứng."], ["Chất dẫn truyền thần kinh nào đóng vai trò trung tâm trong Hệ thống Tiếp cận Hành vi (BAS) và cảm giác thỏa mãn phần thưởng?", ["Acetylcholine", "GABA", "Dopamine", "Melatonin"], 2, "Dopamine là chất dẫn truyền thần kinh trung tâm của mạng lưới phần thưởng, động lực và tìm kiếm cảm giác."], ["Theo Tâm lý học Tiến hóa (Evolutionary Psychology), tại sao trong quần thể loài người lại luôn cùng tồn tại cả người hướng nội lẫn người hướng ngoại?", ["Vì gen nhân cách là lỗi ngẫu nhiên không có ý nghĩa sinh học", "Vì mỗi nét nhân cách mang lại lợi thế thích nghi trong những hoàn cảnh sinh tồn và bối cảnh sinh sản khác nhau", "Vì con người chưa tiến hóa hoàn thiện", "Vì khí hậu thay đổi"], 1, "Cả hai nét tính cách đều có giá trị thích nghi: người hướng ngoại mở rộng liên minh, người hướng nội thận trọng tránh nguy hiểm."], ["Yếu tố nào đóng góp lớn nhất vào 50% môi trường ảnh hưởng đến sự hình thành nhân cách của một đứa trẻ?", ["Môi trường gia đình chung mà mọi anh em đều trải qua", "Môi trường không chia sẻ (Non-shared environment: bạn bè, trải nghiệm riêng biệt)", "Chế độ dinh dưỡng trường học", "Chương trình truyền hình quốc gia"], 1, "Môi trường không chia sẻ (Non-shared environment) có tác động mạnh mẽ hơn nhiều so với môi trường chia sẻ chung trong gia đình."], ["Mô hình khí chất của Galen nhấn mạnh rằng trạng thái tâm lý lành mạnh là kết quả của:", ["Sự lấn át tuyệt đối của thể dịch máu đỏ", "Sự quân bình và hài hòa (Eucrasia) giữa các thể dịch trong cơ thể", "Việc loại bỏ hoàn toàn mật đen ra khỏi cơ thể", "Sự ức chế các cơ chế phòng vệ"], 1, "Galen cho rằng sức khỏe và tính cách quân bình đạt được khi các thể dịch ở trạng thái cân bằng hài hòa."], ["Nghiên cứu về độ di truyền của nét 'Tận tâm' (Conscientiousness) và 'Bất ổn cảm xúc' (Neuroticism) trong Big Five cho thấy:", ["Hoàn toàn 100% do môi trường tạo nên", "Cả hai đều có hệ số di truyền khoảng 40% - 50%", "Chỉ có người nam mới di truyền", "Chỉ di truyền từ người mẹ"], 1, "Mọi nét trong mô hình 5 nhân tố lớn đều có hệ số di truyền thực nghiệm dao động quanh mức 40-50%."], ["Quan điểm khoa học hiện đại kết luận gì về mối quan hệ giữa sinh học và nhân cách?", ["Sinh học quy định 100% số phận con người (chủ nghĩa giản lược sinh học)", "Sinh học và môi trường liên tục tương tác hai chiều, tạo nên tính mềm dẻo và đa dạng của nhân cách", "Sinh học hoàn toàn không ảnh hưởng gì đến nhân cách", "Chỉ có cấu trúc xương sọ mới phản ánh tâm lý"], 1, "Con người là một thực thể sinh học - tâm lý - xã hội; gen cung cấp tiềm năng và môi trường nhào nặn sự bộc lộ thực tế."]], "trees": [["Thuyết Thể chất & Thể dịch", "nguồn gốc cổ đại", "chia thành", [["4 Thể dịch Hippocrates", "nguyên tố & khí chất", "gồm", [["Máu đỏ (Sanguine)", "linh hoạt, lạc quan, sôi nổi nhưng mau nản", "", []], ["Mật vàng (Choleric)", "nóng nảy, quyết đoán, say mê nhưng dễ bộc phát", "", []], ["Mật đen (Melancholic)", "u sầu, sâu sắc, chu đáo nhưng nhút nhát, bi quan", "", []], ["Đờm dãi (Phlegmatic)", "điềm tĩnh, kiên định, bình thản nhưng chậm chạp", "", []]]], ["Thuyết Tạng người Sheldon", "hình thể & tính cách", "gồm", [["Ectomorph (gầy)", "khí chất não năng: kín đáo, nhạy cảm, hướng nội", "", []], ["Mesomorph (cơ bắp)", "khí chất thân năng: mạo hiểm, quyết đoán, chỉ huy", "", []], ["Endomorph (tròn béo)", "khí chất tạng năng: thích ăn ngon, hòa đồng, thân thiện", "", []]]]]], ["Di truyền & Tương tác G x E", "nền tảng bộ gen", "chia thành", [["Di truyền học hành vi", "nghiên cứu sinh đôi MZ và DZ", "gồm", [["Hệ số di truyền h²", "40% - 50% biến thiên nhân cách do bộ gen", "", []], ["Môi trường không chia sẻ", "trải nghiệm sống riêng biệt tạo nên sự khác biệt", "", []]]], ["3 Dạng Tương tác G x E", "Scarr & McCartney", "gồm", [["Thụ động (Passive)", "cha mẹ truyền gen và dựng môi trường phù hợp", "", []], ["Kích thích (Evocative)", "đặc điểm gen khơi gợi phản ứng người xung quanh", "", []], ["Chủ động (Active)", "tự tìm kiếm môi trường hợp thiên hướng (Niche-picking)", "", []]]]]], ["Cơ sở Thần kinh Khí chất", "mạch não & chất dẫn truyền", "chia thành", [["ARAS (Hans Eysenck)", "hệ hoạt hóa lưới thân não", "gồm", [["Người Hướng nội", "mức kích hoạt vỏ não nền cao bẩm sinh", "", []], ["Người Hướng ngoại", "mức kích hoạt vỏ não nền thấp, tìm kiếm kích thích", "", []]]], ["Mô hình BAS & BIS (Gray)", "tiếp cận & ức chế", "gồm", [["BAS (Dopamine)", "tiếp cận phần thưởng, lạc quan, hướng ngoại, bốc đồng", "", []], ["BIS (Serotonin/Hệ viền)", "phát hiện mối đe dọa, dừng lại, cảnh giác, lo âu", "", []]]], ["Tâm lý học Tiến hóa (Buss)", "thích nghi sinh tồn", "gồm", [["Đa dạng nhân cách", "chiến lược sinh tồn khác nhau trong môi trường biến đổi", "", []]]]]]]}, {"id": "nc3", "part": "Phần II: Các Trường phái Lý thuyết Trọng yếu", "code": "NC.3", "title": "Quan điểm Nét nhân cách (Trait Theories)", "goals": ["Hiểu đóng góp nền tảng của Gordon Allport và 3 cấp độ nét tính cách.", "Nắm vững phương pháp Phân tích nhân tố của Raymond Cattell và Bảng câu hỏi 16PF.", "Phân tích Mô hình 3 chiều PEN của Hans Eysenck.", "Làm chủ Mô hình 5 nhân tố lớn (Big Five / OCEAN) và Mô hình 6 nhân tố HEXACO."], "sections": [{"h": "Gordon Allport: Khai sinh Thuyết Nét Nhân cách", "items": ["<b>Gordon Allport (1897–1967):</b> Được coi là 'cha đẻ của tâm lý học nhân cách hiện đại'; ông phản đối phân tâm học (quá đào sâu vào vô thức và quá khứ bệnh lý) và thuyết hành vi (coi con người như chuột bồ câu).", "<b>Định nghĩa Nét nhân cách (Trait):</b> Là một cấu trúc tâm lý - sinh lý học thần kinh có khả năng tiếp nhận nhiều kích thích tương đương và dẫn hướng cho các hình thức hành vi thích nghi kiên định.", "<b>Ba cấp độ Nét tính cách của Allport:</b>", "• <b>1. Nét chủ đạo (Cardinal trait):</b> Đặc điểm thống trị bao trùm toàn bộ cuộc đời, chi phối hầu hết mọi hành vi của một cá nhân đến mức tên của họ trở thành tính từ miêu tả nét đó (vd: Lòng vị tha của Mẹ Teresa, sự tàn bạo của Hitler, tính đa nghi của Machiavelli). <i>Rất hiếm người có nét chủ đạo.</i>", "• <b>2. Nét trung tâm (Central traits):</b> Những đặc tính cốt lõi (khoảng 5 đến 10 nét) thường được dùng để viết một lá thư giới thiệu hoặc mô tả tính cách nổi bật của một người (vd: trung thực, thông minh, hòa đồng, nhút nhát, chăm chỉ).", "• <b>3. Nét thứ yếu (Secondary traits):</b> Những đặc điểm ngoại vi, chỉ bộc lộ trong các hoàn cảnh đặc thù hoặc sở thích hẹp (vd: thích ăn đồ cay, ghét đám đông khi đi xem phim, dễ bực mình khi bị ngắt lời)."]}, {"h": "Raymond Cattell: Phân tích Nhân tố & 16 Yếu tố Nhân cách (16PF)", "items": ["<b>Ứng dụng Toán thống kê:</b> Cattell sử dụng kỹ thuật <b>Phân tích nhân tố (Factor Analysis)</b> để sàng lọc hàng nghìn từ vựng mô tả tính cách thành các cụm biến số căn bản.", "<b>Nét bề mặt (Surface traits) vs. Nét gốc (Source traits):</b>", "• <i>Nét bề mặt:</i> Các cụm hành vi quan sát thấy cùng xuất hiện với nhau (vd: thân thiện, hay cười, dễ bắt chuyện).", "• <i>Nét gốc:</i> Các nhân tố sâu kín bên dưới điều khiển và tạo nên các nét bề mặt; đây mới là những viên gạch cấu trúc cơ bản của nhân cách.", "<b>Bộ câu hỏi 16PF (Sixteen Personality Factor Questionnaire):</b> Đo lường 16 nét gốc lưỡng cực (vd: Kín đáo vs Cởi mở, Nhẹ dạ vs Đa nghi, Thực tế vs Tưởng tượng, Thư thái vs Căng thẳng).", "<b>Thu thập dữ liệu đa nguồn (L-Q-T Data):</b> Dữ liệu cuộc đời (Life data - L), Bảng câu hỏi tự thuật (Questionnaire data - Q), và Trắc nghiệm hành vi khách quan (Objective test - T)."]}, {"h": "Hans Eysenck: Mô hình Ba Chiều Nhân cách (PEN)", "items": ["Eysenck kết hợp phân tích nhân tố với sinh học thần kinh thực nghiệm, đề xuất 3 siêu nhân tố (*Superfactors* / Chiều kích cấp cao):", "<b>1. P - Psychoticism vs. Superego Control (Tâm thần hung tính vs. Kiểm soát siêu tôi):</b>", "• <i>P cao:</i> Lạnh lùng, hung hăng, thiếu đồng cảm, vô cảm trước nỗi đau của người khác, thích mạo hiểm nguy hiểm, sáng tạo phá cách nhưng dễ phạm pháp.", "• <i>P thấp (Kiểm soát tốt):</i> Ấm áp, giàu lòng trắc ẩn, đồng cảm, tôn trọng quy chuẩn xã hội.", "<b>2. E - Extraversion vs. Introversion (Hướng ngoại vs. Hướng nội):</b>", "• <i>E cao (Hướng ngoại):</i> Sôi nổi, thích giao lưu, nói nhiều, chuộng kích thích xã hội.", "• <i>E thấp (Hướng nội):</i> Trầm lặng, kín đáo, thích một mình, cẩn trọng.", "<b>3. N - Neuroticism vs. Emotional Stability (Nhiễu tâm vs. Ổn định cảm xúc):</b>", "• <i>N cao (Nhiễu tâm):</i> Lo âu, hay thay đổi tâm trạng, dễ xúc động, thường xuyên căng thẳng, phản ứng quá mức với stress.", "• <i>N thấp (Ổn định):</i> Bình tĩnh, tự chủ, điềm đạm, phục hồi nhanh sau biến cố."]}, {"h": "Mô hình Năm Nhân tố Lớn (Big Five / OCEAN) & Mô hình HEXACO", "items": ["<b>Mô hình Big Five (Paul Costa & Robert McCrae):</b> Là mô hình nhân cách được chấp nhận rộng rãi nhất trong khoa học tâm lý hiện đại, tóm tắt qua từ viết tắt <b>OCEAN</b>:", "• <b>O - Openness to Experience (Cởi mở với trải nghiệm):</b> Trí tưởng tượng phong phú, yêu nghệ thuật, tò mò trí tuệ, thích phiêu lưu và tư duy độc lập (ngược lại: bảo thủ, thực dụng, ghét thay đổi).", "• <b>C - Conscientiousness (Tận tâm / Chu đáo):</b> Ngăn nắp, có kỷ luật, trách nhiệm, kiên trì, định hướng mục tiêu cao (ngược lại: cẩu thả, bốc đồng, trì hoãn, vô tổ chức).", "• <b>E - Extraversion (Hướng ngoại):</b> Thân thiện, quyết đoán, nhiệt huyết, thích tương tác và tìm kiếm năng lượng từ đám đông (ngược lại: trầm tĩnh, dè dặt, thích yên tĩnh).", "• <b>A - Agreeableness (Dễ chịu / Hòa đồng):</b> Đáng tin, vị tha, tốt bụng, hợp tác, khiêm tốn (ngược lại: hoài nghi, ích kỷ, đối đầu, thù địch).", "• <b>N - Neuroticism (Bất ổn cảm xúc / Nhiễu tâm):</b> Dễ lo âu, trầm cảm, giận dữ, tự ti, nhạy cảm trước căng thẳng (ngược lại: ổn định, tự tin, kiên cường).", "<b>Mô hình 6 nhân tố HEXACO (Michael Ashton & Kibeom Lee):</b>", "• Thêm nhân tố <b>H - Honesty-Humility (Chân thật - Khiêm nhường):</b> Đo lường sự chân thành, công bằng, không tham lam, khiêm tốn.", "• Người có chỉ số H thấp thường gắn liền với **Bộ Ba Đen Tối (Dark Triad)**: Tính ái kỷ (Narcissism), Xảo quyệt (Machiavellianism), và Thái nhân cách (Psychopathy)."]}], "tables": [{"title": "Bảng đối chiếu Chi tiết 5 Nhân tố Lớn (Big Five / OCEAN)", "head": ["Nhân tố (Mã)", "Mô tả cốt lõi", "Người đạt điểm CAO", "Người đạt điểm THẤP", "Tương quan Đời sống & Nghề nghiệp"], "rows": [["O - Openness (Cởi mở)", "Mức độ tò mò trí tuệ và sự nhạy cảm thẩm mỹ", "Sáng tạo, độc đáo, triết lý, thích cái mới", "Thực tế, rập khuôn, thích lối mòn truyền thống", "Nghệ thuật, nghiên cứu, khoa học đổi mới"], ["C - Conscientiousness (Tận tâm)", "Khả năng kiểm soát xung động và định hướng mục tiêu", "Ngăn nắp, kỷ luật, đáng tin cậy, nỗ lực cao", "Bừa bãi, dễ phân tâm, tùy hứng, hay trễ hẹn", "Dự báo thành công học tập và sự nghiệp tốt nhất"], ["E - Extraversion (Hướng ngoại)", "Mức độ thoải mái và năng lượng trong tương tác xã hội", "Hòa đồng, hoạt bát, quyết đoán, lạc quan", "Kín tiếng, ít nói, trầm mặc, thích làm việc độc lập", "Lãnh đạo, bán hàng, quan hệ công chúng (PR)"], ["A - Agreeableness (Dễ chịu)", "Xu hướng ưu tiên hòa thuận và nâng đỡ người khác", "Đồng cảm, từ bi, hay giúp đỡ, dễ tha thứ", "Hoài nghi, cứng đầu, cạnh tranh, dễ gây gổ", "Tham vấn tâm lý, công tác xã hội, y tá, chăm sóc"], ["N - Neuroticism (Bất ổn cảm xúc)", "Mức độ trải nghiệm cảm xúc tiêu cực và lo hãi", "Lo âu, căng thẳng, dễ tổn thương, tự chỉ trích", "Bình tĩnh, điềm đạm, phục hồi tâm lý tốt, tự tin", "Dự báo nguy cơ trầm cảm, lo âu, kiệt sức (burnout)"]]}, {"title": "So sánh Các Mô hình Nét Nhân cách Tiêu biểu", "head": ["Mô hình", "Tác giả chính", "Số lượng nhân tố", "Phương pháp xây dựng", "Đặc điểm nổi bật"], "rows": [["3 Cấp độ Nét", "Gordon Allport", "Cardinal, Central, Secondary", "Phân tích từ vựng & Nghiên cứu cá biệt", "Đặt nền móng lý thuyết nét tính cách"], ["16PF", "Raymond Cattell", "16 Nét gốc lưỡng cực", "Phân tích nhân tố toán học trên L-Q-T data", "Khảo sát chi tiết đa chiều, ứng dụng tuyển dụng"], ["Mô hình PEN", "Hans Eysenck", "3 Siêu nhân tố (P, E, N)", "Phân tích nhân tố kết hợp sinh học thần kinh", "Gắn trực tiếp với cơ sở kích hoạt sinh học não"], ["Big Five (OCEAN)", "Costa & McCrae", "5 Nhân tố lớn", "Nghiên cứu từ vựng học & Phân tích nhân tố toàn cầu", "Mô hình chuẩn mực phổ quát nhất hiện nay"], ["HEXACO", "Ashton & Lee", "6 Nhân tố (thêm H)", "Phân tích chéo nhiều ngôn ngữ và nền văn hóa", "Giải thích xuất sắc các hành vi đạo đức và lòng tham"]]}], "tips": ["Mẹo ghi nhớ Big Five: Luôn nhớ từ khóa **OCEAN** (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism).", "Nhân tố C (Tận tâm) là chỉ báo dự đoán kết quả học tập và hiệu suất công việc mạnh mẽ nhất trong tất cả các nét!", "Phân biệt Allport vs Cattell: Allport tin vào tính độc nhất của mỗi cá nhân (Idiographic); Cattell dùng toán học tìm mẫu số chung của nhân loại (Nomothetic).", "Nhân tố H trong HEXACO là vũ khí đắc lực để nhận diện những kẻ giả tạo, hai mặt, tham nhũng hoặc theo chủ nghĩa cơ hội."], "cards": [["Gordon Allport", "Cha đẻ của thuyết nét nhân cách hiện đại, người đề xuất phân loại 3 cấp độ nét: Chủ đạo, Trung tâm và Thứ yếu."], ["Nét chủ đạo (Cardinal trait)", "Nét tính cách thống trị chi phối gần như toàn bộ cuộc đời và hành vi của cá nhân (rất hiếm gặp)."], ["Nét trung tâm (Central trait)", "Nhóm khoảng 5-10 đặc điểm cốt lõi tiêu biểu nhất định hình nên nhân cách của một con người."], ["Nét thứ yếu (Secondary trait)", "Những đặc điểm bề nổi chỉ xuất hiện trong những tình huống đặc thù hoặc sở thích hẹp."], ["Phân tích nhân tố", "Kỹ thuật thống kê toán học dùng để rút gọn số lượng lớn các biến số quan sát thành một số ít các nhân tố căn bản."], ["Raymond Cattell", "Nhà tâm lý học tiên phong ứng dụng phân tích nhân tố để xây dựng bảng câu hỏi 16 yếu tố nhân cách (16PF)."], ["Nét gốc (Source trait)", "Các nhân tố cấu trúc nền tảng sâu kín điều khiển các biểu hiện hành vi bề mặt của con người."], ["Mô hình PEN", "Mô hình 3 chiều nhân cách của Eysenck: Psychoticism (Tâm thần hung tính), Extraversion (Hướng ngoại), Neuroticism (Nhiễu tâm)."], ["Psychoticism", "Chiều kích trong mô hình Eysenck đặc trưng bởi sự vô cảm, hung hăng, thiếu đồng cảm và chống đối xã hội."], ["Big Five (OCEAN)", "Mô hình 5 nhân tố lớn gồm Cởi mở (O), Tận tâm (C), Hướng ngoại (E), Dễ chịu (A), và Bất ổn cảm xúc (N)."], ["Openness to Experience", "Nét Big Five đặc trưng bởi trí tưởng tượng, khiếu thẩm mỹ, sự tò mò trí tuệ và khao khát cái mới."], ["Conscientiousness", "Nét Big Five đặc trưng bởi tính kỷ luật, tổ chức, tinh thần trách nhiệm và kiên trì theo đuổi mục tiêu."], ["Agreeableness", "Nét Big Five đặc trưng bởi lòng vị tha, sự tin cậy, lòng tốt và tinh thần hợp tác vì cộng đồng."], ["Neuroticism", "Nét Big Five đặc trưng bởi xu hướng dễ trải nghiệm cảm xúc tiêu cực như lo âu, trầm cảm, giận dữ và dễ tổn thương."], ["Mô hình HEXACO", "Mô hình 6 nhân tố của Ashton & Lee, bổ sung chiều kích H (Honesty-Humility: Chân thật - Khiêm nhường)."], ["Dark Triad (Bộ Ba Đen Tối)", "Cụm 3 nét nhân cách độc hại gồm Ái kỷ (Narcissism), Xảo quyệt (Machiavellianism) và Thái nhân cách (Psychopathy)."]], "qs": [["Ai được tôn vinh là 'Cha đẻ của Tâm lý học Nhân cách hiện đại' với việc đề xuất 3 cấp độ nét tính cách?", ["Sigmund Freud", "Gordon Allport", "B.F. Skinner", "Carl Jung"], 1, "Gordon Allport là người tiên phong xây dựng nền tảng học thuật cho thuyết nét nhân cách."], ["Mẹ Teresa nổi tiếng với lòng vị tha và tình thương bao la chi phối toàn bộ cuộc đời bà. Theo Allport, đây là ví dụ của:", ["Nét trung tâm (Central trait)", "Nét chủ đạo (Cardinal trait)", "Nét thứ yếu (Secondary trait)", "Trạng thái tâm lý nhất thời"], 1, "Nét chủ đạo (Cardinal trait) là đặc tính thống trị chi phối hầu như toàn bộ cuộc đời một người (rất hiếm)."], ["Đặc điểm nào dưới đây là 'Nét trung tâm' (Central trait) theo cách phân loại của Gordon Allport?", ["Một trong 5 đến 10 đặc điểm cốt lõi tạo nên tính cách tiêu biểu của một người", "Sở thích ghét ăn hành tây khi ăn phở", "Một hành vi phạm tội bất ngờ", "Phản xạ giật đầu gối"], 0, "Nét trung tâm gồm 5-10 đặc điểm căn bản thường được dùng để mô tả tính cách tổng thể của một người."], ["Kỹ thuật thống kê toán học cốt lõi mà Raymond Cattell đã sử dụng để tìm ra 16 yếu tố nhân cách cơ bản là:", ["Hồi quy logistic", "Phân tích nhân tố (Factor Analysis)", "Kiểm định T-test độc lập", "Phân tích phương sai ANOVA"], 1, "Cattell đã sử dụng phân tích nhân tố để cô đọng hàng ngàn từ vựng thành 16 nhân tố gốc."], ["Theo Raymond Cattell, loại nét tính cách nào đóng vai trò là những 'viên gạch cấu trúc cơ bản' ẩn sâu bên dưới nhân cách?", ["Nét bề mặt (Surface traits)", "Nét gốc (Source traits)", "Nét tình huống", "Nét xã hội"], 1, "Nét gốc (Source traits) là những nhân tố sâu kín bên trong điều khiển các biểu hiện hành vi bề mặt."], ["Ba siêu nhân tố trong mô hình PEN của Hans Eysenck bao gồm:", ["Phân tâm, Bản ngã, Siêu ngã", "Psychoticism, Extraversion, Neuroticism", "Cởi mở, Tận tâm, Hướng nội", "Hành vi, Nhận thức, Cảm xúc"], 1, "Mô hình PEN đại diện cho Psychoticism (Tâm thần hung tính), Extraversion (Hướng ngoại), và Neuroticism (Nhiễu tâm)."], ["Một cá nhân lạnh lùng, tàn nhẫn, không hề cảm thấy hối hận khi làm tổn thương người khác và thích các trò mạo hiểm nguy hiểm sẽ đạt điểm cao ở chiều kích nào của Eysenck?", ["Extraversion", "Psychoticism (Tâm thần hung tính)", "Neuroticism", "Agreeableness"], 1, "Điểm Psychoticism cao đặc trưng bởi sự thiếu thấu cảm, hung hăng, bốc đồng và vô cảm xã hội."], ["Từ viết tắt OCEAN trong mô hình 5 Nhân tố Lớn (Big Five) đại diện cho những nét nào?", ["Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism", "Optimism, Creativity, Energy, Ambition, Nature", "Order, Calm, Emotion, Action, Novelty", "Origin, Control, Effort, Ability, Need"], 0, "OCEAN là viết tắt của Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism."], ["Nét nhân cách nào trong Big Five được các nghiên cứu chứng minh là yếu tố dự báo mạnh mẽ và nhất quán nhất cho thành công học tập và sự nghiệp?", ["Openness (Cởi mở)", "Conscientiousness (Tận tâm / Chu đáo)", "Extraversion (Hướng ngoại)", "Agreeableness (Dễ chịu)"], 1, "Nét Tận tâm (Conscientiousness) phản ánh kỷ luật, nỗ lực và trách nhiệm, là dự báo số một cho thành công."], ["Một người luôn hào hứng đọc sách triết học, thích đi du lịch khám phá các nền văn hóa lạ và say mê hội họa trừu tượng thường đạt điểm rất cao ở nét:", ["Openness to Experience (Cởi mở với trải nghiệm)", "Neuroticism", "Agreeableness", "Thận trọng truyền thống"], 0, "Cởi mở với trải nghiệm (Openness) phản ánh trí tò mò trí tuệ, nhạy cảm thẩm mỹ và khao khát cái mới."], ["Điểm khác biệt quan trọng nhất giữa Mô hình HEXACO của Ashton & Lee so với Mô hình Big Five truyền thống là gì?", ["HEXACO loại bỏ hoàn toàn nét Hướng ngoại", "HEXACO bổ sung thêm chiều kích H (Honesty-Humility: Chân thật - Khiêm nhường)", "HEXACO chỉ áp dụng cho người châu Á", "HEXACO không dùng toán thống kê"], 1, "HEXACO bổ sung nhân tố Honesty-Humility (H), nâng số nhân tố từ 5 lên 6."], ["Cụm ba nét tính cách độc hại 'Dark Triad' (Bộ Ba Đen Tối) bao gồm những nét nào?", ["Trầm cảm, Lo âu, Ám ảnh cưỡng chế", "Ái kỷ (Narcissism), Xảo quyệt (Machiavellianism), Thái nhân cách (Psychopathy)", "Hung hăng, Nhút nhát, Lười biếng", "Ghen tỵ, Kiêu ngạo, Tham lam"], 1, "Dark Triad gồm Tính ái kỷ (yêu mình thái quá), Machiavellianism (thao túng, thủ đoạn), và Psychopathy (thiếu lương tâm, tàn nhẫn)."], ["Người có chỉ số Neuroticism (Bất ổn cảm xúc) rất thấp thường có biểu hiện tâm lý nào?", ["Thường xuyên rơi vào hoảng loạn trước kỳ thi", "Bình tĩnh, điềm đạm, vững vàng và phục hồi nhanh chóng sau biến cố căng thẳng", "Mất khả năng tư duy logic", "Luôn nghi ngờ mọi người xung quanh"], 1, "Neuroticism thấp đồng nghĩa với sự ổn định cảm xúc cao, bình tĩnh và có khả năng chống chịu stress tốt."], ["Một nhà tuyển dụng muốn tìm kiếm ứng viên cho vị trí Trưởng phòng Chăm sóc khách hàng cần người thấu cảm, hòa nhã và biết lắng nghe. Họ nên ưu tiên ứng viên có điểm cao ở nét nào?", ["Extraversion và Agreeableness", "Psychoticism", "Neuroticism", "Chỉ cần Openness"], 0, "Nét Dễ chịu (Agreeableness - thấu cảm, chu đáo) và Hướng ngoại (Extraversion - giao tiếp tốt) là lý tưởng cho dịch vụ khách hàng."], ["Chỉ trích lớn nhất đối với các lý thuyết nét tính cách (như Big Five) từ phía các nhà tâm lý học tình huống (như Walter Mischel) là gì?", ["Nét tính cách không đo lường được bằng máy tính", "Các nét tính cách đánh giá quá thấp ảnh hưởng của bối cảnh tình huống cụ thể lên hành vi con người", "Big Five chỉ có 5 yếu tố là quá nhiều", "Thuyết nét tính cách dựa quá nhiều vào vô thức"], 1, "Tranh luận 'Nét vs Tình huống' (Person-Situation debate): Mischel cho rằng hành vi biến đổi rất lớn tùy bối cảnh, nét không dự đoán tuyệt đối được hành vi đơn lẻ."]], "trees": [["Allport & Cattell", "nền tảng thuyết nét", "chia thành", [["Gordon Allport", "người khai sinh thuyết nét", "gồm", [["Nét chủ đạo (Cardinal)", "chi phối toàn bộ cuộc đời (rất hiếm)", "", []], ["Nét trung tâm (Central)", "5 - 10 đặc điểm cốt lõi tiêu biểu nhất", "", []], ["Nét thứ yếu (Secondary)", "sở thích ngoại vi trong hoàn cảnh đặc thù", "", []]]], ["Raymond Cattell", "phân tích nhân tố toán học", "gồm", [["Nét bề mặt vs Nét gốc", "biểu hiện hành vi vs cấu trúc sâu kín bên dưới", "", []], ["Bộ câu hỏi 16PF", "16 yếu tố nhân cách lưỡng cực căn bản", "", []], ["Dữ liệu L-Q-T", "dữ liệu cuộc đời (L), câu hỏi (Q), trắc nghiệm (T)", "", []]]]]], ["Mô hình PEN (Eysenck)", "3 siêu nhân tố sinh học", "chia thành", [["P - Psychoticism", "tâm thần hung tính vs kiểm soát siêu tôi", "gồm", [["P cao", "lạnh lùng, hung hăng, thiếu thấu cảm, chống đối xã hội", "", []], ["P thấp", "ấm áp, giàu lòng trắc ẩn, tuân thủ chuẩn mực", "", []]]], ["E - Extraversion", "hướng ngoại vs hướng nội", "gồm", [["E cao", "hoạt bát, giao tiếp, tìm kiếm kích thích xã hội", "", []], ["E thấp", "trầm lặng, kín đáo, thích ở một mình", "", []]]], ["N - Neuroticism", "bất ổn cảm xúc vs ổn định", "gồm", [["N cao", "dễ lo âu, căng thẳng, dao động tâm trạng", "", []], ["N thấp", "bình tĩnh, kiên cường, phục hồi nhanh sau biến cố", "", []]]]]], ["Big Five (OCEAN) & HEXACO", "mô hình hiện đại chuẩn mực", "chia thành", [["Năm nhân tố lớn (OCEAN)", "Costa & McCrae", "gồm", [["O - Openness", "cởi mở, tò mò trí tuệ, thẩm mỹ, sáng tạo", "", []], ["C - Conscientiousness", "tận tâm, kỷ luật, trách nhiệm (dự báo thành công số 1)", "", []], ["E - Extraversion", "hướng ngoại, quyết đoán, nhiệt huyết", "", []], ["A - Agreeableness", "dễ chịu, hòa đồng, vị tha, đồng cảm", "", []], ["N - Neuroticism", "bất ổn cảm xúc, lo âu, tự ti, dễ tổn thương", "", []]]], ["Mô hình HEXACO", "Ashton & Lee (thêm nhân tố H)", "gồm", [["H - Honesty-Humility", "chân thật, khiêm tốn, công bằng, không tham lam", "", []], ["Dark Triad", "H thấp: Ái kỷ, Xảo quyệt Machiavellian, Thái nhân cách", "", []]]]]]]}, {"id": "nc4", "part": "Phần II: Các Trường phái Lý thuyết Trọng yếu", "code": "NC.4", "title": "Quan điểm Tâm động học (Phân tâm học & Hậu Freud)", "goals": ["Làm chủ học thuyết Phân tâm học của Sigmund Freud: Động lực bản năng, Địa hình tâm trí, Cấu trúc Id-Ego-Superego.", "Phân tích toàn diện 3 cấp độ Cơ chế phòng vệ của Ego từ kém thích nghi đến thích nghi cao.", "Nắm vững 5 giai đoạn phát triển tâm tính dục và cơ chế Cắm chốt (Fixation).", "Nắm các đóng góp lớn của Carl Jung (Cổ mẫu & Vô thức tập thể), Alfred Adler (Mặc cảm tự ti) và Erik Erikson (8 giai đoạn phát triển)."], "sections": [{"h": "Sigmund Freud: Bản năng, Địa hình Tâm trí & Cấu trúc Nhân cách", "items": ["<b>Sigmund Freud (1856–1939):</b> Bác sĩ thần kinh người Áo, người sáng lập Phân tâm học (Psychoanalysis).", "<b>Hai Động lực Bản năng Cốt lõi:</b>", "• <b>Bản năng sống (Eros):</b> Hướng đến sinh tồn, khoái cảm, tăng trưởng và sinh sản; năng lượng tâm thần vận hành bản năng sống gọi là <b>Libido (Dục năng)</b>.", "• <b>Bản năng chết (Thanatos):</b> Xu hướng vô thức hướng về sự bất động, giải thoát khỏi đau khổ; bộc lộ ra ngoài thành <i>xung năng gây hấn, phá hoại và bạo lực</i>.", "<b>Bộ ba Địa hình Tâm trí (Topographical Model):</b>", "• <i>Ý thức (Conscious):</i> Những gì ta đang nhận biết trong thời điểm hiện tại (suy nghĩ, cảm giác tức thời).", "• <i>Tiền ý thức (Preconscious):</i> Kho lưu trữ ký ức không có sẵn ở ý thức nhưng có thể dễ dàng truy xuất khi chú ý (vd: số điện thoại nhà, tên bạn học cũ).", "• <i>Vô thức (Unconscious):</i> Tầng sâu nhất, rộng lớn nhất (như phần chìm tảng băng trôi), chứa các bản năng nguyên thủy, ký ức sang chấn và ham muốn cấm kỵ bị dồn nén. Vô thức bộc lộ qua: lỡ lời (Freudian slips / Lapsus), giấc mơ, hành vi lặp lại.", "<b>Bộ ba Cấu trúc Nhân cách (Structural Model):</b>", "• <b>Id (Cái Nó / Bản năng nguyên thủy):</b> Hoàn toàn vô thức, vận hành theo <b>Nguyên lý Khoái lạc (Pleasure Principle)</b>, đòi hỏi thỏa mãn ngay lập tức các nhu cầu sinh học; tư duy sơ đẳng, phi logic.", "• <b>Ego (Bản ngã / Cái Tôi):</b> Vận hành theo <b>Nguyên lý Thực tế (Reality Principle)</b>; là 'nhạc trưởng' trung gian hòa giải giữa đòi hỏi của Id, ràng buộc đạo đức của Superego và thực tế khách quan.", "• <b>Superego (Siêu bản ngã / Siêu Tôi):</b> Vận hành theo <b>Nguyên lý Đạo đức</b>; được tiếp thu từ cha mẹ và xã hội, gồm 2 phần: <i>Lương tâm (Conscience)</i> trừng phạt bằng cảm giác tội lỗi và <i>Cái tôi lý tưởng (Ego Ideal)</i> khen thưởng bằng lòng tự hào."]}, {"h": "Ba Hình thái Lo hãi & Toàn bộ Hệ thống Cơ chế Phòng vệ của Ego", "items": ["<b>Ba loại Lo hãi (Anxiety):</b> Khi Ego bị đe dọa hoặc mất kiểm soát:", "• <i>Lo hãi thực tế:</i> Sợ hãi trước mối nguy hiểm có thật từ môi trường bên ngoài (cháy nhà, thú dữ).", "• <i>Lo hãi đạo đức:</i> Ego vi phạm tiêu chuẩn của Superego → cảm thấy cắn rứt, tội lỗi, tự sỉ vả.", "• <i>Lo hãi nhiễu tâm:</i> Ego sợ các xung năng nguyên thủy của Id sẽ bùng phát mất kiểm soát và bị trừng phạt.", "<b>Bản chất Cơ chế Phòng vệ (Defense Mechanisms):</b> Chiến lược tâm lý do Ego vận hành một cách <b>vô thức</b> nhằm bóp méo thực tế để bảo vệ cá nhân khỏi lo hãi và đau khổ.", "<b>Hệ thống phân loại theo mức độ thích nghi:</b>", "• <b>1. Kém thích nghi (Cái giá rất đắt, xa rời thực tế):</b>", "  - <i>Phân tách (Splitting):</i> Nhìn đối tượng thuần túy 'tốt hoàn toàn' hoặc 'xấu hoàn toàn' (đen - trắng).", "  - <i>Phóng chiếu (Projection):</i> Gán những suy nghĩ, ham muốn xấu xa của mình sang người khác (mình ghét họ nhưng nghĩ họ ghét mình).", "  - <i>Đồng nhất hóa phóng chiếu:</i> Phóng chiếu cảm xúc lên người khác rồi vô thức ép họ hành xử đúng như vậy.", "  - <i>Chối bỏ (Denial):</i> Từ chối thừa nhận một sự thật hiển nhiên đang tồn tại (bị ung thư nhưng bảo chỉ là cảm cúm).", "  - <i>Hợp lý hóa (Rationalization):</i> Bịa ra lý do có vẻ logic để bao biện cho thất bại ('Nho còn xanh lắm').", "  - <i>Phân ly (Dissociation):</i> Tách rời ý thức khỏi thực tại (ngất xỉu, mất trí nhớ tạm thời khi gặp sang chấn).", "  - <i>Acting out:</i> Bộc phát hành vi bốc đồng (uống say, đập phá) để xả cảm xúc tiêu cực thay vì đối diện.", "  - <i>Thoái lui (Regression):</i> Quay về cách hành xử của giai đoạn tuổi thơ (mè nheo, khóc lóc, ăn vạ).", "• <b>2. Thích nghi trung bình:</b>", "  - <i>Dồn nén (Repression):</i> Đẩy ký ức, cảm xúc đau buồn xuống tầng vô thức một cách vô thức.", "  - <i>Trí tuệ hóa (Intellectualization):</i> Dùng lý lẽ hàn lâm, phân tích lạnh lùng để né tránh trải nghiệm cảm xúc đau đớn.", "  - <i>Chuyển vị (Displacement):</i> Trút giận/chuyển cảm xúc từ đối tượng nguy hiểm sang đối tượng an toàn hơn (bị sếp mắng về nhà đá con chó).", "  - <i>Chuyển dạng (Somatization / Conversion):</i> Xung đột tâm lý chuyển hóa thành triệu chứng cơ thể (đau dạ dày, liệt giả vờ).", "  - <i>Hủy tác động (Undoing):</i> Làm một hành động mang tính nghi thức để chuộc lỗi với hy vọng 'xóa bỏ' hành vi sai trước đó.", "  - <i>Hình thành phản ứng ngược (Reaction Formation):</i> Thể hiện hành vi hoàn toàn trái ngược với thôi thúc vô thức bên trong (rất ghét nhưng tỏ ra vồ vập yêu thương quá mức).", "  - <i>Quay ngược lại bản thân (Turning against self):</i> Trút cơn giận vào chính mình → cơ chế gốc rễ của Trầm cảm.", "• <b>3. Thích ứng cao (Trưởng thành & Lành mạnh):</b>", "  - <i>Thăng hoa (Sublimation):</i> Chuyển hóa xung năng tình dục/gây hấn thành các hoạt động sáng tạo được xã hội tôn vinh (vận động viên đấm bốc, phẫu thuật viên, nghệ thuật gia).", "  - <i>Hài hước (Humor):</i> Nhìn nhận khía cạnh buồn cười của nghịch cảnh để giảm bớt căng thẳng mà không chối bỏ thực tế.", "  - <i>Vị tha (Altruism):</i> Tận tụy giúp đỡ người khác để xoa dịu nỗi đau của bản thân.", "  - <i>Trì hoãn có ý thức (Suppression):</i> Chủ động gác lại lo âu để tập trung giải quyết việc trước mắt."]}, {"h": "Các Giai đoạn Phát triển Tâm tính dục & Hiện tượng Cắm chốt (Fixation)", "items": ["Freud khẳng định nhân cách được định hình vững chắc trong <b>5–6 năm đầu đời</b> qua 5 giai đoạn tâm tính dục tương ứng với vùng khoái cảm (*Erogenous zone*):", "<b>1. Giai đoạn Miệng (Oral, 0–18 tháng):</b> Vùng khoái cảm là môi miệng (bú, mút, cắn). Sang chấn: Cai sữa. <i>Cắm chốt miệng:</i> Hút thuốc, ăn vặt, nói nhiều, cả tin, lệ thuộc quá mức.", "<b>2. Giai đoạn Hậu môn (Anal, 1.5–3 tuổi):</b> Vùng khoái cảm là hậu môn (bài tiết). Sang chấn: Tập đi vệ sinh (*Toilet training*).", "• <i>Tập quá khắt khe:</i> Nhân cách giữ phân (*Anal-retentive*) → keo kiệt, bủn xỉn, sạch sẽ quá mức, độc đoán, cầu toàn.", "• <i>Tập quá buông thả:</i> Nhân cách tống phân (*Anal-expulsive*) → bừa bãi, luộm thuộm, phá hoại, cẩu thả.", "<b>3. Giai đoạn Dương vật tượng trưng (Phallic, 3–6 tuổi):</b> Vùng khoái cảm là cơ quan sinh dục; giai đoạn quan trọng nhất trong hình thành nhân cách:", "• <i>Phức cảm Oedipus ở bé trai:</i> Yêu mẹ, thù ghét cha → Lo âu thiến hoạn (*Castration anxiety*) → Đồng nhất hóa với cha để hình thành Superego.", "• <i>Phức cảm Electra ở bé gái:</i> Ghen tị dương vật (*Penis envy*), oán trách mẹ → Đồng nhất hóa với mẹ.", "• <i>Cắm chốt Phallic:</i> Phô trương hoặc tự ti về giới tính, quyến rũ lẳng lơ hoặc sợ hãi tình dục.", "<b>4. Giai đoạn Tiềm tàng (Latency, 6 tuổi – dậy thì):</b> Dục năng tạm lắng dịu; trẻ tập trung học tập, rèn luyện kỹ năng và mở rộng quan hệ bạn bè cùng giới.", "<b>5. Giai đoạn Sinh dục (Genital, Dậy thì trở đi):</b> Dục năng bùng phát trở lại, hướng ra đối tượng dị tính bên ngoài gia đình; phát triển tình yêu và sự nghiệp trưởng thành.", "<b>Khái niệm Nhân cách Lành mạnh theo Freud:</b> Có một Ego vững mạnh cân bằng được Id và Superego; sử dụng cơ chế phòng vệ thích ứng cao; và có khả năng <b>'Yêu thương và Làm việc' (Lieben und arbeiten)</b>."]}, {"h": "Các Nhà Lý thuyết Hậu Freud: Jung, Adler & Erikson", "items": ["<b>Carl Gustav Jung (Tâm lý học Phân tích):</b>", "• <i>Vô thức tập thể (Collective Unconscious):</i> Tầng sâu nhất của tâm trí chứa ký ức tiến hóa chung của toàn nhân loại.", "• <i>Các Cổ mẫu (Archetypes):</i> <b>Persona</b> (Mặt nạ xã hội), <b>Shadow</b> (Bóng tối - bản năng thú tính bị che giấu), <b>Anima</b> (Nữ tính trong vô thức đàn ông) & <b>Animus</b> (Nam tính trong vô thức phụ nữ), <b>Self</b> (Bản ngã tối thượng dung hợp mọi mặt đối lập).", "• <i>Định hướng & Chức năng:</i> Hướng nội (Introversion) vs Hướng ngoại (Extraversion); 4 chức năng tâm lý (Tư duy, Cảm giác, Trực giác, Cảm xúc) → Nền tảng chỉ số MBTI.", "<b>Alfred Adler (Tâm lý học Cá nhân):</b>", "• <i>Mặc cảm tự ti (Inferiority Complex) & Bù trừ (Compensation):</i> Con người sinh ra yếu ớt nên luôn mang cảm giác tự ti; động lực sống là <b>Nỗ lực vươn tới sự ưu việt / hoàn thiện</b>.", "• <i>Cảm thức cộng đồng (Social Interest):</i> Thước đo sức khỏe tinh thần chân chính là sự cống hiến cho xã hội.", "• <i>Thứ tự sinh:</i> Con đầu (dễ mất ngôi, trách nhiệm), Con thứ (cạnh tranh, nỗ lực), Con út (nuông chiều, ỷ lại), Con một (thiếu kỹ năng chia sẻ).", "<b>Erik Erikson (Thuyết Phát triển Tâm lý - Xã hội):</b> Mở rộng ra <b>8 giai đoạn xuyên suốt vòng đời</b>; nhấn mạnh khủng hoảng bản sắc / căn tính (*Identity Crisis*) ở tuổi thanh thiếu niên."]}], "tables": [{"title": "Bảng phân loại Toàn diện Các Cơ chế Phòng vệ (George Vaillant & Cabaniss)", "head": ["Cấp độ", "Cơ chế phòng vệ", "Bản chất vận hành", "Ví dụ thực tế minh họa"], "rows": [["Kém thích nghi", "Phóng chiếu (Projection)", "Gán xung năng/suy nghĩ xấu của mình cho người khác", "Người chồng ngoại tình luôn nghi ngờ vợ lăng nhăng"], ["Kém thích nghi", "Chối bỏ (Denial)", "Từ chối chấp nhận hiện thực cay đắng đang diễn ra", "Thân nhân không tin người thân đã mất, vẫn dọn cơm"], ["Kém thích nghi", "Hợp lý hóa (Rationalization)", "Dựng lên lý do nghe có vẻ hợp lý để che đậy thất bại", "Trượt phỏng vấn thì bảo 'Công ty đó môi trường tệ hại'"], ["Kém thích nghi", "Thoái lui (Regression)", "Quay về hành vi của lứa tuổi nhỏ hơn để tìm an toàn", "Người lớn gặp stress nặng nằm cuộn tròn khóc lóc mè nheo"], ["Thích nghi TB", "Dồn nén (Repression)", "Đẩy ký ức sang chấn sâu vào vô thức", "Nạn nhân tai nạn quên sạch diễn biến vụ va chạm kinh hoàng"], ["Thích nghi TB", "Chuyển vị (Displacement)", "Trút cảm xúc lên đối tượng thay thế an toàn hơn", "Bị sếp phê bình ở công ty, về nhà trút giận la mắng con cái"], ["Thích nghi TB", "Phản ứng ngược (Reaction Formation)", "Thể hiện hành vi ngược lại 180 độ với thôi thúc vô thức", "Trong lòng vô cùng ghen ghét nhưng bên ngoài khen ngợi nịnh bợ"], ["Thích nghi TB", "Quay ngược bản thân (Turning against self)", "Chĩa sự tức giận vào chính mình (gốc rễ trầm cảm)", "Tự rủa mình ngu ngốc khi người khác lừa dối mình"], ["Thích ứng CAO", "Thăng hoa (Sublimation)", "Chuyển xung năng tiêu cực thành sáng tạo nghệ thuật/công việc", "Người có xung năng hung hăng trở thành võ sĩ vô địch"], ["Thích ứng CAO", "Hài hước (Humor)", "Dùng tiếng cười để giải tỏa căng thẳng mà không bóp méo thực tế", "Làm trò đùa tự giễu khi bị trượt vỏ chuối trước đám đông"], ["Thích ứng CAO", "Vị tha (Altruism)", "Giúp đỡ người khác để vượt qua nỗi đau mất mát của bản thân", "Mẹ mất con vì tai nạn đứng ra lập quỹ từ thiện cứu trẻ em"]]}, {"title": "Bảng 5 Giai đoạn Phát triển Tâm tính dục của Sigmund Freud", "head": ["Giai đoạn", "Độ tuổi", "Vùng khoái cảm", "Nhiệm vụ & Sang chấn", "Hậu quả Cắm chốt (Fixation) khi trưởng thành"], "rows": [["Miệng (Oral)", "0 – 18 tháng", "Môi, miệng, lưỡi", "Bú mớm, cắn nhai; Sang chấn cai sữa", "Nghiện hút thuốc, ăn vặt, nói nhiều, cả tin, phụ thuộc"], ["Hậu môn (Anal)", "1.5 – 3 tuổi", "Hậu môn (bài tiết)", "Huấn luyện đi vệ sinh (Toilet training)", "Khắt khe: bủn xỉn, cầu toàn / Buông thả: bừa bãi, phá phách"], ["Dương vật (Phallic)", "3 – 6 tuổi", "Cơ quan sinh dục", "Phức cảm Oedipus / Electra; Lo âu thiến", "Phô trương/yếm thế tình dục, đỏng đảnh, siêu tôi méo mó"], ["Tiềm ẩn (Latency)", "6 tuổi – dậy thì", "Không có (tạm lắng)", "Học tập, tiếp thu kỹ năng, kết bạn", "Khó khăn trong thiết lập quan hệ bạn bè xã hội"], ["Sinh dục (Genital)", "Dậy thì trở đi", "Bộ phận sinh dục", "Tình yêu trưởng thành và tính dục dị tính", "Nhân cách quân bình, khả năng Yêu và Làm việc"]]}], "tips": ["Công thức cấu trúc Freud: Id = Thú tính / Bản năng; Superego = Thiên thần / Đạo đức; Ego = Con người thực tế đứng giữa hòa giải.", "Phân biệt Chuyển vị vs Thăng hoa: Chuyển vị chỉ đổi đối tượng để xả (đá con chó); Thăng hoa biến xung năng thành điều có ích cho xã hội (vẽ tranh, tập võ).", "Định nghĩa nhân cách lành mạnh bất hủ của Freud: 'Một người khỏe mạnh là người có khả năng yêu thương và khả năng làm việc' (To love and to work).", "Mặc cảm Oedipus: Trẻ trai sợ cha thiến dương vật → nhận ra cha quá mạnh → đồng nhất hóa với cha để sau này cưới người phụ nữ giống mẹ."], "cards": [["Sigmund Freud", "Nhà sáng lập Phân tâm học, người đưa ra mô hình Id-Ego-Superego, cơ chế phòng vệ và các giai đoạn tâm tính dục."], ["Libido (Dục năng)", "Nguồn năng lượng tâm thần điều khiển bản năng sống (Eros), hướng đến khoái cảm và sự sinh tồn."], ["Thanatos", "Bản năng chết theo Freud, biểu hiện thành xung năng gây hấn, phá hoại và tự hủy hoại."], ["Id (Cái Nó)", "Thành phần nguyên thủy vô thức của nhân cách, hoạt động theo Nguyên lý Khoái lạc."], ["Ego (Bản ngã)", "Thành phần lý trí của nhân cách hoạt động theo Nguyên lý Thực tế, làm trung gian giữa Id, Superego và thực tại."], ["Superego (Siêu ngã)", "Cơ quan đạo đức của nhân cách gồm Lương tâm và Cái tôi lý tưởng, hoạt động theo Nguyên lý Đạo đức."], ["Lo hãi nhiễu tâm", "Nỗi sợ vô thức rằng xung năng của Id sẽ áp đảo Ego dẫn đến hành vi bị xã hội trừng phạt."], ["Cơ chế phòng vệ", "Các chiến lược vô thức của Ego nhằm bóp méo thực tế để bảo vệ cá nhân khỏi cảm giác lo hãi và đau khổ."], ["Phóng chiếu (Projection)", "Cơ chế phòng vệ gán những ham muốn, suy nghĩ không thể chấp nhận của bản thân sang người khác."], ["Thăng hoa (Sublimation)", "Cơ chế phòng vệ thích ứng cao nhất: chuyển hóa xung năng cấm kỵ thành các sáng tạo nghệ thuật, thể thao hữu ích."], ["Phức cảm Oedipus", "Xung đột trong giai đoạn Phallic khi bé trai khao khát chiếm hữu mẹ và thù địch với cha."], ["Cắm chốt (Fixation)", "Tình trạng năng lượng tâm thần bị mắc kẹt lại ở một giai đoạn phát triển tâm tính dục do quá thiếu hụt hoặc quá thỏa mãn."], ["Carl Jung", "Nhà sáng lập Tâm lý học Phân tích, người đề xuất Vô thức tập thể, Cổ mẫu (Archetypes) và khái niệm Hướng nội/Hướng ngoại."], ["Cổ mẫu (Archetypes)", "Những hình ảnh, biểu tượng nguyên thủy kế thừa từ vô thức tập thể của nhân loại (Persona, Shadow, Anima/Animus, Self)."], ["Alfred Adler", "Nhà sáng lập Tâm lý học Cá nhân, nhấn mạnh Mặc cảm tự ti, Nỗ lực vươn tới ưu việt và Cảm thức cộng đồng."], ["Erik Erikson", "Nhà lý thuyết hậu Freud phát triển mô hình 8 giai đoạn phát triển tâm lý xã hội xuyên suốt vòng đời con người."]], "qs": [["Theo Sigmund Freud, thành phần nào của nhân cách vận hành hoàn toàn ở tầng vô thức và tuân theo 'Nguyên lý Khoái lạc'?", ["Ego (Bản ngã)", "Id (Cái Nó / Bản năng nguyên thủy)", "Superego (Siêu bản ngã)", "Tiền ý thức"], 1, "Id hoạt động theo Nguyên lý Khoái lạc (Pleasure Principle), đòi hỏi thỏa mãn ngay lập tức các nhu cầu."], ["Bộ phận nào của nhân cách đóng vai trò là 'nhạc trưởng' trung gian hòa giải giữa đòi hỏi của Id, tiêu chuẩn của Superego và thực tế?", ["Id", "Ego (Bản ngã)", "Vô thức tập thể", "Lương tâm"], 1, "Ego vận hành theo Nguyên lý Thực tế, làm trung gian dung hòa các xung đột nội tâm."], ["Một nhân viên sau khi bị giám đốc mắng vô cớ tại công ty, khi về nhà đã nổi giận và đá con chó cưng. Người này đã sử dụng cơ chế phòng vệ nào?", ["Thăng hoa (Sublimation)", "Chuyển vị (Displacement)", "Phóng chiếu (Projection)", "Hợp lý hóa (Rationalization)"], 1, "Chuyển vị (Displacement) là việc trút cảm xúc giận dữ từ đối tượng nguy hiểm (sếp) sang đối tượng an toàn hơn (con chó)."], ["Một người đàn ông có ham muốn gây hấn bạo lực mãnh liệt đã ghi danh học boxing và trở thành một võ sĩ quyền anh vô địch thế giới. Đây là ví dụ của:", ["Thoái lui (Regression)", "Thăng hoa (Sublimation)", "Chối bỏ (Denial)", "Hình thành phản ứng ngược"], 1, "Thăng hoa (Sublimation) là cơ chế thích ứng cao, chuyển hóa xung năng hung hăng thành thành tựu thể thao được xã hội tôn vinh."], ["Người mẹ thực tâm rất chán ghét đứa con ngoài ý muốn nhưng lại luôn thể hiện sự quan tâm, lo lắng và bao bọc đứa trẻ một cách thái quá. Đây là cơ chế:", ["Đồng nhất hóa phóng chiếu", "Hình thành phản ứng ngược (Reaction Formation)", "Chuyển dạng", "Hủy tác động"], 1, "Hình thành phản ứng ngược là việc biểu lộ hành vi hoàn toàn trái ngược với thôi thúc dồn nén bên trong."], ["Một người lớn gặp biến cố mất việc làm liền quay về nằm cuộn tròn trên giường, mút ngón tay và đòi mẹ nấu cháo bón cho ăn. Người này đang trải qua:", ["Thoái lui (Regression)", "Phân ly (Dissociation)", "Acting out", "Cắm chốt sinh dục"], 0, "Thoái lui (Regression) là sự quay trở lại các khuôn mẫu hành vi của giai đoạn ấu thơ để tìm kiếm sự an toàn."], ["Theo Freud, người trưởng thành có tính cách keo kiệt, bủn xỉn, cực kỳ sạch sẽ và cầu toàn độc đoán là do bị cắm chốt (Fixation) ở giai đoạn nào?", ["Giai đoạn Miệng (Oral)", "Giai đoạn Hậu môn (Anal-retentive)", "Giai đoạn Dương vật tượng trưng (Phallic)", "Giai đoạn Tiềm tàng (Latency)"], 1, "Cắm chốt hậu môn do cha mẹ tập đi vệ sinh quá khắt khe sinh ra nhân cách giữ phân: bủn xỉn, keo kiệt, cầu toàn."], ["Phức cảm Oedipus diễn ra trong giai đoạn phát triển tâm tính dục nào của trẻ?", ["Giai đoạn Miệng (0 - 18 tháng)", "Giai đoạn Hậu môn (1.5 - 3 tuổi)", "Giai đoạn Dương vật tượng trưng (Phallic, 3 - 6 tuổi)", "Giai đoạn Sinh dục (Dậy thì)"], 2, "Phức cảm Oedipus là tâm điểm của giai đoạn Dương vật tượng trưng (Phallic stage)."], ["Theo Carl Jung, tầng tâm trí sâu kín nhất chứa đựng những ký ức, biểu tượng nguyên thủy được kế thừa từ toàn bộ lịch sử tiến hóa của nhân loại là:", ["Vô thức cá nhân (Personal Unconscious)", "Vô thức tập thể (Collective Unconscious)", "Tiền ý thức", "Bản ngã tối thượng"], 1, "Vô thức tập thể (Collective Unconscious) là khái niệm đặc trưng của Jung chứa các cổ mẫu chung của loài người."], ["Cổ mẫu (Archetype) nào trong lý thuyết của Jung đại diện cho chiếc 'mặt nạ xã hội' mà cá nhân đeo vào để đáp ứng kỳ vọng của thế giới bên ngoài?", ["Shadow (Bóng tối)", "Persona", "Anima", "Self"], 1, "Persona là chiếc mặt nạ công khai chúng ta trưng ra trước xã hội."], ["Alfred Adler cho rằng động lực căn bản thúc đẩy sự phát triển nhân cách của con người bắt nguồn từ:", ["Xung năng tình dục Libido", "Mặc cảm tự ti bẩm sinh và Nỗ lực vươn tới sự ưu việt, hoàn thiện", "Bản năng chết Thanatos", "Nỗi lo âu thiến hoạn"], 1, "Adler nhấn mạnh con người sinh ra yếu đuối nên có mặc cảm tự ti; động lực sống là nỗ lực bù trừ để vươn tới sự ưu việt."], ["Theo Alfred Adler, thước đo cốt lõi để đánh giá một nhân cách khỏe mạnh và mức độ trưởng thành tâm lý là:", ["Số tiền kiếm được", "Cảm thức cộng đồng / Mối quan tâm xã hội (Social Interest)", "Quyền lực thống trị người khác", "Mức độ thỏa mãn Id"], 1, "Cảm thức cộng đồng (Social Interest) — lòng tận tụy vì lợi ích chung — là tiêu chí sức khỏe tâm thần của Adler."], ["Erik Erikson đã mở rộng học thuyết của Freud như thế nào?", ["Thu hẹp nhân cách chỉ trong 3 năm đầu đời", "Mở rộng sự phát triển nhân cách thành 8 giai đoạn tâm lý xã hội kéo dài suốt cả vòng đời", "Loại bỏ hoàn toàn yếu tố xã hội", "Chỉ tập trung vào người cao tuổi"], 1, "Erikson xây dựng mô hình phát triển tâm lý xã hội xuyên suốt toàn bộ vòng đời (Life-span development)."], ["Trong thí nghiệm của Deborah Cabaniss, cơ chế 'Quay ngược lại bản thân' (Turning against self) được xem là nguyên nhân tâm động học trực tiếp dẫn đến:", ["Hội chứng hưng cảm", "Bệnh trầm cảm (Depression)", "Rối loạn ám ảnh cưỡng chế", "Hội chứng Tourette"], 1, "Freud và Cabaniss khẳng định trầm cảm xuất hiện khi cơn giận dữ đối với đối tượng bên ngoài bị chĩa ngược lại tấn công chính mình."], ["Theo Sigmund Freud, một nhân cách được coi là thực sự lành mạnh và trưởng thành khi đạt được điều kiện nào sau đây?", ["Ego đủ mạnh để điều hòa cân bằng Id và Superego, và có khả năng 'Yêu thương và Làm việc'", "Superego triệt tiêu hoàn toàn mọi ham muốn của Id", "Id được thỏa mãn tuyệt đối không bị kiềm chế", "Loại bỏ hoàn toàn mọi cơ chế phòng vệ"], 0, "Nhân cách lành mạnh là sự quân bình nội tâm do một Ego vững mạnh chỉ huy, thể hiện qua khả năng yêu và làm việc."]], "trees": [["Sigmund Freud: Cấu trúc & Động lực", "phân tâm học kinh điển", "chia thành", [["Động lực Bản năng", "Eros vs Thanatos", "gồm", [["Bản năng sống (Eros)", "dục năng Libido: khoái cảm, sinh tồn, sinh sản", "", []], ["Bản năng chết (Thanatos)", "xung năng gây hấn, phá hoại và tự hủy", "", []]]], ["Địa hình Tâm trí", "mô hình tảng băng trôi", "gồm", [["Ý thức (Conscious)", "nhận biết trong thời điểm hiện tại", "", []], ["Tiền ý thức (Preconscious)", "ký ức tiềm tàng dễ dàng nhớ lại", "", []], ["Vô thức (Unconscious)", "bản năng sâu kín, dồn nén; bộc lộ qua lỡ lời, giấc mơ", "", []]]], ["Cấu trúc Nhân cách", "bộ ba tương tác", "gồm", [["Id (Cái Nó)", "nguyên lý khoái lạc, phi logic, đòi thỏa mãn tức thì", "", []], ["Ego (Bản ngã)", "nguyên lý thực tế, nhạc trưởng hòa giải xung đột", "", []], ["Superego (Siêu ngã)", "nguyên lý đạo đức: lương tâm và cái tôi lý tưởng", "", []]]]]], ["Cơ chế Phòng vệ & Cắm chốt", "chiến lược ứng phó của Ego", "chia thành", [["3 Cấp độ Phòng vệ", "vô thức bóp méo thực tế", "gồm", [["Kém thích nghi", "phóng chiếu, chối bỏ, hợp lý hóa, thoái lui, splitting", "", []], ["Thích nghi trung bình", "dồn nén, chuyển vị, chuyển dạng cơ thể, phản ứng ngược", "", []], ["Thích ứng cao", "thăng hoa (sáng tạo/thể thao), hài hước, vị tha", "", []]]], ["5 Giai đoạn Tâm tính dục", "phát triển & cắm chốt (Fixation)", "gồm", [["Miệng (Oral, 0-18th)", "cai sữa; cắm chốt: ăn vặt, hút thuốc, cả tin, lệ thuộc", "", []], ["Hậu môn (Anal, 1.5-3t)", "tập đi vệ sinh; giữ phân (keo kiệt) vs tống phân (bừa bãi)", "", []], ["Phallic (3-6t)", "phức cảm Oedipus/Electra, lo âu thiến; cắm chốt giới tính", "", []], ["Tiềm ẩn & Sinh dục", "tạm lắng (6t-dậy thì) → bùng phát tính dục trưởng thành", "", []]]], ["Nhân cách Lành mạnh", "chuẩn mực Freud", "gồm", [["Lieben und arbeiten", "khả năng yêu thương và khả năng làm việc", "", []]]]]], ["Trường phái Hậu Freud", "Jung, Adler & Erikson", "chia thành", [["Carl Jung (TLH Phân tích)", "vô thức tập thể & cổ mẫu", "gồm", [["Vô thức tập thể", "ký ức tiến hóa chung của toàn nhân loại", "", []], ["Cổ mẫu (Archetypes)", "Persona, Shadow, Anima/Animus, Self", "", []], ["MBTI", "hướng nội/hướng ngoại & 4 chức năng tâm lý", "", []]]], ["Alfred Adler (TLH Cá nhân)", "mặc cảm tự ti & bù trừ", "gồm", [["Nỗ lực ưu việt", "vượt qua cảm giác tự ti để hoàn thiện bản thân", "", []], ["Cảm thức cộng đồng", "Social interest: thước đo sức khỏe tinh thần", "", []], ["Thứ tự sinh", "con đầu, con thứ, con út, con một", "", []]]], ["Erik Erikson", "8 giai đoạn tâm lý xã hội", "gồm", [["Suốt vòng đời", "khủng hoảng danh tính (Identity Crisis) tuổi dậy thì", "", []]]]]]]}, {"id": "nc5", "part": "Phần II: Các Trường phái Lý thuyết Trọng yếu", "code": "NC.5", "title": "Quan điểm Nhân văn & Hiện sinh (Humanistic & Existential)", "goals": ["Hiểu Tháp nhu cầu 5 tầng của Abraham Maslow và bản chất Hiện thực hóa bản thân.", "Phân tích Thuyết Nhân vị trọng tâm của Carl Rogers: Bản ngã thực tế vs Bản ngã lý tưởng, Sự tương hợp.", "Nắm vững các điều kiện trị liệu cốt lõi: Sự chấp nhận tích cực vô điều kiện (UPR) và Thấu cảm.", "Làm chủ Thuyết Hiện sinh của Viktor Frankl (Ý nghĩa cuộc sống) và Rollo May (Lo âu hiện sinh)."], "sections": [{"h": "Trường phái 'Lực lượng thứ Ba' & Abraham Maslow", "items": ["<b>Lực lượng thứ Ba (The Third Force):</b> Tâm lý học Nhân văn ra đời thập niên 1950–1960 như một làn sóng phản kháng mạnh mẽ chống lại: <i>Phân tâm học</i> (quá bi quan, coi con người là nô lệ của xung năng bệnh hoạn) và <i>Thuyết Hành vi</i> (quá máy móc, coi con người như cỗ máy phản xạ vô hồn). Nhân văn xem con người là sinh thể tự do, có phẩm giá, hướng thiện và khao khát vươn lên.", "<b>Thang bậc Nhu cầu của Abraham Maslow (1908–1970):</b> Sắp xếp theo hình kim tự tháp từ đáy lên đỉnh:", "• <b>1. Nhu cầu Sinh lý (Physiological):</b> Ăn, uống, ngủ, thở, tình dục, duy trì thân nhiệt.", "• <b>2. Nhu cầu An toàn (Safety):</b> An ninh thân thể, việc làm, tài chính, sức khỏe, nơi trú ẩn ổn định.", "• <b>3. Nhu cầu Yêu thương & Thuộc về (Love & Belonging):</b> Tình bạn, gia đình, tình yêu lứa đôi, cảm giác thuộc về một tập thể.", "• <b>4. Nhu cầu Được tôn trọng (Esteem):</b> Tự trọng, lòng tự hào, cảm giác năng lực, danh tiếng và sự công nhận của xã hội.", "• <b>5. Nhu cầu Hiện thực hóa Bản thân (Self-Actualization):</b> Khát khao khai phá và phát huy tối đa mọi tiềm năng nội tại; 'Một người có thể là gì, người đó phải là thế ấy'.", "<b>Nhu cầu Thiếu hụt (D-needs / Deficiency) vs. Nhu cầu Hiện hữu/Tăng trưởng (B-needs / Being / Metaneeds):</b>", "• <i>D-needs (4 tầng dưới):</i> Xuất phát từ sự thiếu thốn; khi được đáp ứng thì động lực sẽ giảm xuống.", "• <i>B-needs (Tầng đỉnh cao):</i> Xuất phát từ khao khát phát triển; càng được đáp ứng thì động lực càng tăng cao.", "<b>Trải nghiệm đỉnh cao (Peak Experience):</b> Những khoảnh khắc thăng hoa tột bậc của cảm giác ngây ngất, kết nối sâu sắc với vũ trụ và vạn vật."]}, {"h": "Carl Rogers: Thuyết Nhân vị Trọng tâm & Con người Vận hành Đầy đủ", "items": ["<b>Xu hướng Hiện thực hóa (Actualizing Tendency):</b> Động lực bẩm sinh của mọi sinh vật hướng tới sự phát triển, hoàn thiện và hiện thực hóa các tiềm năng tích cực.", "<b>Cấu trúc Bản ngã (Self-Concept):</b>", "• <b>Bản ngã thực tế (Real Self):</b> Con người thật của bạn — cách bạn thực sự cảm nhận, suy nghĩ và hành xử trong hiện tại.", "• <b>Bản ngã lý tưởng (Ideal Self):</b> Hình mẫu con người mà bạn mong muốn hoặc tin rằng mình nên trở thành.", "• <b>Sự Tương hợp (Congruence) vs. Bất tương hợp (Incongruence):</b>", "  - <i>Tương hợp cao:</i> Bản ngã thực tế và lý tưởng gần như trùng khớp → Tâm lý bình an, tự tin, lành mạnh.", "  - <i>Bất tương hợp:</i> Khoảng cách quá lớn giữa 'Tôi là ai' và 'Tôi muốn là ai' → Tạo ra lo âu, cảm giác tự ti, phòng vệ và bất ổn tâm lý.", "<b>Điều kiện có giá trị (Conditions of Worth) vs. Chấp nhận Tích cực Vô điều kiện (Unconditional Positive Regard - UPR):</b>", "• Khi cha mẹ đặt điều kiện: 'Chỉ khi con ngoan/học giỏi thì ba mẹ mới yêu con' → Trẻ hình thành bản ngã giả tạo để làm hài lòng người khác, xa rời cảm xúc thật của mình.", "• <i>UPR:</i> Tình yêu thương, sự trân trọng trọn vẹn dành cho cá nhân mà không kèm theo bất kỳ điều kiện tiên quyết nào. Đây là chìa khóa chữa lành cốt lõi trong trị liệu tâm lý.", "<b>Con người Vận hành Đầy đủ (Fully Functioning Person):</b> Cởi mở trước mọi trải nghiệm, sống trọn vẹn trong hiện tại (*Existential living*), tin tưởng trực giác bản thân, tự do lựa chọn và giàu tính sáng tạo."]}, {"h": "Thuyết Hiện sinh: Viktor Frankl & Rollo May", "items": ["<b>Tâm lý học Hiện sinh (Existential Psychology):</b> Nhấn mạnh con người phải tự đối diện với 4 nỗi trăn trở hiện sinh tối thượng: <i>Cái chết, Sự cô đơn hiện sinh, Tự do & Trách nhiệm, và Sự vô nghĩa</i>.", "<b>Viktor Frankl (1905–1997) & Liệu pháp Ý nghĩa (Logotherapy):</b>", "• Sống sót qua các trại tập trung diệt chủng Đức Quốc xã (Auschwitz), Frankl đúc kết trong tác phẩm <i>'Đi tìm lẽ sống' (Man's Search for Meaning)</i>:", "• Động lực căn bản của con người không phải là khoái cảm (Freud) hay quyền lực (Adler), mà là <b>Ý chí tìm kiếm Ý nghĩa (Will to Meaning)</b>.", "• <b>Ba con đường khám phá ý nghĩa cuộc đời:</b>", "  1. <i>Qua sáng tạo công việc:</i> Làm việc, cống hiến, tạo ra các tác phẩm có giá trị.", "  2. <i>Qua trải nghiệm:</i> Trải nghiệm cái đẹp của thiên nhiên, nghệ thuật và đặc biệt là tình yêu thương chân thành với một người khác.", "  3. <i>Qua thái độ trước đau khổ không thể tránh khỏi:</i> Biến bi kịch cá nhân thành khúc khải hoàn của tinh thần dũng cảm ('Người có một lý do để sống có thể chịu đựng được hầu hết mọi nghịch cảnh').", "<b>Rollo May:</b> Phân biệt <i>Lo âu bình thường</i> (thúc đẩy con người hành động và đối diện thách thức) và <i>Lo âu bệnh lý</i> (làm tê liệt, né tránh tự do và trách nhiệm)."]}], "tables": [{"title": "So sánh Nhu cầu Thiếu hụt (D-needs) và Nhu cầu Hiện hữu (B-needs) của Maslow", "head": ["Tiêu chí so sánh", "Nhu cầu Thiếu hụt (D-needs)", "Nhu cầu Hiện hữu / Tăng trưởng (B-needs)"], "rows": [["Vị trí trên tháp", "4 tầng dưới (Sinh lý, An toàn, Yêu thương, Tôn trọng)", "Tầng đỉnh cao (Hiện thực hóa bản thân - Self-Actualization)"], ["Nguồn gốc động lực", "Bắt nguồn từ sự thiếu thốn, mất cân bằng nội môi", "Bắt nguồn từ khao khát phát triển và hoàn thiện tiềm năng"], ["Quy luật thỏa mãn", "Khi được thỏa mãn thì nhu cầu và căng thẳng sẽ giảm đi", "Càng được thỏa mãn thì con người càng khao khát vươn cao"], ["Hậu quả khi bị tước đoạt", "Gây ra bệnh tật thể chất hoặc rối loạn tâm lý", "Gây ra bệnh lý siêu hình (Metapathology: mất phương hướng, vô cảm)"], ["Mục tiêu hướng tới", "Sự sinh tồn, an toàn và hòa nhập xã hội", "Chân - Thiện - Mỹ, sự thật, tự chủ và sáng tạo đỉnh cao"]]}, {"title": "So sánh Bản ngã Tương hợp (Congruence) và Bất tương hợp (Incongruence) của Rogers", "head": ["Đặc điểm", "Bản ngã Tương hợp (Congruence)", "Bản ngã Bất tương hợp (Incongruence)"], "rows": [["Khoảng cách Real - Ideal", "Bản ngã thực tế và Bản ngã lý tưởng gần như trùng khớp", "Khoảng cách rất lớn giữa con người thật và kỳ vọng lý tưởng"], ["Trạng thái cảm xúc", "Bình an, tự tin, chân thật, chấp nhận bản thân", "Thường xuyên lo âu, tự ti, phòng vệ, cảm giác mình là kẻ giả mạo"], ["Mối quan hệ với người khác", "Cởi mở, thấu cảm, không phán xét, xây dựng niềm tin", "E ngại bị phán xét, đeo mặt nạ để lấy lòng người khác"], ["Nguyên nhân hình thành", "Được nuôi dưỡng trong môi trường chấp nhận vô điều kiện", "Bị áp đặt quá nhiều 'Điều kiện có giá trị' từ thời thơ ấu"]]}], "tips": ["Công thức Maslow: Không thể bắt một người đói ăn nghĩ đến việc sáng tác thơ ca — Nhu cầu sinh lý và an toàn phải được đáp ứng cơ bản trước!", "Châm ngôn bất hủ của Carl Rogers: 'Nghịch lý kỳ diệu là chỉ khi tôi chấp nhận con người thật của mình đúng như nó là, tôi mới có thể thay đổi.'", "Frankl nhắc nhở: Ý nghĩa cuộc sống không phải thứ có sẵn để tìm thấy như nhặt được đồ rơi, mà là trách nhiệm do chính bạn kiến tạo thông qua thái độ sống.", "Muốn giúp thân chủ chữa lành: Hãy thực hành 3 thái độ Rogers: Chân thật (Genuineness), Chấp nhận vô điều kiện (UPR) và Thấu cảm chuẩn xác (Empathy)."], "cards": [["Lực lượng thứ Ba", "Tên gọi của trường phái Tâm lý học Nhân văn nhằm phân biệt với Phân tâm học (thứ nhất) và Thuyết Hành vi (thứ hai)."], ["Abraham Maslow", "Nhà tâm lý học nhân văn lỗi lạc, người sáng lập Tháp nhu cầu 5 tầng và nghiên cứu về Hiện thực hóa bản thân."], ["Hiện thực hóa bản thân", "Tầng đỉnh cao trên tháp Maslow: khát khao phát huy tối đa toàn bộ tiềm năng, tài năng và sự độc đáo của cá nhân."], ["D-needs (Thiếu hụt)", "Nhóm nhu cầu cơ bản phát sinh do thiếu thốn; khi được đáp ứng thì động lực sẽ suy giảm."], ["B-needs (Hiện hữu)", "Nhóm nhu cầu tăng trưởng đỉnh cao (Chân - Thiện - Mỹ); càng thực hiện con người càng cảm thấy giàu ý nghĩa."], ["Trải nghiệm đỉnh cao", "Khoảnh khắc ngây ngất, thăng hoa tột bực khi con người cảm thấy hòa nhập sâu sắc và trọn vẹn với thực tại."], ["Carl Rogers", "Nhà tâm lý học nhân văn đề xuất Thuyết Nhân vị trọng tâm, khái niệm Bản ngã thực tế/lý tưởng và Chấp nhận vô điều kiện."], ["Xu hướng hiện thực hóa", "Động lực nội tại bẩm sinh của con người hướng đến duy trì, nâng cao và hoàn thiện bản thân."], ["Bản ngã thực tế (Real Self)", "Hình ảnh chân thật về những suy nghĩ, cảm xúc và đặc điểm thực tế đang diễn ra bên trong cá nhân."], ["Bản ngã lý tưởng (Ideal Self)", "Hình mẫu con người hoàn hảo mà cá nhân ao ước và đặt mục tiêu trở thành."], ["Sự Tương hợp (Congruence)", "Trạng thái hài hòa, trùng khớp giữa Bản ngã thực tế và Bản ngã lý tưởng, đem lại sự an bình nội tâm."], ["Chấp nhận vô điều kiện (UPR)", "Thái độ đón nhận, tôn trọng và yêu thương trọn vẹn thân chủ mà không kèm bất kỳ điều kiện hay phán xét nào."], ["Điều kiện có giá trị", "Các tiêu chuẩn áp đặt từ cha mẹ khiến trẻ tin rằng mình chỉ có giá trị khi cư xử đúng theo kỳ vọng của người khác."], ["Viktor Frankl", "Bác sĩ tâm thần sống sót qua trại tập trung Auschwitz, tác giả 'Man's Search for Meaning', sáng lập Liệu pháp Ý nghĩa."], ["Logotherapy (Liệu pháp Ý nghĩa)", "Trường phái tâm lý trị liệu hiện sinh tập trung giúp thân chủ tìm ra ý nghĩa và mục đích sống."], ["Rollo May", "Nhà tâm lý học hiện sinh hàng đầu của Mỹ, phân tích bản chất của tự do, tình yêu, cái chết và lo âu hiện sinh."]], "qs": [["Trường phái Tâm lý học Nhân văn được gọi là 'Lực lượng thứ Ba' (The Third Force) vì ra đời nhằm phản đối hai trường phái thống trị nào trước đó?", ["Tâm lý học Nhận thức và Thần kinh học", "Phân tâm học và Thuyết Hành vi", "Thuyết Gestalt và Thuyết Cấu trúc", "Thuyết Tiến hóa và Di truyền học"], 1, "Nhân văn ra đời phản biện chủ nghĩa tiền định bi quan của Phân tâm học và sự máy móc của Thuyết Hành vi."], ["Theo Tháp nhu cầu của Abraham Maslow, nhu cầu nào nằm ở vị trí cao nhất trên đỉnh của kim tự tháp?", ["Nhu cầu Được tôn trọng (Esteem)", "Nhu cầu Hiện thực hóa bản thân (Self-Actualization)", "Nhu cầu An toàn (Safety)", "Nhu cầu Gắn bó yêu thương"], 1, "Hiện thực hóa bản thân (Self-Actualization) là đỉnh cao của tháp Maslow."], ["Đặc điểm nào dưới đây phân biệt giữa Nhu cầu Thiếu hụt (D-needs) và Nhu cầu Tăng trưởng (B-needs) của Maslow?", ["D-needs càng thỏa mãn càng tăng; B-needs càng thỏa mãn càng giảm", "D-needs sinh ra do sự thiếu thốn (khi thỏa mãn động lực giảm); B-needs sinh ra do khao khát phát triển (càng thỏa mãn động lực càng tăng)", "D-needs chỉ có ở động vật", "B-needs chỉ xuất hiện khi về già"], 1, "D-needs (đói, sợ, cô đơn) giảm khi được đáp ứng; B-needs (học hỏi, sáng tạo, đạo đức) càng làm càng đam mê."], ["Theo Maslow, khoảnh khắc ngây ngất, thăng hoa tột cùng khi một người cảm thấy hòa quyện hoàn hảo với vũ trụ và chạm đến tiềm năng tối đa được gọi là:", ["Trải nghiệm đỉnh cao (Peak experience)", "Hiện tượng cắm chốt", "Trạng thái vô thức", "Cơn lo hãi nhiễu tâm"], 0, "Trải nghiệm đỉnh cao (Peak experience) là trạng thái thăng hoa cực độ của tâm trí."], ["Theo Carl Rogers, trạng thái bất an, lo âu và tự ti sâu sắc nảy sinh chủ yếu từ nguyên nhân nào?", ["Do xung năng Id quá mạnh", "Do khoảng cách quá lớn giữa Bản ngã thực tế (Real Self) và Bản ngã lý tưởng (Ideal Self) — Sự bất tương hợp", "Do thiếu chất dẫn truyền thần kinh Dopamine", "Do bị cắm chốt ở giai đoạn miệng"], 1, "Sự bất tương hợp (Incongruence) giữa con người thật và hình mẫu lý tưởng là căn nguyên của lo âu theo Rogers."], ["Khi cha mẹ nói: 'Ba mẹ chỉ yêu con khi con đạt học sinh giỏi và vâng lời tuyệt đối', đứa trẻ đã bị áp đặt cơ chế nào?", ["Chấp nhận tích cực vô điều kiện (UPR)", "Điều kiện có giá trị (Conditions of Worth)", "Xu hướng hiện thực hóa", "Tiến trình thành nhân"], 1, "Điều kiện có giá trị (Conditions of worth) dạy trẻ bóp méo bản thân để được chấp nhận."], ["Theo Carl Rogers, yếu tố nào là điều kiện tiên quyết mang lại sự biến đổi tích cực và chữa lành cho thân chủ trong phòng trị liệu?", ["Phân tích giấc mơ và giải mã biểu tượng", "Sự chấp nhận tích cực vô điều kiện (Unconditional Positive Regard) và thấu cảm chân thành", "Áp dụng hình phạt nghiêm khắc khi tái phạm", "Kê đơn thuốc hướng thần liều cao"], 1, "Sự chấp nhận vô điều kiện (UPR) tạo môi trường an toàn tuyệt đối để thân chủ tự tháo gỡ lớp phòng vệ."], ["Khái niệm 'Con người vận hành đầy đủ' (Fully Functioning Person) của Carl Rogers mang đặc trưng nào?", ["Hoàn toàn không bao giờ phạm sai lầm", "Cởi mở trước mọi trải nghiệm, sống trọn vẹn trong hiện tại và tin tưởng bản thân", "Chỉ biết nghe theo lời khuyên của người khác", "Đạt chỉ số thông minh tuyệt đối"], 1, "Con người vận hành đầy đủ sống cởi mở, chân thật trong từng khoảnh khắc hiện tại và tin tưởng vào trực giác."], ["Tác phẩm kinh điển 'Đi tìm lẽ sống' (Man's Search for Meaning) của bác sĩ tâm thần Viktor Frankl được đúc kết từ trải nghiệm sinh tử nào?", ["Cuộc chiến tranh thế giới thứ nhất tại Nga", "Thời gian sống sót qua các trại tập trung diệt chủng của Đức Quốc xã", "Chuyến thám hiểm Bắc Cực", "Nghiên cứu bệnh nhân tâm thần phân liệt tại Vienna"], 1, "Frankl đúc kết Liệu pháp Ý nghĩa từ trải nghiệm sinh tồn phi thường trong trại tập trung Auschwitz."], ["Theo Liệu pháp Ý nghĩa (Logotherapy) của Viktor Frankl, động lực căn bản và sâu xa nhất của đời người là:", ["Ý chí hướng tới Khoái lạc (Will to Pleasure)", "Ý chí tìm kiếm Ý nghĩa (Will to Meaning)", "Ý chí hướng tới Quyền lực (Will to Power)", "Bản năng sinh tồn mù quáng"], 1, "Frankl khẳng định 'Ý chí tìm kiếm Ý nghĩa' là động lực số một nâng đỡ sự sống con người."], ["Frankl chỉ ra rằng con người vẫn có thể tìm thấy ý nghĩa sống ngay cả trong những hoàn cảnh bi đát và đau đớn nhất bằng cách nào?", ["Uống thuốc an thần để quên đi", "Lựa chọn thái độ dũng cảm và kiên cường đối diện với nghịch cảnh", "Chối bỏ thực tế và sống trong ảo tưởng", "Quy kết toàn bộ lỗi lầm cho số phận"], 1, "Khi không thể thay đổi hoàn cảnh, con người vẫn có tự do tối thượng là chọn lựa thái độ đối diện với đau khổ."], ["Rollo May phân biệt giữa 'Lo âu bình thường' và 'Lo âu bệnh lý' như thế nào?", ["Lo âu bình thường tương xứng với mối đe dọa và thúc đẩy phát triển; Lo âu bệnh lý làm tê liệt và bóp méo tự do", "Lo âu bình thường chỉ có ở người giàu", "Lo âu bệnh lý hoàn toàn không có cảm xúc", "Hai loại lo âu là hoàn toàn giống nhau"], 0, "Lo âu bình thường tỷ lệ thuận với thách thức và kích hoạt lòng can đảm; lo âu bệnh lý làm tê liệt con người."], ["Theo triết lý Hiện sinh, con người sinh ra trước hết là tồn tại, sau đó mới tự định nghĩa bản thân qua các lựa chọn. Luận điểm này được tóm tắt là:", ["Bản chất có trước Tồn tại", "Tồn tại có trước Bản chất (Existence precedes Essence)", "Định mệnh an bài mọi sự", "Tất cả chỉ là phản xạ"], 1, "Khẩu hiệu hiện sinh: Tồn tại đi trước bản chất — bạn là tổng hòa những lựa chọn và hành động của chính mình."], ["Một học sinh nghèo nhịn ăn sáng để dành tiền mua sách học tập. Hiện tượng này chứng minh điều gì về lý thuyết Maslow?", ["Tháp Maslow luôn cố định 100% không bao giờ thay đổi", "Thứ bậc nhu cầu có thể linh hoạt đảo lộn tùy thuộc vào hệ giá trị và ý chí của cá nhân", "Học sinh đó bị rối loạn ăn uống", "Nhu cầu sinh lý hoàn toàn không có thật"], 1, "Maslow thừa nhận ở những người có lý tưởng sống cao, thứ tự các tầng nhu cầu có thể linh hoạt thay đổi."], ["Câu nói nổi tiếng: 'Bất cứ ai có một lý do để sống đều có thể chịu đựng được hầu hết mọi nghịch cảnh' là của triết gia Nietzsche được trích dẫn bởi:", ["Sigmund Freud", "Viktor Frankl", "B.F. Skinner", "Raymond Cattell"], 1, "Viktor Frankl thường xuyên trích dẫn câu này để minh chứng sức mạnh cứu rỗi của việc tìm ra ý nghĩa cuộc đời."]], "trees": [["Abraham Maslow & Tháp Nhu cầu", "hiện thực hóa bản thân", "chia thành", [["5 Tầng Tháp Nhu cầu", "từ đáy lên đỉnh", "gồm", [["1. Sinh lý (Physiological)", "ăn, uống, ngủ, thở, tình dục", "", []], ["2. An toàn (Safety)", "an ninh thân thể, việc làm, tài chính, nơi ở", "", []], ["3. Yêu thương & Thuộc về", "tình bạn, gia đình, tình yêu lứa đôi, tập thể", "", []], ["4. Được tôn trọng (Esteem)", "tự trọng, danh tiếng, cảm giác năng lực", "", []], ["5. Hiện thực hóa (Self-Actualization)", "khai phá trọn vẹn tiềm năng tối đa của cá nhân", "", []]]], ["D-needs vs. B-needs", "thiếu hụt vs hiện hữu", "gồm", [["D-needs (4 tầng dưới)", "sinh ra do thiếu thốn; thỏa mãn thì động lực giảm", "", []], ["B-needs (Tầng đỉnh)", "khao khát Chân - Thiện - Mỹ; càng làm càng say mê", "", []]]], ["Trải nghiệm đỉnh cao", "Peak Experience: khoảnh khắc ngây ngất hòa nhập thực tại", "", []]]], ["Carl Rogers: Thuyết Nhân vị Trọng tâm", "bản ngã & sự tương hợp", "chia thành", [["Cấu trúc Bản ngã", "Self-concept", "gồm", [["Bản ngã thực tế (Real Self)", "con người thật sự hiện tại", "", []], ["Bản ngã lý tưởng (Ideal Self)", "hình mẫu ao ước muốn trở thành", "", []], ["Tương hợp (Congruence)", "trùng khớp → an bình, tự tin, phát triển lành mạnh", "", []], ["Bất tương hợp (Incongruence)", "khoảng cách xa → lo âu, tự ti, phòng vệ méo mó", "", []]]], ["Điều kiện Chữa lành", "thực hành phòng trị liệu", "gồm", [["Chấp nhận vô điều kiện (UPR)", "yêu thương, tôn trọng trọn vẹn không phán xét", "", []], ["Điều kiện có giá trị", "áp đặt tiêu chuẩn giả tạo khiến đánh mất bản thân", "", []], ["Thấu cảm chuẩn xác", "lắng nghe sâu và phản hồi chân thành", "", []]]], ["Con người Vận hành Đầy đủ", "Fully Functioning: cởi mở trải nghiệm, tin trực giác", "", []]]], ["Thuyết Hiện sinh (Frankl & May)", "ý nghĩa cuộc sống & tự do", "chia thành", [["Viktor Frankl (Logotherapy)", "ý chí tìm kiếm ý nghĩa", "gồm", [["Man's Search for Meaning", "vượt qua thảm họa trại tập trung Auschwitz", "", []], ["3 Con đường tạo ý nghĩa", "lao động sáng tạo, trải nghiệm tình yêu, thái độ can trường", "", []]]], ["Rollo May (Lo âu Hiện sinh)", "đối diện trách nhiệm", "gồm", [["Lo âu bình thường", "thúc đẩy hành động dũng cảm đối diện thách thức", "", []], ["Lo âu bệnh lý", "làm tê liệt, né tránh tự do và trách nhiệm sống", "", []]]], ["4 Nỗi trăn trở Hiện sinh", "Cái chết, Sự cô đơn, Tự do/Trách nhiệm, Sự vô nghĩa", "", []]]]]}, {"id": "nc6", "part": "Phần II: Các Trường phái Lý thuyết Trọng yếu", "code": "NC.6", "title": "Quan điểm Học tập & Nhận thức – Hành vi", "goals": ["Hiểu quan điểm của B.F. Skinner: Điều kiện hóa thao tác, củng cố, trừng phạt và biến đổi hành vi.", "Làm chủ Thuyết Học tập Xã hội của Albert Bandura: Học qua quan sát (Modeling) và Tương tác 3 chiều.", "Phân tích vai trò quyết định của Niềm tin vào năng lực bản thân (Self-Efficacy).", "Nắm vững Thuyết Cấu trúc Tâm thức Cá nhân của George Kelly (Con người như nhà khoa học)."], "sections": [{"h": "B.F. Skinner: Thuyết Hành vi & Điều kiện hóa Thao tác", "items": ["<b>B.F. Skinner (1904–1990):</b> Đại diện tiêu biểu nhất của Thuyết Hành vi cực đoan (Radical Behaviorism). Ông phủ nhận các khái niệm trừu tượng bên trong (như 'tâm trí', 'bản ngã', 'vô thức'); xem <b>Nhân cách là tập hợp các khuôn mẫu hành vi tích lũy được qua lịch sử củng cố</b>.", "<b>Điều kiện hóa Thao tác (Operant Conditioning):</b> Hành vi được định hình và duy trì bởi các <b>hệ quả (Consequences)</b> xảy ra ngay sau nó:", "• <b>Củng cố tích cực (Positive Reinforcement):</b> Thêm một kích thích dễ chịu (phần thưởng, lời khen, tiền) → <i>Làm tăng tần suất hành vi</i>.", "• <b>Củng cố tiêu cực (Negative Reinforcement):</b> Loại bỏ một kích thích khó chịu (tiếng ồn, cơn đau, sự cằn nhằn) → <i>Làm tăng tần suất hành vi</i>.", "• <b>Trừng phạt tích cực (Positive Punishment):</b> Thêm một kích thích khó chịu (phạt đòn, khiển trách) → <i>Làm giảm tần suất hành vi</i>.", "• <b>Trừng phạt tiêu cực (Negative Punishment):</b> Tước đi một kích thích dễ chịu (tịch thu điện thoại, cấm túc) → <i>Làm giảm tần suất hành vi</i>.", "<b>Các Lịch củng cố (Schedules of Reinforcement):</b>", "• <i>Tỷ lệ biến đổi (Variable Ratio):</i> Phần thưởng xuất hiện sau một số lần hành vi ngẫu nhiên không đoán trước → <b>Tạo ra hành vi bền bỉ nhất, khó bị dập tắt nhất</b> (cơ chế gây nghiện cờ bạc, máy đánh bạc slot machine, lướt mạng xã hội).", "• <i>Khoảng thời gian cố định (Fixed Interval):</i> Thưởng theo chu kỳ thời gian cố định (nhận lương hàng tháng) → Hành vi chỉ tăng vọt sát kỳ đánh giá."]}, {"h": "Albert Bandura: Thuyết Học tập Xã hội & Nhận thức", "items": ["<b>Albert Bandura (1925–2021):</b> Bổ sung yếu tố nhận thức vào thuyết hành vi; khẳng định con người không học thụ động như động vật mà học tập thông qua tư duy và tương tác xã hội.", "<b>Học tập qua Quan sát / Bắt chước Mẫu (Observational Learning / Modeling):</b>", "• <i>Thí nghiệm Búp bê Bobo (Bobo Doll Experiment, 1961):</i> Trẻ em xem video người lớn đấm đá, chửi bới búp bê Bobo; khi vào phòng chơi, trẻ bắt chước chính xác các hành vi hung hăng đó dù không hề nhận được bất kỳ phần thưởng trực tiếp nào.", "• <i>Bốn tiến trình của học tập qua quan sát:</i> <b>1. Chú ý (Attention)</b> → <b>2. Lưu giữ (Retention / Ghi nhớ)</b> → <b>3. Tái tạo hành vi (Reproduction)</b> → <b>4. Động lực (Motivation)</b>.", "<b>Mô hình Tương tác Quyết định luận Ba chiều (Triadic Reciprocal Determinism):</b>", "• Hành vi con người không phải là đường một chiều mà là sự tương tác qua lại liên tục giữa 3 yếu tố: <b>Cá nhân/Nhận thức (P)</b> ↔ <b>Hành vi (B)</b> ↔ <b>Môi trường (E)</b>.", "• Vd: Niềm tin tự tin của bạn (P) khiến bạn chủ động phát biểu (B), giáo viên khen ngợi tạo môi trường tích cực (E), lời khen lại củng cố thêm niềm tin tự tin (P)."]}, {"h": "Niềm tin vào Năng lực Bản thân (Self-Efficacy)", "items": ["<b>Khái niệm:</b> Niềm tin của cá nhân về khả năng thực hiện thành công các hành động cần thiết để đạt được mục tiêu cụ thể.", "<b>Phân biệt Self-Efficacy vs. Self-Esteem (Lòng tự trọng):</b> Self-esteem là bạn yêu quý bản thân đến mức nào; Self-efficacy là bạn tin mình có năng lực hoàn thành nhiệm vụ này tốt đến mức nào.", "<b>Bốn Nguồn gốc Hình thành Self-Efficacy (theo thứ tự sức mạnh):</b>", "• <b>1. Trải nghiệm Thành công trong Quá khứ (Mastery Experiences):</b> Nguồn mạnh nhất; từng tự mình vượt qua khó khăn tương tự sẽ xây dựng niềm tin sắt đá.", "• <b>2. Trải nghiệm Gián tiếp / Quan sát Người khác (Vicarious Experiences):</b> Thấy người có hoàn cảnh tương tự mình làm được → 'Họ làm được, mình cũng làm được!'.", "• <b>3. Sự Thuyết phục Xã hội (Social Persuasion):</b> Lời động viên, khích lệ chân thành từ những người có uy tín.", "• <b>4. Trạng thái Sinh lý & Cảm xúc (Physiological States):</b> Nhịp tim, sự bình tĩnh hay hoảng loạn; người tự tin diễn giải tim đập nhanh là 'hào hứng', người tự ti diễn giải là 'sợ hãi thất bại'."]}, {"h": "George Kelly: Thuyết Cấu trúc Tâm thức Cá nhân (Personal Constructs)", "items": ["<b>George Kelly (1905–1967):</b> Đưa ra quan điểm độc đáo: <b>'Con người như một Nhà khoa học' (Person-as-Scientist)</b>.", "<b>Bản chất:</b> Mỗi chúng ta liên tục tạo dựng các giả thuyết về thế giới, thử nghiệm chúng trong thực tế và điều chỉnh các dự đoán để kiểm soát tương lai.", "<b>Cấu trúc Tâm thức Cá nhân (Personal Construct):</b> Là chiếc lăng kính nhận thức mang tính <b>Lưỡng cực (Bipolar)</b> mà cá nhân dùng để gán ý nghĩa cho thế giới (vd: Thông minh vs Ngu ngốc, Thân thiện vs Thù địch, An toàn vs Nguy hiểm).", "<b>Các Hiện tượng Cảm xúc theo Kelly:</b>", "• <i>Lo âu (Anxiety):</i> Xảy ra khi ta đối mặt với sự kiện nằm ngoài phạm vi bao quát của hệ thống cấu trúc sẵn có (không biết gán nhãn thế nào).", "• <i>Sợ hãi (Fear):</i> Khi một cấu trúc mới chuẩn bị thâm nhập vào hệ thống tâm thức.", "• <i>Bị đe dọa (Threat):</i> Nhận thức thấy toàn bộ hệ thống cấu trúc căn bản của cuộc đời mình đang đứng trước nguy cơ sụp đổ hoàn toàn.", "<b>Liệu pháp Vai Đóng Cố định (Fixed-Role Therapy):</b> Cho thân chủ đóng vai một nhân vật giả định có hệ cấu trúc mới để thử nghiệm cách sống mới lành mạnh hơn."]}], "tables": [{"title": "Bảng Ma trận Bốn Dạng Hệ quả Hành vi của B.F. Skinner", "head": ["Thao tác tác động", "Kích thích Dễ chịu (Phần thưởng)", "Kích thích Khó chịu (Đau đớn / Phạt)"], "rows": [["THÊM VÀO (Positive)", "<b>Củng cố Tích cực (+R):</b> Thêm thưởng → TĂNG hành vi (vd: Đạt điểm 10 được thưởng điện thoại mới)", "<b>Trừng phạt Tích cực (+P):</b> Thêm phạt → GIẢM hành vi (vd: Đi học trễ bị bắt quét sân trường)"], ["RÚT BỎ (Negative)", "<b>Trừng phạt Tiêu cực (-P):</b> Tước phần thưởng → GIẢM hành vi (vd: Đánh nhau bị tịch thu máy chơi game 1 tuần)", "<b>Củng cố Tiêu cực (-R):</b> Loại bỏ phiền toái → TĂNG hành vi (vd: Thắt dây an toàn để tắt tiếng chuông báo 'ting ting')"]]}, {"title": "So sánh Tiếp cận Hành vi (Skinner) và Nhận thức Xã hội (Bandura)", "head": ["Tiêu chí", "Thuyết Hành vi Cổ điển (B.F. Skinner)", "Thuyết Học tập Nhận thức Xã hội (Albert Bandura)"], "rows": [["Cơ chế học tập", "Điều kiện hóa thao tác trực tiếp thông qua thử và sai", "Học qua quan sát, bắt chước mẫu (Modeling) và xử lý nhận thức"], ["Vai trò của Nhận thức", "Phủ nhận; xem tâm trí như 'hộp đen' không cần nghiên cứu", "Đóng vai trò trung tâm; tư duy, niềm tin, tự điều chỉnh hành vi"], ["Mối quan hệ con người - môi trường", "Môi trường kiểm soát và quyết định 100% hành vi con người", "Tương tác 3 chiều qua lại (Cá nhân ↔ Hành vi ↔ Môi trường)"], ["Khái niệm cốt lõi", "Củng cố (+/-), Trừng phạt (+/-), Lịch củng cố biến đổi", "Quan sát búp bê Bobo, Self-Efficacy, Tự điều chỉnh (Self-regulation)"]]}], "tips": ["Mẹo phân biệt Củng cố vs Trừng phạt: Củng cố = TĂNG tần suất hành vi; Trừng phạt = GIẢM tần suất hành vi. Tích cực = THÊM vào; Tiêu cực = BỚT đi.", "Lịch tỷ lệ biến đổi (Variable Ratio): Lý do vì sao người ta nghiện TikTok, Facebook và cờ bạc — bộ não không biết lượt quẹt nào sẽ trúng thưởng!", "Muốn nâng cao Self-Efficacy cho người khác: Đừng chỉ nói 'Cố lên!', hãy chia nhỏ mục tiêu để họ có được 'Trải nghiệm thành công' (Mastery experience) đầu tiên.", "Kelly nhắc nhở: Khi thân chủ nổi loạn hay lo âu, đó là vì 'lăng kính cấu trúc' của họ đang bị đe dọa vỡ vụn trước một thực tế mới mẻ."], "cards": [["B.F. Skinner", "Nhà tâm lý học hành vi cực đoan, người phát triển Thuyết Điều kiện hóa thao tác và hộp Skinner."], ["Củng cố tích cực", "Hành vi được gia tăng tần suất bằng cách trao tặng một kích thích dễ chịu ngay sau khi hành vi xảy ra."], ["Củng cố tiêu cực", "Hành vi được gia tăng tần suất bằng cách loại bỏ một kích thích khó chịu, phiền toái."], ["Trừng phạt tích cực", "Hành vi bị suy giảm tần suất do nhận thêm một kích thích khó chịu, đau đớn."], ["Trừng phạt tiêu cực", "Hành vi bị suy giảm tần suất do bị tước đi một kích thích dễ chịu hoặc đặc quyền."], ["Lịch tỷ lệ biến đổi", "Lịch củng cố trao thưởng sau số lần hành vi ngẫu nhiên; tạo ra phản ứng bền bỉ nhất và khó dập tắt nhất."], ["Albert Bandura", "Nhà tâm lý học sáng lập Thuyết Học tập Nhận thức Xã hội, Thí nghiệm búp bê Bobo và lý thuyết Self-Efficacy."], ["Búp bê Bobo", "Thí nghiệm kinh điển năm 1961 của Bandura chứng minh trẻ em bắt chước hành vi bạo lực qua quan sát người lớn."], ["Modeling (Học qua làm mẫu)", "Tiến trình tiếp thu hành vi mới thông qua việc quan sát hành động và hệ quả của người làm mẫu."], ["Tương tác 3 chiều", "Mô hình Bandura: Hành vi (B), Cá nhân/Nhận thức (P) và Môi trường (E) liên tục tác động qua lại lẫn nhau."], ["Self-Efficacy", "Niềm tin của cá nhân về năng lực của chính mình trong việc thực hiện thành công một nhiệm vụ cụ thể."], ["Mastery Experiences", "Trải nghiệm làm chủ/thành công trong quá khứ — nguồn gốc mạnh mẽ và bền vững nhất của Self-Efficacy."], ["George Kelly", "Nhà tâm lý học đề xuất Thuyết Cấu trúc Tâm thức Cá nhân, xem con người như một nhà khoa học."], ["Personal Construct", "Chiếc lăng kính nhận thức lưỡng cực (bipolar) mà mỗi cá nhân tự tạo dựng để dự đoán và diễn giải thế giới."], ["Person-as-Scientist", "Ẩn dụ trung tâm của Kelly: con người liên tục đặt giả thuyết, thử nghiệm và điều chỉnh dự đoán về cuộc sống."], ["Fixed-Role Therapy", "Liệu pháp vai đóng cố định của Kelly giúp thân chủ thử nghiệm hệ thống cấu trúc mới thông qua việc nhập vai."]], "qs": [["Theo B.F. Skinner, bản chất của Nhân cách con người là gì?", ["Cấu trúc bản năng vô thức bị đè nén", "Tập hợp các khuôn mẫu hành vi tích lũy được qua lịch sử củng cố", "Hình ảnh bản ngã lý tưởng", "Hệ thống các cổ mẫu di truyền"], 1, "Skinner coi nhân cách đơn thuần là tập hợp các phản ứng hành vi được củng cố bởi môi trường."], ["Người lái xe ô tô cài dây an toàn để tắt tiếng chuông báo 'ting ting' khó chịu trên xe. Hành vi cài dây an toàn được củng cố bằng cơ chế nào?", ["Củng cố tích cực (Positive Reinforcement)", "Củng cố tiêu cực (Negative Reinforcement)", "Trừng phạt tích cực (Positive Punishment)", "Trừng phạt tiêu cực (Negative Punishment)"], 1, "Loại bỏ một kích thích khó chịu (tiếng chuông ồn) để tăng tần suất hành vi (cài dây an toàn) là Củng cố tiêu cực."], ["Người chơi máy đánh bạc (Slot Machine) trong sòng bạc tiếp tục nhét tiền và gạt cần hàng giờ liền vì trò chơi này vận hành theo lịch củng cố nào?", ["Khoảng thời gian cố định (Fixed Interval)", "Tỷ lệ biến đổi (Variable Ratio)", "Khoảng thời gian biến đổi (Variable Interval)", "Củng cố liên tục 100%"], 1, "Lịch tỷ lệ biến đổi (Variable Ratio) trao thưởng sau số lần ngẫu nhiên, tạo ra sự nghiện và hành vi bền bỉ nhất."], ["Thí nghiệm kinh điển với 'Búp bê Bobo' (1961) của Albert Bandura đã chứng minh hiện tượng tâm lý nào?", ["Trẻ em chỉ học được khi bị phạt đòn", "Trẻ em có thể học và bắt chước các hành vi hung hăng đơn thuần thông qua việc quan sát người lớn làm mẫu", "Trí thông minh IQ do di truyền 100%", "Búp bê kích hoạt vô thức tập thể"], 1, "Thí nghiệm Bobo Doll chứng minh trẻ học tập qua quan sát (Observational learning / Modeling) mà không cần thưởng phạt trực tiếp."], ["Mô hình 'Tương tác Quyết định luận Ba chiều' (Triadic Reciprocal Determinism) của Bandura bao gồm 3 yếu tố tương tác qua lại nào?", ["Bản năng, Bản ngã, Siêu ngã", "Cá nhân/Nhận thức (P), Hành vi (B), và Môi trường (E)", "Sinh học, Thần kinh, Xã hội", "Quá khứ, Hiện tại, Tương lai"], 1, "Mô hình Bandura là sự tương tác 2 chiều giữa Cá nhân (P), Hành vi (B) và Môi trường (E)."], ["Khái niệm 'Self-Efficacy' trong lý thuyết của Albert Bandura được định nghĩa chuẩn xác là:", ["Mức độ một người tự yêu quý và tôn trọng giá trị bản thân", "Niềm tin của cá nhân về năng lực của chính mình trong việc hoàn thành thành công một mục tiêu hay nhiệm vụ cụ thể", "Khả năng thao túng người khác", "Sự may mắn ngẫu nhiên"], 1, "Self-Efficacy là niềm tin vào năng lực thực thi hành động để đạt kết quả mong muốn."], ["Nguồn gốc nào đóng vai trò mạnh mẽ, trực tiếp và bền vững nhất trong việc xây dựng niềm tin Self-Efficacy của một cá nhân?", ["Những lời khen ngợi xã giao từ bạn bè", "Trải nghiệm thành công tự thân trong quá khứ (Mastery Experiences)", "Xem phim tài liệu về người nổi tiếng", "Dùng thuốc kích thích tinh thần"], 1, "Tự mình trải nghiệm và làm chủ thành công trong quá khứ (Mastery experiences) là nguồn củng cố năng lực vững chắc nhất."], ["George Kelly sử dụng ẩn dụ nào để mô tả bản chất của con người trong Thuyết Cấu trúc Tâm thức Cá nhân?", ["Con người như một cỗ máy sinh học", "Con người như một Nhà khoa học (Person-as-Scientist)", "Con người như một con thú bị kìm hãm", "Con người như một diễn viên kịch"], 1, "Kelly xem mỗi con người như một nhà khoa học: luôn đặt giả thuyết, thử nghiệm và tiên lượng cuộc sống."], ["Theo George Kelly, 'Cấu trúc cá nhân' (Personal Construct) là gì?", ["Một loại tế bào thần kinh trong thùy trán", "Chiếc lăng kính nhận thức mang tính lưỡng cực (bipolar) dùng để gán ý nghĩa và diễn giải các sự kiện đời sống", "Một chứng rối loạn ám ảnh cưỡng chế", "Bộ quy tắc ứng xử xã hội"], 1, "Cấu trúc cá nhân là thang đánh giá lưỡng cực (vd: tốt/xấu, ấm áp/lạnh lùng) mà tâm trí dùng để phân loại thế giới."], ["Theo George Kelly, cảm giác 'Lo âu' (Anxiety) nảy sinh khi nào trong tâm trí một con người?", ["Khi xung năng Id đòi hỏi thỏa mãn", "Khi cá nhân đối mặt với một sự kiện nằm ngoài phạm vi bao quát của hệ thống cấu trúc nhận thức sẵn có", "Khi thiếu hụt serotonin", "Khi bị điểm kém trong bài kiểm tra"], 1, "Lo âu xảy ra khi hệ cấu trúc của ta không thể lý giải hoặc dự đoán được sự kiện đang diễn ra."], ["Liệu pháp 'Vai đóng Cố định' (Fixed-Role Therapy) của George Kelly nhằm mục đích gì cho thân chủ?", ["Khám phá các sang chấn thời thơ ấu", "Giúp thân chủ thử nghiệm một hệ thống cấu trúc tâm thức mới bằng cách đóng vai một tính cách giả định khác", "Giam cầm hành vi tiêu cực", "Thôi miên hồi quy tiền kiếp"], 1, "Liệu pháp này cho thân chủ đóng vai một người mới để trải nghiệm cách nhìn nhận thế giới khác biệt và giải phóng bản thân."], ["Một học sinh liên tục bị điểm kém môn Toán, dù cố gắng nhưng không có ai hướng dẫn nên em tin rằng 'mình sinh ra không thể học được Toán' và từ bỏ hoàn toàn. Em này có:", ["Chỉ số Self-Efficacy môn Toán rất thấp", "Nét Hướng ngoại quá cao", "Cổ mẫu Shadow áp đảo", "Rối loạn nhân cách kịch tính"], 0, "Trải nghiệm thất bại liên tiếp làm suy sụp niềm tin vào năng lực bản thân (Low Self-Efficacy) đối với môn học đó."], ["Điểm khác biệt căn bản nhất giữa B.F. Skinner và Albert Bandura là gì?", ["Skinner coi trọng nhận thức còn Bandura thì không", "Bandura thừa nhận vai trò trung tâm của các quá trình nhận thức và học qua quan sát; Skinner phủ nhận vai trò của nhận thức", "Skinner chỉ nghiên cứu trẻ em", "Bandura chỉ nghiên cứu chim bồ câu"], 1, "Bandura đưa nhận thức và sự quan sát làm mẫu (Modeling) vào trung tâm, trong khi Skinner chỉ quan tâm hành vi quan sát được."], ["Một đứa trẻ bị mẹ phạt không cho dùng iPad trong 3 ngày vì tội trêu chọc em gái. Đây là ví dụ của hình thức can thiệp nào theo Skinner?", ["Củng cố tích cực", "Củng cố tiêu cực", "Trừng phạt tiêu cực (Negative Punishment)", "Trừng phạt tích cực"], 2, "Tước đi một đặc quyền/kích thích dễ chịu (iPad) để làm giảm hành vi xấu là Trừng phạt tiêu cực (Negative Punishment)."], ["Bốn tiến trình liên hoàn trong việc Học tập qua Quan sát (Modeling) theo Albert Bandura được sắp xếp đúng thứ tự là:", ["Tái tạo → Chú ý → Động lực → Ghi nhớ", "Chú ý (Attention) → Lưu giữ (Retention) → Tái tạo hành vi (Reproduction) → Động lực (Motivation)", "Động lực → Thử sai → Bắt chước → Quên", "Quan sát → Bị phạt → Sợ hãi → Bỏ cuộc"], 1, "Quy trình 4 bước của Bandura: Chú ý nguồn mẫu → Ghi nhớ vào tâm trí → Thực hành tái tạo cơ bắp → Có động lực để thực hiện."]], "trees": [["B.F. Skinner: Thuyết Hành vi", "điều kiện hóa thao tác", "chia thành", [["Bản chất Nhân cách", "tập hợp các phản ứng hành vi được củng cố", "", []], ["4 Cơ chế Hệ quả", "hành vi tăng hoặc giảm", "gồm", [["Củng cố tích cực (+R)", "thêm phần thưởng dễ chịu → TĂNG hành vi", "", []], ["Củng cố tiêu cực (-R)", "loại bỏ phiền toái khó chịu → TĂNG hành vi", "", []], ["Trừng phạt tích cực (+P)", "thêm hình phạt đau đớn → GIẢM hành vi", "", []], ["Trừng phạt tiêu cực (-P)", "tước bỏ quyền lợi dễ chịu → GIẢM hành vi", "", []]]], ["Lịch củng cố", "schedules of reinforcement", "gồm", [["Tỷ lệ biến đổi (Variable Ratio)", "thưởng sau số lần ngẫu nhiên → bền bỉ nhất (cờ bạc)", "", []], ["Khoảng thời gian cố định", "thưởng theo định kỳ thời gian (lương tháng)", "", []]]]]], ["Albert Bandura: Nhận thức Xã hội", "học qua làm mẫu & tương tác", "chia thành", [["Búp bê Bobo (1961)", "học qua quan sát người lớn bắt chước bạo lực", "", []], ["4 Tiến trình Modeling", "Chú ý (Attention) → Ghi nhớ → Tái tạo → Động lực", "", []], ["Tương tác Quyết định luận 3 chiều", "Cá nhân (P) ↔ Hành vi (B) ↔ Môi trường (E)", "", []], ["Self-Efficacy (Niềm tin Năng lực)", "niềm tin làm chủ nhiệm vụ", "gồm", [["Trải nghiệm thành công (Mastery)", "nguồn vững chắc số 1 từ thành công quá khứ", "", []], ["Quan sát người khác (Vicarious)", "thấy bạn làm được củng cố niềm tin bản thân", "", []], ["Thuyết phục xã hội & Sinh lý", "lời động viên & sự bình tĩnh của nhịp tim", "", []]]]]], ["George Kelly: Cấu trúc Tâm thức", "con người như nhà khoa học", "chia thành", [["Person-as-Scientist", "liên tục đặt giả thuyết, thử nghiệm và tiên lượng cuộc sống", "", []], ["Personal Construct", "chiếc lăng kính lưỡng cực (bipolar) gán nghĩa thế giới", "", []], ["Cảm xúc theo Kelly", "lo âu khi sự kiện nằm ngoài cấu trúc; đe dọa khi cấu trúc vỡ vụn", "", []], ["Fixed-Role Therapy", "liệu pháp đóng vai giúp thử nghiệm cách sống mới lành mạnh", "", []]]]]}];
+const BYID = {};
+LESSONS.forEach(l => { BYID[l.id] = l; });
+
+/* ---------- Storage & State ---------- */
+const STORE_KEY = "tlhnc_review_v1";
+let S = { q: {}, c: {}, exam: [] };
+try {
+  const saved = localStorage.getItem(STORE_KEY);
+  if(saved) S = JSON.parse(saved);
+} catch(e) {}
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch(e){}
+}
+
+let state = { view: "home", tab: "sum" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function mastery(l) {
+  let ok = 0, done = 0;
+  l.qs.forEach((q, idx) => {
+    const st = S.q[l.id + "-" + idx];
+    if(st && st.done) { done++; if(st.ok) ok++; }
+  });
+  return { ok, done, total: l.qs.length, pct: l.qs.length ? Math.round(ok / l.qs.length * 100) : 0 };
+}
+
+function wrongIds() {
+  const res = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      const qid = l.id + "-" + idx;
+      if(S.q[qid] && S.q[qid].done && !S.q[qid].ok) res.push(qid);
+    });
+  });
+  return res;
+}
+
+function cardStats(l) {
+  let known = 0;
+  l.cards.forEach((c, idx) => {
+    if(S.c[l.id + "-" + idx] === "known") known++;
+  });
+  return { known, total: l.cards.length };
+}
+
+/* ---------- Navigation ---------- */
+function go(v, tab) {
+  state.view = v;
+  if(tab) state.tab = tab;
+  $("#side").classList.remove("open");
+  renderSide();
+  renderMain();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderSide() {
+  const c = $("#sideLessons");
+  let curPart = "";
+  let html = "";
+  LESSONS.forEach(l => {
+    if(l.part !== curPart) {
+      curPart = l.part;
+      html += `<div class="part-label">${esc(curPart)}</div>`;
+    }
+    const on = state.view === l.id ? "on" : "";
+    const m = mastery(l);
+    html += `
+    <button class="lesson-btn ${on}" data-go="${l.id}" data-tab="sum">
+      <span class="code">${l.code}</span>
+      <span class="name">${esc(l.title)}</span>
+      <span class="mini"><i style="width:${m.pct}%"></i></span>
+    </button>`;
+  });
+  c.innerHTML = html;
+  $(".nav-home").classList.toggle("on", state.view === "home");
+}
+
+// Global click delegation for all navigation elements (nav-home, brand, lessons, exam, axon map)
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-go]");
+  if(btn) {
+    const g = btn.getAttribute("data-go");
+    const t = btn.getAttribute("data-tab") || (g === "home" ? "sum" : state.tab);
+    go(g, t);
+  }
+});
+
+/* ---------- Home View ---------- */
+function renderHome(m) {
+  const totQ = LESSONS.reduce((a, l) => a + l.qs.length, 0);
+  const totC = LESSONS.reduce((a, l) => a + l.cards.length, 0);
+  let ok = 0, done = 0;
+  LESSONS.forEach(l => { const s = mastery(l); ok += s.ok; done += s.done; });
+
+  let segs = LESSONS.map(l => {
+    const s = mastery(l);
+    return `<button class="seg" data-go="${l.id}" data-tab="sum" title="${esc(l.code + ' ' + l.title)}: ${s.pct}% đúng">
+      <span class="fill" style="width:${s.pct}%"></span>
+      <span class="lbl">${l.code}</span>
+    </button>`;
+  }).join("");
+
+  m.innerHTML = `
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Tâm lý học Nhân cách – Góc ôn tập & Tự học</h2>
+      <p>Nền tảng ôn tập tương tác hoàn chỉnh dựa trên chương trình học phần <b>Tâm lý học Nhân cách</b> (Mã HP: TLH025 – 4 Tín chỉ, ĐH KHXH&NV TP.HCM): ${LESSONS.length} bài học trọng tâm, tích hợp <b>Sơ đồ tư duy SVG</b>, ${totC} thẻ flashcards 3D và ${totQ} câu hỏi trắc nghiệm có giải thích chuyên sâu.</p>
+      <div class="lead-q">“Nhân cách là sự tổ chức động bên trong cá nhân của những hệ thống tâm sinh lý xác định hành vi và tư duy đặc trưng.” – Gordon Allport</div>
+    </div>
+    <div class="exam-card">
+      <h3>Cấu trúc môn học & Đánh giá</h3>
+      <div class="exam-facts">
+        <div class="fact"><strong>10%</strong><span>Chuyên cần & Thảo luận</span></div>
+        <div class="fact"><strong>30%</strong><span>Kiểm tra giữa kỳ</span></div>
+        <div class="fact"><strong>60%</strong><span>Cuối kỳ (Trắc nghiệm)</span></div>
+        <div class="fact"><strong>${totQ}</strong><span>Câu trắc nghiệm toàn khóa</span></div>
+      </div>
+      <div class="exam-foot">Chuyên cần tối thiểu 80% • Đầy đủ 6 quan điểm nhân cách</div>
+    </div>
+  </div>
+  </section>
+
+  <h3 style="font-size:18px; margin:32px 0 14px; font-weight:750">Danh sách bài học trọng tâm</h3>
+  <div class="grid-lessons">
+    ${LESSONS.map(l => {
+      const s = mastery(l);
+      const cs = cardStats(l);
+      return `
+      <div class="lcard" data-go="${l.id}" data-tab="sum">
+        <span class="code">${l.code}</span>
+        <div class="t">${esc(l.title)}</div>
+        <div class="meta">
+          <span>${l.qs.length} câu trắc nghiệm • ${cs.known}/${cs.total} thẻ nhớ</span>
+          <strong>${s.pct}%</strong>
+        </div>
+        <div class="bar"><i style="width:${s.pct}%"></i></div>
+      </div>`;
+    }).join("")}
+  </div>`;
+  bindNavClicks(m);
+}
+
+/* ---------- Mindmap SVG Engine ---------- */
+const MMC = ["#3B4A8C", "#D98A1F", "#1E8C86", "#C8366E", "#7A5BC7", "#2A7FB8", "#6F8A2E", "#B0683A", "#4F6D7A"];
+
+function treeSVG(root, ci0) {
+  const LH = 36, PX = 14, NX = 12;
+  const tw = (t, px, b) => t.length * px * (b ? 0.6 : 0.53);
+  let leaves = 0, cc = 0;
+  const nodes = [];
+
+  (function walk(n, d, parent, ci) {
+    if (d === 1 || d === 2) ci = cc++;
+    const o = { t: n[0], note: n[1] || "", rel: n[2] || "", d, parent, ci, kids: [] };
+    o.w = tw(o.t, PX, 1) + (o.note ? tw(" – " + o.note, NX) : 0) + 28;
+    o.rw = o.rel ? tw(o.rel, 12) + 20 : 0;
+    nodes.push(o);
+
+    const ch = n[3] || [];
+    if (!ch.length) {
+      o.y = leaves * LH + LH / 2 + 8;
+      leaves++;
+    }
+    ch.forEach(c => o.kids.push(walk(c, d + 1, o, ci)));
+    if (ch.length) o.y = (o.kids[0].y + o.kids[o.kids.length - 1].y) / 2;
+    return o;
+  })(root, 0, null, 0);
+
+  const maxD = Math.max(...nodes.map(n => n.d));
+  const colX = [12];
+  for (let d = 0; d < maxD; d++) {
+    const at = nodes.filter(n => n.d === d);
+    colX[d + 1] = colX[d] + Math.max(...at.map(n => n.w)) + Math.max(56, Math.max(...at.map(n => n.rw)) + 44);
+  }
+
+  const W = Math.max(...nodes.map(n => colX[n.d] + n.w)) + 24;
+  const H = Math.max(leaves * LH + 24, 70);
+
+  let edges = "", body = "";
+  nodes.forEach(n => {
+    const x = colX[n.d], col = MMC[(n.ci + ci0) % MMC.length];
+    if (n.kids.length) {
+      const sx = x + n.w;
+      let ex = sx;
+      if (n.rel) {
+        const px = sx + 8;
+        body += `<rect x="${px}" y="${n.y - 11}" width="${n.rw}" height="22" rx="11" fill="var(--surface)" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="1.2"/><text x="${px + n.rw / 2}" y="${n.y + 4.3}" text-anchor="middle" font-size="11.5" font-style="italic" fill="${n.d === 0 ? "var(--muted)" : col}">${esc(n.rel)}</text>`;
+        edges += `<path d="M${sx},${n.y} H${px}" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="2"/>`;
+        ex = px + n.rw;
+      }
+      n.kids.forEach(k => {
+        const kc = MMC[(k.ci + ci0) % MMC.length];
+        const kx = colX[k.d];
+        const mx = (ex + kx) / 2;
+        edges += `<path d="M${ex},${n.y} C${mx},${n.y} ${mx},${k.y} ${kx},${k.y}" fill="none" stroke="${kc}" stroke-width="2" opacity=".75"/>`;
+      });
+    }
+
+    const fill = n.d === 0 ? "var(--ink)" : n.d === 1 ? col : "var(--surface)";
+    const tcol = n.d === 0 ? "var(--paper)" : n.d === 1 ? "#fff" : "var(--ink)";
+    body += `<rect x="${x}" y="${n.y - 14}" width="${n.w}" height="28" rx="${n.d < 2 ? 14 : 8}" fill="${fill}" ${n.d >= 2 ? `stroke="${col}" stroke-width="1.5"` : ""}/>`;
+    body += `<text x="${x + 14}" y="${n.y + 5}" font-size="${PX}" fill="${tcol}"><tspan font-weight="700">${esc(n.t)}</tspan>${n.note ? `<tspan font-size="${NX}" ${n.d >= 2 ? `fill="var(--muted)"` : `fill-opacity=".85"`}> – ${esc(n.note)}</tspan>` : ""}</text>`;
+  });
+
+  return `<svg viewBox="0 0 ${Math.ceil(W)} ${H}" style="min-width:${Math.round(W * 0.72)}px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ tư duy: ${esc(root[0])}" font-family="inherit">${edges}${body}</svg>`;
+}
+
+function renderTrees(l) {
+  if (!l.trees || !l.trees.length) return "";
+  return l.trees.map((t, i) => `
+    <div class="tree">
+      <div class="mm-scroll">${treeSVG(t, i * 2)}</div>
+    </div>
+  `).join("");
+}
+
+/* ---------- Lesson View ---------- */
+function renderLesson(m, l) {
+  const tabs = [
+    { id: "sum", label: "Tóm tắt cốt lõi" },
+    { id: "tbl", label: "Bảng so sánh", count: l.tables.length },
+    { id: "fc",  label: "Thẻ ghi nhớ", count: l.cards.length },
+    { id: "q",   label: "Trắc nghiệm", count: l.qs.length },
+    { id: "tip", label: "Mẹo nhớ", count: l.tips.length }
+  ];
+
+  let tabNav = tabs.map(t => `
+    <button class="tab ${state.tab === t.id ? "on" : ""}" data-tab="${t.id}">
+      ${t.label}${t.count !== undefined ? `<span class="count">${t.count}</span>` : ""}
+    </button>
+  `).join("");
+
+  m.innerHTML = `
+  <div class="lhead">
+    <div class="bigcode">${l.code}</div>
+    <div>
+      <div class="part">${esc(l.part)}</div>
+      <h2>${esc(l.title)}</h2>
+    </div>
+  </div>
+
+  <div class="goals">
+    <h4>Mục tiêu bài học cần đạt</h4>
+    <ul>${l.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+  </div>
+
+  <div class="tabs">${tabNav}</div>
+  <div id="tabBody"></div>`;
+
+  m.querySelectorAll(".tab").forEach(b => {
+    b.onclick = () => {
+      state.tab = b.getAttribute("data-tab");
+      m.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      renderTabBody(l);
+    };
+  });
+
+  renderTabBody(l);
+}
+
+function renderTabBody(l) {
+  const tb = $("#tabBody");
+  if(state.tab === "sum") renderTabSum(tb, l);
+  else if(state.tab === "tbl") renderTabTbl(tb, l);
+  else if(state.tab === "fc") renderTabFc(tb, l);
+  else if(state.tab === "q") renderTabQ(tb, l);
+  else if(state.tab === "tip") renderTabTip(tb, l);
+}
+
+/* Tab: Tóm tắt (Summary + Mindmap Trees + Content Blocks + Tables + Tips) */
+function renderTabSum(tb, l) {
+  let treeSection = "";
+  if (l.trees && l.trees.length) {
+    treeSection = `
+    <div class="mm-wrap">
+      <div class="mm-head">
+        <h4>Sơ đồ tư duy dạng nhánh cây (SVG Mindmap Tree)</h4>
+        <span class="muted" style="font-size:12.5px">Kéo ngang để xem toàn bộ cấu trúc phân nhánh</span>
+      </div>
+      ${renderTrees(l)}
+    </div>`;
+  }
+
+  let blocks = l.sections.map((s, idx) => `
+    <details class="block" ${idx < 2 ? "open" : ""}>
+      <summary>${esc(s.h)}</summary>
+      <ul>
+        ${s.items.map(it => `<li>${it}</li>`).join("")}
+      </ul>
+    </details>
+  `).join("");
+
+  let tablesPreview = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+
+  let tipsPreview = `
+    <h4 style="margin:24px 0 10px; font-size:15px; font-weight:750">Mẹo ghi nhớ nhanh</h4>
+    <div class="tips-wrap">
+      ${l.tips.map(tp => `
+        <div class="tip-card">
+          <span class="tip-badge">Pro-tip</span>
+          <div class="tip-body">${tp}</div>
+        </div>
+      `).join("")}
+    </div>`;
+
+  tb.innerHTML = treeSection + blocks + tablesPreview + tipsPreview;
+}
+
+/* Tab: Bảng so sánh */
+function renderTabTbl(tb, l) {
+  if(!l.tables || !l.tables.length) {
+    tb.innerHTML = `<div class="empty">Bài này chưa có bảng so sánh tổng hợp.</div>`;
+    return;
+  }
+  tb.innerHTML = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+}
+
+/* Tab: Thẻ ghi nhớ Flashcards */
+let fcIdx = 0;
+function renderTabFc(tb, l) {
+  if(!l.cards || !l.cards.length) {
+    tb.innerHTML = `<div class="empty">Chưa có thẻ ghi nhớ.</div>`;
+    return;
+  }
+  if(fcIdx >= l.cards.length) fcIdx = 0;
+  const c = l.cards[fcIdx];
+  const cid = l.id + "-" + fcIdx;
+  const isKnown = S.c[cid] === "known";
+
+  tb.innerHTML = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Thẻ <b>${fcIdx + 1}</b> / ${l.cards.length} • Phím tắt: <b>Space</b> (lật), <b>1</b> (quên), <b>2</b> (thuộc), <b>←/→</b> (chuyển)</span>
+    <span class="chip-btn">${isKnown ? "✓ Đã thuộc" : "○ Cần ôn"}</span>
+  </div>
+
+  <div class="fc-stage">
+    <div class="fc" id="fcCard" tabindex="0" role="button" aria-label="Bấm hoặc gõ Space để lật thẻ">
+      <div class="fc-inner">
+        <div class="fc-face front">
+          <div class="fc-tag">Thuật ngữ / Khái niệm</div>
+          <div class="fc-text">${esc(c[0])}</div>
+          <div class="fc-hint">Bấm để xem định nghĩa & cơ chế</div>
+        </div>
+        <div class="fc-face back">
+          <div class="fc-tag">Bản chất Sinh lý & Giải phẫu</div>
+          <div class="fc-text" style="font-size:16px; font-weight:550">${esc(c[1])}</div>
+          <div class="fc-hint">Bấm để lật lại mặt trước</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-controls">
+      <button class="btn ghost" id="fcPrev">← Thẻ trước</button>
+      <button class="btn ${!isKnown ? "primary" : "ghost"}" id="fcAgain">Quên / Cần ôn lại (1)</button>
+      <button class="btn ${isKnown ? "primary" : "ghost"}" id="fcKnow">Đã thuộc (2)</button>
+      <button class="btn ghost" id="fcNext">Thẻ tiếp →</button>
+    </div>
+  </div>`;
+
+  const cardEl = $("#fcCard");
+  cardEl.onclick = () => cardEl.classList.toggle("flip");
+
+  $("#fcPrev").onclick = () => { if(fcIdx > 0) { fcIdx--; renderTabFc(tb, l); } };
+  $("#fcNext").onclick = () => { if(fcIdx < l.cards.length - 1) { fcIdx++; renderTabFc(tb, l); } };
+  $("#fcAgain").onclick = () => {
+    S.c[cid] = "again";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+  $("#fcKnow").onclick = () => {
+    S.c[cid] = "known";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+}
+
+/* Tab: Trắc nghiệm */
+function renderTabQ(tb, l) {
+  if(!l.qs || !l.qs.length) {
+    tb.innerHTML = `<div class="empty">Chưa có câu hỏi trắc nghiệm.</div>`;
+    return;
+  }
+  const m = mastery(l);
+  let html = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Đã làm: <b>${m.done}/${m.total}</b> câu • Đúng: <b>${m.ok}</b> (${m.pct}%)</span>
+    <button class="btn ghost" id="resetQBtn" style="font-size:12.5px; padding:6px 12px">↺ Làm lại bài này</button>
+  </div>`;
+
+  html += l.qs.map((q, idx) => {
+    const qid = l.id + "-" + idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1}.</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  tb.innerHTML = html;
+
+  tb.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const qidx = parseInt(qid.split("-")[1], 10);
+      const q = l.qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    };
+  });
+
+  $("#resetQBtn").onclick = () => {
+    if(confirm("Bạn muốn xóa kết quả trắc nghiệm của bài này để luyện lại từ đầu?")) {
+      l.qs.forEach((_, idx) => { delete S.q[l.id + "-" + idx]; });
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    }
+  };
+}
+
+/* Tab: Mẹo nhớ */
+function renderTabTip(tb, l) {
+  if(!l.tips || !l.tips.length) {
+    tb.innerHTML = `<div class="empty">Chưa có mẹo nhớ.</div>`;
+    return;
+  }
+  tb.innerHTML = `
+  <div class="tips-wrap">
+    ${l.tips.map(tp => `
+      <div class="tip-card">
+        <span class="tip-badge">Pro-tip</span>
+        <div class="tip-body">${tp}</div>
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+/* ---------- Exam Simulation View ---------- */
+function renderExam(m) {
+  let allQ = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      allQ.push({ q, lid: l.id, idx, code: l.code });
+    });
+  });
+
+  if(!S.exam || !S.exam.length) {
+    allQ.sort(() => Math.random() - 0.5);
+    S.exam = allQ.slice(0, 30);
+  }
+
+  let doneCount = 0, okCount = 0;
+  S.exam.forEach(item => {
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid];
+    if(st && st.done) { doneCount++; if(st.ok) okCount++; }
+  });
+
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px">
+    <h2>Phòng Thi thử Trắc nghiệm HĐTK Cấp cao</h2>
+    <p>Đề thi mô phỏng gồm <b>30 câu hỏi ngẫu nhiên</b> từ toàn bộ 6 bài học. Phản hồi kết quả và giải thích chi tiết ngay khi chọn đáp án.</p>
+    <div style="margin-top:14px; font-weight:700">Đã hoàn thành: ${doneCount}/30 câu • Điểm số: ${doneCount ? Math.round(okCount / doneCount * 100) : 0}% (${okCount}/${doneCount})</div>
+  </div>
+  <div class="toolbar">
+    <button class="btn primary" id="newExamBtn">🔄 Tạo đề thi mới ngẫu nhiên</button>
+  </div>`;
+
+  html += S.exam.map((item, exIdx) => {
+    const q = item.q;
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+        <div style="margin-top:4px; font-size:12px; color:var(--muted)">Thuộc: <b>${item.code} – ${esc(BYID[item.lid].title)}</b></div>
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${exIdx + 1} (${item.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderExam(m);
+      renderSide();
+    };
+  });
+
+  $("#newExamBtn").onclick = () => {
+    if(confirm("Tạo đề thi mới ngẫu nhiên 30 câu khác?")) {
+      S.exam = [];
+      renderExam(m);
+    }
+  };
+}
+
+/* ---------- Wrong Questions View ---------- */
+function renderWrong(m) {
+  const wids = wrongIds();
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px; background:#4A1E2E">
+    <h2>Ôn tập các câu đã làm sai</h2>
+    <p>Hiện bạn đang có <b>${wids.length} câu làm sai</b> cần khắc phục. Hãy làm lại cẩn thận để biến điểm yếu thành điểm mạnh trước kỳ thi!</p>
+  </div>`;
+
+  if(!wids.length) {
+    html += `<div class="empty">🎉 Tuyệt vời! Bạn không có câu hỏi nào bị làm sai.</div>`;
+    m.innerHTML = html;
+    bindNavClicks(m);
+    return;
+  }
+
+  html += wids.map((qid, idx) => {
+    const [lid, qidxStr] = qid.split("-");
+    const qidx = parseInt(qidxStr, 10);
+    const l = BYID[lid];
+    const q = l.qs[qidx];
+
+    const optHtml = q[1].map((opt, oidx) => {
+      return `<button class="opt" data-qid="${qid}" data-oidx="${oidx}">
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    return `
+    <div class="qcard">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1} (${l.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      <div class="exp" style="margin-top:10px">
+        <b>Gợi ý đáp án đúng:</b> ${String.fromCharCode(65 + q[2])}. ${esc(q[1][q[2]])}<br>
+        <b>Giải thích:</b> ${esc(q[3])}
+      </div>
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderWrong(m);
+      renderSide();
+    };
+  });
+}
+
+/* ---------- Main Render Entrypoint ---------- */
+function renderMain() {
+  const m = $("#main");
+  if(state.view === "home") renderHome(m);
+  else if(state.view === "exam") renderExam(m);
+  else if(state.view === "wrong") renderWrong(m);
+  else if(BYID[state.view]) renderLesson(m, BYID[state.view]);
+  else renderHome(m);
+}
+
+/* ---------- Search Modal ---------- */
+const searchBtn = $("#searchBtn");
+const searchBtnTop = $("#searchBtnTop");
+if(searchBtn) searchBtn.onclick = openSearch;
+if(searchBtnTop) searchBtnTop.onclick = openSearch;
+
+function openSearch() {
+  const mask = document.createElement("div");
+  mask.className = "modal-mask";
+  mask.innerHTML = `
+  <div class="modal">
+    <div class="modal-head">
+      <input type="text" class="modal-input" id="modalInput" placeholder="Nhập thuật ngữ cần tìm (vd: Pavlov, Amygdala, Synapse, LTP, Giao cảm...)..." autofocus>
+      <button class="btn ghost" id="closeSearch">✕</button>
+    </div>
+    <div class="modal-results" id="modalRes">
+      <div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm thuật ngữ trong toàn bộ 6 bài học.</div>
+    </div>
+  </div>`;
+  document.body.appendChild(mask);
+
+  const input = $("#modalInput");
+  const res = $("#modalRes");
+  $("#closeSearch").onclick = () => mask.remove();
+  mask.onclick = e => { if(e.target === mask) mask.remove(); };
+
+  const run = () => {
+    const q = input.value.trim().toLowerCase();
+    if(q.length < 2) {
+      res.innerHTML = `<div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm...</div>`;
+      return;
+    }
+
+    const matches = [];
+    LESSONS.forEach(l => {
+      l.sections.forEach(s => {
+        s.items.forEach(it => {
+          if(it.toLowerCase().includes(q) || s.h.toLowerCase().includes(q)) {
+            matches.push({ type: "Lý thuyết", title: s.h, desc: it.replace(/<[^>]+>/g, ''), lid: l.id });
+          }
+        });
+      });
+      l.cards.forEach(c => {
+        if(c[0].toLowerCase().includes(q) || c[1].toLowerCase().includes(q)) {
+          matches.push({ type: "Thẻ nhớ", title: c[0], desc: c[1], lid: l.id });
+        }
+      });
+      l.qs.forEach(question => {
+        if(question[0].toLowerCase().includes(q) || question[3].toLowerCase().includes(q)) {
+          matches.push({ type: "Câu trắc nghiệm", title: question[0], desc: "Giải thích: " + question[3], lid: l.id });
+        }
+      });
+    });
+
+    if(!matches.length) {
+      res.innerHTML = `<div class="empty">Không tìm thấy nội dung nào chứa từ khóa "${esc(q)}".</div>`;
+      return;
+    }
+
+    res.innerHTML = matches.slice(0, 30).map(m => `
+      <div class="item" data-go="${m.lid}" data-tab="sum">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px">
+          <span class="w">${esc(m.title)}</span>
+          <span class="chip-btn" style="padding:2px 8px; font-size:11px">${m.type}</span>
+        </div>
+        <div style="font-size:13.5px; line-height:1.45; color:var(--ink)">${esc(m.desc)}</div>
+        <div class="from">Thuộc bài: <b>${BYID[m.lid].code} – ${esc(BYID[m.lid].title)}</b></div>
+      </div>
+    `).join("");
+
+    res.querySelectorAll("[data-go]").forEach(item => {
+      item.onclick = () => {
+        const lid = item.getAttribute("data-go");
+        mask.remove();
+        go(lid, "sum");
+      };
+    });
+  };
+
+  input.oninput = run;
+  run();
+}
+
+/* ---------- Theme toggle & Mobile menu ---------- */
+$("#menuBtn").onclick = () => $("#side").classList.toggle("open");
+$("#themeBtn").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("tlhnc_theme", next); } catch(e){}
+};
+try {
+  const savedTheme = localStorage.getItem("tlhnc_theme");
+  if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+} catch(e){}
+
+// Keyboard shortcuts for flashcard
+window.addEventListener("keydown", (e) => {
+  if(state.tab === "fc") {
+    if(e.code === "Space") {
+      const f = $("#fcCard");
+      if(f) { e.preventDefault(); f.classList.toggle("flip"); }
+    } else if(e.key === "1") {
+      const b = $("#fcAgain"); if(b) b.click();
+    } else if(e.key === "2") {
+      const b = $("#fcKnow"); if(b) b.click();
+    } else if(e.code === "ArrowRight") {
+      const b = $("#fcNext"); if(b) b.click();
+    } else if(e.code === "ArrowLeft") {
+      const b = $("#fcPrev"); if(b) b.click();
+    }
+  }
+});
+
+// Global event delegation for navigation and goals modal
+document.addEventListener("click", (e) => {
+  const goBtn = e.target.closest("[data-go]");
+  if (goBtn) {
+    e.preventDefault();
+    go(goBtn.dataset.go, goBtn.dataset.tab);
+    return;
+  }
+  if (e.target.closest("#goalsBtn")) {
+    e.preventDefault();
+    const modal = $("#goalsModal");
+    if(modal) modal.style.display = "flex";
+    return;
+  }
+  if (e.target.closest("#closeGoalsModal") || e.target.closest("#okGoalsBtn") || e.target === $("#goalsModal")) {
+    const modal = $("#goalsModal");
+    if(modal) modal.style.display = "none";
+    return;
+  }
+});
+
+// Initial boot
+go("home");
+</script>
+
+<!-- ================= STUDY TIME TRACKER & HUB NAVIGATION ================= -->
+<script>
+(function() {
+  const COURSE_ID = 'tlhnc';
+  const TIME_KEY = 'study_time_' + COURSE_ID;
+  const LAST_KEY = 'last_accessed_' + COURSE_ID;
+  
+  let lastActive = Date.now();
+  let accumulatedSeconds = parseInt(localStorage.getItem(TIME_KEY) || '0', 10);
+  
+  // Set last accessed time
+  localStorage.setItem(LAST_KEY, Date.now().toString());
+
+  // Listen to user activity
+  const markActive = () => { lastActive = Date.now(); };
+  ['mousemove', 'keydown', 'scroll', 'touchstart', 'click'].forEach(evt => {
+    window.addEventListener(evt, markActive, { passive: true });
+  });
+
+  // Ticking interval every 1 second
+  setInterval(() => {
+    const isVisible = document.visibilityState === 'visible';
+    const isRecentlyActive = (Date.now() - lastActive) < 180000; // 3 minutes timeout
+    
+    if (isVisible && isRecentlyActive) {
+      accumulatedSeconds += 1;
+      if (accumulatedSeconds % 5 === 0) {
+        localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+        localStorage.setItem(LAST_KEY, Date.now().toString());
+      }
+    }
+  }, 1000);
+
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+    localStorage.setItem(LAST_KEY, Date.now().toString());
+  });
+
+  // Handle URL mode parameter (e.g., ?mode=exam)
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+    if (mode === 'exam') {
+      setTimeout(() => {
+        const btn = document.querySelector('[data-go="exam"]');
+        if (btn) btn.click();
+      }, 350);
+    }
+  });
+})();
+</script>
+<!-- ======================================================================= -->
+
+</body>
+</html>

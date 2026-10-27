@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Giải phẫu và Sinh lý Hoạt động Thần kinh Cấp cao – Góc ôn tập & Tự học tương tác</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F9; --surface:#FFFFFF; --surface2:#EAEEF5; --ink:#1A2340; --muted:#5E6785; --line:#D6DCE8;
+  --myelin:#E9A23B; --myelin-soft:#FBEBD0; --axon:#1E8C86; --axon-soft:#D7EEEC; --rose:#C8366E; --rose-soft:#F7DCE6;
+  --indigo:#3B4A8C; --shadow:0 1px 3px rgba(26,35,64,.08);
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --font:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:20px; height:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100%}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--myelin); outline-offset:2px; border-radius:6px}
+b{font-weight:650}
+.app{display:grid; grid-template-columns:300px 1fr; min-height:100vh}
+
+/* Sidebar */
+.side{background:var(--surface); border-right:1px solid var(--line); padding:22px 16px 28px; position:sticky; top:0; height:100vh; overflow-y:auto; display:flex; flex-direction:column}
+.brand{display:flex; gap:12px; align-items:center; padding:4px 8px 18px; border-bottom:1px solid var(--line); margin-bottom:14px; background:none; border-left:0; border-right:0; border-top:0; width:100%; text-align:left; cursor:pointer}
+.brand-mark{width:42px; height:42px; flex:none; border-radius:12px; background:linear-gradient(135deg,var(--indigo),var(--axon)); display:grid; place-items:center; color:#fff}
+.brand-mark svg{width:24px; height:24px; fill:currentColor}
+.brand h1{font-size:15px; line-height:1.25; margin:0; font-weight:750; color:var(--ink)}
+.brand small{display:block; color:var(--muted); font-size:12px; font-weight:500; margin-top:2px}
+.nav-home{display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border-radius:var(--r-md); border:0; background:none; text-align:left; font-weight:650; font-size:14.5px}
+.nav-home:hover{background:var(--surface2)}
+.nav-home.on{background:var(--ink); color:var(--paper)}
+.part-label{font-size:12px; color:var(--muted); margin:18px 10px 6px; font-weight:700; text-transform:uppercase; letter-spacing:.05em}
+.lesson-btn{display:grid; grid-template-columns:46px 1fr; align-items:center; gap:4px 8px; width:100%; padding:10px 12px; border:0; border-radius:var(--r-md); background:none; text-align:left; margin-bottom:3px}
+.lesson-btn:hover{background:var(--surface2)}
+.lesson-btn.on{background:var(--myelin-soft)}
+.lesson-btn .code{font-weight:800; font-size:13px; color:var(--indigo)}
+.lesson-btn .name{font-size:13.5px; font-weight:600; line-height:1.3}
+.lesson-btn .mini{grid-column:2; height:4px; border-radius:4px; background:var(--surface2); overflow:hidden; margin-top:4px}
+.lesson-btn.on .mini{background:rgba(0,0,0,.15)}
+.mini i{display:block; height:100%; background:var(--axon); border-radius:4px; transition:width .3s}
+.side-foot{margin-top:auto; padding:16px 8px 0; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap}
+.chip-btn{border:1px solid var(--line); background:var(--surface2); border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px}
+.chip-btn:hover{border-color:var(--ink)}
+
+/* Main Container */
+.main{padding:30px clamp(16px,4vw,48px) 64px; max-width:1120px; width:100%}
+.topbar{display:none}
+
+/* Hero & Exam Dashboard */
+.hero{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:stretch; margin-bottom:26px}
+.hero-card{background:var(--ink); color:var(--paper); border-radius:var(--r-lg); padding:26px 28px; position:relative; overflow:hidden; box-shadow:var(--shadow)}
+.hero-card h2{font-size:clamp(22px,3vw,32px); line-height:1.2; margin:0 0 10px; font-weight:800; letter-spacing:-.01em}
+.hero-card p{margin:0; opacity:.85; font-size:14.5px; line-height:1.55}
+.hero-card .lead-q{margin-top:18px; font-size:13.5px; opacity:.92; border-left:3px solid var(--myelin); padding-left:12px; font-style:italic}
+.exam-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px; display:flex; flex-direction:column; gap:14px; box-shadow:var(--shadow)}
+.exam-card h3{margin:0; font-size:16px; font-weight:750}
+.exam-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+.fact{background:var(--surface2); border-radius:var(--r-md); padding:10px 12px}
+.fact strong{display:block; font-size:20px; font-weight:800; line-height:1.1; color:var(--indigo)}
+.fact span{font-size:12px; color:var(--muted); font-weight:550}
+
+.btn{border:0; border-radius:var(--r-md); padding:10px 16px; font-weight:650; font-size:14px; background:var(--surface2); color:var(--ink); transition:all .2s; display:inline-flex; align-items:center; justify-content:center; gap:6px}
+.btn:hover{filter:brightness(.95)}
+.btn.primary{background:var(--myelin); color:#1A2340; font-weight:750}
+.btn.dark{background:var(--ink); color:var(--paper)}
+.btn.ghost{background:none; border:1px solid var(--line)}
+.btn:disabled{opacity:.45; cursor:not-allowed}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+/* Axon Map */
+.map{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px 18px; margin-bottom:26px; box-shadow:var(--shadow)}
+.map-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.map-head h3{margin:0; font-size:16px; font-weight:750}
+.map-head p{margin:0; color:var(--muted); font-size:13px}
+.axon-wrap{overflow-x:auto; padding-bottom:6px}
+.axon{display:flex; align-items:center; min-width:600px; padding:8px 4px}
+.soma{width:44px; height:44px; border-radius:50%; background:var(--indigo); flex:none; position:relative; box-shadow:0 0 0 6px var(--surface2)}
+.soma::after{content:""; position:absolute; inset:14px; border-radius:50%; background:var(--surface)}
+.seg{flex:1; height:32px; margin:0 4px; border-radius:16px; background:var(--surface2); position:relative; overflow:hidden; border:0; padding:0; min-width:70px; cursor:pointer}
+.seg .fill{position:absolute; inset:0 auto 0 0; background:var(--myelin); border-radius:16px; transition:width .4s ease}
+.seg .lbl{position:relative; font-size:12.5px; font-weight:800; color:var(--ink); line-height:32px; display:block; text-align:center}
+.seg:hover{outline:2px solid var(--ink); outline-offset:1px}
+.terminal{width:26px; height:26px; flex:none; border-radius:50%; border:5px solid var(--axon); margin-left:4px}
+
+/* Grid Lessons Cards */
+.grid-lessons{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px}
+.lcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px; text-align:left; display:flex; flex-direction:column; gap:8px; min-height:140px; cursor:pointer; transition:border-color .2s}
+.lcard:hover{border-color:var(--ink); transform:translateY(-2px); box-shadow:var(--shadow)}
+.lcard .code{font-weight:800; color:var(--indigo); font-size:13px}
+.lcard .t{font-weight:700; font-size:15px; line-height:1.35; margin:2px 0}
+.lcard .meta{font-size:12px; color:var(--muted); margin-top:auto; display:flex; justify-content:space-between}
+.bar{height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-top:4px}
+.bar i{display:block; height:100%; background:var(--axon); transition:width .3s}
+
+/* Lesson Detail View */
+.lhead{display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; margin-bottom:8px}
+.lhead .bigcode{font-size:clamp(44px,6vw,68px); font-weight:850; line-height:.9; color:var(--myelin); letter-spacing:-.03em}
+.lhead .part{color:var(--muted); font-size:13px; font-weight:600}
+.lhead h2{margin:2px 0 0; font-size:clamp(22px,3vw,30px); line-height:1.2; font-weight:800}
+.goals{background:var(--axon-soft); border-radius:var(--r-md); padding:14px 18px; margin:16px 0; border-left:4px solid var(--axon)}
+.goals h4{margin:0 0 6px; font-size:13.5px; font-weight:750}
+.goals ul{margin:0; padding-left:18px; font-size:14px}
+.goals li{margin:3px 0}
+
+/* Mindmap Tree Wrapper & SVG */
+.mm-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); margin:18px 0 24px; overflow:hidden; box-shadow:var(--shadow)}
+.mm-head{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap; background:var(--surface2)}
+.mm-head h4{margin:0; font-size:14.5px; font-weight:750}
+.mm-scroll{overflow-x:auto; padding:14px 16px; -webkit-overflow-scrolling:touch}
+.tree{padding:12px 6px; border-bottom:1px dashed var(--line)}
+.tree:last-child{border-bottom:0}
+.mm-scroll svg{display:block; height:auto}
+
+/* Tabs */
+.tabs{display:flex; gap:6px; margin:20px 0 22px; border-bottom:1px solid var(--line); overflow-x:auto}
+.tab{border:0; background:none; padding:10px 16px 12px; font-weight:650; font-size:15px; color:var(--muted); border-bottom:3px solid transparent; margin-bottom:-1px; white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink); border-bottom-color:var(--myelin)}
+.tab .count{font-size:11.5px; background:var(--surface2); border-radius:999px; padding:1px 8px; margin-left:6px; color:var(--muted)}
+
+/* Toolbar */
+.toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:14px 0}
+.muted{color:var(--muted)}
+
+/* Content Blocks (Details / Accordion) */
+.block{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); margin-bottom:12px; overflow:hidden}
+.block summary{list-style:none; cursor:pointer; padding:14px 18px; font-weight:700; font-size:15.5px; display:flex; justify-content:space-between; align-items:center; gap:10px}
+.block summary::-webkit-details-marker{display:none}
+.block summary::after{content:"+"; font-size:22px; font-weight:400; color:var(--muted); line-height:1}
+.block[open] summary::after{content:"–"}
+.block ul{margin:0; padding:0 22px 16px 36px}
+.block li{margin:7px 0; max-width:82ch; font-size:14.5px}
+.block li b{color:var(--indigo)}
+
+/* Tables */
+.tblwrap{overflow-x:auto; margin:18px 0; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface)}
+.tblwrap h4{margin:0; padding:12px 16px; font-size:14.5px; font-weight:750; border-bottom:1px solid var(--line); background:var(--surface2)}
+table.data{width:100%; border-collapse:collapse; font-size:14px; text-align:left}
+table.data th, table.data td{padding:10px 16px; border-bottom:1px solid var(--line); vertical-align:top}
+table.data th{background:var(--surface2); font-weight:700; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.03em}
+table.data tr:last-child td{border-bottom:0}
+
+/* Pro Tips */
+.tips-wrap{display:grid; gap:12px; margin:18px 0}
+.tip-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 18px; display:flex; gap:14px; align-items:flex-start}
+.tip-badge{flex:none; background:var(--myelin-soft); color:#8B5A10; font-weight:800; font-size:12px; border-radius:6px; padding:3px 8px; text-transform:uppercase}
+.tip-body{font-size:14.5px; line-height:1.55}
+
+/* Flashcard Component */
+.fc-stage{display:flex; flex-direction:column; align-items:center; gap:16px; margin:20px 0}
+.fc{perspective:1000px; width:100%; max-width:560px; height:280px; cursor:pointer}
+.fc-inner{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .4s ease; border-radius:var(--r-lg); box-shadow:var(--shadow)}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--r-lg); border:1px solid var(--line); background:var(--surface); padding:26px 28px; display:flex; flex-direction:column; justify-content:space-between}
+.fc-face.back{transform:rotateY(180deg); background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.fc-tag{font-size:12px; font-weight:750; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+.fc-face.back .fc-tag{color:var(--myelin)}
+.fc-text{font-size:clamp(16px,2.2vw,20px); font-weight:700; line-height:1.45; margin:auto 0}
+.fc-hint{font-size:12.5px; color:var(--muted)}
+.fc-face.back .fc-hint{color:rgba(255,255,255,.65)}
+.fc-controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+/* Quiz Question Cards */
+.qcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; margin-bottom:14px}
+.qcard.answered{border-color:var(--line)}
+.qcard .qtxt{font-weight:700; font-size:15px; margin-bottom:12px; line-height:1.45}
+.qnum{display:inline-block; font-size:12px; font-weight:800; color:var(--indigo); margin-right:6px}
+.opts{display:grid; gap:8px}
+.opt{border:1px solid var(--line); background:var(--surface2); border-radius:var(--r-sm); padding:10px 14px; text-align:left; font-size:14px; display:flex; gap:10px; align-items:center; transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.correct{background:var(--axon-soft); border-color:var(--axon); color:#0B4A45; font-weight:650}
+.opt.wrong{background:var(--rose-soft); border-color:var(--rose); color:#6E163B; font-weight:650}
+.exp{margin-top:12px; padding:10px 14px; border-radius:var(--r-sm); background:var(--surface2); font-size:13.5px; line-height:1.5; border-left:3px solid var(--indigo)}
+
+/* Search Modal */
+.modal-mask{position:fixed; inset:0; background:rgba(17,22,42,.6); backdrop-filter:blur(4px); display:grid; place-items:center; z-index:999; padding:16px}
+.modal{background:var(--surface); border-radius:var(--r-lg); width:100%; max-width:640px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--line); box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.modal-head{display:flex; gap:10px; padding:16px; border-bottom:1px solid var(--line)}
+.modal-input{flex:1; border:1px solid var(--line); border-radius:var(--r-md); padding:10px 14px; font:inherit; background:var(--surface2); color:var(--ink)}
+.modal-input:focus{outline:2px solid var(--myelin); background:var(--surface)}
+.modal-results{overflow-y:auto; padding:12px; display:grid; gap:8px}
+.modal-results .item{padding:10px 14px; border-radius:var(--r-md); border:1px solid var(--line); cursor:pointer; background:var(--surface)}
+.modal-results .item:hover{border-color:var(--ink); background:var(--surface2)}
+.modal-results .w{font-weight:750; color:var(--indigo); font-size:14px}
+.modal-results .from{font-size:12px; color:var(--muted); margin-top:2px}
+.empty{padding:30px; text-align:center; color:var(--muted); font-size:14px}
+
+/* Mobile Topbar */
+@media (max-width:880px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed; inset:0 auto 0 0; width:290px; transform:translateX(-100%); transition:transform .3s ease; z-index:100; box-shadow:4px 0 16px rgba(0,0,0,.15)}
+  .side.open{transform:translateX(0)}
+  .topbar{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--surface); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:90}
+  .hero{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="btn ghost" id="menuBtn">☰ Mục lục</button>
+  <span style="font-weight:750; font-size:14.5px">HĐTK Cấp cao</span>
+  <button class="btn ghost" id="searchBtnTop">🔍</button>
+</div>
+
+<div class="app">
+  <aside class="side" id="side">
+    <button class="brand" data-go="home">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 0 0-9 9c0 3.6 2.1 6.7 5.2 8.1v1.9c0 .6.4 1 1 1h5.6c.6 0 1-.4 1-1v-1.9c3.1-1.4 5.2-4.5 5.2-8.1a9 9 0 0 0-9-9zm-1 18h-2v-1h2v1zm4 0h-2v-1h2v1zm1.2-2.8l-.2.1v.7h-8v-.7l-.2-.1C5.1 16.6 3.5 13.9 3.5 11 3.5 6.3 7.3 2.5 12 2.5s8.5 3.8 8.5 8.5c0 2.9-1.6 5.6-4.3 6.2z"/></svg>
+      </div>
+      <div>
+        <h1>HĐTK Cấp cao</h1>
+        <small>Khoa Tâm lý học • ĐH KHXH&NV</small>
+      </div>
+    </button>
+        <a href="./index.html" class="nav-dashboard" style="display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:var(--r-md); background:var(--surface2); color:var(--ink); font-weight:700; font-size:13px; text-decoration:none; margin-bottom:8px; border:1px solid var(--line); transition:all .15s ease;">
+      <span style="font-size:16px;">🏛️</span>
+      <span>Cổng Dashboard</span>
+      <span style="margin-left:auto; font-size:10.5px; padding:2px 6px; border-radius:4px; background:var(--axon); color:#fff; font-weight:800;">HUB</span>
+    </a>
+    <button class="nav-home" data-go="home">🏠 Tổng quan môn học</button>
+    <div id="sideLessons"></div>
+    <div class="side-foot">
+      <button class="chip-btn" id="searchBtn">🔍 Tra cứu nhanh</button>
+      <button class="chip-btn" id="themeBtn">🌓 Giao diện</button>
+    </div>
+  </aside>
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<script>
+const LESSONS = [{"id": "tk1", "part": "Phần I: Cơ sở Giải phẫu & Sinh lý Tế bào", "code": "TK.1", "title": "Đại cương & Mối quan hệ Giải phẫu – Sinh lý – Hành vi", "goals": ["Hiểu bản chất Giải phẫu học, Sinh lý học và phân biệt với Phẫu tích, Phẫu thuật.", "Phân biệt Hoạt động thần kinh cấp thấp (dưới vỏ) và Hoạt động thần kinh cấp cao (vỏ não).", "Nắm vững nấc thang tiến hóa của hệ thần kinh từ phản ứng sinh học đến phản ánh tâm lý.", "Trình bày mối liên hệ tương hỗ 2 chiều giữa Cấu trúc giải phẫu, Cơ chế sinh lý và Hành vi."], "sections": [{"h": "Giải phẫu học vs. Sinh lý học & Phân biệt thuật ngữ Y khoa", "items": ["<b>Giải phẫu học (Anatomy):</b> Môn khoa học nghiên cứu hình thái, cấu trúc và mối quan hệ không gian vị trí giữa các cơ quan, mô và tế bào của cơ thể sinh vật.", "<b>Sinh lý học (Physiology):</b> Môn khoa học nghiên cứu chức năng, cơ chế vận hành hóa - lý, quá trình trao đổi chất và điều hòa cân bằng nội môi của các cơ quan giải phẫu.", "<b>Phân biệt chuẩn xác 3 thuật ngữ y khoa:</b>", "• <i>Giải phẫu:</i> Môn học/khoa học nghiên cứu cấu trúc cơ thể sống.", "• <i>Phẫu tích (Dissection):</i> Kỹ thuật xẻ, cắt, bóc tách mô trên tử thi hoặc tiêu bản để khảo sát hình thái giải phẫu.", "• <i>Phẫu thuật (Surgery):</i> Thủ thuật ngoại khoa dùng dao kéo/dụng cụ can thiệp trực tiếp lên cơ thể người bệnh nhằm điều trị bệnh tật hoặc sửa chữa tổn thương."]}, {"h": "Hoạt động Thần kinh Cấp thấp vs. Cấp cao (HĐTKCC)", "items": ["<b>Hoạt động thần kinh cấp thấp:</b> Do tủy sống, thân não và các hạch dưới vỏ đảm nhiệm; điều hòa các hoạt động nội tạng vô thức và duy trì các hằng định sinh tồn (nhịp tim, huyết áp, hô hấp, trương lực cơ cơ bản).", "<b>Hoạt động thần kinh cấp cao (HĐTKCC):</b> Là hoạt động chức năng tích hợp tinh vi nhất của não bộ, <b>tập trung chủ yếu ở vỏ bán cầu đại não</b>.", "<b>Bản chất tâm lý học:</b> Hoạt động thần kinh cấp cao chính là <b>cơ sở sinh lý học của các hiện tượng tâm lý người</b> (nhận thức, cảm xúc, tư duy, ngôn ngữ, ý thức, hành vi xã hội).", "<b>Lịch sử thuật ngữ:</b> Do nhà sinh lý học người Nga <b>Ivan Petrovich Pavlov</b> đưa ra (năm 1909) nhằm đưa các hiện tượng tâm trí trừu tượng vào nghiên cứu thực nghiệm khách quan bằng phương pháp phản xạ."]}, {"h": "Cơ sở Tiến hóa: Từ Nhận kích thích đến Phản ánh Tâm lý", "items": ["<b>Tính nhận kích thích (Irritability):</b> Phản ứng đáp trả các tác nhân ảnh hưởng <i>trực tiếp</i> đến sự sống (có ở sinh vật đơn bào, thực vật).", "<b>Tính cảm ứng (Sensibility):</b> Phản ứng đáp trả các kích thích <i>gián tiếp</i> báo hiệu mồi hoặc nguy hiểm (vd: con nhện nhận biết rung động tơ nhện báo hiệu con mồi). Đây là <b>mầm mống đầu tiên của sự phản ánh tâm lý</b>.", "<b>Ba nấc thang tiến hóa giải phẫu hệ thần kinh:</b>", "• <i>Thần kinh dạng lưới (Ruột khoang - sứa, hải quỳ):</i> Toàn thân co rút đồng loạt, chưa chuyên hóa.", "• <i>Thần kinh chuỗi hạch (Giun dẹp, giun đất, côn trùng):</i> Có hạch não và chuỗi hạch bụng, thực hiện phản xạ tại chỗ nhanh.", "• <i>Thần kinh dạng ống (Động vật có xương sống & người):</i> Tủy sống và Não bộ phát triển tột bậc với bán cầu đại não nhiều nếp nhăn, vỏ não dày đặc liên kết nơ-ron.", "<b>Chuỗi tiến hóa tâm lý:</b> Cảm giác (đi theo mùi, ánh sáng) → Tri giác (nhận diện con mồi/hình thể) → Tư duy (dùng công cụ, ngôn ngữ trừu tượng)."]}, {"h": "Mối quan hệ Tam giác: Giải phẫu – Sinh lý – Hành vi", "items": ["<b>Giải phẫu là 'Phần cứng' (Hardware):</b> Cung cấp nền tảng vật chất và cấu trúc mạng lưới (các thùy não, nhân xám, đường dẫn truyền thần kinh, thụ thể).", "<b>Sinh lý là 'Phần mềm / Tín hiệu' (Software & Signaling):</b> Vận hành các xung điện thế hoạt động, giải phóng chất dẫn truyền thần kinh, biến thiên hưng phấn và ức chế.", "<b>Hành vi là 'Đầu ra tương tác' (Behavioral Output):</b> Mọi hành vi cử động, lời nói, quyết định, cảm xúc đều bắt nguồn từ sự tích hợp giải phẫu - sinh lý thần kinh.", "<b>Tác động hai chiều (Bi-directional feedback):</b> Không chỉ giải phẫu sinh lý quy định hành vi, mà <b>hành vi, lối sống và trải nghiệm tâm lý liên tục tác động ngược trở lại</b> làm tái cấu trúc giải phẫu và biến đổi sinh lý não bộ (cơ chế tính mềm dẻo thần kinh)."]}, {"h": "Ba chức năng tích hợp cơ bản của Hệ thần kinh", "items": ["<b>1. Cảm giác hướng tâm (Sensory Input - Afferent):</b> Tiếp nhận thông tin từ thụ thể ngoại vi (giác quan, cơ quan nội tạng) truyền về TKTW.", "<b>2. Tích hợp trung ương (Integration tại CNS):</b> Não bộ và tủy sống đối chiếu, phân tích, lưu trữ và ra quyết định xử lý thông tin.", "<b>3. Vận động / Đáp ứng ly tâm (Motor Output - Efferent):</b> Dẫn truyền mệnh lệnh từ não/tủy ra cơ xương (hệ vận động có ý thức SNS) hoặc cơ tim, cơ trơn, tuyến nội tiết (hệ tự chủ ANS)."]}], "tables": [{"title": "So sánh Hoạt động Thần kinh Cấp thấp vs. Hoạt động Thần kinh Cấp cao", "head": ["Tiêu chí đối sánh", "Hoạt động Thần kinh Cấp thấp", "Hoạt động Thần kinh Cấp cao (HĐTKCC)"], "rows": [["Vị trí giải phẫu chỉ huy", "Các cấu trúc dưới vỏ: Tủy sống, thân não, tiểu não, các hạch đáy", "Vỏ bán cầu đại não (Cerebral Cortex) và các vùng liên hợp"], ["Bản chất sinh học", "Phản xạ không điều kiện bẩm sinh, mang tính loài cố định", "Phản xạ có điều kiện tập nhiễm, hình thành trong đời sống cá thể"], ["Chức năng chính", "Duy trì sinh tồn nội môi: tuần hoàn, hô hấp, tiêu hóa, trương lực cơ", "Điều hòa nhận thức, ngôn ngữ, tư duy, cảm xúc, hành vi xã hội"], ["Mối liên hệ tâm lý", "Chưa mang bản chất tâm lý ý thức", "Là cơ sở vật chất sinh lý học của toàn bộ đời sống tâm lý người"], ["Ý nghĩa thích nghi", "Thích nghi cứng nhắc với điều kiện môi trường ổn định", "Thích nghi mềm dẻo, linh hoạt và chủ động làm chủ môi trường"]]}, {"title": "Phân biệt Giải phẫu, Phẫu tích và Phẫu thuật", "head": ["Thuật ngữ", "Bản chất khái niệm", "Đối tượng thực hiện", "Mục đích"], "rows": [["Giải phẫu (Anatomy)", "Khoa học về hình thái và cấu trúc cơ thể", "Sinh viên y, nhà khoa học, bác sĩ", "Hiểu biết cấu tạo cơ thể người"], ["Phẫu tích (Dissection)", "Kỹ thuật xẻ, bóc tách mô quan sát", "Xác hiến, mô hình, động vật thí nghiệm", "Học tập giải phẫu và nghiên cứu mô học"], ["Phẫu thuật (Surgery)", "Thủ thuật ngoại khoa can thiệp y khoa", "Người bệnh đang sống trong phòng mổ", "Điều trị bệnh tật, chỉnh sửa thương tổn"]]}], "tips": ["Khắc cốt ghi tâm: <b>Giải phẫu</b> là môn học, <b>Phẫu tích</b> là mổ xác để học, <b>Phẫu thuật</b> là mổ người sống để chữa bệnh.", "Cảm ứng (Sensibility) xuất hiện khi sinh vật đáp ứng với <b>kích thích gián tiếp</b> — đây là mầm mống khởi thủy của phản ánh tâm lý.", "Pavlov dùng thuật ngữ 'HĐTK cấp cao' để <b>khách quan hóa</b> hiện tượng tâm lý, chứng minh tâm lý có cơ sở vật chất sinh lý đo lường được.", "Não bộ không phải cỗ máy một chiều: Hành vi và trải nghiệm suy nghĩ của bạn hôm nay trực tiếp 'tái lập trình' mạng nơ-ron cho ngày mai."], "cards": [["Giải phẫu học (Anatomy)", "Khoa học nghiên cứu hình thái, cấu trúc và vị trí các cơ quan trong cơ thể sinh vật."], ["Sinh lý học (Physiology)", "Khoa học nghiên cứu chức năng, cơ chế vận hành hóa - lý và sự cân bằng nội môi của cơ thể."], ["Phẫu tích (Dissection)", "Kỹ thuật mổ xẻ, bóc tách mô trên tử thi hoặc tiêu bản phục vụ nghiên cứu và giảng dạy giải phẫu."], ["Phẫu thuật (Surgery)", "Thủ thuật ngoại khoa can thiệp dao kéo trên người bệnh nhằm điều trị tổn thương hoặc bệnh lý."], ["Hoạt động thần kinh cấp thấp", "Hoạt động do tủy sống và thân não điều khiển, duy trì các chức năng sinh tồn vô thức."], ["Hoạt động thần kinh cấp cao", "Hoạt động tích hợp của vỏ não, là cơ sở sinh lý của các quá trình tâm lý, nhận thức và ý thức."], ["Tính nhận kích thích (Irritability)", "Khả năng đáp ứng lại các kích thích ảnh hưởng trực tiếp đến sự sống (ở đơn bào, thực vật)."], ["Tính cảm ứng (Sensibility)", "Khả năng đáp ứng kích thích gián tiếp báo hiệu mồi/nguy hiểm; là mầm mống của phản ánh tâm lý."], ["Thần kinh dạng lưới", "Hệ thần kinh sơ khai ở ruột khoang (sứa, thủy tức), khi bị kích thích thì toàn bộ cơ thể co rút."], ["Thần kinh chuỗi hạch", "Hệ thần kinh ở giun, côn trùng gồm các hạch liên kết dọc cơ thể, giúp phản xạ định khu nhanh."], ["Thần kinh dạng ống", "Hệ thần kinh ở động vật có xương sống gồm TKTW (não, tủy sống) phát triển cao độ."], ["Đường hướng tâm (Afferent)", "Đường dẫn truyền xung thần kinh cảm giác từ cơ quan thụ cảm ngoại vi về hệ TKTW."], ["Đường ly tâm (Efferent)", "Đường dẫn truyền xung thần kinh vận động từ hệ TKTW ra các cơ quan đáp ứng (cơ, tuyến)."]], "qs": [["Thuật ngữ 'Hoạt động thần kinh cấp cao' lần đầu tiên được nhà khoa học nào đưa vào sinh lý học thực nghiệm?", ["René Descartes", "Ivan Petrovich Pavlov", "Sigmund Freud", "Wilhelm Wundt"], 1, "Ivan Petrovich Pavlov giới thiệu thuật ngữ này năm 1909 để nghiên cứu cơ sở sinh lý của hiện tượng tâm lý."], ["Phát biểu nào sau đây phân biệt đúng nhất giữa Phẫu tích và Phẫu thuật?", ["Phẫu tích thực hiện trên người bệnh sống, phẫu thuật thực hiện trên xác", "Phẫu tích là kỹ thuật xẻ mô trên xác để học tập; phẫu thuật là can thiệp ngoại khoa điều trị người bệnh", "Cả hai từ này hoàn toàn đồng nghĩa và dùng thay thế cho nhau trong y khoa", "Phẫu tích do bác sĩ mổ, phẫu thuật do sinh viên thực hiện"], 1, "Phẫu tích (Dissection) là thao tác học thuật trên xác; Phẫu thuật (Surgery) là can thiệp chữa bệnh trên người sống."], ["Hiện tượng tâm lý đầu tiên (mầm mống tâm lý) xuất hiện gắn liền với đặc tính sinh học nào?", ["Tính nhận kích thích đối với tác nhân trực tiếp", "Tính cảm ứng đối với các kích thích gián tiếp báo hiệu môi trường", "Sự xuất hiện của tiếng nói và chữ viết", "Sự hình thành tư duy trừu tượng"], 1, "Tính cảm ứng (khả năng phản ứng với kích thích gián tiếp mang ý nghĩa báo hiệu) là mầm mống sơ khai của tâm lý."], ["Cấu trúc giải phẫu nào giữ vai trò trung tâm điều khiển Hoạt động Thần kinh Cấp cao ở người?", ["Tủy sống", "Tiểu não", "Vỏ bán cầu đại não", "Hành não"], 2, "Vỏ bán cầu đại não là tầng cao nhất, tích hợp mọi chức năng nhận thức, ngôn ngữ và tâm lý cấp cao."], ["Hệ thần kinh dạng lưới là đặc trưng tiến hóa của nhóm sinh vật nào sau đây?", ["Giun đất và côn trùng", "Cá và lưỡng cư", "Ruột khoang (sứa, thủy tức, hải quỳ)", "Thú có túi"], 2, "Ruột khoang có hệ thần kinh dạng lưới; kích thích một điểm lan tỏa làm co rút toàn thân."], ["Mối quan hệ giữa Cấu trúc giải phẫu, Cơ chế sinh lý và Hành vi là:", ["Mối quan hệ một chiều: giải phẫu sinh ra hành vi và hành vi không thể thay đổi não", "Mối quan hệ tương hỗ hai chiều: giải phẫu sinh lý tạo ra hành vi, hành vi và trải nghiệm tác động tái cấu trúc não", "Hoàn toàn độc lập, hành vi tâm lý không liên quan đến cấu trúc thần kinh", "Chỉ có yếu tố di truyền quyết định giải phẫu, hành vi không có vai trò gì"], 1, "Đây là mối quan hệ tương hỗ hai chiều; tính mềm dẻo thần kinh cho phép hành vi định hình lại cấu trúc não."], ["Ba chức năng cơ bản của hệ thần kinh theo chu trình phản xạ lần lượt là:", ["Tích hợp → Cảm giác → Vận động", "Vận động → Tích hợp → Cảm giác", "Cảm giác hướng tâm → Tích hợp trung ương → Đáp ứng ly tâm", "Ức chế → Hưng phấn → Vận động"], 2, "Chu trình tích hợp thần kinh kinh điển: Đầu vào cảm giác (Afferent) → Xử lý tích hợp (CNS) → Đầu ra vận động (Efferent)."], ["Tổ chức dưới vỏ nào sau đây phụ trách điều hòa các hoạt động sinh tồn cấp thấp như nhịp thở, huyết áp?", ["Hành não (thuộc thân não)", "Vỏ não thùy trán", "Hồi hải mã", "Thể chai"], 0, "Hành não chứa trung tâm sinh tồn điều hòa tuần hoàn và hô hấp (hoạt động thần kinh cấp thấp)."]], "trees": [["Đại cương HĐTKCC", "Cơ sở sinh lý tâm lý", "gồm", [["Giải phẫu & Sinh lý", "Cấu trúc và Chức năng", "phân biệt", [["Giải phẫu", "hình thái, vị trí, cơ quan", "", []], ["Sinh lý", "vận hành, cơ chế, nội môi", "", []], ["Phẫu tích vs Phẫu thuật", "mổ xác nghiên cứu vs mổ người chữa bệnh", "", []]]], ["Phân tầng Hoạt động", "Cấp thấp vs Cấp cao", "đối chiếu", [["HĐTK Cấp thấp", "tủy, thân não; duy trì sinh tồn nội tạng vô thức", "", []], ["HĐTK Cấp cao", "vỏ đại não; cơ sở sinh lý của hiện tượng tâm lý", "", []]]], ["Tiến hóa Thần kinh", "Nấc thang phát triển", "từ thấp lên cao", [["Nhận kích thích", "đáp ứng trực tiếp (đơn bào, thực vật)", "", []], ["Cảm ứng (Sensibility)", "đáp ứng gián tiếp (mầm mống tâm lý)", "", []], ["3 Dạng tổ chức", "lưới (sứa) → chuỗi hạch (giun) → dạng ống có não (người)", "", []]]], ["Tam giác Tương tác", "Mối liên hệ 2 chiều", "gồm", [["Giải phẫu (Hardware)", "nền tảng cấu trúc, nơ-ron, thùy não", "", []], ["Sinh lý (Software)", "xung điện, synap, hưng phấn, ức chế", "", []], ["Hành vi (Output)", "đầu ra tương tác; tác động ngược tái cấu trúc não", "", []]]]]]]}, {"id": "tk2", "part": "Phần I: Cơ sở Giải phẫu & Sinh lý Tế bào", "code": "TK.2", "title": "Tế bào Thần kinh, Dẫn truyền Synapse & Tính mềm dẻo Não bộ", "goals": ["Mô tả cấu trúc nơ-ron (thân, sợi nhánh, sợi trục, myelin) và 4 loại tế bào thần kinh đệm.", "Giải thích cơ chế điện thế nghỉ (-70mV) và điện thế hoạt động (+30mV) qua kênh ion.", "Trình bày cấu tạo và cơ chế dẫn truyền qua khớp synap hóa học, các chất dẫn truyền chính.", "Giải thích cơ chế Tính mềm dẻo thần kinh (Neuroplasticity) và sự tác động ngược của tâm lý lên não."], "sections": [{"h": "Cấu tạo Neuron & Các loại Tế bào Thần kinh Đệm (Glia)", "items": ["<b>Neuron (Tế bào thần kinh):</b> Đơn vị cấu trúc và chức năng cơ bản của hệ thần kinh, gồm 3 phần chính:", "• <i>Thân neuron (Soma):</i> Chứa nhân tế bào, ty thể, thể Nissl (tổng hợp protein); trung tâm chuyển hóa của nơ-ron.", "• <i>Sợi nhánh (Dendrites):</i> Tiếp nhận tín hiệu từ các nơ-ron khác và truyền về thân.", "• <i>Sợi trục (Axon):</i> Dẫn truyền xung điện từ gò sợi trục (Axon hillock) đi xa tới cúc tận cùng; được bọc bao Myelin cách điện ngắt quãng bởi các <b>eo Ranvier</b>.", "<b>Tế bào thần kinh đệm (Neuroglia):</b> Chiếm số lượng gấp 5-10 lần nơ-ron, gồm 4 loại quan trọng:", "• <i>Tế bào sao (Astrocytes):</i> Tạo **Hàng rào máu - não (Blood-Brain Barrier - BBB)** bảo vệ não khỏi độc chất; nuôi dưỡng nơ-ron và tái hấp thu chất dẫn truyền.", "• <i>Tế bào ít nhánh (Oligodendrocytes):</i> Tạo bao Myelin bao bọc sợi trục ở <b>Hệ Thần kinh Trung ương</b>.", "• <i>Tế bào Schwann:</i> Tạo bao Myelin bao bọc sợi trục ở <b>Hệ Thần kinh Ngoại biên</b>.", "• <i>Vi tế bào đệm (Microglia):</i> Đóng vai trò đại thực bào miễn dịch, dọn dẹp tế bào chết và kháng viêm trong não."]}, {"h": "Điện thế Màng & Cơ chế Điện thế Hoạt động", "items": ["<b>Điện thế nghỉ (Resting Membrane Potential ≈ -70 mV):</b> Mặt trong màng tế bào tích điện âm so với mặt ngoài. Cơ chế duy trì: Kênh rò $K^+$ mở (cho $K^+$ khuếch tán ra ngoài) và hoạt động của <b>bơm $Na^+-K^+$-ATPase</b> (chủ động bơm $3 Na^+$ ra ngoài và đưa $2 K^+$ vào trong).", "<b>Điện thế hoạt động (Action Potential ≈ +30 mV):</b> Khi kích thích đạt ngưỡng (Threshold ≈ -55 mV):", "• <i>1. Pha Khử cực (Depolarization):</i> Kênh $Na^+$ phụ thuộc điện thế mở toang, dòng $Na^+$ ồ ạt tràn vào làm điện thế vọt từ -70mV lên +30mV.", "• <i>2. Pha Tái cực (Repolarization):</i> Kênh $Na^+$ đóng lại, kênh $K^+$ mở ra, $K^+$ ùa ra ngoài đưa điện thế trở về mức âm.", "• <i>3. Pha Quá phân cực (Hyperpolarization):</i> Kênh $K^+$ đóng chậm, màng tạm thời âm hơn -70mV trước khi bơm $Na^+-K^+$ lập lại cân bằng.", "<b>Dẫn truyền nhảy vọt (Saltatory Conduction):</b> Trên sợi có bao Myelin, xung điện nhảy cóc qua các eo Ranvier với tốc độ cực nhanh (lên đến 120 m/s), tiết kiệm năng lượng tối đa."]}, {"h": "Cơ chế Dẫn truyền qua Khớp Synapse Hóa học", "items": ["<b>Cấu tạo Synapse:</b> Gồm Cúc tận cùng màng trước (chứa túi bọc chất dẫn truyền), Khe synap (rộng 20-30 nm), và Màng sau synap (chứa thụ thể đặc hiệu Receptor).", "<b>Trình tự 4 bước dẫn truyền:</b>", "1. Xung điện thế hoạt động lan truyền đến cúc tận cùng màng trước.", "2. Khử cực kích hoạt mở kênh $Ca^{2+}$ phụ thuộc điện thế; $Ca^{2+}$ ùa vào tế bào.", "3. $Ca^{2+}$ thúc đẩy các túi bọc hòa màng, giải phóng chất dẫn truyền qua khe synap bằng cơ chế xuất bào.", "4. Hóa chất gắn vào thụ thể màng sau: Mở kênh $Na^+$ gây <b>Hưng phấn (EPSP)</b>, hoặc mở kênh $Cl^-$/$K^+$ gây <b>Ức chế (IPSP)</b>.", "<b>Số phận chất dẫn truyền sau tiết:</b> Bị phân hủy bởi enzyme (vd: Acetylcholinesterase) hoặc được màng trước tái hấp thu (Reuptake) qua protein vận chuyển."]}, {"h": "Các Chất Dẫn truyền Thần kinh & Hành vi Tâm lý", "items": ["<b>Dopamine:</b> Hệ thống phần thưởng, động lực, khoái cảm, tập trung chú ý và điều hòa vận động. Thiếu hụt ở vùng liềm đen gây bệnh <i>Parkinson</i>; thừa ở đường viền gây hoang tưởng trong <i>Tâm thần phân liệt</i>.", "<b>Serotonin (5-HT):</b> Điều hòa cảm xúc, giấc ngủ, sự ngon miệng. Suy giảm nghiêm trọng trong chứng trầm cảm và rối loạn lo âu (thuốc chống trầm cảm SSRI ức chế tái hấp thu Serotonin).", "<b>GABA:</b> Chất dẫn truyền <b>ức chế chính</b> của não bộ; giúp làm dịu thần kinh, giảm lo âu, an thần ngủ ngon (thuốc ngủ, rượu bia tác động lên thụ thể GABA).", "<b>Glutamate:</b> Chất dẫn truyền <b>hưng phấn chính</b>; giữ vai trò quyết định trong học tập và hình thành trí nhớ thông qua củng cố synap dài hạn (LTP). Dư thừa gây độc thần kinh (Excitotoxicity).", "<b>Acetylcholine (ACh):</b> Kích thích co cơ ở khớp thần kinh - cơ; điều hòa trí nhớ và chú ý tại não. Tổn thương tế bào tiết ACh ở vỏ não là đặc trưng bệnh <i>Alzheimer</i>.", "<b>Endorphins:</b> 'Morphine nội sinh' của cơ thể; ức chế dẫn truyền cảm giác đau, tạo cảm giác hưng phấn dễ chịu sau khi tập thể dục hoặc thiền."]}, {"h": "Tính Mềm dẻo Thần kinh (Neuroplasticity) – Tâm lý tác động ngược lên Não", "items": ["<b>Khái niệm:</b> Não bộ không phải là một khối giải phẫu cố định bất biến mà liên tục tái cấu trúc mạng lưới nơ-ron và điều chỉnh độ nhạy synap trong suốt cuộc đời để đáp ứng với trải nghiệm sống.", "<b>Định luật Hebbian (1949):</b> <i>'Neurons that fire together, wire together'</i> — Những nơ-ron phát xung đồng thời sẽ tăng cường kết nối synap với nhau; nơ-ron không sử dụng sẽ bị cắt tỉa (Synaptic pruning).", "<b>Hành vi tác động lại giải phẫu não như thế nào?</b>", "• <i>Học tập & Rèn luyện kỹ năng mới:</i> Kích thích mọc thêm các gai synap (Dendritic spines), tăng bề dày vỏ não ở vùng chức năng tương ứng (vd: tài xế taxi London có vùng hồi hải mã định vị không gian lớn hơn đáng kể).", "• <i>Trị liệu tâm lý (CBT) & Thiền định:</i> Giúp giảm kích thước và độ kích hoạt của hạch hạnh nhân (giảm lo âu), đồng thời tăng sinh mật độ nơ-ron ở vỏ não trước trán (tăng khả năng tự chủ cảm xúc).", "• <i>Stress mạn tính & Lối sống độc hại:</i> Tiết liên tục hormone Cortisol làm teo nơ-ron hồi hải mã (suy giảm trí nhớ) và phì đại hạch hạnh nhân (dễ kích động, hoảng loạn)."]}], "tables": [{"title": "Bảng tổng hợp Các Chất Dẫn truyền Thần kinh Trọng yếu", "head": ["Chất dẫn truyền", "Loại tác động", "Vai trò tâm lý & hành vi", "Bệnh lý / Ứng dụng liên quan"], "rows": [["Dopamine", "Hưng phấn / Ức chế", "Động lực, tưởng thưởng, khoái cảm, vận động", "Thiếu gây Parkinson; Dư gây Tâm thần phân liệt, nghiện"], ["Serotonin", "Ức chế / Điều hòa", "Cân bằng khí sắc, giấc ngủ, giảm lo âu", "Thiếu hụt gây Trầm cảm; Đích tác động của thuốc SSRI"], ["GABA", "Ức chế chính ở não", "Làm dịu não bộ, giảm kích động, an thần", "Thiếu gây động kinh, rối loạn lo âu; Bia rượu tăng GABA"], ["Glutamate", "Hưng phấn chính", "Học tập, củng cố trí nhớ (LTP)", "Dư thừa gây co giật, độc tế bào nơ-ron sau đột quỵ"], ["Acetylcholine", "Hưng phấn ở cơ, điều hòa", "Co cơ, trí nhớ, sự tỉnh táo", "Suy giảm tế bào tiết ACh gây bệnh sa sút trí tuệ Alzheimer"], ["Endorphin", "Ức chế đau", "Giảm đau tự nhiên, tạo cảm giác khoan khoái", "Tiết ra khi vận động thể thao, giảm căng thẳng"]]}, {"title": "So sánh Các Loại Tế bào Thần kinh Đệm (Neuroglia)", "head": ["Tế bào đệm", "Vị trí", "Chức năng sinh học cốt lõi", "Ý nghĩa lâm sàng"], "rows": [["Tế bào sao (Astrocytes)", "Hệ TKTW (Não, tủy)", "Tạo Hàng rào máu - não (BBB), nuôi dưỡng nơ-ron", "Nguồn gốc phần lớn các khối u não ác tính (U tế bào sao)"], ["Tế bào ít nhánh (Oligodendrocytes)", "Hệ TKTW", "Tạo bao Myelin bọc sợi trục trong TKTW", "Bị tấn công phá hủy trong bệnh Xơ cứng rải rác (MS)"], ["Tế bào Schwann", "Hệ TK Ngoại biên", "Tạo bao Myelin bọc sợi thần kinh ngoại biên", "Hỗ trợ tái sinh sợi trục sau chấn thương dây thần kinh"], ["Vi tế bào đệm (Microglia)", "Hệ TKTW", "Đại thực bào miễn dịch, dọn dẹp mảnh vụn tế bào", "Kích hoạt quá mức gây viêm thần kinh trong Alzheimer"]]}], "tips": ["Bao Myelin ở <b>TKTW</b> do <i>Oligodendrocytes</i> tạo nên; ở <b>Ngoại biên</b> do tế bào <i>Schwann</i> tạo nên — đừng nhầm lẫn trong phòng thi!", "Điện thế nghỉ màng nơ-ron được giữ ở <b>-70mV</b> chủ yếu nhờ <b>Bơm $Na^+-K^+$-ATPase</b> và kênh rò ion Kali.", "GABA là 'chân phanh' của não bộ (ức chế, an thần); Glutamate là 'chân ga' (hưng phấn, học tập).", "Định luật Hebbian: <i>'Neurons fire together, wire together'</i> — Càng chủ động ôn tập và suy nghĩ tích cực, bạn càng đắp dày kết nối synap đó."], "cards": [["Thân neuron (Soma)", "Trung tâm trao đổi chất của nơ-ron, chứa nhân và bào quan tổng hợp chất dẫn truyền."], ["Sợi nhánh (Dendrites)", "Các nhánh kéo dài từ thân nơ-ron có nhiệm vụ tiếp nhận tín hiệu từ nơ-ron khác."], ["Sợi trục (Axon)", "Sợi dài đơn độc dẫn truyền xung điện thế hoạt động từ thân nơ-ron đến cúc tận cùng."], ["Eo Ranvier", "Các khoảng hở ngắt quãng không có myelin trên sợi trục, nơi xung điện nhảy cóc qua."], ["Tế bào sao (Astrocytes)", "Tế bào đệm hình sao tham gia tạo hàng rào máu - não và hỗ trợ chuyển hóa nơ-ron."], ["Oligodendrocytes", "Tế bào thần kinh đệm chịu trách nhiệm tạo bao Myelin cho các sợi trục trong hệ TKTW."], ["Tế bào Schwann", "Tế bào thần kinh đệm chịu trách nhiệm tạo bao Myelin cho các sợi thần kinh ngoại vi."], ["Vi tế bào đệm (Microglia)", "Tế bào miễn dịch chuyên trách thực bào các mô hoại tử và vi sinh vật trong não."], ["Điện thế nghỉ (-70 mV)", "Điện thế chênh lệch giữa hai bên màng tế bào khi không có kích thích, duy trì bởi bơm Na-K."], ["Bơm Na+-K+-ATPase", "Cơ chế vận chuyển chủ động bơm 3 ion Na+ ra ngoài và 2 ion K+ vào trong màng."], ["Dẫn truyền nhảy vọt", "Cơ chế xung điện nhảy từ eo Ranvier này sang eo khác trên sợi có bao myelin."], ["Khe synap (Synaptic cleft)", "Khoảng hở hẹp 20-30nm giữa màng trước và màng sau của khớp thần kinh hóa học."], ["Định luật Hebbian", "Nguyên lý 'neurons that fire together wire together': neuron cùng phát xung sẽ tăng kết nối."], ["Tính mềm dẻo thần kinh (Neuroplasticity)", "Khả năng tái tổ chức mạng lưới cấu trúc và chức năng của não bộ để đáp ứng với trải nghiệm sống."]], "qs": [["Tế bào thần kinh đệm nào sau đây chịu trách nhiệm chính tạo nên Hàng rào máu – não (Blood-Brain Barrier)?", ["Tế bào ít nhánh (Oligodendrocytes)", "Tế bào sao (Astrocytes)", "Tế bào Schwann", "Vi tế bào đệm (Microglia)"], 1, "Tế bào sao (Astrocytes) có các chân tận cùng áp sát mạch máu não tạo nên hàng rào máu - não."], ["Ion nào đóng vai trò kích hoạt trực tiếp việc giải phóng chất dẫn truyền thần kinh từ cúc tận cùng màng trước vào khe synap?", ["Ion Na+", "Ion K+", "Ion Ca2+", "Ion Cl-"], 2, "Dòng ion Ca2+ tràn vào cúc tận cùng khi khử cực là tín hiệu kích thích túi bọc hòa màng giải phóng chất dẫn truyền."], ["Chất dẫn truyền thần kinh ức chế chủ yếu của hệ thần kinh trung ương là chất nào sau đây?", ["Glutamate", "GABA (Gamma-Aminobutyric Acid)", "Dopamine", "Acetylcholine"], 1, "GABA là chất dẫn truyền ức chế chính giúp làm dịu hoạt động thần kinh, mở kênh Cl- gây quá phân cực."], ["Bệnh xơ cứng rải rác (Multiple Sclerosis - MS) là bệnh lý tự miễn phá hủy cấu trúc nào của nơ-ron?", ["Thân nơ-ron", "Bao Myelin trong hệ thần kinh trung ương", "Các thụ thể ở màng sau synap", "Eo Ranvier"], 1, "Bệnh MS phá vỡ bao Myelin trong não và tủy sống, làm mất khả năng dẫn truyền xung điện nhanh."], ["Nguyên lý Hebbian kinh điển trong Tính mềm dẻo thần kinh (Neuroplasticity) được đúc kết thành câu nói nào?", ["'Use it and lose it'", "'Neurons that fire together, wire together'", "'One neuron for one specific memory'", "'Brain structure is unchangeable after childhood'"], 1, "Hebb (1949) chỉ ra rằng các nơ-ron cùng kích hoạt đồng thời sẽ gia tăng liên kết synap với nhau."], ["Sự suy giảm chất dẫn truyền thần kinh nào ở vùng thể vân/liềm đen dẫn đến các triệu chứng run tay và cứng cơ trong bệnh Parkinson?", ["Serotonin", "GABA", "Dopamine", "Endorphin"], 2, "Thoái hóa các nơ-ron sản xuất Dopamine ở chất đen não giữa là nguyên nhân sinh lý chính gây Parkinson."], ["Dẫn truyền nhảy vọt (Saltatory conduction) mang lại lợi ích nổi bật nào so với dẫn truyền liên tục?", ["Tốc độ nhanh hơn nhiều và tiết kiệm năng lượng ATP cho tế bào", "Làm giảm điện thế màng xuống mức 0 mV", "Cho phép xung điện truyền ngược chiều từ cúc tận cùng về thân", "Loại bỏ hoàn toàn sự phụ thuộc vào ion Na+"], 0, "Dẫn truyền nhảy cóc qua eo Ranvier giúp tăng tốc độ truyền tin lên hàng chục lần và giảm hao phí ATP."], ["Tác động của hành vi tập thể dục, học tập hoặc trị liệu tâm lý lên não bộ được giải thích bởi cơ chế sinh học nào?", ["Tính bất biến giải phẫu của hệ thần kinh", "Tính mềm dẻo thần kinh (Neuroplasticity) và sự tăng sinh kết nối synap", "Sự chết theo chương trình của các tế bào sao", "Sự ức chế hoàn toàn hoạt động của tế bào microglia"], 1, "Nhờ tính mềm dẻo thần kinh, hành vi và trải nghiệm học tập kích thích tăng sinh gai synap và dày vỏ não."]], "trees": [["Tế bào & Dẫn truyền Synapse", "Cơ sở nơ-ron vi thể", "gồm", [["Cấu tạo Neuron", "Đơn vị chức năng", "chia thành", [["Thân (Soma)", "chứa nhân, chuyển hóa protein", "", []], ["Sợi nhánh (Dendrites)", "tiếp nhận xung thần kinh đến", "", []], ["Sợi trục (Axon)", "dẫn truyền đi; bao myelin & eo Ranvier", "", []]]], ["Tế bào đệm (Glia)", "Hỗ trợ & Bảo vệ", "gồm 4 loại", [["Tế bào sao (Astrocytes)", "tạo Hàng rào máu - não (BBB), nuôi dưỡng", "", []], ["Oligodendrocytes", "tạo Myelin ở Hệ TKTW", "", []], ["Tế bào Schwann", "tạo Myelin ở Hệ Ngoại biên", "", []], ["Vi tế bào đệm (Microglia)", "đại thực bào miễn dịch, dọn rác não", "", []]]], ["Điện thế Hoạt động", "Cơ chế xung điện", "qua 3 pha", [["Điện thế nghỉ (-70mV)", "duy trì bởi Bơm Na-K và kênh rò K+", "", []], ["Khử cực & Đảo cực (+30mV)", "mở kênh Na+ ồ ạt tràn vào màng", "", []], ["Tái cực & Quá phân cực", "đóng kênh Na+, mở kênh K+ đưa điện thế âm", "", []], ["Dẫn truyền nhảy vọt", "nhảy qua các eo Ranvier cực nhanh (120m/s)", "", []]]], ["Synapse & Hóa chất", "Khớp thần kinh hóa học", "trình tự", [["Cơ chế 4 bước", "Xung điện → Kênh Ca2+ mở → Xuất bào → Gắn thụ thể", "", []], ["Chất dẫn truyền chính", "Dopamine (thưởng), Serotonin (khí sắc), GABA (ức chế), Glutamate (hưng phấn)", "", []]]], ["Tính mềm dẻo (Plasticity)", "Tâm lý tác động lên Não", "nguyên lý", [["Định luật Hebbian", "Neurons fire together, wire together", "", []], ["Tái tổ chức gai synap", "học tập, CBT, thiền định làm dày vỏ não", "", []]]]]]]}, {"id": "tk3", "part": "Phần I: Cơ sở Giải phẫu & Sinh lý Tế bào", "code": "TK.3", "title": "Giải phẫu Hệ Thần kinh Trung ương & Cơ quan Phân tích Cảm giác", "goals": ["Mô tả cấu trúc đại thể của Hệ Thần kinh Trung ương (Não bộ, Tủy sống) và Hệ Ngoại biên.", "Nắm vững chức năng chuyên biệt của 4 thùy đại não và hiện tượng chia cắt não (Split-Brain).", "Trình bày cấu tạo 3 bộ phận của Cơ quan phân tích và cơ chế chuyển dạng năng lượng cảm giác.", "Phân tích cơ chế tiếp nhận của 5 giác quan và đặc điểm độc đáo của đường dẫn truyền khứu giác."], "sections": [{"h": "Tổng quan Giải phẫu Hệ Thần kinh Trung ương & Ngoại biên", "items": ["<b>Hệ Thần kinh Trung ương (CNS):</b> Nằm trong các khoang xương bảo vệ, gồm:", "• <i>Não bộ (Brain):</i> Nằm trong hộp sọ, gồm Bán cầu đại não, Gian não (Đồi thị, Vùng dưới đồi), Thân não và Tiểu não.", "• <i>Tủy sống (Spinal Cord):</i> Nằm trong ống sống, dài khoảng 45cm, trung tâm của các phản xạ tủy không điều kiện và đường dẫn truyền vận động - cảm giác nối não với ngoại vi.", "<b>Hệ Thần kinh Ngoại biên (PNS):</b> Gồm <b>12 đôi dây thần kinh sọ</b> (xuất phát từ thân não) và <b>31 đôi dây thần kinh tủy sống</b>, các hạch thần kinh và thụ thể rải rác khắp cơ thể.", "<b>Chất xám và Chất trắng:</b>", "• Ở Não bộ: <i>Chất xám</i> (thân nơ-ron) nằm ở lớp vỏ ngoài và các nhân dưới vỏ; <i>Chất trắng</i> (sợi trục có bao myelin) nằm ở bên trong.", "• Ở Tủy sống: <i>Chất xám</i> tạo thành hình cánh bướm nằm bên trong; <i>Chất trắng</i> bao bọc ở các cột bên ngoài."]}, {"h": "Bốn Thùy Đại não & Thể Chai (Corpus Callosum)", "items": ["<b>1. Thùy Trán (Frontal Lobe):</b> Vùng phát triển cao nhất ở người; chỉ huy vận động có ý thức (vỏ não vận động sơ cấp), lập kế hoạch, kiểm soát xung động, tư duy trừu tượng, tính cách cá nhân; chứa <b>Vùng Broca</b> ở bán cầu ưu thế phụ trách <i>phát âm ngôn ngữ</i>.", "<b>2. Thùy Đỉnh (Parietal Lobe):</b> Chứa vỏ não cảm giác thân thể sơ cấp; tiếp nhận cảm giác xúc giác, áp giác, nhiệt độ, đau và tích hợp cảm giác không gian vị trí cơ thể.", "<b>3. Thùy Chẩm (Occipital Lobe):</b> Nằm ở phía sau đầu; chứa <b>Vỏ não thị giác sơ cấp</b>, tiếp nhận và giải mã ánh sáng, màu sắc, hình khối.", "<b>4. Thùy Thái dương (Temporal Lobe):</b> Chứa vỏ não thính giác sơ cấp; xử lý âm thanh, giai điệu; chứa <b>Vùng Wernicke</b> phụ trách <i>hiểu ý nghĩa ngôn ngữ</i>; chứa Hồi hải mã phụ trách củng cố trí nhớ.", "<b>Thể chai (Corpus Callosum):</b> Bó chất trắng khổng lồ gồm hơn 200 triệu sợi trục nối liền hai bán cầu đại não. Thí nghiệm <b>Split-Brain</b> (Roger Sperry, Nobel 1981) trên bệnh nhân cắt thể chai chứng minh: Bán cầu Trái chuyên biệt về logic, ngôn ngữ phân tích; Bán cầu Phải chuyên biệt về không gian, cảm xúc, hình tượng toàn thể."]}, {"h": "Các Cấu trúc Dưới vỏ: Đồi thị, Vùng dưới đồi, Tiểu não, Thân não", "items": ["<b>Đồi thị (Thalamus):</b> 'Trạm bưu điện / Cổng chuyển tiếp' trung tâm của não; tiếp nhận hầu như <b>toàn bộ xung cảm giác</b> (thị, thính, vị, xúc giác) rồi phân loại gửi lên các thùy vỏ não tương ứng (<i>riêng Khứu giác không qua đồi thị</i>).", "<b>Vùng dưới đồi (Hypothalamus):</b> Trung tâm điều hòa nội tiết và cân bằng nội môi; kiểm soát thân nhiệt, cảm giác đói - no, khát nước, chu kỳ thức - ngủ và điều khiển tuyến yên.", "<b>Thân não (Brainstem):</b> Gồm Não giữa (Trung não), Cầu não và Hành não; chứa thể lưới (RAS) duy trì sự tỉnh táo ý thức; <b>Hành não</b> chứa trung tâm sinh tồn kiểm soát nhịp tim, nhịp thở, huyết áp và phản xạ nôn, nuốt, ho.", "<b>Tiểu não (Cerebellum):</b> Nằm phía sau thân não; phụ trách điều phối các cử động cơ xương nhịp nhàng, trơn tru, tinh vi và duy trì thăng bằng tư thế (tổn thương gây dáng đi say rượu, mất phối hợp động tác)."]}, {"h": "Cơ quan Phân tích & Cơ chế Chuyển dạng Năng lượng (Transduction)", "items": ["<b>Khái niệm Cơ quan Phân tích (Pavlov):</b> Hệ thống thần kinh tinh vi chuyên trách tiếp nhận và phân tích các kích thích từ thế giới ngoài và trong cơ thể.", "<b>Cấu tạo 3 bộ phận của một Cơ quan phân tích:</b>", "• <i>1. Bộ phận cảm thụ (Thụ thể - Receptor):</i> Nơi tiếp nhận tác nhân kích thích đặc hiệu.", "• <i>2. Đường dẫn truyền hướng tâm:</i> Dây thần kinh cảm giác và các trạm chuyển tiếp dưới vỏ (tủy sống, thân não, đồi thị).", "• <i>3. Bộ phận phân tích ở vỏ não:</i> Vùng vỏ não cảm giác sơ cấp giải mã ý thức.", "<b>Quá trình chuyển dạng năng lượng (Transduction):</b> Các kích thích vật lý, hóa học (sóng ánh sáng, sóng âm, áp lực, phân tử mùi) được tế bào thụ cảm biến đổi thành <b>xung điện thế thần kinh</b> để não bộ đọc được."]}, {"h": "Sinh lý 5 Giác quan Cốt lõi", "items": ["<b>Thị giác:</b> Võng mạc mắt chứa 2 loại tế bào quang thụ: <b>Tế bào que (Rods)</b> cực nhạy sáng, giúp nhìn trong bóng tối (trắng đen); <b>Tế bào nón (Cones)</b> nhận diện màu sắc (đỏ, lục, lam) và chi tiết ban ngày. Tín hiệu qua bắt chéo thị giác về thùy chẩm.", "<b>Thính giác:</b> Sóng âm rung màng nhĩ → đòn bẩy chuỗi 3 xương con (Búa - Đe - Bàn đạp) khuyếch đại lực → dịch ốc tai dao động làm nghiêng lông tế bào ở <b>cơ quan Corti</b> → sinh xung điện theo dây TK VIII về thùy thái dương.", "<b>Khứu giác:</b> Phân tử mùi tan trong niêm mạc mũi gắn thụ thể trên lông khứu giác. <b>Đặc điểm độc nhất:</b> Xung khứu giác đi trực tiếp từ hành khứu về vỏ não khứu giác và hệ viền mà <b>không cần đi qua đồi thị</b> (giải thích tại sao mùi hương gợi lại ký ức cảm xúc rất mạnh).", "<b>Vị giác:</b> Các nụ vị giác ở gai lưỡi nhận biết 5 vị cơ bản (ngọt, chua, mặn, đắng, umami) dẫn truyền qua dây TK VII, IX, X về vỏ não vị giác ở thùy đảo và thùy đỉnh.", "<b>Cảm giác thân thể & Phản xạ tủy:</b> Các thụ thể cơ học Meissner, Pacini, thụ thể nhiệt, thụ thể đau (Nociceptors). Phản xạ rút tay khi chạm vật nóng là <b>cung phản xạ tủy sống khẩn cấp</b> khép kín ngay tại khoanh tủy trước khi tín hiệu đau lên tới vỏ não."]}, {"h": "Các Quy luật Thụ thể Cảm giác Chuyên sâu & Ứng dụng Lâm sàng (Nhóm 4)", "items": ["<b>Giác quan đặc biệt (Special Senses) vs Giác quan chung:</b> Giác quan đặc biệt (thị, thính, khứu, vị) tập trung ở vùng đầu, dẫn truyền thẳng lên não qua <i>Dây thần kinh sọ</i> không qua tủy sống; Giác quan chung (xúc giác, nhiệt, đau) phân bố toàn thân và phải qua tủy sống.", "<b>4 Thuộc tính kích thích não bộ giải mã:</b> <i>Bản chất</i> (kích thích gì?), <i>Vị trí</i> (ở tọa độ nào?), <i>Cường độ</i> (mạnh hay yếu, mã hóa bằng tần số xung), và <i>Thời gian</i> (kéo dài bao lâu, diễn biến thế nào).", "<b>Thụ thể thần kinh vs Phi thần kinh:</b> Thụ thể thần kinh là tận cùng biến đổi của nơ-ron (vd: Thụ thể Pacinian ở da nhận rung động); Thụ thể phi thần kinh là tế bào biểu mô biệt hóa tạo synap với nơ-ron (vd: Tế bào Merkel xúc giác, Tế bào lông ốc tai và tiền đình).", "<b>Nhu mô não KHÔNG có thụ thể đau:</b> Nơ-ron và tế bào đệm của não hoàn toàn không có thụ thể đau; đây là cơ sở sinh lý cho các ca <b>Phẫu thuật não khi bệnh nhân thức tỉnh (Awake Brain Surgery)</b>, bác sĩ chỉ cần gây tê da đầu và màng não.", "<b>Định vị âm thanh là 'phép tính' của não:</b> Ốc tai chỉ có bản đồ tần số (không có bản đồ không gian); não bộ bắt buộc phải so sánh độ lệch thời gian và cường độ giữa 2 tai để tính vị trí nguồn âm (người điếc 1 tai mất hoàn toàn khả năng định vị hướng âm).", "<b>Tương tác Khứu giác – Vị giác:</b> Lưỡi chỉ nhận 5 vị đơn sơ; 80% hương vị phong phú là do khứu giác cảm nhận mùi thơm xộc lên khoang mũi; nghẹt mũi do cảm cúm làm thức ăn dường như mất hết mùi vị."]}], "tables": [{"title": "Bảng Chức năng Chuyên biệt 4 Thùy Đại não & Hội chứng Tổn thương", "head": ["Thùy đại não", "Vị trí & Vùng chức năng chính", "Chức năng tâm lý - thần kinh", "Biểu hiện khi bị tổn thương"], "rows": [["Thùy Trán (Frontal)", "Phía trước trán; Vùng Broca, Vỏ não vận động sơ cấp", "Vận động có ý thức, lập kế hoạch, phát âm, kiềm chế xung động, nhân cách", "Mất ngôn ngữ Broca (hiểu nhưng không nói được); mất kiềm chế hành vi"], ["Thùy Đỉnh (Parietal)", "Đỉnh đầu; Vỏ não cảm giác thân thể sơ cấp", "Xử lý cảm giác xúc giác, nhiệt, đau, định hướng không gian bản thể", "Mất nhận thức cảm giác cơ thể, mất định hướng không gian (Hội chứng bỏ quên nửa người)"], ["Thùy Thái dương (Temporal)", "Hai bên thái dương; Vùng Wernicke, Vỏ não thính giác, Hồi hải mã", "Tiếp nhận âm thanh, hiểu ý nghĩa ngôn ngữ, củng cố trí nhớ dài hạn", "Mất ngôn ngữ Wernicke (nói trôi chảy nhưng vô nghĩa, không hiểu lời); mất trí nhớ"], ["Thùy Chẩm (Occipital)", "Phía sau gáy; Vỏ não thị giác sơ cấp", "Tiếp nhận và xử lý tín hiệu ánh sáng, màu sắc, hình dạng vật thể", "Mù vỏ não, ảo giác thị giác, không nhận biết được vật nhìn thấy"]]}, {"title": "So sánh Hai Bán cầu Não và Thí nghiệm Não chia cắt (Split-Brain)", "head": ["Đặc điểm so sánh", "Bán cầu Não Trái", "Bán cầu Não Phải"], "rows": [["Phong cách xử lý", "Phân tích, tuần tự, logic, chi tiết từng bước", "Trực giác, tổng thể, hình tượng, không gian, nghệ thuật"], ["Chức năng Ngôn ngữ", "Chuyên biệt về ngôn ngữ nói, viết, ngữ pháp, từ vựng", "Hiểu ngữ điệu, ẩn dụ, cảm xúc trong giọng nói, hài hước"], ["Vận động & Cảm giác", "Điều khiển và nhận cảm giác nửa thân bên PHẢI", "Điều khiển và nhận cảm giác nửa thân bên TRÁI"], ["Thí nghiệm Split-Brain", "Vật hiện thị trường phải: Bệnh nhân đọc tên vanh vách", "Vật hiện thị trường trái: Không đọc tên được nhưng tay trái cầm đúng vật"]]}], "tips": ["Khứu giác là giác quan <b>duy nhất</b> truyền thẳng về vỏ não và hệ viền mà <b>không đi qua Đồi thị</b>.", "Tổn thương vùng <b>Broca</b>: hiểu được nhưng không nói được; Tổn thương vùng <b>Wernicke</b>: nói trôi chảy như suối nhưng vô nghĩa và không hiểu người khác nói gì.", "Thân não gồm 3 phần từ trên xuống: <b>Trung não → Cầu não → Hành não</b>; Hành não là trung tâm sinh tồn tim mạch - hô hấp.", "Bán cầu não trái điều khiển nửa người bên phải; Cắt thể chai (Split-Brain) làm hai bán cầu hoạt động độc lập không trao đổi được thông tin."], "cards": [["Hệ Thần kinh Trung ương (CNS)", "Gồm Não bộ nằm trong hộp sọ và Tủy sống nằm trong cột sống."], ["Hệ Thần kinh Ngoại biên (PNS)", "Gồm 12 đôi dây thần kinh sọ và 31 đôi dây thần kinh tủy cùng các hạch ngoại biên."], ["Thùy Trán (Frontal lobe)", "Chỉ huy vận động, lập kế hoạch, tư duy trừu tượng, kiềm chế và phát âm ngôn ngữ (Broca)."], ["Vùng Broca", "Vùng vận động ngôn ngữ ở thùy trán; tổn thương gây mất khả năng phát âm lời nói."], ["Vùng Wernicke", "Vùng cảm giác ngôn ngữ ở thùy thái dương; tổn thương gây mất khả năng hiểu ý nghĩa lời nói."], ["Thùy Chẩm (Occipital lobe)", "Thùy nằm sau đầu chứa vỏ não thị giác sơ cấp, giải mã ánh sáng và hình ảnh."], ["Thể chai (Corpus callosum)", "Bó chất trắng khổng lồ nối liền và truyền tin giữa hai bán cầu đại não."], ["Đồi thị (Thalamus)", "Trạm chuyển tiếp hầu hết mọi tín hiệu cảm giác (trừ khứu giác) lên vỏ não."], ["Vùng dưới đồi (Hypothalamus)", "Trung tâm điều hòa nội môi, thân nhiệt, cảm giác đói khát và chỉ huy hệ nội tiết."], ["Tiểu não (Cerebellum)", "Cơ quan điều phối cử động nhịp nhàng, giữ thăng bằng và duy trì tư thế."], ["Hành não (Medulla oblongata)", "Phần thấp của thân não, chứa trung tâm sinh tồn điều hòa tim mạch và hơi thở."], ["Cơ quan Corti", "Bộ phận thụ cảm thính giác nằm trong ốc tai biến dao động sóng âm thành xung thần kinh."], ["Tế bào que võng mạc", "Tế bào quang thụ nhạy sáng giúp nhìn vật trong điều kiện ánh sáng yếu (trắng đen)."], ["Chuyển dạng năng lượng (Transduction)", "Quá trình thụ thể biến đổi năng lượng kích thích vật lý/hóa học thành xung điện thần kinh."], ["Giác quan đặc biệt", "Cơ quan thụ cảm phức tạp ở vùng đầu (mắt, tai, mũi, lưỡi), dẫn truyền qua dây sọ không qua tủy."], ["Giác quan chung", "Thụ thể phân bố khắp cơ thể (da, cơ, nội tạng), tín hiệu bắt buộc phải qua tủy sống lên não."], ["Thụ thể Pacinian", "Thụ thể thần kinh ở da đáp ứng với các kích thích cơ học như áp suất sâu và rung động."], ["Tế bào Merkel", "Thụ thể phi thần kinh (tế bào biểu mô) ở da nhận cảm xúc giác tinh tế và áp lực nhẹ."], ["Nhu mô não & Thụ thể đau", "Nhu mô não hoàn toàn không có thụ thể đau; cơ sở phẫu thuật mở sọ khi bệnh nhân tỉnh táo."], ["Định vị nguồn âm 2 tai", "Não so sánh dữ liệu thời gian và cường độ giữa 2 tai để định vị âm thanh vì ốc tai chỉ có bản đồ tần số."]], "qs": [["Cấu trúc nào sau đây của não đóng vai trò như một 'trạm bưu điện chuyển tiếp' hầu hết mọi xung động cảm giác lên vỏ não?", ["Vùng dưới đồi", "Đồi thị (Thalamus)", "Hạch nền", "Thể chai"], 1, "Đồi thị tiếp nhận và phân loại mọi luồng cảm giác (thị, thính, vị, xúc giác) trước khi gửi lên vỏ não, trừ khứu giác."], ["Bệnh nhân sau tai biến mạch máu não hiểu trọn vẹn lời bác sĩ nói nhưng cơ quan phát âm không thể nói thành câu hoàn chỉnh. Bệnh nhân nhiều khả năng tổn thương vùng nào?", ["Vùng Wernicke", "Vùng Broca", "Vỏ não thị giác sơ cấp", "Tiểu não"], 1, "Vùng Broca (ở thùy trán) phụ trách vận động ngôn ngữ; tổn thương gây mất ngôn ngữ diễn đạt (Broca aphasia)."], ["Bó sợi chất trắng lớn nhất nối liền và cho phép hai bán cầu đại não trao đổi thông tin với nhau là cấu trúc nào?", ["Thể chai (Corpus Callosum)", "Dải thị giác", "Cầu não", "Vòm não (Fornix)"], 0, "Thể chai là cầu nối chất trắng liên bán cầu lớn nhất não bộ."], ["Đặc điểm độc đáo của đường dẫn truyền cảm giác khứu giác so với các giác quan khác là gì?", ["Bắt buộc phải đi qua đồi thị trước khi lên vỏ não", "Không qua đồi thị mà truyền trực tiếp từ hành khứu đến vỏ não khứu giác và hệ viền", "Xử lý hoàn toàn tại tủy sống trước khi lên não", "Chỉ kích hoạt khi có ánh sáng chiếu vào mắt"], 1, "Khứu giác là giác quan duy nhất không qua trạm chuyển tiếp đồi thị."], ["Tế bào nào của võng mạc mắt có độ nhạy sáng cực cao, chịu trách nhiệm cho thị giác ban đêm trong điều kiện ánh sáng yếu?", ["Tế bào nón", "Tế bào que (Rods)", "Tế bào hạch", "Tế bào biểu mô sắc tố"], 1, "Tế bào que có độ nhạy sáng cực cao, giúp nhìn trong bóng tối."], ["Tổn thương cấu trúc nào của não bộ sẽ dẫn đến dáng đi lảo đảo như người say rượu và mất khả năng phối hợp động tác nhịp nhàng?", ["Hành não", "Tiểu não (Cerebellum)", "Vùng dưới đồi", "Thùy đỉnh"], 1, "Tiểu não điều phối sự thăng bằng và trơn tru của các cử động cơ xương."], ["Trình tự tiếp nhận và khuếch đại sóng âm ở tai giữa diễn ra qua chuỗi 3 xương con theo thứ tự nào?", ["Xương đe → Xương búa → Xương bàn đạp", "Xương búa → Xương đe → Xương bàn đạp", "Xương bàn đạp → Xương búa → Xương đe", "Màng nhĩ → Ốc tai → Xương búa"], 1, "Chuỗi xương con: Búa (Malleus) → Đe (Incus) → Bàn đạp (Stapes) gõ vào cửa sổ bầu dục ốc tai."], ["Khi vô tình chạm tay vào bề mặt bàn ủi nóng bỏng, tay tự động giật lùi lại ngay lập tức trước khi kịp thấy đau là ví dụ của:", ["Phản xạ tủy sống khẩn cấp", "Phản xạ có điều kiện của vỏ não", "Hoạt động phân tích của thùy chẩm", "Ức chế vượt hạn của thân não"], 0, "Đây là phản xạ tủy sống bảo vệ mô khép kín ngay tại khoanh tủy, không cần chờ vỏ não xử lý."], ["Đặc điểm giải phẫu nào xác định một 'giác quan đặc biệt' (Special Sense) so với giác quan chung?", ["Cơ quan thụ cảm phức tạp tập trung ở vùng đầu, dẫn truyền thẳng qua dây sọ không qua tủy", "Thụ thể phân bố rộng khắp các cơ quan nội tạng", "Phản ứng tự động hoàn toàn không qua vỏ não", "Diện tích tiếp nhận kích thích lớn nhất trên cơ thể"], 0, "Giác quan đặc biệt khu trú ở vùng đầu (mắt, tai, mũi, lưỡi) và đi thẳng lên não qua dây thần kinh sọ."], ["Hệ thần kinh trung ương phân biệt và giải mã các kích thích cảm giác dựa trên 4 thuộc tính cơ bản nào?", ["Bản chất, vị trí, thời gian, cường độ", "Vị trí, thời gian, nhiệt độ, đáp ứng", "Cường độ, tần số, vị trí, bản chất", "Bản chất, thời gian, độ nhạy, ngưỡng cảm nhận"], 0, "TKTW giải mã 4 câu hỏi: Bản chất (gì?), Vị trí (ở đâu?), Cường độ (mạnh yếu?), Thời gian (bao lâu?)."], ["Thụ thể cảm giác nào sau đây thuộc nhóm thụ thể cơ học (Mechanoreceptors)?", ["Thụ thể vị giác và khứu giác", "Thụ thể cảm nhận ánh sáng ở võng mạc", "Tế bào lông ở tai trong và cơ quan tiền đình", "Thụ thể cảm nhận nhiệt độ ở da"], 2, "Tế bào lông ở ốc tai và tiền đình phản ứng với dao động cơ học, áp suất dòng dịch và gia tốc."], ["Thụ thể cảm giác nào sau đây KHÔNG PHẢI loại phi thần kinh (tức là thụ thể thần kinh đích thực)?", ["Thụ thể Pacinian", "Thụ thể tế bào Merkel", "Tế bào lông ở tai trong", "Cả 3 câu đều đúng"], 0, "Thụ thể Pacinian là tận cùng thần kinh được bọc bao; tế bào Merkel và tế bào lông là tế bào biểu mô biệt hóa."], ["Điếc một bên tai gây khó khăn lớn nhất cho chức năng nào sau đây của thính giác?", ["Phân biệt cao độ (trầm / bổng) âm thanh", "Xác định vị trí và hướng nguồn âm", "Nhận biết độ to nhỏ âm thanh ở tai còn lại", "Chuyển sóng âm thành xung thần kinh ở tai lành"], 1, "Ốc tai chỉ có bản đồ tần số; định vị âm thanh là phép tính so sánh dữ liệu giữa 2 tai của não bộ."], ["Thụ thể cảm giác đau (Nociceptors) phân bố rộng khắp cơ thể, NGOẠI TRỪ vị trí nào dưới đây?", ["Màng xương và các khớp", "Nhu mô não thuộc Hệ thần kinh trung ương", "Niêm mạc các cơ quan nội tạng", "Lớp trung bì và hạ bì của da"], 1, "Nhu mô não hoàn toàn không có thụ thể đau, cho phép phẫu thuật não khi bệnh nhân hoàn toàn tỉnh táo."]], "trees": [["Hệ TKTW & Cảm giác", "Giải phẫu đại thể & Giác quan", "gồm", [["Hệ TKTW (CNS)", "Não bộ & Tủy sống", "cấu trúc", [["Não bộ", "đại não, gian não, thân não, tiểu não", "", []], ["Tủy sống", "31 khoanh tủy, trung tâm phản xạ tủy", "", []], ["Chất xám vs Chất trắng", "thân nơ-ron vs sợi trục có myelin", "", []]]], ["Bốn Thùy Đại não", "Phân vùng chức năng", "gồm", [["Thùy Trán", "vận động, lập kế hoạch, nhân cách, Broca (phát âm)", "", []], ["Thùy Đỉnh", "cảm giác thân thể sơ cấp, định hướng không gian", "", []], ["Thùy Thái dương", "thính giác, Wernicke (hiểu tiếng), trí nhớ", "", []], ["Thùy Chẩm", "vỏ não thị giác sơ cấp, nhận biết ánh sáng hình ảnh", "", []], ["Thể chai (Corpus Callosum)", "nối 2 bán cầu; Thí nghiệm Split-Brain (Sperry)", "", []]]], ["Cấu trúc Dưới vỏ", "Điều hòa nội môi & sinh tồn", "gồm", [["Đồi thị (Thalamus)", "trạm bưu điện chuyển tiếp cảm giác (trừ khứu giác)", "", []], ["Vùng dưới đồi (Hypothalamus)", "nội tiết, thân nhiệt, đói khát, giấc ngủ", "", []], ["Thân não (Hành não)", "trung tâm sinh tồn: nhịp tim, nhịp thở, huyết áp", "", []], ["Tiểu não", "phối hợp động tác nhịp nhàng, giữ thăng bằng", "", []]]], ["Cơ quan Phân tích", "Chuyển dạng năng lượng", "gồm", [["3 Bộ phận", "Thụ thể ngoại vi → Đường dẫn truyền → Vỏ não sơ cấp", "", []], ["5 Giác quan cốt lõi", "Thị giác (que/nón), Thính giác (Corti), Khứu giác (trực tiếp không qua đồi thị)", "", []]]]]]]}, {"id": "tk4", "part": "Phần II: HĐTK Cấp cao & Hiện tượng Tâm lý", "code": "TK.4", "title": "Thần kinh Tự chủ (ANS), Trục Não – Cơ thể & Cơ chế Tình cảm", "goals": ["Mô tả cấu trúc giải phẫu và tác động đối kháng giữa Hệ Giao cảm và Đối giao cảm.", "Trình bày cấu tạo Hệ viền (Limbic system), vai trò của Hạch hạnh nhân và Vỏ não trước trán.", "Giải thích cơ chế sinh lý của cảm xúc sợ hãi, stress qua Trục HPA (Dưới đồi - Tuyến yên - Thượng thận).", "Phân tích sự tác động trở lại của cảm xúc, tâm lý lên sinh lý nội tạng, nhịp tim và miễn dịch."], "sections": [{"h": "Tổng quan Hệ Thần kinh Tự chủ (Autonomic Nervous System - ANS)", "items": ["<b>Khái niệm:</b> Nhánh ly tâm của hệ thần kinh điều hòa các hoạt động tự động không theo ý muốn của cơ trơn nội tạng, cơ tim và các tuyến ngoại/nội tiết.", "<b>Cấu trúc 2 nơ-ron dẫn truyền:</b> Gồm nơ-ron trước hạch (thân nằm trong TKTW) và nơ-ron sau hạch (thân nằm ở hạch tự chủ ngoại vi, sợi trục đến cơ quan đích).", "<b>Hai phân nhánh đối kháng chức năng:</b>", "• <b>Hệ Giao cảm (Sympathetic Nervous System):</b> Kích hoạt phản ứng 'Chiến đấu hoặc Bỏ chạy' (Fight or Flight) khi gặp căng thẳng hoặc nguy hiểm.", "• <b>Hệ Đối giao cảm (Parasympathetic Nervous System):</b> Thúc đẩy trạng thái 'Nghỉ ngơi và Tiêu hóa' (Rest and Digest), bảo tồn và phục hồi năng lượng cơ thể.", "• <b>Chất dẫn truyền trước hạch:</b> Sợi trước hạch của <b>CẢ HAI HỆ THỐNG Giao cảm và Đối giao cảm</b> đều tiết ra <b>Acetylcholine (ACh)</b>.", "• <b>Cơ quan đáp ứng:</b> Điều hòa trực tiếp hoạt động vô thức của <b>cơ tim, cơ trơn (mạch máu, phế quản, ruột) và các tuyến</b> nhằm duy trì cân bằng nội môi."]}, {"h": "So sánh Giải phẫu & Tác động của Hệ Giao cảm vs. Đối giao cảm", "items": ["<b>Xuất phát điểm giải phẫu:</b>", "• <i>Giao cảm:</i> Xuất phát từ sừng bên chất xám tủy sống đoạn ngực - thắt lưng (T1 - L2); chuỗi hạch giao cảm nằm sát hai bên cột sống.", "• <i>Đối giao cảm:</i> Xuất phát từ thân não (theo các dây sọ III, VII, IX, và đặc biệt là <b>Dây X - Dây phế vị</b>) và tủy cùng (S2 - S4); hạch nằm ngay sát hoặc trong thành cơ quan đích.", "<b>Chất dẫn truyền thần kinh:</b>", "• <i>Giao cảm:</i> Nơ-ron trước hạch tiết Acetylcholine; nơ-ron sau hạch tiết <b>Noradrenaline (Norepinephrine)</b> tác động lên thụ thể Adrenergic.", "• <i>Đối giao cảm:</i> Cả nơ-ron trước và sau hạch đều tiết <b>Acetylcholine (ACh)</b> tác động lên thụ thể Muscarinic.", "<b>Tác động sinh lý trên cơ quan đích:</b>", "• <i>Đồng tử:</i> Giao cảm làm dãn (nhìn rộng); Đối giao cảm làm co (bảo vệ mắt).", "• <i>Tim mạch:</i> Giao cảm làm tăng nhịp tim, tăng co bóp, tăng huyết áp; Đối giao cảm làm chậm nhịp tim, hạ huyết áp.", "• <i>Hô hấp:</i> Giao cảm làm dãn phế quản (hút nhiều oxy); Đối giao cảm làm co phế quản.", "• <i>Tiêu hóa:</i> Giao cảm làm giảm nhu động ruột, giảm tiết dịch tiêu hóa; Đối giao cảm kích thích nhu động và bài tiết enzyme tiêu hóa."]}, {"h": "Hệ Viền (Limbic System) & Mạng lưới Cảm xúc của Não bộ", "items": ["<b>Hệ viền (Limbic System):</b> Vòng cấu trúc nằm ở ranh giới giữa vỏ não và gian não, được mệnh danh là 'Não bộ cảm xúc', gồm các thành phần trọng yếu:", "• <b>Hạch hạnh nhân (Amygdala):</b> Trung tâm cảnh báo nguy hiểm và phát hiện mối đe dọa; kích hoạt phản ứng sợ hãi, lo âu và hung tính. Người bị tổn thương Amygdala mất hoàn toàn cảm giác sợ và không nhận biết được nét mặt sợ hãi của người khác.", "• <b>Hồi hải mã (Hippocampus):</b> Lưu giữ ký ức bối cảnh cảm xúc; phối hợp với Amygdala để ghi nhớ 'ở đâu và khi nào mối nguy hiểm từng xảy ra'.", "• <b>Vỏ khuy (Cingulate cortex):</b> Điều hòa cảm xúc gắn liền với cảm giác đau đớn thể xác và xã hội.", "<b>Vỏ não trước trán (Prefrontal Cortex - PFC):</b> Đóng vai trò 'Chỉ huy trưởng / Người phanh hãm' kiểm soát từ trên xuống (top-down regulation); gửi tín hiệu ức chế kiềm chế sự bốc đồng của Hạch hạnh nhân. Khả năng làm chủ cảm xúc của con người phụ thuộc vào kết nối vững chắc giữa PFC và Amygdala."]}, {"h": "Sinh lý của Stress & Trục HPA (Dưới đồi – Tuyến yên – Thượng thận)", "items": ["<b>Hai con đường phản ứng cảm xúc của Joseph LeDoux:</b>", "• <i>Đường tắt (Low Road - Nhanh):</i> Thalamus → Amygdala (dưới 12 mili-giây): Kích hoạt cơ thể co giật, nhảy lùi lại trước khi nhận biết vật đó là con rắn hay sợi dây thừng.", "• <i>Đường chính (High Road - Chậm):</i> Thalamus → Vỏ não cảm giác → Vỏ não trước trán → Amygdala: Nhận định chính xác ('Chỉ là sợi dây thừng!') rồi phát lệnh dập tắt báo động của Amygdala.", "<b>Trục HPA trong phản ứng Stress:</b>", "1. Vùng dưới đồi tiết hormone <b>CRH</b>.", "2. CRH kích thích Tuyến yên tiết <b>ACTH</b> vào máu.", "3. ACTH kích thích Vỏ thượng thận tiết <b>Cortisol</b> (hormone chống stress).", "<b>Ý nghĩa sinh học:</b> Tăng đường huyết, tăng huyết áp để sẵn sàng cơ bắp đối phó thử thách ngắn hạn."]}, {"h": "Tác động Ngược của Tâm lý, Cảm xúc lên Cơ thể & Bệnh Thể chất Tâm căn", "items": ["<b>Stress và Lo âu Mạn tính phá hủy cơ thể như thế nào?</b>", "• Cortisol tăng cao kéo dài làm teo nơ-ron hồi hải mã (suy giảm trí nhớ nghiêm trọng), ức chế hệ miễn dịch (dễ nhiễm trùng, ung thư), tăng viêm thành mạch (xơ vữa động mạch, đột quỵ).", "• Giao cảm hưng phấn liên tục gây co thắt dạ dày, tăng axit dịch vị dẫn đến viêm loét dạ dày - tá tràng.", "<b>Bệnh Thể chất Tâm căn (Psychosomatic Disorders):</b> Các bệnh thể xác thực thể có căn nguyên hoặc trầm trọng thêm do căng thẳng tâm lý (cao huyết áp, viêm đại tràng co thắt IBS, đau cơ căng thẳng, chàm da).", "<b>Sức mạnh của Can thiệp Tâm lý:</b>", "• <i>Bài tập thở sâu chậm (Vagus nerve activation):</i> Kích thích thụ thể áp lực xoang cảnh, kích hoạt Dây thần kinh phế vị (dây X), làm giảm nhịp tim tức thì, hạ huyết áp và làm dịu hoạt động của Amygdala.", "• <i>Thiền định & Chánh niệm:</i> Làm giảm nồng độ cortisol lưu hành, tái lập kết nối ức chế của PFC lên Amygdala, giảm các chỉ dấu viêm sinh học."]}], "tables": [{"title": "Bảng So sánh Toàn diện Hệ Thần kinh Giao cảm vs. Đối giao cảm", "head": ["Cơ quan / Tiêu chí", "Hệ Thần kinh Giao cảm", "Hệ Thần kinh Đối giao cảm"], "rows": [["Tên gọi trạng thái", "Chiến đấu hoặc Bỏ chạy (Fight or Flight)", "Nghỉ ngơi và Tiêu hóa (Rest and Digest)"], ["Vị trí nguyên ủy", "Tủy sống ngực - thắt lưng (T1 - L2)", "Thân não (Dây III, VII, IX, X) và Tủy cùng (S2 - S4)"], ["Chất dẫn truyền sau hạch", "Noradrenaline (Norepinephrine)", "Acetylcholine (ACh)"], ["Nhịp tim & Huyết áp", "Tăng mạnh nhịp tim, tăng co bóp, tăng huyết áp", "Làm chậm nhịp tim, giảm co bóp, hạ huyết áp"], ["Đồng tử mắt", "Dãn đồng tử (tối đa hóa tầm nhìn xa)", "Co đồng tử (bảo vệ võng mạc, nhìn gần)"], ["Đường hô hấp (Phế quản)", "Dãn phế quản (hút tối đa oxy cho cơ bắp)", "Co phế quản về mức bình thường"], ["Hệ tiêu hóa & Bài tiết", "Ức chế nhu động, co thắt cơ vòng, giảm tiết dịch", "Tăng co bóp nhu động, dãn cơ vòng, tăng tiết dịch"], ["Tuyến mồ hôi", "Tăng tiết mồ hôi (làm mát cơ thể)", "Không chi phối"]]}, {"title": "So sánh Hai Con đường Phản ứng Cảm xúc theo Joseph LeDoux", "head": ["Tiêu chí đối chiếu", "Con đường Nhanh / Thấp (Low Road)", "Con đường Chậm / Cao (High Road)"], "rows": [["Lộ trình giải phẫu", "Đồi thị (Thalamus) → Hạch hạnh nhân (Amygdala)", "Đồi thị → Vỏ não cảm giác → Vỏ não trước trán → Amygdala"], ["Tốc độ truyền tin", "Cực nhanh (khoảng 12 mili-giây)", "Chậm hơn (khoảng 30 - 40 mili-giây)"], ["Độ chính xác", "Thô sơ, mang tính khái quát ('Thấy bóng dài giống rắn')", "Chi tiết, phân tích chính xác ('Chỉ là sợi dây thừng uốn khúc')"], ["Mục đích sinh tồn", "Phản ứng sinh tồn khẩn cấp để sống sót", "Đánh giá lại thực tế và điều hòa, kiểm soát cảm xúc phù hợp"]]}], "tips": ["Dây thần kinh sọ số X (Dây Phế vị - Vagus nerve) mang tới <b>75% toàn bộ lưu lượng sợi đối giao cảm</b> của cơ thể.", "Muốn bình tĩnh nhanh khi hoảng loạn: Hãy <b>thở ra dài gấp đôi hít vào</b> (4 giây hít - 8 giây thở ra) để kích hoạt dây X làm chậm nhịp tim.", "Hạch hạnh nhân (Amygdala) là máy dò nguy hiểm; Vỏ não trước trán (PFC) là người phanh hãm. Trưởng thành cảm xúc là khi PFC làm chủ Amygdala.", "Cortisol tiết ngắn hạn cứu mạng bạn; Cortisol tiết mạn tính do stress dai dẳng sẽ ăn mòn hồi hải mã và làm suy sụp hệ miễn dịch."], "cards": [["Hệ Thần kinh Tự chủ (ANS)", "Nhánh ly tâm điều khiển tự động hoạt động của nội tạng, cơ tim và tuyến."], ["Hệ Giao cảm", "Phân nhánh ANS kích hoạt phản ứng 'Chiến đấu hoặc Bỏ chạy' (Noradrenaline)."], ["Hệ Đối giao cảm", "Phân nhánh ANS thúc đẩy trạng thái 'Nghỉ ngơi và Tiêu hóa' (Acetylcholine)."], ["Dây thần kinh Phế vị (Dây X)", "Dây thần kinh sọ dài nhất, chủ lực của hệ đối giao cảm điều hòa tim, phổi, tiêu hóa."], ["Hệ viền (Limbic system)", "Mạng lưới cấu trúc dưới vỏ phụ trách cảm xúc, động cơ, học tập và ký ức."], ["Hạch hạnh nhân (Amygdala)", "Cấu trúc hạt hạnh nhân trong hệ viền, trung tâm xử lý nỗi sợ hãi và phản ứng phòng vệ."], ["Vỏ não trước trán (PFC)", "Vùng vỏ não kiểm soát cảm xúc từ trên xuống, ức chế các phản ứng bốc đồng của Amygdala."], ["Trục HPA", "Trục Dưới đồi - Tuyến yên - Thượng thận điều hòa phản ứng stress của cơ thể."], ["Cortisol", "Hormone chống stress do vỏ thượng thận tiết ra, giúp tăng đường huyết để ứng phó thử thách."], ["Low Road (LeDoux)", "Đường truyền cảm xúc tắt từ Đồi thị thẳng tới Amygdala cho phản xạ sinh tồn siêu nhanh."], ["High Road (LeDoux)", "Đường truyền cảm xúc qua vỏ não giúp phân tích chi tiết và điều chỉnh phản ứng."], ["Bệnh Thể chất Tâm căn", "Các tổn thương thực thể ở nội tạng bắt nguồn hoặc trầm trọng do stress tâm lý kéo dài."], ["Sợi trước hạch ANS", "Cả giao cảm và đối giao cảm đều giải phóng Acetylcholine (ACh) ở nơ-ron trước hạch."], ["Cơ quan đáp ứng ANS", "Hệ tự chủ điều khiển cơ tim, cơ trơn và các tuyến để duy trì cân bằng nội môi."], ["Đáp ứng giao cảm căng thẳng", "Tim đập nhanh, dãn đồng tử, khô miệng, đổ mồ hôi và giảm tiêu hóa khi sợ hãi."]], "qs": [["Dây thần kinh sọ nào sau đây là thành phần chủ lực của Hệ thần kinh Đối giao cảm, chi phối nhịp tim và hệ tiêu hóa?", ["Dây thần kinh thị giác (Dây II)", "Dây thần kinh sinh ba (Dây V)", "Dây thần kinh phế vị (Dây X)", "Dây thần kinh thính giác (Dây VIII)"], 2, "Dây thần kinh phế vị (dây X) chứa khoảng 75% sợi đối giao cảm của cơ thể."], ["Cấu trúc nào thuộc Hệ viền (Limbic system) giữ vai trò trung tâm trong việc nhận diện mối đe dọa và khơi mào cảm giác sợ hãi?", ["Hồi hải mã", "Hạch hạnh nhân (Amygdala)", "Thể vú", "Vỏ khuy"], 1, "Hạch hạnh nhân (Amygdala) là trung tâm phát hiện đe dọa và xử lý phản ứng sợ hãi."], ["Khi gặp phải tình huống nguy hiểm bất ngờ, Hệ Giao cảm sẽ gây ra đáp ứng sinh lý nào sau đây?", ["Co đồng tử và làm chậm nhịp tim", "Tăng nhu động ruột và tăng tiết nước bọt", "Dãn đồng tử, tăng nhịp tim và dãn phế quản", "Hạ huyết áp và ức chế tiết mồ hôi"], 2, "Hệ giao cảm kích hoạt trạng thái Fight or Flight: dãn đồng tử, tăng nhịp tim, dãn phế quản để chuẩn bị đối phó."], ["Chất dẫn truyền thần kinh chính được giải phóng bởi các sợi sau hạch của Hệ Giao cảm tác động lên cơ tim là:", ["Acetylcholine", "Noradrenaline (Norepinephrine)", "GABA", "Serotonin"], 1, "Noradrenaline là chất dẫn truyền sau hạch chủ yếu của hệ giao cảm."], ["Trục sinh lý thần kinh - nội tiết nào chịu trách nhiệm điều hòa phản ứng của cơ thể trước các tác nhân gây stress kéo dài?", ["Trục Dưới đồi – Tuyến yên – Tuyến thượng thận (Trục HPA)", "Trục Thể vân – Liềm đen", "Trục Tiểu não – Tiền đình", "Trục Thalamus – Thùy chẩm"], 0, "Trục HPA (Hypothalamic-Pituitary-Adrenal axis) là trục điều hòa phản ứng stress kinh điển."], ["Vùng não nào thực hiện chức năng 'phanh hãm' kiểm soát từ trên xuống (top-down) để làm dịu sự bùng phát cảm xúc của Hạch hạnh nhân?", ["Thùy chẩm", "Vỏ não trước trán (Prefrontal Cortex)", "Tiểu não", "Hành não"], 1, "Vỏ não trước trán (PFC) giúp đánh giá logic và gửi xung ức chế kiềm chế Amygdala."], ["Theo mô hình 2 con đường cảm xúc của Joseph LeDoux, con đường 'Low Road' (Đường tắt) có lộ trình là:", ["Đồi thị → Vỏ não thùy trán → Hồi hải mã", "Đồi thị → Hạch hạnh nhân (Thalamus → Amygdala)", "Hạch hạnh nhân → Tủy sống → Cơ", "Võng mạc → Thùy chẩm → Tiểu não"], 1, "Đường tắt đi thẳng từ Thalamus tới Amygdala giúp cơ thể phản ứng phòng vệ chỉ trong 12 mili-giây."], ["Cơ chế sinh lý học giải thích tại sao bài tập thở sâu và chậm giúp con người nhanh chóng lấy lại sự bình tĩnh là:", ["Làm tăng nồng độ Adrenaline trong máu", "Kích hoạt dây thần kinh phế vị (đối giao cảm) làm giảm nhịp tim và hạ huyết áp", "Gây ức chế vượt hạn toàn bộ vỏ não", "Khử cực tức thì tế bào que võng mạc"], 1, "Thở chậm kích thích thụ thể áp lực và dây phế vị (dây X), làm tăng trương lực đối giao cảm giúp làm dịu cơ thể."], ["Chất dẫn truyền thần kinh do các sợi trước hạch của CẢ hệ giao cảm và đối giao cảm tiết ra là gì?", ["Norepinephrine", "Epinephrine", "Acetylcholine (ACh)", "Dopamine"], 2, "Sợi trước hạch của cả giao cảm và đối giao cảm đều tiết Acetylcholine (ACh)."], ["Nhóm cơ quan đáp ứng nào chịu sự điều khiển trực tiếp chủ yếu của Hệ Thần kinh Tự động?", ["Cơ xương, gân và dây chằng", "Cơ tim, cơ trơn và các tuyến", "Cơ xương, cơ tim và các khớp", "Cơ trơn, cơ xương và dây chằng"], 1, "Hệ thần kinh tự động điều hòa hoạt động của cơ tim, cơ trơn và các tuyến để cân bằng nội môi."], ["Khi nhìn thấy chó dữ xông tới, bạn An cảm thấy tim đập nhanh, khô miệng, tay đổ mồ hôi và mắt mở to. Hiện tượng này do phân nhánh nào chi phối?", ["Hệ thần kinh vận động somatic", "Hệ thần kinh đối giao cảm", "Hệ thần kinh giao cảm", "Vỏ não vận động sơ cấp"], 2, "Căng thẳng sợ hãi kích hoạt hệ giao cảm: tim đập nhanh, dãn đồng tử, khô miệng và đổ mồ hôi."], ["Trước khi bước lên bục thuyết trình, một sinh viên lo lắng, tim đập nhanh và đồng tử dãn to. Cách giải thích sinh lý nào sau đây phù hợp nhất?", ["Tăng hoạt động đối giao cảm, đồng thời tăng nhu động ruột", "Tăng hoạt động giao cảm, đồng thời tăng nhu động ruột", "Tăng hoạt động đối giao cảm, đồng thời giảm nhu động ruột", "Tăng hoạt động giao cảm, đồng thời giảm nhu động ruột"], 3, "Đáp ứng giao cảm làm tăng nhịp tim, dãn đồng tử và giảm hoạt động tiêu hóa (giảm nhu động ruột)."]], "trees": [["Thần kinh Tự chủ & Cảm xúc", "Cân bằng sinh tồn & Trục Não - Cơ thể", "gồm", [["Hệ Tự chủ (ANS)", "Điều hòa nội tạng", "gồm 2 nhánh đối kháng", [["Hệ Giao cảm", "Fight or Flight (Noradrenaline); tăng tim, dãn phế quản, ức chế ruột", "", []], ["Hệ Đối giao cảm", "Rest and Digest (Acetylcholine, Dây X); chậm tim, kích thích tiêu hóa", "", []]]], ["Hệ Viền (Limbic)", "Não bộ cảm xúc", "thành phần", [["Hạch hạnh nhân (Amygdala)", "phát hiện mối nguy, khơi mào sợ hãi, hung tính", "", []], ["Vỏ não trước trán (PFC)", "phanh hãm từ trên xuống, kiểm soát xung động", "", []], ["Hồi hải mã", "gắn nhãn bối cảnh không gian/thời gian cho cảm xúc", "", []]]], ["Sinh lý Stress (HPA)", "Trục Thần kinh - Nội tiết", "chu trình", [["Trục HPA", "Dưới đồi (CRH) → Tuyến yên (ACTH) → Thượng thận (Cortisol)", "", []], ["Hai đường cảm xúc (LeDoux)", "Low Road (nhanh, sinh tồn) vs High Road (chậm, chính xác)", "", []]]], ["Tác động Tâm - Thể", "Ảnh hưởng hai chiều", "biểu hiện", [["Stress mạn tính", "teo hồi hải mã, suy giảm miễn dịch, viêm loét dạ dày", "", []], ["Can thiệp phục hồi", "thở chậm kích hoạt dây X đối giao cảm làm dịu tim mạch", "", []]]]]]]}, {"id": "tk5", "part": "Phần II: HĐTK Cấp cao & Hiện tượng Tâm lý", "code": "TK.5", "title": "Quy luật Hưng phấn – Ức chế & Phản xạ Có điều kiện", "goals": ["Trình bày 2 quá trình thần kinh cơ bản (Hưng phấn, Ức chế) và các quy luật hoạt động của vỏ não.", "Mô tả quá trình hình thành Phản xạ có điều kiện của Pavlov và cơ chế đường liên hệ tạm thời.", "Phân biệt và so sánh toàn diện Ức chế Không điều kiện (Ngoại sinh) và Ức chế Có điều kiện (Nội sinh).", "Nắm vững ý nghĩa thích nghi sinh học và vận dụng vào hình thành thói quen, kỹ năng tâm lý."], "sections": [{"h": "Hai Quá trình Thần kinh Cơ bản & Các Quy luật Vỏ não", "items": ["<b>Hai quá trình thần kinh cơ bản:</b> Toàn bộ hoạt động phức tạp của vỏ não đều dựa trên sự đối lập và thống nhất của hai quá trình:", "• <b>Hưng phấn (Excitation):</b> Quá trình nơ-ron phát xung động, kích thích cơ quan đáp ứng chuyển từ trạng thái nghỉ sang hoạt động hoặc tăng cường hoạt động.", "• <b>Ức chế (Inhibition):</b> Quá trình làm kìm hãm, suy giảm hoặc chấm dứt hoạt động đang diễn ra của nơ-ron hoặc cơ quan đáp ứng.", "<b>Ba quy luật hoạt động của vỏ não (Pavlov):</b>", "• <i>1. Quy luật Lan tỏa & Tập trung:</i> Một điểm hưng phấn hay ức chế ban đầu sẽ lan rộng ra các vùng xung quanh (Lan tỏa); sau đó thu hẹp lại tại điểm xuất phát (Tập trung). Vd: Mới tập lái xe thì gồng toàn thân (lan tỏa), tập thuần thục chỉ cử động cổ tay và chân (tập trung).", "• <i>2. Quy luật Cảm ứng qua lại (Induction):</i> Một quá trình này gây ra hoặc tăng cường quá trình kia:", "  - <i>Cảm ứng đồng thời:</i> Ổ hưng phấn ở một điểm làm xuất hiện ổ ức chế ở các vùng lân cận (vd: đang tập trung cao độ đọc sách thì không nghe thấy tiếng người gọi xung quanh).", "  - <i>Cảm ứng tiếp diễn:</i> Ngay tại một điểm, sau hưng phấn mạnh sẽ chuyển sang ức chế sâu sắc (vd: sau một đợt thi cử căng thẳng thì rơi vào trạng thái ngủ say li bì).", "• <i>3. Quy luật Tương quan Cường độ:</i> Trong giới hạn bình thường, cường độ kích thích càng mạnh thì phản ứng đáp ứng của vỏ não càng lớn."]}, {"h": "Phản xạ Có điều kiện (PX CĐK) & Đường liên hệ Thần kinh Tạm thời", "items": ["<b>Thí nghiệm kinh điển của I.P. Pavlov:</b>", "• Thức ăn (Kích thích không điều kiện - US) → Tiết nước bọt (Phản xạ không điều kiện - UR).", "• Ánh đèn/Tiếng chuông (Kích thích trung tính) → Không tiết nước bọt.", "• Bật đèn/chuông kết hợp cho ăn (lặp lại nhiều lần) → Ánh đèn/chuông trở thành Kích thích có điều kiện (CS) → Tiết nước bọt (Phản xạ có điều kiện - CR).", "<b>Bốn điều kiện bắt buộc để thành lập PX CĐK:</b>", "1. Kích thích có điều kiện (chuông) phải <b>đi trước</b> kích thích không điều kiện (thức ăn) một khoảng thời gian ngắn (vài giây đến nửa phút).", "2. Kích thích có điều kiện phải trơ về mặt sinh học (không gây phản xạ quá mạnh dập tắt kích thích kia).", "3. Vỏ não phải hoàn toàn <b>tỉnh táo, khỏe mạnh</b>, không bị ngộ độc hoặc ức chế.", "4. Môi trường xung quanh phải yên tĩnh, <b>không có kích thích lạ</b> làm xao nhãng.", "<b>Cơ chế sinh lý học cốt lõi:</b> Sự hình thành <b>ĐƯỜNG LIÊN HỆ THẦN KINH TẠM THỜI (Temporary Neural Connection)</b> trên vỏ não giữa trung khu cảm giác tiếp nhận kích thích có điều kiện và trung khu của phản xạ không điều kiện."]}, {"h": "Ức chế Không điều kiện (Ức chế Ngoại sinh)", "items": ["<b>Đặc điểm chung:</b> Mang tính bẩm sinh, không cần qua tập luyện, xuất hiện ngay khi có tác nhân tương ứng tác động.", "<b>Gồm 2 dạng ức chế:</b>", "• <b>1. Ức chế bộc phát (Ức chế ngoại lai):</b> Xuất hiện khi có một kích thích lạ, bất ngờ tác động từ bên ngoài làm xuất hiện phản xạ định hướng 'Cái gì thế?'. Phản xạ định hướng này tạo ra một ổ hưng phấn mới dập tắt phản xạ có điều kiện đang diễn ra theo quy luật cảm ứng đồng thời. (Vd: Học sinh đang chăm chú nghe giảng bỗng nghe tiếng nổ ngoài sân trường liền gián đoạn bài học).", "• <b>2. Ức chế vượt hạn (Ức chế bảo vệ):</b> Xuất hiện khi cường độ kích thích quá mạnh hoặc kéo dài vượt quá giới hạn chịu đựng chức năng của tế bào vỏ não. Khi đó tế bào vỏ não tự động chuyển sang trạng thái ức chế để bảo vệ nơ-ron không bị cạn kiệt năng lượng và hoại tử.", "• <b>Bản chất của giấc ngủ tự nhiên:</b> Giấc ngủ chính là sự lan tỏa của ức chế bảo vệ ra toàn bộ vỏ bán cầu đại não và các tầng dưới vỏ."]}, {"h": "Ức chế Có điều kiện (Ức chế Nội sinh)", "items": ["<b>Đặc điểm chung:</b> Không có sẵn bẩm sinh; phải trải qua quá trình <b>tập luyện và hình thành trong đời sống cá thể</b>; giúp hành vi thích nghi tinh vi với biến đổi môi trường.", "<b>Gồm 4 dạng ức chế:</b>", "• <b>1. Ức chế dập tắt:</b> Xuất hiện khi kích thích có điều kiện (tiếng chuông) lặp lại nhiều lần mà <i>không được củng cố</i> bằng kích thích không điều kiện (thức ăn). Đường liên hệ tạm thời bị ức chế, phản xạ mất dần. (Vd: Dập tắt thói quen xấu khi không còn được tưởng thưởng).", "• <b>2. Ức chế phân biệt:</b> Chỉ củng cố kích thích chuẩn (chuông tần số 1000Hz), không củng cố kích thích na ná (chuông 800Hz). Giúp nơ-ron phân biệt tinh tế các tín hiệu khác nhau trong môi trường. (Vd: Trẻ học phân biệt chữ 'o' và chữ 'ô').", "• <b>3. Ức chế làm chậm:</b> Kéo dài dần khoảng thời gian giữa lúc bật tín hiệu có điều kiện đến khi cho ăn (từ vài giây kéo dài ra 2-3 phút). Phản ứng tiết nước bọt không xuất hiện ngay mà hoãn lại đúng thời điểm thức ăn tới. Là cơ sở sinh lý của <b>tính kiên nhẫn, khả năng tự chủ và chờ đợi</b>.", "• <b>4. Ức chế điều kiện:</b> Phối hợp thêm một tác nhân phụ biến kích thích có điều kiện thành tín hiệu ngưng hoạt động."]}, {"h": "Định hình Động lực (Dynamic Stereotype) & Ý nghĩa Thích nghi", "items": ["<b>Định hình động lực (Dynamic Stereotype):</b> Là một hệ thống các phản xạ có điều kiện được cố định hóa theo một trình tự thời gian và không gian nhất định trên vỏ não sau nhiều lần lặp lại.", "<b>Ý nghĩa thực tiễn:</b>", "• Giúp cơ thể thực hiện chuỗi hành vi phức tạp một cách tự động, nhịp nhàng, tốn ít năng lượng thần kinh nhất (vd: thói quen dậy sớm, kỹ năng đánh máy 10 ngón, chơi đàn piano, quy trình làm việc chuẩn).", "• <i>Tính linh hoạt:</i> Dù đã định hình bền vững nhưng vẫn là 'động' (dynamic), có thể phá vỡ và tái lập định hình mới khi môi trường sống thay đổi (dù đòi hỏi nỗ lực ức chế và hưng phấn rất lớn)."]}], "tables": [{"title": "So sánh Phản xạ Không điều kiện vs. Phản xạ Có điều kiện", "head": ["Tiêu chí phân biệt", "Phản xạ Không điều kiện (PX KĐK)", "Phản xạ Có điều kiện (PX CĐK)"], "rows": [["Nguồn gốc hình thành", "Bẩm sinh, di truyền theo loài từ khi sinh ra", "Tập nhiễm, hình thành trong đời sống cá thể qua trải nghiệm"], ["Cung phản xạ giải phẫu", "Cố định, khép kín ở tủy sống và thân não", "Tạm thời, bắt buộc có sự tham gia của Vỏ bán cầu đại não"], ["Tác nhân kích thích", "Tác nhân không điều kiện tác động trực tiếp lên thụ thể", "Tác nhân có điều kiện (bất kỳ) mang ý nghĩa báo hiệu gián tiếp"], ["Số lượng & Tính bền vững", "Số lượng hạn chế, bền vững suốt đời không mất", "Số lượng vô hạn, không bền vững (dễ mất nếu không củng cố)"], ["Ý nghĩa thích nghi", "Thích nghi thô sơ trong điều kiện sống ổn định", "Thích nghi mềm dẻo, linh hoạt với môi trường luôn biến đổi"]]}, {"title": "So sánh Ức chế Không điều kiện vs. Ức chế Có điều kiện", "head": ["Tiêu chí", "Ức chế Không điều kiện (Ngoại sinh)", "Ức chế Có điều kiện (Nội sinh)"], "rows": [["Bản chất sinh học", "Bẩm sinh, có sẵn ở mọi cá thể cùng loài", "Mắc phải, hình thành do rèn luyện và học tập"], ["Nguyên nhân xuất hiện", "Do kích thích lạ (bộc phát) hoặc kích thích quá ngưỡng (vượt hạn)", "Do không củng cố, do phân biệt hoặc hoãn củng cố"], ["Vị trí xảy ra", "Xảy ra ở cả vỏ não và các tầng thần kinh dưới vỏ", "Chỉ xảy ra chuyên biệt ở Vỏ bán cầu đại não"], ["Ý nghĩa thích nghi", "Bảo vệ tế bào nơ-ron khỏi kiệt quệ năng lượng; sinh tồn", "Giúp hành vi tinh vi, chính xác, rèn luyện tính kiên nhẫn, tự chủ"]]}], "tips": ["Muốn tạo thói quen mới: Tín hiệu có điều kiện (chuông) <b>phải đi TRƯỚC</b> phần thưởng/củng cố (thức ăn); đi sau sẽ không bao giờ tạo được phản xạ!", "Khi học tập mệt mỏi mà cố nhồi nhét, não sẽ bật cơ chế <b>Ức chế vượt hạn</b> (bảo vệ) khiến bạn đọc sách mà chữ không vào đầu — giải pháp là ngủ nghỉ để hồi phục.", "<b>Ức chế làm chậm</b> là nền tảng sinh lý của 'Khả năng trì hoãn sự thỏa mãn' (Marshmallow test) — chìa khóa của thành công cá nhân.", "Quen tay, thành thạo một kỹ năng chính là hình thành <b>Định hình động lực (Dynamic stereotype)</b> trên vỏ não."], "cards": [["Hưng phấn (Excitation)", "Quá trình thần kinh kích hoạt hoặc làm tăng cường hoạt động của tế bào và cơ quan."], ["Ức chế (Inhibition)", "Quá trình thần kinh kìm hãm, suy giảm hoặc làm ngừng trệ hoạt động đang diễn ra."], ["Đường liên hệ tạm thời", "Kết nối chức năng mới hình thành giữa 2 ổ hưng phấn trên vỏ não trong phản xạ có điều kiện."], ["Cảm ứng đồng thời", "Quy luật: Một ổ hưng phấn xuất hiện sẽ gây ức chế ở các vùng xung quanh trên vỏ não."], ["Cảm ứng tiếp diễn", "Quy luật: Tại cùng một điểm, sau trạng thái hưng phấn mạnh sẽ tiếp nối trạng thái ức chế sâu sắc."], ["Ức chế bộc phát (Ngoại lai)", "Ức chế bẩm sinh do kích thích lạ gây phản xạ định hướng 'Cái gì thế?', dập tắt phản xạ cũ."], ["Ức chế vượt hạn (Bảo vệ)", "Ức chế xuất hiện khi kích thích quá mạnh hoặc kéo dài, bảo vệ tế bào vỏ não không kiệt quệ."], ["Giấc ngủ tự nhiên", "Hiện tượng ức chế bảo vệ lan tỏa ra toàn bộ vỏ bán cầu đại não và các tầng dưới vỏ."], ["Ức chế dập tắt", "Ức chế nội sinh xuất hiện khi kích thích có điều kiện không còn được củng cố bằng kích thích không điều kiện."], ["Ức chế phân biệt", "Ức chế chỉ củng cố kích thích chuẩn, giúp phân biệt tinh tế các tín hiệu sai lệch."], ["Ức chế làm chậm", "Ức chế kéo dài khoảng hoãn giữa tín hiệu và củng cố; là cơ sở của tính kiên nhẫn và tự chủ."], ["Định hình động lực", "Hệ thống các phản xạ có điều kiện được cố định hóa theo trình tự không gian và thời gian."]], "qs": [["Cơ sở sinh lý học thần kinh cốt lõi của việc hình thành một Phản xạ có điều kiện theo I.P. Pavlov là:", ["Sự phá hủy hoàn toàn bao myelin của nơ-ron cảm giác", "Sự thành lập đường liên hệ thần kinh tạm thời giữa 2 ổ hưng phấn trên vỏ não", "Sự xuất hiện đột ngột của ức chế vượt hạn", "Sự đóng băng toàn bộ các kênh ion Canxi"], 1, "Bản chất của phản xạ có điều kiện là sự hình thành đường liên hệ thần kinh tạm thời trên vỏ não."], ["Điều kiện tiên quyết nào sau đây là bắt buộc để thành lập một phản xạ có điều kiện?", ["Kích thích có điều kiện phải đi trước kích thích không điều kiện một khoảng thời gian ngắn", "Kích thích không điều kiện phải xuất hiện trước kích thích có điều kiện", "Phải thực hiện trong lúc đối tượng đang ngủ sâu", "Kích thích có điều kiện phải gây đau đớn dữ dội"], 0, "Kích thích có điều kiện (tín hiệu) bắt buộc phải đi trước kích thích không điều kiện."], ["Khi đang chăm chú làm bài thi, một tiếng sấm sét nổ vang khiến sinh viên giật mình đánh rơi bút và ngưng viết. Đây là ví dụ của dạng ức chế nào?", ["Ức chế vượt hạn", "Ức chế dập tắt", "Ức chế bộc phát (ngoại lai)", "Ức chế phân biệt"], 2, "Tiếng sấm kích thích phản xạ định hướng bất ngờ, gây ức chế bộc phát dập tắt hành vi viết."], ["Một học sinh học bài liên tục suốt 14 tiếng đồng hồ không nghỉ, sau đó rơi vào trạng thái đờ đẫn, đọc sách không hiểu gì và thiếp đi. Hiện tượng này do dạng ức chế nào bảo vệ não bộ?", ["Ức chế dập tắt", "Ức chế vượt hạn (bảo vệ)", "Ức chế phân biệt", "Ức chế làm chậm"], 1, "Ức chế vượt hạn xuất hiện khi kích thích kéo dài quá sức chịu đựng chức năng của nơ-ron."], ["Khi một thói quen (như rung chuông thì chó tiết nước bọt) lặp đi lặp lại nhiều lần mà không bao giờ được cho ăn nữa, phản xạ sẽ yếu dần rồi biến mất. Đây là:", ["Ức chế dập tắt", "Ức chế bộc phát", "Ức chế làm chậm", "Ức chế vượt hạn"], 0, "Ức chế dập tắt xảy ra khi kích thích có điều kiện không còn được củng cố bằng kích thích không điều kiện."], ["Bản chất sinh lý học của khả năng rèn luyện 'tính kiên nhẫn', biết kiềm chế chờ đợi đến thời điểm thích hợp là dạng ức chế nào?", ["Ức chế bộc phát", "Ức chế vượt hạn", "Ức chế làm chậm", "Ức chế dập tắt"], 2, "Ức chế làm chậm tạo ra khoảng hoãn giữa tín hiệu và hành động, rèn luyện khả năng tự chủ."], ["Quy luật nào giải thích hiện tượng: Một người đang tập trung cao độ giải bài toán khó thì hoàn toàn không để ý thấy tiếng quạt trần hay người khác nói chuyện bên cạnh?", ["Quy luật lan tỏa", "Quy luật cảm ứng đồng thời", "Quy luật tương quan cường độ", "Quy luật thích ứng cảm giác"], 1, "Ổ hưng phấn mạnh ở trung khu tư duy gây ức chế cảm ứng đồng thời ở các vùng cảm giác xung quanh."], ["Hệ thống các phản xạ có điều kiện được kết nối tuần tự thành thói quen vững chắc, giúp cơ thể thao tác thuần thục và tiết kiệm năng lượng được Pavlov gọi là:", ["Cung phản xạ tủy sống", "Định hình động lực (Dynamic Stereotype)", "Tính mềm dẻo ngoại biên", "Hội chứng Split-Brain"], 1, "Định hình động lực là hệ thống phản xạ có điều kiện nối tiếp nhau thành nếp quen vững chắc trên vỏ não."]], "trees": [["Hưng phấn – Ức chế & PX CĐK", "Quy luật cơ bản của vỏ não", "gồm", [["2 Quá trình cơ bản", "Hưng phấn & Ức chế", "quy luật", [["Lan tỏa & Tập trung", "từ một điểm lan rộng rồi thu gọn lại", "", []], ["Cảm ứng qua lại", "cảm ứng đồng thời (xung quanh) & tiếp diễn (nối tiếp)", "", []], ["Tương quan cường độ", "kích thích mạnh tạo đáp ứng mạnh trong ngưỡng", "", []]]], ["Phản xạ Có điều kiện", "Thí nghiệm Pavlov", "nguyên lý", [["Điều kiện thành lập", "CS đi trước US ngắn; vỏ não tỉnh táo; không kích thích lạ", "", []], ["Cơ chế cốt lõi", "hình thành Đường liên hệ thần kinh tạm thời trên vỏ não", "", []], ["Ý nghĩa", "thích nghi linh hoạt và dự báo biến động môi trường", "", []]]], ["Ức chế Không ĐK (Ngoại sinh)", "Bẩm sinh, bảo vệ", "gồm", [["Ức chế bộc phát", "kích thích lạ tạo phản xạ định hướng dập tắt phản xạ cũ", "", []], ["Ức chế vượt hạn", "kích thích quá mạnh/dài; bảo vệ nơ-ron kiệt quệ (Giấc ngủ)", "", []]]], ["Ức chế Có ĐK (Nội sinh)", "Tập nhiễm, rèn luyện", "gồm", [["Ức chế dập tắt", "không củng cố làm mất phản xạ (bỏ thói quen cũ)", "", []], ["Ức chế phân biệt", "chỉ củng cố kích thích chuẩn, nhận diện tinh vi", "", []], ["Ức chế làm chậm", "hoãn củng cố; nền tảng tính kiên nhẫn & tự chủ", "", []]]], ["Định hình Động lực", "Thói quen vững chắc", "chuỗi phản xạ liên hoàn tự động trên vỏ não", []]]]]}, {"id": "tk6", "part": "Phần II: HĐTK Cấp cao & Hiện tượng Tâm lý", "code": "TK.6", "title": "Hệ thống Tín hiệu, 4 Kiểu Thần kinh & Học tập – Trí nhớ", "goals": ["Mô tả hoạt động phân tích, tổng hợp của vỏ não và phân biệt 2 Hệ thống tín hiệu (HTTH).", "Trình bày 4 kiểu hoạt động thần kinh theo I.P. Pavlov và mối liên hệ với 4 khí chất Hippocrates.", "Giải thích cơ chế sinh lý của Học tập & Trí nhớ (Hồi hải mã, củng cố synap dài hạn - LTP).", "Vận dụng nguyên tắc sinh lý thần kinh để tối ưu hóa phương pháp học tập và rèn luyện trí nhớ."], "sections": [{"h": "Hoạt động Phân tích – Tổng hợp của Vỏ não", "items": ["<b>Hoạt động Phân tích (Analysis):</b> Quá trình vỏ não phân chia một kích thích phức tạp của môi trường thành từng thuộc tính đơn lẻ (nhờ thụ thể và vùng vỏ não cảm giác sơ cấp). Vd: Mắt phân tích riêng độ sáng, màu sắc đỏ/xanh, góc cạnh của quả táo.", "<b>Hoạt động Tổng hợp (Synthesis):</b> Quá trình các vùng liên hợp vỏ não liên kết các thuộc tính đơn lẻ đã được phân tích thành một hình ảnh tổng thể trọn vẹn, khái quát. Vd: Tổng hợp màu đỏ + mùi thơm + vị ngọt + hình tròn thành nhận thức 'Quả táo ăn được'.", "<b>Mối quan hệ biện chứng:</b> Phân tích và Tổng hợp là hai mặt của một quá trình nhận thức thống nhất; không có phân tích chi tiết thì tổng hợp sai lệch, không có tổng hợp thì nhận thức rời rạc vô nghĩa."]}, {"h": "Hai Hệ thống Tín hiệu (Signaling Systems) của Pavlov", "items": ["<b>Hệ thống tín hiệu thứ nhất (First Signaling System):</b>", "• Tín hiệu là bản thân <b>các sự vật, hiện tượng cụ thể</b> trong thế giới khách quan tác động trực tiếp vào các giác quan (màu sắc, âm thanh sấm sét, mùi vị, nhiệt độ nóng lạnh).", "• <i>Phạm vi:</i> Chung cho cả <b>con người và động vật</b>.", "• Là cơ sở sinh lý của <b>tư duy hình tượng cụ thể</b> và cảm giác, tri giác trực quan.", "<b>Hệ thống tín hiệu thứ hai (Second Signaling System):</b>", "• Tín hiệu là <b>tiếng nói và chữ viết</b> — được Pavlov gọi là <i>'Tín hiệu của các tín hiệu thứ nhất'</i>.", "• <i>Phạm vi:</i> <b>Đặc trưng riêng biệt duy nhất của con người</b>; hình thành gắn liền với lao động và đời sống xã hội.", "• Là cơ sở sinh lý của <b>tư duy trừu tượng, khái quát hóa</b>, ngôn ngữ, ý thức và văn hóa nhân loại."]}, {"h": "Bốn Kiểu Hoạt động Thần kinh theo Pavlov & Bốn Khí chất", "items": ["<b>Ba thuộc tính của hai quá trình Hưng phấn & Ức chế (Pavlov):</b>", "• <i>Cường độ:</i> Thần kinh Mạnh hay Yếu.", "• <i>Cân bằng:</i> Hưng phấn và Ức chế có tương đương nhau hay chênh lệch (Cân bằng vs Không cân bằng).", "• <i>Linh hoạt:</i> Khả năng chuyển đổi qua lại giữa Hưng phấn và Ức chế nhanh hay chậm (Linh hoạt vs Không linh hoạt).", "<b>Bốn kiểu hình thần kinh kinh điển đối chiếu 4 khí chất Hippocrates:</b>", "1. <b>Mạnh – Cân bằng – Linh hoạt:</b> Tương ứng khí chất <b>Hăng hái / Hoạt bát (Sanguine)</b>. Tiếp thu nhanh, năng động, lạc quan, thích nghi tốt với môi trường mới, nhưng dễ nản nếu công việc lặp lại đơn điệu.", "2. <b>Mạnh – Cân bằng – Không linh hoạt (Trầm):</b> Tương ứng khí chất <b>Bình thản / Điềm đạm (Phlegmatic)</b>. Chắc chắn, kiên trì, ngăn nắp, làm việc sâu sắc, kiềm chế cảm xúc rất tốt nhưng khó thay đổi thói quen cũ.", "3. <b>Mạnh – Không cân bằng (Hưng phấn > Ức chế):</b> Tương ứng khí chất <b>Nóng nảy (Choleric)</b>. Nhiệt huyết, quyết liệt, dám nghĩ dám làm, phản ứng cực nhanh nhưng dễ cáu gắt, thiếu kiên nhẫn khi gặp cản trở.", "4. <b>Yếu (Cả hưng phấn và ức chế đều yếu):</b> Tương ứng khí chất <b>Ưu tư (Melancholic)</b>. Tế bào vỏ não dễ bị ức chế vượt hạn khi chịu kích thích mạnh; giàu lòng trắc ẩn, nhạy cảm tinh tế nhưng nhút nhát, dễ tổn thương và chịu áp lực kém."]}, {"h": "Cơ chế Sinh lý Thần kinh của Học tập & Trí nhớ", "items": ["<b>Trí nhớ ngắn hạn vs. Trí nhớ dài hạn:</b>", "• <i>Trí nhớ ngắn hạn (Làm việc):</i> Dựa trên hoạt động tuần hoàn xung điện trong mạng nơ-ron (vỏ não trước trán PFC), kéo dài vài giây đến vài phút.", "• <i>Trí nhớ dài hạn:</i> Đòi hỏi thay đổi cấu trúc synap và tổng hợp protein mới.", "<b>Củng cố synap dài hạn (Long-Term Potentiation - LTP):</b>", "• Cơ chế sinh học phân tử cốt lõi của việc ghi nhớ: Khi một synap được kích hoạt lặp đi lặp lại với tần số cao, kênh thụ thể <b>NMDA</b> mở ra cho dòng $Ca^{2+}$ ồ ạt vào màng sau synap.", "• $Ca^{2+}$ kích hoạt enzyme kinase chèn thêm hàng loạt thụ thể <b>AMPA</b> lên màng sau synap, làm synap đó trở nên <b>siêu nhạy cảm</b> với kích thích trong tương lai.", "<b>Vai trò sống còn của Hồi hải mã (Hippocampus):</b>", "• Là 'nhạc trưởng' củng cố trí nhớ (Memory consolidation); chuyển đổi trí nhớ ngắn hạn thành dài hạn để lưu trữ rải rác trên vỏ não.", "• Bệnh nhân kinh điển <b>H.M. (Henry Molaison)</b> bị cắt bỏ 2 bên hồi hải mã: Giữ nguyên ký ức tuổi thơ cũ nhưng mất hoàn toàn khả năng tạo ký ức sự kiện mới (Chứng quên thuận chiều - Anterograde amnesia)."]}, {"h": "Vận dụng Khoa học Não bộ Tối ưu hóa Phương pháp Học tập", "items": ["<b>1. Ôn tập ngắt quãng (Spaced Repetition):</b> Phân tán thời gian học thành nhiều đợt cách nhau giúp kích thích củng cố LTP và tránh để nơ-ron rơi vào <b>ức chế vượt hạn</b>.", "<b>2. Thực hành truy hồi chủ động (Active Recall):</b> Tự đặt câu hỏi và cố gắng nhớ lại (làm flashcards, giải đề thi) kích hoạt đường liên hệ thần kinh tạm thời mạnh gấp 10 lần so với việc đọc thụ động.", "<b>3. Vai trò của Giấc ngủ đối với Trí nhớ:</b> Trong giấc ngủ sóng chậm (NREM) và ngủ REM, Hồi hải mã liên tục 'phát lại' (replay) các thông tin học trong ngày lên vỏ não để khắc sâu ký ức; thiếu ngủ làm giảm 40% khả năng ghi nhớ thông tin mới.", "<b>4. Đa giác quan hóa thông tin:</b> Kết hợp hình ảnh (Thùy chẩm), âm thanh (Thùy thái dương) và sơ đồ tư duy liên kết cả hai bán cầu não giúp gia tăng độ bền vững của mạng lưới synap."]}], "tables": [{"title": "Ma trận 4 Kiểu Hoạt động Thần kinh Pavlov đối chiếu 4 Khí chất Hippocrates", "head": ["Kiểu Thần kinh (Pavlov)", "Cường độ – Cân bằng – Linh hoạt", "Khí chất tương ứng", "Đặc điểm tâm lý & Ứng xử"], "rows": [["Kiểu Linh hoạt", "Mạnh – Cân bằng – Linh hoạt", "Hăng hái (Sanguine)", "Hoạt bát, cởi mở, tiếp thu nhanh, thích nghi linh hoạt, dễ chán việc đơn điệu"], ["Kiểu Trầm / Bình thản", "Mạnh – Cân bằng – Không linh hoạt", "Điềm đạm (Phlegmatic)", "Điềm tĩnh, kiên định, ngăn nắp, sâu sắc, khó thay đổi nền nếp cũ"], ["Kiểu Nóng nảy", "Mạnh – Không cân bằng (HP > ỨC)", "Nóng nảy (Choleric)", "Nhiệt huyết, xông xáo, bộc trực, phản ứng mạnh, dễ cáu giận mất kiềm chế"], ["Kiểu Yếu", "Yếu (Cả HP và ỨC đều yếu)", "Ưu tư (Melancholic)", "Nhạy cảm, sâu sắc, tinh tế, chịu áp lực kém, nhút nhát, dễ bị ức chế vượt hạn"]]}, {"title": "So sánh Hệ thống Tín hiệu Thứ nhất vs. Hệ thống Tín hiệu Thứ hai", "head": ["Tiêu chí đối sánh", "Hệ thống Tín hiệu Thứ nhất", "Hệ thống Tín hiệu Thứ hai"], "rows": [["Bản chất tín hiệu", "Sự vật, hiện tượng cụ thể, trực quan (ánh sáng, âm thanh, mùi vị thực tế)", "Tiếng nói và chữ viết (ngôn ngữ, khái niệm trừu tượng)"], ["Chủ thể sở hữu", "Chung cho cả loài người và động vật", "Duy nhất chỉ có ở con người"], ["Hình thức tư duy", "Tư duy hình tượng cụ thể, cảm tính", "Tư duy trừu tượng, logic, khái quát bản chất"], ["Cơ chế sinh lý học", "Vỏ não cảm giác sơ cấp tiếp nhận kích thích trực tiếp", "Vùng ngôn ngữ vỏ não (Broca, Wernicke) và vùng liên hợp trước trán"], ["Ví dụ thực tế", "Nhìn thấy quả chanh thật chua hoặc ngửi thấy mùi khói khét", "Nghe người khác nói chữ 'Chanh' hoặc đọc bài thơ về quê hương"]]}], "tips": ["Hệ thống tín hiệu <b>thứ hai</b> (tiếng nói, chữ viết) là ranh giới sinh lý học vĩ đại nhất phân biệt con người với loài vật.", "Không có kiểu thần kinh nào là 'tốt nhất' hay 'xấu nhất' — mỗi kiểu đều có thế mạnh riêng nếu biết bố trí môi trường phù hợp.", "LTP (Củng cố synap dài hạn) cần <b>sự lặp lại ngắt quãng</b> để chèn thêm thụ thể AMPA — học dồn một đêm trước thi chỉ tạo trí nhớ ngắn hạn rất nhanh trôi.", "Hồi hải mã đóng vai trò như 'bộ nhớ đệm tạm thời'; giấc ngủ sâu chính là lúc dữ liệu được ghi vĩnh viễn vào 'ổ cứng' vỏ não."], "cards": [["Hoạt động phân tích", "Quá trình vỏ não phân chia kích thích phức tạp thành các thuộc tính cảm giác đơn lẻ."], ["Hoạt động tổng hợp", "Quá trình vùng liên hợp vỏ não gắn kết các thuộc tính đơn lẻ thành nhận thức trọn vẹn."], ["Hệ thống tín hiệu thứ nhất", "Tín hiệu là bản thân sự vật, hiện tượng cụ thể tác động trực tiếp lên giác quan (người & vật)."], ["Hệ thống tín hiệu thứ hai", "Tín hiệu là tiếng nói và chữ viết, phản ánh thế giới trừu tượng (chỉ có ở người)."], ["Kiểu thần kinh Hăng hái", "Mạnh - Cân bằng - Linh hoạt: hoạt bát, nhanh nhẹn, thích nghi cao."], ["Kiểu thần kinh Điềm đạm", "Mạnh - Cân bằng - Không linh hoạt: điềm tĩnh, ngăn nắp, kiên định, khó đổi thói quen."], ["Kiểu thần kinh Nóng nảy", "Mạnh - Không cân bằng (hưng phấn chiếm ưu thế): nhiệt huyết, quyết liệt, dễ cáu gắt."], ["Kiểu thần kinh Ưu tư", "Yếu (cả hưng phấn và ức chế đều yếu): nhạy cảm, tinh tế, chịu áp lực kém."], ["Củng cố synap dài hạn (LTP)", "Sự gia tăng bền vững hiệu quả dẫn truyền synap sau kích thích lặp lại tần số cao."], ["Hồi hải mã (Hippocampus)", "Cấu trúc hệ viền chịu trách nhiệm đóng gói và chuyển trí nhớ ngắn hạn thành dài hạn."], ["Chứng quên thuận chiều", "Mất khả năng ghi nhớ các sự kiện mới xảy ra sau khi hồi hải mã bị tổn thương (ca H.M.)."], ["Thực hành truy hồi (Active Recall)", "Phương pháp tự kiểm tra và nhớ lại thông tin giúp kích hoạt tái cấu trúc mạng nơ-ron."]], "qs": [["Điểm khác biệt cốt lõi nhất giữa Hệ thống tín hiệu thứ nhất và Hệ thống tín hiệu thứ hai là gì?", ["Hệ thống tín hiệu thứ nhất chỉ có ở động vật", "Hệ thống tín hiệu thứ hai (tiếng nói, chữ viết) chỉ duy nhất có ở con người", "Hệ thống tín hiệu thứ nhất không sử dụng giác quan", "Hệ thống tín hiệu thứ hai không liên quan đến vỏ não"], 1, "Hệ thống tín hiệu thứ hai (ngôn ngữ, chữ viết) là đặc trưng riêng biệt chỉ có ở con người."], ["Một học sinh có kiểu hoạt động thần kinh 'Mạnh – Cân bằng – Linh hoạt' sẽ tương ứng với khí chất nào theo phân loại cổ điển của Hippocrates?", ["Khí chất Ưu tư (Melancholic)", "Khí chất Nóng nảy (Choleric)", "Khí chất Hăng hái / Hoạt bát (Sanguine)", "Khí chất Bình thản / Điềm đạm (Phlegmatic)"], 2, "Mạnh - Cân bằng - Linh hoạt tương ứng với khí chất Hăng hái (Sanguine)."], ["Kiểu hoạt động thần kinh nào theo Pavlov có đặc điểm 'Mạnh – Không cân bằng', trong đó quá trình hưng phấn chiếm ưu thế tuyệt đối so với ức chế?", ["Khí chất Nóng nảy (Choleric)", "Khí chất Điềm đạm (Phlegmatic)", "Khí chất Hăng hái (Sanguine)", "Khí chất Ưu tư (Melancholic)"], 0, "Kiểu Mạnh - Không cân bằng (Hưng phấn > Ức chế) là kiểu Nóng nảy (Choleric)."], ["Cơ chế sinh học phân tử cốt lõi của việc hình thành dấu vết trí nhớ dài hạn tại các khớp synap là hiện tượng nào sau đây?", ["Sự khử cực màng tế bào Schwann", "Hiện tượng củng cố synap dài hạn (LTP - Long-Term Potentiation)", "Sự ức chế hoàn toàn thụ thể AMPA", "Hiện tượng dẫn truyền liên tục không nhảy vọt"], 1, "LTP (Long-Term Potentiation) là cơ sở phân tử của trí nhớ và học tập."], ["Cấu trúc giải phẫu nào của não bộ đóng vai trò quyết định trong việc củng cố và chuyển đổi trí nhớ ngắn hạn thành trí nhớ dài hạn?", ["Tiểu não", "Hồi hải mã (Hippocampus)", "Hành não", "Tuyến tùng"], 1, "Hồi hải mã đóng vai trò trung tâm trong củng cố trí nhớ sự kiện và không gian."], ["Trường hợp bệnh nhân nổi tiếng H.M. sau khi bị phẫu thuật cắt bỏ 2 bên Hồi hải mã để chữa động kinh đã mắc phải triệu chứng gì?", ["Mất toàn bộ ký ức tuổi thơ nhưng nhớ rất tốt sự kiện hiện tại", "Mất khả năng hình thành trí nhớ dài hạn mới (Chứng quên thuận chiều)", "Mất hoàn toàn khả năng vận động tay chân", "Mất ngôn ngữ diễn đạt Broca"], 1, "Bệnh nhân H.M. không thể tạo thêm bất kỳ ký ức sự kiện mới nào sau phẫu thuật."], ["Theo sinh lý học thần kinh, việc phân bổ thời gian ôn tập ngắt quãng (Spaced repetition) có ưu thế vượt trội hơn học dồn một đêm vì:", ["Giúp nơ-ron liên tục khử cực mà không cần tái cực", "Tạo thời gian cho synap củng cố LTP và tránh đưa vỏ não vào trạng thái ức chế vượt hạn", "Làm giảm hoàn toàn nồng độ Dopamine trong não", "Biến đổi phản xạ có điều kiện thành phản xạ không điều kiện"], 1, "Học ngắt quãng kích thích củng cố synap và cho não thời gian nghỉ tránh ức chế vượt hạn."], ["Khi một người nghe từ 'Ngọn lửa', dù không có lửa thật trước mắt, họ vẫn hiểu ý nghĩa nguy hiểm và nóng rát. Đây là hoạt động của:", ["Chỉ riêng thụ thể nhiệt ở da", "Hệ thống tín hiệu thứ hai", "Phản xạ tủy sống đơn thuần", "Hoạt động thần kinh cấp thấp của thân não"], 1, "Từ 'Ngọn lửa' là tín hiệu ngôn ngữ thuộc Hệ thống tín hiệu thứ hai đại diện cho sự vật thực tế."]], "trees": [["Hệ thống Tín hiệu & Trí nhớ", "Nhận thức cấp cao & 4 Kiểu thần kinh", "gồm", [["Phân tích & Tổng hợp", "Hai mặt nhận thức", "chức năng", [["Phân tích", "chia nhỏ kích thích thành thuộc tính đơn lẻ (vỏ sơ cấp)", "", []], ["Tổng hợp", "gắn kết thành hình tượng tổng thể trọn vẹn (vùng liên hợp)", "", []]]], ["Hai Hệ thống Tín hiệu", "Đặc trưng loài người", "đối chiếu", [["Hệ thống tín hiệu 1", "sự vật cụ thể trực quan (chung cho người & động vật)", "", []], ["Hệ thống tín hiệu 2", "tiếng nói & chữ viết (duy nhất ở con người; tư duy trừu tượng)", "", []]]], ["4 Kiểu Thần kinh Pavlov", "Đối chiếu 4 Khí chất", "phân loại", [["Mạnh - Cân bằng - Linh hoạt", "Khí chất Hăng hái (Sanguine): năng động, thích nghi cao", "", []], ["Mạnh - Cân bằng - Trầm", "Khí chất Điềm đạm (Phlegmatic): kiên định, ngăn nắp, sâu sắc", "", []], ["Mạnh - Không cân bằng", "Khí chất Nóng nảy (Choleric): nhiệt huyết, quyết liệt, dễ cáu", "", []], ["Yếu", "Khí chất Ưu tư (Melancholic): nhạy cảm, tinh tế, chịu áp lực kém", "", []]]], ["Sinh lý Học tập & Trí nhớ", "Cơ sở củng cố mạng nơ-ron", "nguyên lý", [["Củng cố synap dài hạn (LTP)", "hoạt hóa thụ thể NMDA, dòng Ca2+ chèn thêm thụ thể AMPA", "", []], ["Hồi hải mã (Hippocampus)", "đóng gói chuyển trí nhớ ngắn sang dài hạn (ca bệnh H.M.)", "", []], ["Khoa học học tập", "Spaced Repetition (học ngắt quãng), Active Recall, ngủ đủ giấc", "", []]]]]]]}];
+const BYID = {};
+LESSONS.forEach(l => { BYID[l.id] = l; });
+
+/* ---------- Storage & State ---------- */
+const STORE_KEY = "hdtkcc_review_v1";
+let S = { q: {}, c: {}, exam: [] };
+try {
+  const saved = localStorage.getItem(STORE_KEY);
+  if(saved) S = JSON.parse(saved);
+} catch(e) {}
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch(e){}
+}
+
+let state = { view: "home", tab: "sum" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function mastery(l) {
+  let ok = 0, done = 0;
+  l.qs.forEach((q, idx) => {
+    const st = S.q[l.id + "-" + idx];
+    if(st && st.done) { done++; if(st.ok) ok++; }
+  });
+  return { ok, done, total: l.qs.length, pct: l.qs.length ? Math.round(ok / l.qs.length * 100) : 0 };
+}
+
+function wrongIds() {
+  const res = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      const qid = l.id + "-" + idx;
+      if(S.q[qid] && S.q[qid].done && !S.q[qid].ok) res.push(qid);
+    });
+  });
+  return res;
+}
+
+function cardStats(l) {
+  let known = 0;
+  l.cards.forEach((c, idx) => {
+    if(S.c[l.id + "-" + idx] === "known") known++;
+  });
+  return { known, total: l.cards.length };
+}
+
+/* ---------- Navigation ---------- */
+function go(v, tab) {
+  state.view = v;
+  if(tab) state.tab = tab;
+  $("#side").classList.remove("open");
+  renderSide();
+  renderMain();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderSide() {
+  const c = $("#sideLessons");
+  let curPart = "";
+  let html = "";
+  LESSONS.forEach(l => {
+    if(l.part !== curPart) {
+      curPart = l.part;
+      html += `<div class="part-label">${esc(curPart)}</div>`;
+    }
+    const on = state.view === l.id ? "on" : "";
+    const m = mastery(l);
+    html += `
+    <button class="lesson-btn ${on}" data-go="${l.id}" data-tab="sum">
+      <span class="code">${l.code}</span>
+      <span class="name">${esc(l.title)}</span>
+      <span class="mini"><i style="width:${m.pct}%"></i></span>
+    </button>`;
+  });
+  c.innerHTML = html;
+  $(".nav-home").classList.toggle("on", state.view === "home");
+}
+
+// Global click delegation for all navigation elements (nav-home, brand, lessons, exam, axon map)
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-go]");
+  if(btn) {
+    const g = btn.getAttribute("data-go");
+    const t = btn.getAttribute("data-tab") || (g === "home" ? "sum" : state.tab);
+    go(g, t);
+  }
+});
+
+/* ---------- Home View ---------- */
+function renderHome(m) {
+  const totQ = LESSONS.reduce((a, l) => a + l.qs.length, 0);
+  const totC = LESSONS.reduce((a, l) => a + l.cards.length, 0);
+  let ok = 0, done = 0;
+  LESSONS.forEach(l => { const s = mastery(l); ok += s.ok; done += s.done; });
+
+  let segs = LESSONS.map(l => {
+    const s = mastery(l);
+    return `<button class="seg" data-go="${l.id}" data-tab="sum" title="${esc(l.code + ' ' + l.title)}: ${s.pct}% đúng">
+      <span class="fill" style="width:${s.pct}%"></span>
+      <span class="lbl">${l.code}</span>
+    </button>`;
+  }).join("");
+
+  m.innerHTML = `
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Giải phẫu & Sinh lý HĐTK Cấp cao – Góc ôn tập & Tự học</h2>
+      <p>Nền tảng ôn tập tương tác hoàn chỉnh dựa trên chương trình học phần của <b>TS.BS.CK2. Trà Anh Duy</b> (Khoa Tâm lý học, ĐH KHXH&NV TP.HCM): ${LESSONS.length} bài học trọng tâm, tích hợp <b>Sơ đồ tư duy SVG</b>, ${totC} thẻ flashcards 3D và ${totQ} câu hỏi trắc nghiệm có giải thích y khoa chi tiết.</p>
+      <div class="lead-q">“Hoạt động thần kinh cấp cao là cơ sở sinh lý học của các hiện tượng tâm lý người.” – Ivan Petrovich Pavlov</div>
+    </div>
+    <div class="exam-card">
+      <h3>Cấu trúc môn học & Đánh giá</h3>
+      <div class="exam-facts">
+        <div class="fact"><strong>40%</strong><span>Giữa kỳ (Chuyên đề nhóm)</span></div>
+        <div class="fact"><strong>60%</strong><span>Cuối kỳ (80 câu / 60 phút)</span></div>
+        <div class="fact"><strong>≥ 80%</strong><span>Chuyên cần điều kiện dự thi</span></div>
+        <div class="fact"><strong>${totQ}</strong><span>Câu trắc nghiệm tinh chọn</span></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" data-go="exam">📝 Vào thi thử ngay</button>
+        <button class="btn ghost" data-go="wrong">⚠️ Ôn câu đã sai (${wrongIds().length})</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="map">
+    <div class="map-head">
+      <h3>Sợi trục tiến độ học tập</h3>
+      <p>Mỗi đoạn bao Myelin đại diện cho 1 bài học. Độ đầy hiển thị % câu trắc nghiệm bạn đã làm đúng (Đã làm: ${done}/${totQ} câu, đúng ${ok} câu).</p>
+    </div>
+    <div class="axon-wrap">
+      <div class="axon">
+        <div class="soma" title="Điểm xuất phát: Thân neuron"></div>
+        ${segs}
+        <div class="terminal" title="Đích đến: Cúc tận cùng thần kinh"></div>
+      </div>
+    </div>
+  </section>
+
+  <h3 style="font-size:18px; margin:32px 0 14px; font-weight:750">Danh sách bài học trọng tâm</h3>
+  <div class="grid-lessons">
+    ${LESSONS.map(l => {
+      const s = mastery(l);
+      const cs = cardStats(l);
+      return `
+      <div class="lcard" data-go="${l.id}" data-tab="sum">
+        <span class="code">${l.code}</span>
+        <div class="t">${esc(l.title)}</div>
+        <div class="meta">
+          <span>${l.qs.length} câu trắc nghiệm • ${cs.known}/${cs.total} thẻ nhớ</span>
+          <strong>${s.pct}%</strong>
+        </div>
+        <div class="bar"><i style="width:${s.pct}%"></i></div>
+      </div>`;
+    }).join("")}
+  </div>`;
+  bindNavClicks(m);
+}
+
+/* ---------- Mindmap SVG Engine ---------- */
+const MMC = ["#3B4A8C", "#D98A1F", "#1E8C86", "#C8366E", "#7A5BC7", "#2A7FB8", "#6F8A2E", "#B0683A", "#4F6D7A"];
+
+function treeSVG(root, ci0) {
+  const LH = 36, PX = 14, NX = 12;
+  const tw = (t, px, b) => t.length * px * (b ? 0.6 : 0.53);
+  let leaves = 0, cc = 0;
+  const nodes = [];
+
+  (function walk(n, d, parent, ci) {
+    if (d === 1 || d === 2) ci = cc++;
+    const o = { t: n[0], note: n[1] || "", rel: n[2] || "", d, parent, ci, kids: [] };
+    o.w = tw(o.t, PX, 1) + (o.note ? tw(" – " + o.note, NX) : 0) + 28;
+    o.rw = o.rel ? tw(o.rel, 12) + 20 : 0;
+    nodes.push(o);
+
+    const ch = n[3] || [];
+    if (!ch.length) {
+      o.y = leaves * LH + LH / 2 + 8;
+      leaves++;
+    }
+    ch.forEach(c => o.kids.push(walk(c, d + 1, o, ci)));
+    if (ch.length) o.y = (o.kids[0].y + o.kids[o.kids.length - 1].y) / 2;
+    return o;
+  })(root, 0, null, 0);
+
+  const maxD = Math.max(...nodes.map(n => n.d));
+  const colX = [12];
+  for (let d = 0; d < maxD; d++) {
+    const at = nodes.filter(n => n.d === d);
+    colX[d + 1] = colX[d] + Math.max(...at.map(n => n.w)) + Math.max(56, Math.max(...at.map(n => n.rw)) + 44);
+  }
+
+  const W = Math.max(...nodes.map(n => colX[n.d] + n.w)) + 24;
+  const H = Math.max(leaves * LH + 24, 70);
+
+  let edges = "", body = "";
+  nodes.forEach(n => {
+    const x = colX[n.d], col = MMC[(n.ci + ci0) % MMC.length];
+    if (n.kids.length) {
+      const sx = x + n.w;
+      let ex = sx;
+      if (n.rel) {
+        const px = sx + 8;
+        body += `<rect x="${px}" y="${n.y - 11}" width="${n.rw}" height="22" rx="11" fill="var(--surface)" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="1.2"/><text x="${px + n.rw / 2}" y="${n.y + 4.3}" text-anchor="middle" font-size="11.5" font-style="italic" fill="${n.d === 0 ? "var(--muted)" : col}">${esc(n.rel)}</text>`;
+        edges += `<path d="M${sx},${n.y} H${px}" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="2"/>`;
+        ex = px + n.rw;
+      }
+      n.kids.forEach(k => {
+        const kc = MMC[(k.ci + ci0) % MMC.length];
+        const kx = colX[k.d];
+        const mx = (ex + kx) / 2;
+        edges += `<path d="M${ex},${n.y} C${mx},${n.y} ${mx},${k.y} ${kx},${k.y}" fill="none" stroke="${kc}" stroke-width="2" opacity=".75"/>`;
+      });
+    }
+
+    const fill = n.d === 0 ? "var(--ink)" : n.d === 1 ? col : "var(--surface)";
+    const tcol = n.d === 0 ? "var(--paper)" : n.d === 1 ? "#fff" : "var(--ink)";
+    body += `<rect x="${x}" y="${n.y - 14}" width="${n.w}" height="28" rx="${n.d < 2 ? 14 : 8}" fill="${fill}" ${n.d >= 2 ? `stroke="${col}" stroke-width="1.5"` : ""}/>`;
+    body += `<text x="${x + 14}" y="${n.y + 5}" font-size="${PX}" fill="${tcol}"><tspan font-weight="700">${esc(n.t)}</tspan>${n.note ? `<tspan font-size="${NX}" ${n.d >= 2 ? `fill="var(--muted)"` : `fill-opacity=".85"`}> – ${esc(n.note)}</tspan>` : ""}</text>`;
+  });
+
+  return `<svg viewBox="0 0 ${Math.ceil(W)} ${H}" style="min-width:${Math.round(W * 0.72)}px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ tư duy: ${esc(root[0])}" font-family="inherit">${edges}${body}</svg>`;
+}
+
+function renderTrees(l) {
+  if (!l.trees || !l.trees.length) return "";
+  return l.trees.map((t, i) => `
+    <div class="tree">
+      <div class="mm-scroll">${treeSVG(t, i * 2)}</div>
+    </div>
+  `).join("");
+}
+
+/* ---------- Lesson View ---------- */
+function renderLesson(m, l) {
+  const tabs = [
+    { id: "sum", label: "Tóm tắt cốt lõi" },
+    { id: "tbl", label: "Bảng so sánh", count: l.tables.length },
+    { id: "fc",  label: "Thẻ ghi nhớ", count: l.cards.length },
+    { id: "q",   label: "Trắc nghiệm", count: l.qs.length },
+    { id: "tip", label: "Mẹo nhớ", count: l.tips.length }
+  ];
+
+  let tabNav = tabs.map(t => `
+    <button class="tab ${state.tab === t.id ? "on" : ""}" data-tab="${t.id}">
+      ${t.label}${t.count !== undefined ? `<span class="count">${t.count}</span>` : ""}
+    </button>
+  `).join("");
+
+  m.innerHTML = `
+  <div class="lhead">
+    <div class="bigcode">${l.code}</div>
+    <div>
+      <div class="part">${esc(l.part)}</div>
+      <h2>${esc(l.title)}</h2>
+    </div>
+  </div>
+
+  <div class="goals">
+    <h4>Mục tiêu bài học cần đạt</h4>
+    <ul>${l.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+  </div>
+
+  <div class="tabs">${tabNav}</div>
+  <div id="tabBody"></div>`;
+
+  m.querySelectorAll(".tab").forEach(b => {
+    b.onclick = () => {
+      state.tab = b.getAttribute("data-tab");
+      m.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      renderTabBody(l);
+    };
+  });
+
+  renderTabBody(l);
+}
+
+function renderTabBody(l) {
+  const tb = $("#tabBody");
+  if(state.tab === "sum") renderTabSum(tb, l);
+  else if(state.tab === "tbl") renderTabTbl(tb, l);
+  else if(state.tab === "fc") renderTabFc(tb, l);
+  else if(state.tab === "q") renderTabQ(tb, l);
+  else if(state.tab === "tip") renderTabTip(tb, l);
+}
+
+/* Tab: Tóm tắt (Summary + Mindmap Trees + Content Blocks + Tables + Tips) */
+function renderTabSum(tb, l) {
+  let treeSection = "";
+  if (l.trees && l.trees.length) {
+    treeSection = `
+    <div class="mm-wrap">
+      <div class="mm-head">
+        <h4>Sơ đồ tư duy dạng nhánh cây (SVG Mindmap Tree)</h4>
+        <span class="muted" style="font-size:12.5px">Kéo ngang để xem toàn bộ cấu trúc phân nhánh</span>
+      </div>
+      ${renderTrees(l)}
+    </div>`;
+  }
+
+  let blocks = l.sections.map((s, idx) => `
+    <details class="block" ${idx < 2 ? "open" : ""}>
+      <summary>${esc(s.h)}</summary>
+      <ul>
+        ${s.items.map(it => `<li>${it}</li>`).join("")}
+      </ul>
+    </details>
+  `).join("");
+
+  let tablesPreview = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+
+  let tipsPreview = `
+    <h4 style="margin:24px 0 10px; font-size:15px; font-weight:750">Mẹo ghi nhớ nhanh</h4>
+    <div class="tips-wrap">
+      ${l.tips.map(tp => `
+        <div class="tip-card">
+          <span class="tip-badge">Pro-tip</span>
+          <div class="tip-body">${tp}</div>
+        </div>
+      `).join("")}
+    </div>`;
+
+  tb.innerHTML = treeSection + blocks + tablesPreview + tipsPreview;
+}
+
+/* Tab: Bảng so sánh */
+function renderTabTbl(tb, l) {
+  if(!l.tables || !l.tables.length) {
+    tb.innerHTML = `<div class="empty">Bài này chưa có bảng so sánh tổng hợp.</div>`;
+    return;
+  }
+  tb.innerHTML = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+}
+
+/* Tab: Thẻ ghi nhớ Flashcards */
+let fcIdx = 0;
+function renderTabFc(tb, l) {
+  if(!l.cards || !l.cards.length) {
+    tb.innerHTML = `<div class="empty">Chưa có thẻ ghi nhớ.</div>`;
+    return;
+  }
+  if(fcIdx >= l.cards.length) fcIdx = 0;
+  const c = l.cards[fcIdx];
+  const cid = l.id + "-" + fcIdx;
+  const isKnown = S.c[cid] === "known";
+
+  tb.innerHTML = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Thẻ <b>${fcIdx + 1}</b> / ${l.cards.length} • Phím tắt: <b>Space</b> (lật), <b>1</b> (quên), <b>2</b> (thuộc), <b>←/→</b> (chuyển)</span>
+    <span class="chip-btn">${isKnown ? "✓ Đã thuộc" : "○ Cần ôn"}</span>
+  </div>
+
+  <div class="fc-stage">
+    <div class="fc" id="fcCard" tabindex="0" role="button" aria-label="Bấm hoặc gõ Space để lật thẻ">
+      <div class="fc-inner">
+        <div class="fc-face front">
+          <div class="fc-tag">Thuật ngữ / Khái niệm</div>
+          <div class="fc-text">${esc(c[0])}</div>
+          <div class="fc-hint">Bấm để xem định nghĩa & cơ chế</div>
+        </div>
+        <div class="fc-face back">
+          <div class="fc-tag">Bản chất Sinh lý & Giải phẫu</div>
+          <div class="fc-text" style="font-size:16px; font-weight:550">${esc(c[1])}</div>
+          <div class="fc-hint">Bấm để lật lại mặt trước</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-controls">
+      <button class="btn ghost" id="fcPrev">← Thẻ trước</button>
+      <button class="btn ${!isKnown ? "primary" : "ghost"}" id="fcAgain">Quên / Cần ôn lại (1)</button>
+      <button class="btn ${isKnown ? "primary" : "ghost"}" id="fcKnow">Đã thuộc (2)</button>
+      <button class="btn ghost" id="fcNext">Thẻ tiếp →</button>
+    </div>
+  </div>`;
+
+  const cardEl = $("#fcCard");
+  cardEl.onclick = () => cardEl.classList.toggle("flip");
+
+  $("#fcPrev").onclick = () => { if(fcIdx > 0) { fcIdx--; renderTabFc(tb, l); } };
+  $("#fcNext").onclick = () => { if(fcIdx < l.cards.length - 1) { fcIdx++; renderTabFc(tb, l); } };
+  $("#fcAgain").onclick = () => {
+    S.c[cid] = "again";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+  $("#fcKnow").onclick = () => {
+    S.c[cid] = "known";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+}
+
+/* Tab: Trắc nghiệm */
+function renderTabQ(tb, l) {
+  if(!l.qs || !l.qs.length) {
+    tb.innerHTML = `<div class="empty">Chưa có câu hỏi trắc nghiệm.</div>`;
+    return;
+  }
+  const m = mastery(l);
+  let html = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Đã làm: <b>${m.done}/${m.total}</b> câu • Đúng: <b>${m.ok}</b> (${m.pct}%)</span>
+    <button class="btn ghost" id="resetQBtn" style="font-size:12.5px; padding:6px 12px">↺ Làm lại bài này</button>
+  </div>`;
+
+  html += l.qs.map((q, idx) => {
+    const qid = l.id + "-" + idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1}.</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  tb.innerHTML = html;
+
+  tb.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const qidx = parseInt(qid.split("-")[1], 10);
+      const q = l.qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    };
+  });
+
+  $("#resetQBtn").onclick = () => {
+    if(confirm("Bạn muốn xóa kết quả trắc nghiệm của bài này để luyện lại từ đầu?")) {
+      l.qs.forEach((_, idx) => { delete S.q[l.id + "-" + idx]; });
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    }
+  };
+}
+
+/* Tab: Mẹo nhớ */
+function renderTabTip(tb, l) {
+  if(!l.tips || !l.tips.length) {
+    tb.innerHTML = `<div class="empty">Chưa có mẹo nhớ.</div>`;
+    return;
+  }
+  tb.innerHTML = `
+  <div class="tips-wrap">
+    ${l.tips.map(tp => `
+      <div class="tip-card">
+        <span class="tip-badge">Pro-tip</span>
+        <div class="tip-body">${tp}</div>
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+/* ---------- Exam Simulation View ---------- */
+function renderExam(m) {
+  let allQ = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      allQ.push({ q, lid: l.id, idx, code: l.code });
+    });
+  });
+
+  if(!S.exam || !S.exam.length) {
+    allQ.sort(() => Math.random() - 0.5);
+    S.exam = allQ.slice(0, 30);
+  }
+
+  let doneCount = 0, okCount = 0;
+  S.exam.forEach(item => {
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid];
+    if(st && st.done) { doneCount++; if(st.ok) okCount++; }
+  });
+
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px">
+    <h2>Phòng Thi thử Trắc nghiệm HĐTK Cấp cao</h2>
+    <p>Đề thi mô phỏng gồm <b>30 câu hỏi ngẫu nhiên</b> từ toàn bộ 6 bài học. Phản hồi kết quả và giải thích chi tiết ngay khi chọn đáp án.</p>
+    <div style="margin-top:14px; font-weight:700">Đã hoàn thành: ${doneCount}/30 câu • Điểm số: ${doneCount ? Math.round(okCount / doneCount * 100) : 0}% (${okCount}/${doneCount})</div>
+  </div>
+  <div class="toolbar">
+    <button class="btn primary" id="newExamBtn">🔄 Tạo đề thi mới ngẫu nhiên</button>
+  </div>`;
+
+  html += S.exam.map((item, exIdx) => {
+    const q = item.q;
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+        <div style="margin-top:4px; font-size:12px; color:var(--muted)">Thuộc: <b>${item.code} – ${esc(BYID[item.lid].title)}</b></div>
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${exIdx + 1} (${item.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderExam(m);
+      renderSide();
+    };
+  });
+
+  $("#newExamBtn").onclick = () => {
+    if(confirm("Tạo đề thi mới ngẫu nhiên 30 câu khác?")) {
+      S.exam = [];
+      renderExam(m);
+    }
+  };
+}
+
+/* ---------- Wrong Questions View ---------- */
+function renderWrong(m) {
+  const wids = wrongIds();
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px; background:#4A1E2E">
+    <h2>Ôn tập các câu đã làm sai</h2>
+    <p>Hiện bạn đang có <b>${wids.length} câu làm sai</b> cần khắc phục. Hãy làm lại cẩn thận để biến điểm yếu thành điểm mạnh trước kỳ thi!</p>
+  </div>`;
+
+  if(!wids.length) {
+    html += `<div class="empty">🎉 Tuyệt vời! Bạn không có câu hỏi nào bị làm sai.</div>`;
+    m.innerHTML = html;
+    bindNavClicks(m);
+    return;
+  }
+
+  html += wids.map((qid, idx) => {
+    const [lid, qidxStr] = qid.split("-");
+    const qidx = parseInt(qidxStr, 10);
+    const l = BYID[lid];
+    const q = l.qs[qidx];
+
+    const optHtml = q[1].map((opt, oidx) => {
+      return `<button class="opt" data-qid="${qid}" data-oidx="${oidx}">
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    return `
+    <div class="qcard">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1} (${l.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      <div class="exp" style="margin-top:10px">
+        <b>Gợi ý đáp án đúng:</b> ${String.fromCharCode(65 + q[2])}. ${esc(q[1][q[2]])}<br>
+        <b>Giải thích:</b> ${esc(q[3])}
+      </div>
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderWrong(m);
+      renderSide();
+    };
+  });
+}
+
+/* ---------- Main Render Entrypoint ---------- */
+function renderMain() {
+  const m = $("#main");
+  if(state.view === "home") renderHome(m);
+  else if(state.view === "exam") renderExam(m);
+  else if(state.view === "wrong") renderWrong(m);
+  else if(BYID[state.view]) renderLesson(m, BYID[state.view]);
+  else renderHome(m);
+}
+
+/* ---------- Search Modal ---------- */
+const searchBtn = $("#searchBtn");
+const searchBtnTop = $("#searchBtnTop");
+if(searchBtn) searchBtn.onclick = openSearch;
+if(searchBtnTop) searchBtnTop.onclick = openSearch;
+
+function openSearch() {
+  const mask = document.createElement("div");
+  mask.className = "modal-mask";
+  mask.innerHTML = `
+  <div class="modal">
+    <div class="modal-head">
+      <input type="text" class="modal-input" id="modalInput" placeholder="Nhập thuật ngữ cần tìm (vd: Pavlov, Amygdala, Synapse, LTP, Giao cảm...)..." autofocus>
+      <button class="btn ghost" id="closeSearch">✕</button>
+    </div>
+    <div class="modal-results" id="modalRes">
+      <div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm thuật ngữ trong toàn bộ 6 bài học.</div>
+    </div>
+  </div>`;
+  document.body.appendChild(mask);
+
+  const input = $("#modalInput");
+  const res = $("#modalRes");
+  $("#closeSearch").onclick = () => mask.remove();
+  mask.onclick = e => { if(e.target === mask) mask.remove(); };
+
+  const run = () => {
+    const q = input.value.trim().toLowerCase();
+    if(q.length < 2) {
+      res.innerHTML = `<div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm...</div>`;
+      return;
+    }
+
+    const matches = [];
+    LESSONS.forEach(l => {
+      l.sections.forEach(s => {
+        s.items.forEach(it => {
+          if(it.toLowerCase().includes(q) || s.h.toLowerCase().includes(q)) {
+            matches.push({ type: "Lý thuyết", title: s.h, desc: it.replace(/<[^>]+>/g, ''), lid: l.id });
+          }
+        });
+      });
+      l.cards.forEach(c => {
+        if(c[0].toLowerCase().includes(q) || c[1].toLowerCase().includes(q)) {
+          matches.push({ type: "Thẻ nhớ", title: c[0], desc: c[1], lid: l.id });
+        }
+      });
+      l.qs.forEach(question => {
+        if(question[0].toLowerCase().includes(q) || question[3].toLowerCase().includes(q)) {
+          matches.push({ type: "Câu trắc nghiệm", title: question[0], desc: "Giải thích: " + question[3], lid: l.id });
+        }
+      });
+    });
+
+    if(!matches.length) {
+      res.innerHTML = `<div class="empty">Không tìm thấy nội dung nào chứa từ khóa "${esc(q)}".</div>`;
+      return;
+    }
+
+    res.innerHTML = matches.slice(0, 30).map(m => `
+      <div class="item" data-go="${m.lid}" data-tab="sum">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px">
+          <span class="w">${esc(m.title)}</span>
+          <span class="chip-btn" style="padding:2px 8px; font-size:11px">${m.type}</span>
+        </div>
+        <div style="font-size:13.5px; line-height:1.45; color:var(--ink)">${esc(m.desc)}</div>
+        <div class="from">Thuộc bài: <b>${BYID[m.lid].code} – ${esc(BYID[m.lid].title)}</b></div>
+      </div>
+    `).join("");
+
+    res.querySelectorAll("[data-go]").forEach(item => {
+      item.onclick = () => {
+        const lid = item.getAttribute("data-go");
+        mask.remove();
+        go(lid, "sum");
+      };
+    });
+  };
+
+  input.oninput = run;
+  run();
+}
+
+/* ---------- Theme toggle & Mobile menu ---------- */
+$("#menuBtn").onclick = () => $("#side").classList.toggle("open");
+$("#themeBtn").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("hdtkcc_theme", next); } catch(e){}
+};
+try {
+  const savedTheme = localStorage.getItem("hdtkcc_theme");
+  if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+} catch(e){}
+
+// Keyboard shortcuts for flashcard
+window.addEventListener("keydown", (e) => {
+  if(state.tab === "fc") {
+    if(e.code === "Space") {
+      const f = $("#fcCard");
+      if(f) { e.preventDefault(); f.classList.toggle("flip"); }
+    } else if(e.key === "1") {
+      const b = $("#fcAgain"); if(b) b.click();
+    } else if(e.key === "2") {
+      const b = $("#fcKnow"); if(b) b.click();
+    } else if(e.code === "ArrowRight") {
+      const b = $("#fcNext"); if(b) b.click();
+    } else if(e.code === "ArrowLeft") {
+      const b = $("#fcPrev"); if(b) b.click();
+    }
+  }
+});
+
+// Initial boot
+go("home");
+</script>
+
+<!-- ================= STUDY TIME TRACKER & HUB NAVIGATION ================= -->
+<script>
+(function() {
+  const COURSE_ID = 'hdtkcc';
+  const TIME_KEY = 'study_time_' + COURSE_ID;
+  const LAST_KEY = 'last_accessed_' + COURSE_ID;
+  
+  let lastActive = Date.now();
+  let accumulatedSeconds = parseInt(localStorage.getItem(TIME_KEY) || '0', 10);
+  
+  // Set last accessed time
+  localStorage.setItem(LAST_KEY, Date.now().toString());
+
+  // Listen to user activity
+  const markActive = () => { lastActive = Date.now(); };
+  ['mousemove', 'keydown', 'scroll', 'touchstart', 'click'].forEach(evt => {
+    window.addEventListener(evt, markActive, { passive: true });
+  });
+
+  // Ticking interval every 1 second
+  setInterval(() => {
+    const isVisible = document.visibilityState === 'visible';
+    const isRecentlyActive = (Date.now() - lastActive) < 180000; // 3 minutes timeout
+    
+    if (isVisible && isRecentlyActive) {
+      accumulatedSeconds += 1;
+      if (accumulatedSeconds % 5 === 0) {
+        localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+        localStorage.setItem(LAST_KEY, Date.now().toString());
+      }
+    }
+  }, 1000);
+
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+    localStorage.setItem(LAST_KEY, Date.now().toString());
+  });
+
+  // Handle URL mode parameter (e.g., ?mode=exam)
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+    if (mode === 'exam') {
+      setTimeout(() => {
+        const btn = document.querySelector('[data-go="exam"]');
+        if (btn) btn.click();
+      }, 350);
+    }
+  });
+})();
+</script>
+<!-- ======================================================================= -->
+
+</body>
+</html>

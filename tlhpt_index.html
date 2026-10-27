@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tâm lý học Phát triển – Góc ôn tập & Tự học tương tác</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F9; --surface:#FFFFFF; --surface2:#EAEEF5; --ink:#1A2340; --muted:#5E6785; --line:#D6DCE8;
+  --myelin:#E9A23B; --myelin-soft:#FBEBD0; --axon:#1E8C86; --axon-soft:#D7EEEC; --rose:#C8366E; --rose-soft:#F7DCE6;
+  --indigo:#3B4A8C; --shadow:0 1px 3px rgba(26,35,64,.08);
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --font:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:20px; height:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100%}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--myelin); outline-offset:2px; border-radius:6px}
+b{font-weight:650}
+.app{display:grid; grid-template-columns:300px 1fr; min-height:100vh}
+
+/* Sidebar */
+.side{background:var(--surface); border-right:1px solid var(--line); padding:22px 16px 28px; position:sticky; top:0; height:100vh; overflow-y:auto; display:flex; flex-direction:column}
+.brand{display:flex; gap:12px; align-items:center; padding:4px 8px 18px; border-bottom:1px solid var(--line); margin-bottom:14px; background:none; border-left:0; border-right:0; border-top:0; width:100%; text-align:left; cursor:pointer}
+.brand-mark{width:42px; height:42px; flex:none; border-radius:12px; background:linear-gradient(135deg,var(--indigo),var(--axon)); display:grid; place-items:center; color:#fff}
+.brand-mark svg{width:24px; height:24px; fill:currentColor}
+.brand h1{font-size:15px; line-height:1.25; margin:0; font-weight:750; color:var(--ink)}
+.brand small{display:block; color:var(--muted); font-size:12px; font-weight:500; margin-top:2px}
+.nav-home{display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border-radius:var(--r-md); border:0; background:none; text-align:left; font-weight:650; font-size:14.5px}
+.nav-home:hover{background:var(--surface2)}
+.nav-home.on{background:var(--ink); color:var(--paper)}
+.part-label{font-size:12px; color:var(--muted); margin:18px 10px 6px; font-weight:700; text-transform:uppercase; letter-spacing:.05em}
+.lesson-btn{display:grid; grid-template-columns:46px 1fr; align-items:center; gap:4px 8px; width:100%; padding:10px 12px; border:0; border-radius:var(--r-md); background:none; text-align:left; margin-bottom:3px}
+.lesson-btn:hover{background:var(--surface2)}
+.lesson-btn.on{background:var(--myelin-soft)}
+.lesson-btn .code{font-weight:800; font-size:13px; color:var(--indigo)}
+.lesson-btn .name{font-size:13.5px; font-weight:600; line-height:1.3}
+.lesson-btn .mini{grid-column:2; height:4px; border-radius:4px; background:var(--surface2); overflow:hidden; margin-top:4px}
+.lesson-btn.on .mini{background:rgba(0,0,0,.15)}
+.mini i{display:block; height:100%; background:var(--axon); border-radius:4px; transition:width .3s}
+.side-foot{margin-top:auto; padding:16px 8px 0; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap}
+.chip-btn{border:1px solid var(--line); background:var(--surface2); border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px}
+.chip-btn:hover{border-color:var(--ink)}
+
+/* Main Container */
+.main{padding:30px clamp(16px,4vw,48px) 64px; max-width:1120px; width:100%}
+.topbar{display:none}
+
+/* Hero & Exam Dashboard */
+.hero{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:stretch; margin-bottom:26px}
+.hero-card{background:var(--ink); color:var(--paper); border-radius:var(--r-lg); padding:26px 28px; position:relative; overflow:hidden; box-shadow:var(--shadow)}
+.hero-card h2{font-size:clamp(22px,3vw,32px); line-height:1.2; margin:0 0 10px; font-weight:800; letter-spacing:-.01em}
+.hero-card p{margin:0; opacity:.85; font-size:14.5px; line-height:1.55}
+.hero-card .lead-q{margin-top:18px; font-size:13.5px; opacity:.92; border-left:3px solid var(--myelin); padding-left:12px; font-style:italic}
+.exam-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px; display:flex; flex-direction:column; gap:14px; box-shadow:var(--shadow)}
+.exam-card h3{margin:0; font-size:16px; font-weight:750}
+.exam-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+.fact{background:var(--surface2); border-radius:var(--r-md); padding:10px 12px}
+.fact strong{display:block; font-size:20px; font-weight:800; line-height:1.1; color:var(--indigo)}
+.fact span{font-size:12px; color:var(--muted); font-weight:550}
+
+.btn{border:0; border-radius:var(--r-md); padding:10px 16px; font-weight:650; font-size:14px; background:var(--surface2); color:var(--ink); transition:all .2s; display:inline-flex; align-items:center; justify-content:center; gap:6px}
+.btn:hover{filter:brightness(.95)}
+.btn.primary{background:var(--myelin); color:#1A2340; font-weight:750}
+.btn.dark{background:var(--ink); color:var(--paper)}
+.btn.ghost{background:none; border:1px solid var(--line)}
+.btn:disabled{opacity:.45; cursor:not-allowed}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+/* Axon Map */
+.map{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px 18px; margin-bottom:26px; box-shadow:var(--shadow)}
+.map-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.map-head h3{margin:0; font-size:16px; font-weight:750}
+.map-head p{margin:0; color:var(--muted); font-size:13px}
+.axon-wrap{overflow-x:auto; padding-bottom:6px}
+.axon{display:flex; align-items:center; min-width:600px; padding:8px 4px}
+.soma{width:44px; height:44px; border-radius:50%; background:var(--indigo); flex:none; position:relative; box-shadow:0 0 0 6px var(--surface2)}
+.soma::after{content:""; position:absolute; inset:14px; border-radius:50%; background:var(--surface)}
+.seg{flex:1; height:32px; margin:0 4px; border-radius:16px; background:var(--surface2); position:relative; overflow:hidden; border:0; padding:0; min-width:70px; cursor:pointer}
+.seg .fill{position:absolute; inset:0 auto 0 0; background:var(--myelin); border-radius:16px; transition:width .4s ease}
+.seg .lbl{position:relative; font-size:12.5px; font-weight:800; color:var(--ink); line-height:32px; display:block; text-align:center}
+.seg:hover{outline:2px solid var(--ink); outline-offset:1px}
+.terminal{width:26px; height:26px; flex:none; border-radius:50%; border:5px solid var(--axon); margin-left:4px}
+
+/* Grid Lessons Cards */
+.grid-lessons{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px}
+.lcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px; text-align:left; display:flex; flex-direction:column; gap:8px; min-height:140px; cursor:pointer; transition:border-color .2s}
+.lcard:hover{border-color:var(--ink); transform:translateY(-2px); box-shadow:var(--shadow)}
+.lcard .code{font-weight:800; color:var(--indigo); font-size:13px}
+.lcard .t{font-weight:700; font-size:15px; line-height:1.35; margin:2px 0}
+.lcard .meta{font-size:12px; color:var(--muted); margin-top:auto; display:flex; justify-content:space-between}
+.bar{height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-top:4px}
+.bar i{display:block; height:100%; background:var(--axon); transition:width .3s}
+
+/* Lesson Detail View */
+.lhead{display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; margin-bottom:8px}
+.lhead .bigcode{font-size:clamp(44px,6vw,68px); font-weight:850; line-height:.9; color:var(--myelin); letter-spacing:-.03em}
+.lhead .part{color:var(--muted); font-size:13px; font-weight:600}
+.lhead h2{margin:2px 0 0; font-size:clamp(22px,3vw,30px); line-height:1.2; font-weight:800}
+.goals{background:var(--axon-soft); border-radius:var(--r-md); padding:14px 18px; margin:16px 0; border-left:4px solid var(--axon)}
+.goals h4{margin:0 0 6px; font-size:13.5px; font-weight:750}
+.goals ul{margin:0; padding-left:18px; font-size:14px}
+.goals li{margin:3px 0}
+
+/* Mindmap Tree Wrapper & SVG */
+.mm-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); margin:18px 0 24px; overflow:hidden; box-shadow:var(--shadow)}
+.mm-head{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap; background:var(--surface2)}
+.mm-head h4{margin:0; font-size:14.5px; font-weight:750}
+.mm-scroll{overflow-x:auto; padding:14px 16px; -webkit-overflow-scrolling:touch}
+.tree{padding:12px 6px; border-bottom:1px dashed var(--line)}
+.tree:last-child{border-bottom:0}
+.mm-scroll svg{display:block; height:auto}
+
+/* Tabs */
+.tabs{display:flex; gap:6px; margin:20px 0 22px; border-bottom:1px solid var(--line); overflow-x:auto}
+.tab{border:0; background:none; padding:10px 16px 12px; font-weight:650; font-size:15px; color:var(--muted); border-bottom:3px solid transparent; margin-bottom:-1px; white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink); border-bottom-color:var(--myelin)}
+.tab .count{font-size:11.5px; background:var(--surface2); border-radius:999px; padding:1px 8px; margin-left:6px; color:var(--muted)}
+
+/* Toolbar */
+.toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:14px 0}
+.muted{color:var(--muted)}
+
+/* Content Blocks (Details / Accordion) */
+.block{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); margin-bottom:12px; overflow:hidden}
+.block summary{list-style:none; cursor:pointer; padding:14px 18px; font-weight:700; font-size:15.5px; display:flex; justify-content:space-between; align-items:center; gap:10px}
+.block summary::-webkit-details-marker{display:none}
+.block summary::after{content:"+"; font-size:22px; font-weight:400; color:var(--muted); line-height:1}
+.block[open] summary::after{content:"–"}
+.block ul{margin:0; padding:0 22px 16px 36px}
+.block li{margin:7px 0; max-width:82ch; font-size:14.5px}
+.block li b{color:var(--indigo)}
+
+/* Tables */
+.tblwrap{overflow-x:auto; margin:18px 0; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface)}
+.tblwrap h4{margin:0; padding:12px 16px; font-size:14.5px; font-weight:750; border-bottom:1px solid var(--line); background:var(--surface2)}
+table.data{width:100%; border-collapse:collapse; font-size:14px; text-align:left}
+table.data th, table.data td{padding:10px 16px; border-bottom:1px solid var(--line); vertical-align:top}
+table.data th{background:var(--surface2); font-weight:700; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.03em}
+table.data tr:last-child td{border-bottom:0}
+
+/* Pro Tips */
+.tips-wrap{display:grid; gap:12px; margin:18px 0}
+.tip-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 18px; display:flex; gap:14px; align-items:flex-start}
+.tip-badge{flex:none; background:var(--myelin-soft); color:#8B5A10; font-weight:800; font-size:12px; border-radius:6px; padding:3px 8px; text-transform:uppercase}
+.tip-body{font-size:14.5px; line-height:1.55}
+
+/* Flashcard Component */
+.fc-stage{display:flex; flex-direction:column; align-items:center; gap:16px; margin:20px 0}
+.fc{perspective:1000px; width:100%; max-width:560px; height:280px; cursor:pointer}
+.fc-inner{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .4s ease; border-radius:var(--r-lg); box-shadow:var(--shadow)}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--r-lg); border:1px solid var(--line); background:var(--surface); padding:26px 28px; display:flex; flex-direction:column; justify-content:space-between}
+.fc-face.back{transform:rotateY(180deg); background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.fc-tag{font-size:12px; font-weight:750; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+.fc-face.back .fc-tag{color:var(--myelin)}
+.fc-text{font-size:clamp(16px,2.2vw,20px); font-weight:700; line-height:1.45; margin:auto 0}
+.fc-hint{font-size:12.5px; color:var(--muted)}
+.fc-face.back .fc-hint{color:rgba(255,255,255,.65)}
+.fc-controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+/* Quiz Question Cards */
+.qcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; margin-bottom:14px}
+.qcard.answered{border-color:var(--line)}
+.qcard .qtxt{font-weight:700; font-size:15px; margin-bottom:12px; line-height:1.45}
+.qnum{display:inline-block; font-size:12px; font-weight:800; color:var(--indigo); margin-right:6px}
+.opts{display:grid; gap:8px}
+.opt{border:1px solid var(--line); background:var(--surface2); border-radius:var(--r-sm); padding:10px 14px; text-align:left; font-size:14px; display:flex; gap:10px; align-items:center; transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.correct{background:var(--axon-soft); border-color:var(--axon); color:#0B4A45; font-weight:650}
+.opt.wrong{background:var(--rose-soft); border-color:var(--rose); color:#6E163B; font-weight:650}
+.exp{margin-top:12px; padding:10px 14px; border-radius:var(--r-sm); background:var(--surface2); font-size:13.5px; line-height:1.5; border-left:3px solid var(--indigo)}
+
+/* Search Modal */
+.modal-mask{position:fixed; inset:0; background:rgba(17,22,42,.6); backdrop-filter:blur(4px); display:grid; place-items:center; z-index:999; padding:16px}
+.modal{background:var(--surface); border-radius:var(--r-lg); width:100%; max-width:640px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--line); box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.modal-head{display:flex; gap:10px; padding:16px; border-bottom:1px solid var(--line)}
+.modal-input{flex:1; border:1px solid var(--line); border-radius:var(--r-md); padding:10px 14px; font:inherit; background:var(--surface2); color:var(--ink)}
+.modal-input:focus{outline:2px solid var(--myelin); background:var(--surface)}
+.modal-results{overflow-y:auto; padding:12px; display:grid; gap:8px}
+.modal-results .item{padding:10px 14px; border-radius:var(--r-md); border:1px solid var(--line); cursor:pointer; background:var(--surface)}
+.modal-results .item:hover{border-color:var(--ink); background:var(--surface2)}
+.modal-results .w{font-weight:750; color:var(--indigo); font-size:14px}
+.modal-results .from{font-size:12px; color:var(--muted); margin-top:2px}
+.empty{padding:30px; text-align:center; color:var(--muted); font-size:14px}
+
+/* Mobile Topbar */
+@media (max-width:880px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed; inset:0 auto 0 0; width:290px; transform:translateX(-100%); transition:transform .3s ease; z-index:100; box-shadow:4px 0 16px rgba(0,0,0,.15)}
+  .side.open{transform:translateX(0)}
+  .topbar{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--surface); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:90}
+  .hero{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="btn ghost" id="menuBtn">☰ Mục lục</button>
+  <span style="font-weight:750; font-size:14.5px">Tâm lý học Phát triển</span>
+  <button class="btn ghost" id="searchBtnTop">🔍</button>
+</div>
+
+<div class="app">
+  <aside class="side" id="side">
+    <button class="brand" data-go="home">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 0 0-9 9c0 3.6 2.1 6.7 5.2 8.1v1.9c0 .6.4 1 1 1h5.6c.6 0 1-.4 1-1v-1.9c3.1-1.4 5.2-4.5 5.2-8.1a9 9 0 0 0-9-9zm-1 18h-2v-1h2v1zm4 0h-2v-1h2v1zm1.2-2.8l-.2.1v.7h-8v-.7l-.2-.1C5.1 16.6 3.5 13.9 3.5 11 3.5 6.3 7.3 2.5 12 2.5s8.5 3.8 8.5 8.5c0 2.9-1.6 5.6-4.3 6.2z"/></svg>
+      </div>
+      <div>
+        <h1>Tâm lý học Phát triển</h1>
+        <small>Góc ôn tập & Tự học tương tác</small>
+      </div>
+    </button>
+        <a href="./index.html" class="nav-dashboard" style="display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:var(--r-md); background:var(--surface2); color:var(--ink); font-weight:700; font-size:13px; text-decoration:none; margin-bottom:8px; border:1px solid var(--line); transition:all .15s ease;">
+      <span style="font-size:16px;">🏛️</span>
+      <span>Cổng Dashboard</span>
+      <span style="margin-left:auto; font-size:10.5px; padding:2px 6px; border-radius:4px; background:var(--axon); color:#fff; font-weight:800;">HUB</span>
+    </a>
+    <button class="nav-home" data-go="home">🏠 Tổng quan môn học</button>
+    <div id="sideLessons"></div>
+    <div class="side-foot">
+      <button class="chip-btn" data-go="exam">📝 Thi thử</button>
+      <button class="chip-btn" data-go="wrong">⚠️ Câu sai (<span id="wrongCount">0</span>)</button>
+      <button class="chip-btn" id="searchBtn">🔍 Tra cứu</button>
+      <button class="chip-btn" id="themeBtn">🌓 Giao diện</button>
+      <button class="chip-btn" id="goalsBtn" style="border-color:var(--myelin); color:var(--ink); font-weight:700">🎯 Chuẩn đầu ra (CLO1 - CLO5)</button>
+    </div>
+  </aside>
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<!-- Modal Chuẩn đầu ra (CLO1 - CLO5) -->
+<div id="goalsModal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:9999; overflow-y:auto; padding:20px; align-items:center; justify-content:center;">
+  <div class="modal-card" style="background:var(--surface); color:var(--ink); border-radius:var(--r-lg); max-width:920px; width:100%; max-height:90vh; overflow-y:auto; padding:28px 32px; box-shadow:0 12px 36px rgba(0,0,0,.25); border:1px solid var(--line); position:relative; margin:auto;">
+    <button id="closeGoalsModal" style="position:absolute; top:20px; right:20px; background:var(--surface2); border:0; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:18px; font-weight:bold; color:var(--muted); display:flex; align-items:center; justify-content:center;">✕</button>
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px">
+      <span style="background:var(--rose-soft); color:var(--rose); font-weight:800; padding:4px 10px; border-radius:6px; font-size:13px">KHUNG NĂNG LỰC CHUẨN ĐẦU RA</span>
+      <span style="font-size:13px; color:var(--muted)">ĐH KHXH&NV – ĐHQG TP.HCM (Mã HP: TLH026 – 4 Tín chỉ)</span>
+    </div>
+    <h2 style="font-size:24px; font-weight:800; margin:0 0 14px; color:var(--ink)">Đối chiếu Mục tiêu Môn học Tâm lý học Phát triển</h2>
+    <p style="font-size:14.5px; color:var(--muted); line-height:1.55; margin-bottom:24px">Hệ thống ôn tập được thiết kế bao phủ 100% các chuẩn đầu ra (CLO1 – CLO5) và chỉ số kết quả thực hiện (PI 5.1, 6.1, 6.2, 6.3) của đề cương đào tạo cử nhân:</p>
+    
+    <div style="display:flex; flex-direction:column; gap:18px;">
+      <div style="background:var(--surface2); border-radius:var(--r-md); padding:16px 20px; border-left:4px solid var(--rose);">
+        <h3 style="margin:0 0 10px; font-size:16px; font-weight:750; color:var(--rose)">CHUẨN ĐẦU RA HỌC PHẦN (CLOs & PIs)</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+          <thead>
+            <tr style="text-align:left; border-bottom:1px solid var(--line); color:var(--muted);">
+              <th style="padding:8px 6px; width:70px">Mã CĐR</th>
+              <th style="padding:8px 6px">Nội dung chuẩn đầu ra</th>
+              <th style="padding:8px 6px; width:220px">Đáp ứng trên nền tảng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO1</td>
+              <td style="padding:10px 6px">Trình bày được các khái niệm, quy luật phát triển tâm lý chung và sự biến đổi tâm lý qua các giai đoạn từ thai nhi đến người cao tuổi (PI 5.1).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bao phủ 6 bài học, 18 sơ đồ tư duy SVG & 96 flashcards)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO2</td>
+              <td style="padding:10px 6px">Phân tích được các yếu tố sinh học, xã hội, môi trường ảnh hưởng đến sự phát triển cá nhân qua từng lứa tuổi (PI 5.1).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Ma trận các yếu tố di truyền, văn hóa, môi trường sinh thái Bronfenbrenner)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO3</td>
+              <td style="padding:10px 6px">Vận dụng các đại học thuyết tâm lý phát triển (Piaget, Vygotsky, Erikson, Bowlby, Bronfenbrenner, Kohlberg) để giải thích các hiện tượng tâm lý và khủng hoảng lứa tuổi (PI 6.1, 6.2).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bảng đối sánh chuyên sâu 7 học thuyết, phân tích cơ chế khủng hoảng lứa tuổi)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO4</td>
+              <td style="padding:10px 6px">Đề xuất các giải pháp định hướng giáo dục, can thiệp tâm lý và hỗ trợ phát triển lành mạnh phù hợp với từng lứa tuổi (PI 6.3).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (90 câu hỏi trắc nghiệm tình huống thực tiễn, phân tích ca và mẹo ứng dụng)</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 6px; font-weight:800; color:var(--rose)">CLO5</td>
+              <td style="padding:10px 6px">Thể hiện tư duy khoa học, tôn trọng sự đa dạng cá nhân và đạo đức nghề nghiệp của nhà tâm lý học.</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Nền tảng tự học tương tác, luyện đề thi trắc nghiệm chuẩn hóa)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:24px; text-align:right">
+      <button class="btn primary" id="okGoalsBtn" style="padding:10px 24px">Đã hiểu – Bắt đầu học</button>
+    </div>
+  </div></div>
+  </div>
+</div>
+
+
+<script>
+const LESSONS = [{"id": "pt1", "part": "Phần I: Nhập môn & Lý thuyết Nền tảng", "code": "PT.1", "title": "Đại cương về Tâm lý học Phát triển & Các Quy luật Chung", "goals": ["Hiểu bản chất của sự phát triển tâm lý: Biến đổi về lượng và chất, tính liên tục và gián đoạn.", "Nắm vững 3 chiều kích phát triển: Thể chất - Vận động, Nhận thức, và Cảm xúc - Xã hội.", "Phân biệt ưu - nhược điểm của 3 thiết kế nghiên cứu: Cắt ngang (Cross-sectional), Theo chiều dọc (Longitudinal), và Chuỗi hỗn hợp (Sequential).", "Làm chủ 4 quy luật phát triển tâm lý chung, khái niệm Khủng hoảng lứa tuổi và Hoạt động chủ đạo."], "sections": [{"h": "Sự Phát triển Tâm lý là gì? Khái niệm & Ba Chiều kích Cốt lõi", "items": ["<b>Tâm lý học Phát triển (Developmental Psychology):</b> Ngành khoa học nghiên cứu những quy luật, cơ chế biến đổi và ổn định về thể chất, nhận thức, cảm xúc và nhân cách của con người <b>xuyên suốt toàn bộ vòng đời (Life-span development)</b> — từ thời điểm thụ thai đến khi qua đời.", "<b>Bản chất của sự phát triển:</b> Không đơn thuần là sự tăng trưởng kích thước (tăng về lượng), mà là <b>quá trình biến đổi nhảy vọt về chất</b>, tạo nên những cấu tạo tâm lý mới (*Neoformations*) chưa từng có ở giai đoạn trước.", "<b>Ba chiều kích phát triển tương tác đan xen:</b>", "• <i>Phát triển Thể chất & Vận động (Physical/Biological):</i> Biến đổi cơ thể, sự trưởng thành của não bộ, giác quan, kỹ năng vận động thô/tinh và sức khỏe tổng thể.", "• <i>Phát triển Nhận thức (Cognitive):</i> Tiến trình tư duy, cảm giác, tri giác, ngôn ngữ, trí nhớ, giải quyết vấn đề và trí thông minh.", "• <i>Phát triển Cảm xúc & Xã hội (Socio-emotional):</i> Biến đổi trong trải nghiệm cảm xúc, nhận thức bản thân, các mối quan hệ gắn bó, tình bạn, tình yêu và chuẩn mực đạo đức.", "<b>Tính liên tục (Continuous) vs. Tính gián đoạn (Discontinuous):</b> Quan điểm liên tục xem phát triển như một con dốc thoai thoải (tích lũy kỹ năng dần dần); Quan điểm gián đoạn xem phát triển như những bậc thang (mỗi nấc thang là một giai đoạn về chất riêng biệt)."]}, {"h": "Các Phương pháp Nghiên cứu Đặc thù trong TLH Phát triển", "items": ["<b>1. Thiết kế Cắt ngang (Cross-sectional Design):</b>", "• <i>Cách làm:</i> Nghiên cứu đồng thời nhiều nhóm đối tượng ở các lứa tuổi khác nhau tại cùng một thời điểm (vd: cùng lúc đo lường nhóm 5 tuổi, 10 tuổi và 15 tuổi).", "• <i>Ưu điểm:</i> Tiết kiệm thời gian, chi phí thấp, cho kết quả nhanh chóng.", "• <i>Nhược điểm:</i> Dễ bị nhiễu bởi <b>Hiệu ứng thế hệ (Cohort effect)</b> — sự khác biệt do hoàn cảnh lịch sử, công nghệ (vd: thế hệ Z lớn lên với smartphone khác thế hệ 8X).", "<b>2. Thiết kế Theo chiều dọc (Longitudinal Design):</b>", "• <i>Cách làm:</i> Theo dõi và kiểm tra một nhóm đối tượng duy nhất lặp đi lặp lại qua nhiều năm tháng suốt một chặng đường đời (vd: theo dõi nhóm trẻ từ 2 tuổi đến khi 30 tuổi).", "• <i>Ưu điểm:</i> Thấy rõ quỹ đạo phát triển thực tế của từng cá nhân, loại bỏ được hiệu ứng thế hệ.", "• <i>Nhược điểm:</i> Cực kỳ tốn kém thời gian và kinh phí; tỷ lệ hao hụt đối tượng (*Attrition*) cao do chuyển nhà, bỏ dở, tử vong; người tham gia có thể quen bài test (*Practice effect*).", "<b>3. Thiết kế Chuỗi hỗn hợp (Sequential Design):</b> Kết hợp cả hai phương pháp: theo dõi nhiều nhóm thế hệ tuổi khác nhau qua một khoảng thời gian nhất định nhằm tận dụng ưu điểm và khắc phục nhược điểm của cả hai."]}, {"h": "Các Yếu tố Chi phối & Bốn Quy luật Phát triển Chung", "items": ["<b>Bốn nhóm yếu tố chi phối sự phát triển:</b>", "• <i>Yếu tố Bẩm sinh - Di truyền (Nature):</i> Cung cấp tiền đề vật chất và giới hạn biên độ tiềm năng (*Reaction range*).", "• <i>Yếu tố Môi trường sống (Nurture):</i> Hoàn cảnh gia đình, trường học, dinh dưỡng, bối cảnh kinh tế - xã hội hiện thực hóa tiềm năng.", "• <i>Hoạt động & Giao tiếp (Activity & Communication):</i> Yếu tố trực tiếp quyết định sự hình thành và biến đổi tâm lý (Leontiev, Vygotsky).", "• <i>Giáo dục (Education):</i> Đóng vai trò chủ đạo, định hướng và đi trước mở đường cho sự phát triển.", "<b>Bốn quy luật phát triển tâm lý chung:</b>", "• <b>1. Quy luật không đồng đều (Unevenness):</b> Các chức năng tâm lý và các giai đoạn lứa tuổi không phát triển với tốc độ bằng nhau. Có những thời kỳ tốc độ nhảy vọt (dậy thì, 0-1 tuổi), có thời kỳ phát triển chậm rãi. Tồn tại các <b>Thời kỳ nhạy cảm (Sensitive periods)</b> — giai đoạn cơ thể tối ưu nhất để tiếp thu một chức năng cụ thể (vd: học ngôn ngữ tốt nhất trước 7 tuổi).", "• <b>2. Quy luật toàn vẹn và tích hợp (Integrity):</b> Tâm lý là một chỉnh thể thống nhất; biến đổi trong nhận thức sẽ dẫn đến biến đổi trong tình cảm và nhân cách.", "• <b>3. Quy luật tính mềm dẻo và bù trừ (Plasticity & Compensation):</b> Não bộ và tâm lý có khả năng thích nghi linh hoạt; chức năng suy giảm có thể được bù trừ bằng chức năng khác (vd: người khiếm thị có thính giác và xúc giác cực kỳ nhạy bén).", "• <b>4. Quy luật phân hóa và tích hợp dần (Differentiation):</b> Từ những phản xạ thô sơ đồng loạt ở trẻ sơ sinh dần phân hóa thành các thao tác tinh tế, rồi tích hợp lại thành các kỹ năng phức tạp."]}, {"h": "Khủng hoảng Lứa tuổi & Khái niệm Hoạt động Chủ đạo", "items": ["<b>Khủng hoảng lứa tuổi (Developmental Crises):</b>", "• Là những bước ngoặt phát triển tâm lý diễn ra ngắn hạn (vài tháng đến 1 năm) chuyển giao giữa hai giai đoạn lứa tuổi ổn định (vd: Khủng hoảng sơ sinh, Khủng hoảng tuổi lên 3, Khủng hoảng 6-7 tuổi vào lớp 1, Khủng hoảng tuổi dậy thì).", "• <i>Bản chất khoa học:</i> Khủng hoảng không phải là hiện tượng tiêu cực hay bệnh lý, mà là <b>dấu hiệu tích cực chứng minh cấu tạo tâm lý cũ đã chật chội và trẻ đang đòi hỏi một vị thế xã hội mới</b>.", "<b>Hoạt động Chủ đạo (Leading Activity - A.N. Leontiev & D.B. Elkonin):</b>", "• Là dạng hoạt động mà sự phát triển của nó quy định những biến đổi căn bản nhất trong các quá trình tâm lý và cấu trúc nhân cách của đứa trẻ ở giai đoạn lứa tuổi đó.", "• Mỗi thời kỳ lứa tuổi đều có một hoạt động chủ đạo tương ứng (Giao lưu cảm xúc trực tiếp → Hoạt động với đồ vật → Trò chơi đóng vai → Học tập → Giao lưu bạn bè → Lao động nghề nghiệp)."]}], "tables": [{"title": "So sánh Các Thiết kế Nghiên cứu trong Tâm lý học Phát triển", "head": ["Tiêu chí đối sánh", "Thiết kế Cắt ngang (Cross-sectional)", "Thiết kế Theo chiều dọc (Longitudinal)", "Thiết kế Chuỗi hỗn hợp (Sequential)"], "rows": [["Đối tượng khảo sát", "Nhiều nhóm tuổi khác nhau", "Một nhóm đối tượng duy nhất", "Nhiều nhóm tuổi khác nhau"], ["Thời gian tiến hành", "Tại một thời điểm duy nhất", "Lặp lại suốt nhiều năm/tháng", "Theo dõi lặp lại trong một khoảng thời gian"], ["Ưu điểm lớn nhất", "Nhanh chóng, tiết kiệm chi phí, dễ quản lý", "Thấy rõ tiến trình phát triển thực tế của từng cá nhân", "Kiểm soát được cả hiệu ứng thế hệ lẫn thời gian"], ["Nhược điểm lớn nhất", "Bị ảnh hưởng bởi Hiệu ứng thế hệ (Cohort effect)", "Tốn kém, nguy cơ mất mẫu (Attrition) và quen đề test", "Quy trình thực hiện phức tạp, chi phí cao"], ["Tình huống sử dụng", "Khảo sát nhanh xu hướng khác biệt theo lứa tuổi", "Nghiên cứu tính ổn định dài hạn của khí chất, nhân cách", "Nghiên cứu quy mô lớn cấp quốc gia về nhận thức"]]}, {"title": "Ma trận Hoạt động Chủ đạo qua Các Giai đoạn Lứa tuổi (Elkonin)", "head": ["Giai đoạn Lứa tuổi", "Tên thời kỳ", "Hoạt động Chủ đạo (Leading Activity)", "Cấu tạo Tâm lý Mới xuất hiện"], "rows": [["0 – 1 tuổi", "Hài nhi", "Giao lưu cảm xúc trực tiếp với người lớn", "Phức cảm hớn hở, nhu cầu gắn bó xã hội đầu tiên"], ["1 – 3 tuổi", "Ấu nhi", "Hoạt động với đồ vật (công cụ)", "Đi lại độc lập, ngôn ngữ bùng nổ, ý thức về cái tôi 'Con tự làm'"], ["3 – 6 tuổi", "Mẫu giáo", "Trò chơi đóng vai có chủ đề", "Tư duy hình tượng, trí tưởng tượng, hiểu luật chơi xã hội"], ["6 – 11/12 tuổi", "Nhi đồng (Tiểu học)", "Hoạt động Học tập", "Tư duy thao tác cụ thể, chú ý có chủ định, tính cần cù"], ["12 – 17/18 tuổi", "Thiếu niên (Vị thành niên)", "Giao lưu cá nhân thân tình với bạn cùng lứa", "Tự ý thức, cảm nhận 'tính người lớn', khủng hoảng bản sắc"], ["18 – 24 tuổi", "Thanh niên (Emerging Adulthood)", "Học tập chuyên nghiệp & Chuẩn bị nghề nghiệp", "Tự xác định đường đời, tư duy hậu hình thức, tình yêu trưởng thành"]]}], "tips": ["Mẹo nhớ bản chất phát triển: 'Phát triển không phải là con cá lớn lên thành con cá to hơn, mà là nòng nọc rụng đuôi biến thành con ếch' — Biến đổi về CHẤT!", "Nhớ kỹ 3 phương pháp nghiên cứu: Cắt ngang = Chụp một bức ảnh toàn cảnh; Chiều dọc = Quay một bộ phim tài liệu dài tập.", "Khủng hoảng lứa tuổi (tuổi lên 3, tuổi dậy thì) là cơ hội vàng để trưởng thành: Đừng dập tắt sự chống đối của trẻ, hãy tạo không gian an toàn cho trẻ tự lập.", "Hoạt động chủ đạo: Muốn trẻ phát triển tốt nhất ở lứa tuổi nào, hãy tạo điều kiện tối đa cho hoạt động chủ đạo của lứa tuổi đó (Mẫu giáo là phải được CHƠI, không phải nhồi nhét học chữ)."], "cards": [["Tâm lý học Phát triển", "Khoa học nghiên cứu các quy luật biến đổi và ổn định về thể chất, nhận thức và tâm lý của con người từ lúc thụ thai đến khi qua đời."], ["Biến đổi về chất", "Bản chất của phát triển tâm lý, tạo ra những cấu tạo tâm lý mới (Neoformations) nhảy vọt thay vì chỉ tăng kích thước."], ["Thời kỳ nhạy cảm", "Giai đoạn cơ thể có độ mềm dẻo tối ưu nhất để tiếp thu một chức năng tâm lý cụ thể (vd: ngôn ngữ trước 7 tuổi)."], ["Hiệu ứng thế hệ (Cohort)", "Sự khác biệt giữa các nhóm tuổi bắt nguồn từ bối cảnh lịch sử, công nghệ sống khác nhau chứ không phải do quy luật lứa tuổi."], ["Nghiên cứu cắt ngang", "Phương pháp so sánh đồng thời nhiều nhóm lứa tuổi khác nhau tại cùng một thời điểm."], ["Nghiên cứu chiều dọc", "Phương pháp theo dõi và đánh giá lặp đi lặp lại một nhóm đối tượng duy nhất xuyên suốt nhiều năm tháng cuộc đời."], ["Hao hụt mẫu (Attrition)", "Hiện tượng người tham gia nghiên cứu chiều dọc bị giảm dần số lượng theo thời gian do bỏ cuộc, chuyển chỗ ở hoặc qua đời."], ["Quy luật không đồng đều", "Quy luật chỉ rõ các cơ quan và chức năng tâm lý phát triển với tốc độ và nhịp điệu khác nhau ở từng thời kỳ."], ["Tính mềm dẻo (Plasticity)", "Khả năng của não bộ và tâm trí biến đổi, thích ứng và bù trừ chức năng trước các trải nghiệm sống hoặc tổn thương."], ["Khủng hoảng lứa tuổi", "Thời kỳ bước ngoặt chuyển giao giữa hai giai đoạn lứa tuổi, biểu hiện bằng sự xung đột giữa nhu cầu mới của trẻ và cách ứng xử cũ của người lớn."], ["Hoạt động chủ đạo", "Dạng hoạt động quy định những biến đổi căn bản nhất trong tâm lý và nhân cách của trẻ ở một giai đoạn lứa tuổi xác định."], ["A.N. Leontiev & Elkonin", "Hai nhà tâm lý học lỗi lạc của trường phái hoạt động đề xuất lý thuyết về chuỗi Hoạt động chủ đạo qua các lứa tuổi."], ["Tư duy Hậu hình thức", "Dạng tư duy xuất hiện ở người trưởng thành, có khả năng chấp nhận tính tương đối, sự mơ hồ và các nghịch lý cuộc sống."], ["Biên độ tiềm năng", "Khái niệm di truyền học cho rằng bộ gen thiết lập giới hạn trên và dưới, còn môi trường quyết định điểm thể hiện cụ thể."], ["Giáo dục mở đường", "Quan điểm Vygotsky: Giáo dục tốt nhất là nền giáo dục đi trước sự phát triển, định hướng và kéo sự phát triển tiến lên."], ["Life-span Perspective", "Quan điểm tiếp cận vòng đời của Paul Baltes: phát triển diễn ra suốt đời, đa chiều kích, đa định hướng và mềm dẻo."]], "qs": [["Tâm lý học phát triển nghiên cứu sự biến đổi tâm lý của con người trong khoảng thời gian nào?", ["Từ khi sinh ra đến khi học hết đại học", "Xuyên suốt toàn bộ vòng đời: từ thời điểm thụ thai đến khi qua đời", "Chỉ tập trung vào 5 năm đầu đời", "Từ tuổi dậy thì đến tuổi về hưu"], 1, "Tâm lý học phát triển hiện đại tiếp cận toàn diện xuyên suốt toàn bộ vòng đời (Life-span perspective)."], ["Đặc điểm nào dưới đây phân biệt bản chất của 'Sự phát triển' (Development) so với sự tăng trưởng thuần túy về thể xác?", ["Sự phát triển chỉ diễn ra vào ban đêm", "Sự phát triển là quá trình biến đổi nhảy vọt về CHẤT, tạo nên những cấu tạo tâm lý mới", "Sự phát triển không chịu ảnh hưởng của môi trường", "Sự phát triển dừng lại hoàn toàn ở tuổi 18"], 1, "Phát triển là quá trình vận động biện chứng tạo nên những bước nhảy vọt về chất trong cấu trúc tâm lý."], ["Một nhà nghiên cứu so sánh khả năng ghi nhớ của 3 nhóm trẻ: 5 tuổi, 10 tuổi và 15 tuổi tại cùng một thời điểm trong tháng 10/2026. Đây là thiết kế:", ["Nghiên cứu theo chiều dọc (Longitudinal)", "Nghiên cứu cắt ngang (Cross-sectional)", "Nghiên cứu hồi cứu lịch sử", "Thí nghiệm đơn lẻ"], 1, "Nghiên cứu cắt ngang khảo sát các nhóm lứa tuổi khác nhau tại cùng một thời điểm."], ["Nhược điểm lớn nhất của thiết kế nghiên cứu theo chiều dọc (Longitudinal Design) là gì?", ["Không bao giờ thu được kết quả chính xác", "Cực kỳ tốn kém thời gian, kinh phí và nguy cơ hao hụt mẫu (Attrition) do người tham gia bỏ cuộc", "Bị ảnh hưởng nghiêm trọng bởi hiệu ứng thế hệ", "Chỉ áp dụng được trên động vật"], 1, "Nghiên cứu chiều dọc mất nhiều năm, tốn kém và đối mặt nguy cơ mất mẫu theo thời gian."], ["'Hiệu ứng thế hệ' (Cohort Effect) trong nghiên cứu tâm lý học phát triển được hiểu là:", ["Sự khác biệt giữa các nhóm tuổi bắt nguồn từ bối cảnh văn hóa - lịch sử - công nghệ sống riêng biệt của thế hệ đó", "Sự suy giảm trí nhớ do tuổi tác", "Quy luật di truyền của gen trội", "Sự giống nhau tuyệt đối giữa cha mẹ và con cái"], 0, "Hiệu ứng thế hệ phản ánh tác động của thời đại lịch sử lên những người sinh cùng thời kỳ."], ["Khái niệm 'Thời kỳ nhạy cảm' (Sensitive Period) trong tâm lý học phát triển có ý nghĩa gì?", ["Khoảng thời gian đứa trẻ dễ bị trầm cảm nhất", "Thời điểm tối ưu nhất mà cơ thể và não bộ có độ mềm dẻo cao để tiếp thu một chức năng tâm lý xác định", "Giai đoạn trẻ không chịu ăn uống", "Thời kỳ răng sữa rụng"], 1, "Thời kỳ nhạy cảm là cửa sổ cơ hội vàng để phát triển tối ưu một năng lực cụ thể (như ngôn ngữ, gắn bó)."], ["Theo quan điểm của trường phái tâm lý học hoạt động (Vygotsky, Leontiev), yếu tố nào giữ vai trò quyết định trực tiếp sự phát triển tâm lý trẻ em?", ["Yếu tố di truyền từ dòng họ", "Hoạt động và Giao tiếp của chính đứa trẻ trong môi trường xã hội", "Chế độ dinh dưỡng giàu đạm", "Khí hậu nơi đứa trẻ sinh sống"], 1, "Hoạt động và giao tiếp là phương thức trực tiếp giúp trẻ chuyển hóa kinh nghiệm lịch sử xã hội thành tâm lý cá nhân."], ["Hiện tượng trẻ khiếm thị bẩm sinh thường có thính giác và xúc giác phát triển nhạy bén vượt bậc là minh chứng cho quy luật nào?", ["Quy luật không đồng đều", "Quy luật tính mềm dẻo và bù trừ chức năng", "Quy luật suy thoái sinh học", "Quy luật thoái lui tâm lý"], 1, "Quy luật mềm dẻo và bù trừ: khi một giác quan suy giảm, não bộ sẽ tái cấu trúc để tăng cường chức năng giác quan khác."], ["Theo A.N. Leontiev và D.B. Elkonin, 'Hoạt động chủ đạo' (Leading Activity) được định nghĩa là:", ["Hoạt động mà đứa trẻ dành nhiều thời gian nhất trong ngày (như ngủ)", "Hoạt động quy định những biến đổi căn bản nhất trong các quá trình tâm lý và cấu tạo nhân cách mới của trẻ ở giai đoạn đó", "Hoạt động giúp kiếm ra tiền", "Môn thể thao trẻ yêu thích"], 1, "Hoạt động chủ đạo là cái nôi sản sinh ra những biến đổi tâm lý then chốt của lứa tuổi."], ["Hoạt động chủ đạo của trẻ em lứa tuổi Mẫu giáo (3 – 6 tuổi) là hoạt động nào?", ["Giao lưu cảm xúc trực tiếp với người lớn", "Hoạt động với đồ vật", "Trò chơi đóng vai có chủ đề", "Hoạt động học tập"], 2, "Trò chơi đóng vai có chủ đề là hoạt động chủ đạo giúp trẻ mẫu giáo mô phỏng các mối quan hệ xã hội người lớn."], ["Bản chất tâm lý học của các giai đoạn 'Khủng hoảng lứa tuổi' (như khủng hoảng tuổi lên 3, dậy thì) là gì?", ["Là chứng bệnh tâm thần cần điều trị bằng thuốc", "Là dấu hiệu tích cực cho thấy cấu tạo tâm lý cũ đã chật chội và đứa trẻ đang đòi hỏi một vị thế xã hội mới độc lập hơn", "Do cha mẹ thiếu kỹ năng dạy con", "Là sự suy thoái nhận thức tạm thời"], 1, "Khủng hoảng là bước ngoặt phát triển tất yếu, báo hiệu sự ra đời của một nhân cách ở tầm cao mới."], ["Khi một đứa trẻ 2 tuổi nói 'Con tự xúc cơm!', gạt tay mẹ ra và khóc lóc nếu bị can thiệp, biểu hiện này phản ánh:", ["Sự hư hỏng cần bị phạt đòn", "Sự xuất hiện của ý thức về cái tôi (Ngã tính) trong khủng hoảng tuổi lên 3", "Rối loạn hành vi chống đối", "Hội chứng tăng động"], 1, "Đó là sự xuất hiện cấu tạo tâm lý mới: tự ý thức về bản thân ('Tôi') và khao khát khẳng định sự độc lập."], ["Theo nguyên lý phát triển từ đầu đến chân (Cephalocaudal pattern), sự phát triển vận động của trẻ sơ sinh diễn ra theo chiều hướng nào?", ["Trẻ biết đi trước khi biết ngẩng đầu", "Kiểm soát phần đầu, cổ trước, sau đó đến thân mình, cánh tay và cuối cùng là đôi chân", "Chân phát triển trước, đầu phát triển sau", "Toàn thân phát triển đồng loạt cùng một ngày"], 1, "Nguyên lý Cephalocaudal: sự kiểm soát vận động lan truyền từ đỉnh đầu xuống chân."], ["Quan điểm 'Giáo dục đi trước sự phát triển' của Lev Vygotsky khẳng định vai trò của giáo dục là:", ["Chờ đợi đứa trẻ tự phát triển rồi mới dạy", "Chủ động kiến tạo, định hướng và dẫn dắt sự phát triển tâm lý của trẻ tiến lên phía trước", "Bắt trẻ học thuộc lòng giáo trình đại học từ 3 tuổi", "Thay thế hoàn toàn bộ gen di truyền"], 1, "Giáo dục không chạy theo sau sự phát triển, mà giáo dục tốt phải đi trước mở đường và kéo sự phát triển đi lên."], ["Nghiên cứu chuỗi hỗn hợp (Sequential Design) khắc phục được nhược điểm của nghiên cứu cắt ngang bằng cách nào?", ["Theo dõi nhiều nhóm thế hệ (cohorts) lặp lại qua một khoảng thời gian nhất định", "Chỉ nghiên cứu những người trên 80 tuổi", "Không dùng máy vi tính xử lý số liệu", "Chỉ phỏng vấn một người duy nhất"], 0, "Thiết kế chuỗi hỗn hợp khảo sát nhiều nhóm thế hệ theo chiều thời gian, giúp phân biệt hiệu ứng tuổi tác và hiệu ứng thế hệ."]], "trees": [["Đại cương TLH Phát triển", "bản chất khoa học", "chia thành", [["Bản chất Phát triển", "biến đổi về chất & cấu tạo mới", "gồm", [["Phát triển thể chất", "não bộ, giác quan, vận động thô và tinh", "", []], ["Phát triển nhận thức", "tư duy, trí nhớ, ngôn ngữ, giải quyết vấn đề", "", []], ["Cảm xúc & Xã hội", "bản sắc, gắn bó, tình bạn, đạo đức", "", []]]], ["Tính liên tục vs Gián đoạn", "hai góc nhìn", "gồm", [["Liên tục (Continuous)", "tích lũy lượng dần dần như dốc thoai thoải", "", []], ["Gián đoạn (Discontinuous)", "bước nhảy vọt theo từng bậc thang về chất", "", []]]]]], ["Phương pháp Nghiên cứu", "thiết kế khoa học", "chia thành", [["Cắt ngang (Cross-sectional)", "so sánh nhiều nhóm tuổi tại 1 thời điểm", "gồm", [["Ưu điểm", "nhanh, tiết kiệm, kết quả tức thì", "", []], ["Nhược điểm", "bị nhiễu bởi Hiệu ứng thế hệ (Cohort effect)", "", []]]], ["Chiều dọc (Longitudinal)", "theo dõi 1 nhóm suốt nhiều năm", "gồm", [["Ưu điểm", "thấy quỹ đạo phát triển cá nhân thực tế", "", []], ["Nhược điểm", "tốn kém, nguy cơ hao hụt mẫu (Attrition)", "", []]]], ["Chuỗi hỗn hợp (Sequential)", "kết hợp cắt ngang & chiều dọc tối ưu", "", []]]], ["Quy luật & Hoạt động Chủ đạo", "cơ chế vận hành", "chia thành", [["4 Quy luật chung", "vận động biện chứng", "gồm", [["Không đồng đều", "thời kỳ nhạy cảm (Sensitive periods) tối ưu", "", []], ["Toàn vẹn & Tích hợp", "tâm lý là một chỉnh thể thống nhất", "", []], ["Mềm dẻo & Bù trừ", "não bộ tái cấu trúc bù khuyết chức năng", "", []], ["Phân hóa & Tích hợp", "từ phản xạ thô đến kỹ năng tinh xảo", "", []]]], ["Khủng hoảng & Hoạt động", "Leontiev & Elkonin", "gồm", [["Khủng hoảng lứa tuổi", "bước ngoặt cấu tạo mới đòi vị thế độc lập", "", []], ["Hoạt động chủ đạo", "quy định biến đổi căn bản nhất của lứa tuổi", "", []]]]]]]}, {"id": "pt2", "part": "Phần I: Nhập môn & Lý thuyết Nền tảng", "code": "PT.2", "title": "Các Đại Học thuyết Phát triển Tâm lý Kinh điển", "goals": ["Làm chủ Thuyết Phát triển Nhận thức của Jean Piaget (4 giai đoạn, Schema, Đồng hóa, Điều ứng).", "Nắm vững Thuyết Lịch sử - Văn hóa của Lev Vygotsky: Vùng phát triển gần nhất (ZPD) và Giàn giáo (Scaffolding).", "Phân tích Thuyết Hệ thống Sinh thái của Urie Bronfenbrenner (5 tầng sinh thái).", "Hiểu Thuyết Gắn bó của John Bowlby & Mary Ainsworth và Thuyết Phát triển Đạo đức của Lawrence Kohlberg."], "sections": [{"h": "Jean Piaget: Thuyết Phát triển Nhận thức (Cognitive Development)", "items": ["<b>Jean Piaget (1896–1980):</b> Nhà tâm lý học Thụy Sĩ, người xem trẻ em như 'nhà khoa học tí hon' tự kiến tạo hiểu biết qua tương tác với thế giới.", "<b>Cơ chế Thích ứng Nhận thức:</b>", "• <b>Sơ đồ nhận thức (Schema):</b> Khung khái niệm hoặc mô hình tinh thần dùng để tổ chức và diễn giải thông tin.", "• <b>Đồng hóa (Assimilation):</b> Đưa thông tin mới vào sơ đồ sẵn có (vd: đứa trẻ có sơ đồ 'chó có 4 chân lông xù', khi thấy con mèo cũng gọi là 'chó con').", "• <b>Điều ứng (Accommodation):</b> Thay đổi hoặc tạo sơ đồ mới để phù hợp với thông tin mới (nhận ra mèo kêu 'meo meo', không sủa → tách thành sơ đồ 'mèo').", "• <b>Cân bằng hóa (Equilibration):</b> Trạng thái hòa hợp giữa sơ đồ tâm trí và thực tại khách quan.", "<b>Bốn Giai đoạn Phát triển Nhận thức của Piaget:</b>", "• <b>1. Cảm giác – Vận động (Sensorimotor, 0–2 tuổi):</b> Nhận thức qua giác quan và vận động; Thành tựu lớn nhất: <b>Tính vĩnh cửu của vật thể (Object Permanence)</b> — nhận biết đồ vật vẫn tồn tại dù bị che khuất tầm nhìn (xuất hiện khoảng 8 tháng).", "• <b>2. Tiền thao tác (Preoperational, 2–7 tuổi):</b> Phát triển ngôn ngữ và biểu tượng; Tư duy mang tính <b>Tự trung (Egocentrism)</b> — chỉ nhìn thế giới theo góc nhìn của mình (thí nghiệm 3 ngọn núi); <b>Thuyết vật linh (Animism)</b> — tin đồ vật có cảm xúc; Chưa hiểu tính Bảo tồn.", "• <b>3. Thao tác cụ thể (Concrete Operational, 7–11 tuổi):</b> Tư duy logic trên các đối tượng cụ thể; Đạt được khái niệm <b>Bảo tồn (Conservation)</b> — hiểu lượng nước không đổi khi đổ sang cốc cao hẹp; Khả năng phân loại, đảo ngược (*Reversibility*) và xếp chuỗi.", "• <b>4. Thao tác hình thức (Formal Operational, 11/12 tuổi trở lên):</b> Tư duy trừu tượng, logic giả thuyết – suy diễn (*Hypothetical-deductive reasoning*); Khả năng tranh luận triết học, đạo đức và lên kế hoạch tương lai."]}, {"h": "Lev Vygotsky: Thuyết Lịch sử – Xã hội & Vùng Phát triển Gần nhất (ZPD)", "items": ["<b>Lev Vygotsky (1896–1934):</b> Khác với Piaget nhấn mạnh tự khám phá cá nhân, Vygotsky khẳng định <b>nhận thức hình thành từ văn hóa và tương tác xã hội</b>.", "<b>Vùng Phát triển Gần nhất (Zone of Proximal Development - ZPD):</b>", "• Là khoảng cách giữa <i>mức độ phát triển hiện tại</i> (trẻ tự làm một mình được) và <i>mức độ phát triển tiềm năng</i> (trẻ có thể làm được khi có sự hướng dẫn của người lớn hoặc bạn bè có năng lực hơn - MKO).", "• Giáo dục hiệu quả nhất là tác động trúng vào vùng ZPD này.", "<b>Kỹ thuật Giàn giáo học tập (Scaffolding - Jerome Bruner phát triển từ Vygotsky):</b> Sự hỗ trợ được điều chỉnh phù hợp với năng lực của trẻ; nâng đỡ nhiều khi mới bắt đầu và dần dần rút lui khi trẻ đã thành thạo tự làm chủ.", "<b>Vai trò của Ngôn ngữ:</b> Ngôn ngữ xã hội (giao tiếp bên ngoài) → Ngôn ngữ cá nhân / tự thoại (*Private speech*, tự nói một mình để chỉ dẫn hành vi) → Ngôn ngữ bên trong (*Inner speech*, tư duy trừu tượng)."]}, {"h": "Urie Bronfenbrenner: Thuyết Hệ thống Sinh thái (Ecological Systems)", "items": ["Con người phát triển trong một mạng lưới các hệ thống môi trường lồng ghép vào nhau như búp bê Nga Matryoshka:", "• <b>1. Hệ Vi mô (Microsystem):</b> Môi trường tiếp xúc trực tiếp hàng ngày của đứa trẻ: gia đình, lớp học, nhóm bạn thân, giáo viên.", "• <b>2. Hệ Trung gian (Mesosystem):</b> Mối quan hệ tương tác qua lại giữa các yếu tố trong hệ vi mô (vd: mối liên hệ giữa cha mẹ và giáo viên chủ nhiệm).", "• <b>3. Hệ Ngoại vi (Exosystem):</b> Các bối cảnh gián tiếp ảnh hưởng lên trẻ dù trẻ không trực tiếp tham gia (vd: áp lực công việc của cha mẹ, chính sách công ty mẹ làm, ngân sách giáo dục của quận).", "• <b>4. Hệ Vĩ mô (Macrosystem):</b> Hệ giá trị văn hóa, luật pháp, thể chế chính trị, chuẩn mực xã hội, tôn giáo và tư tưởng thời đại.", "• <b>5. Hệ Thời gian (Chronosystem):</b> Chiều thời gian lịch sử và các biến cố cuộc đời (vd: sự kiện cha mẹ ly hôn, đại dịch Covid-19, thời đại số bùng nổ)."]}, {"h": "Thuyết Gắn bó (Bowlby & Ainsworth) & Thuyết Đạo đức (Kohlberg)", "items": ["<b>John Bowlby & Mary Ainsworth: Thuyết Gắn bó (Attachment Theory):</b>", "• <i>Thí nghiệm 'Tình huống lạ' (Strange Situation) của Mary Ainsworth phân loại 4 kiểu gắn bó:</i>", "  - <b>1. Gắn bó An toàn (Secure, ~65%):</b> Khóc khi mẹ rời đi, vui mừng chào đón và được xoa dịu ngay khi mẹ quay lại; mẹ là 'bệ phóng an toàn' để trẻ tự tin khám phá.", "  - <b>2. Gắn bó Lo âu – Kháng cự (Anxious-Ambivalent):</b> Bám víu mẹ, đau khổ dữ dội khi mẹ đi, khi mẹ về vừa đòi bế vừa giận dữ đấm đá cự tuyệt (do mẹ chăm sóc thất thường).", "  - <b>3. Gắn bó Né tránh (Insecure-Avoidant):</b> Thờ ơ khi mẹ rời đi, lạnh lùng phớt lờ khi mẹ quay về (do mẹ lạnh nhạt, từ chối cảm xúc của trẻ).", "  - <b>4. Gắn bó Hỗn loạn (Disorganized):</b> Hành vi sợ hãi, bối rối, tiến lại gần rồi lùi bước giật cục (thường gặp ở trẻ bị bạo hành, sang chấn).", "• <i>Tác động dài hạn:</i> Kiểu gắn bó thơ ấu định hình <b>Mô hình làm việc nội tâm (Internal Working Model)</b> chi phối niềm tin về tình yêu và cách ứng xử trong hôn nhân khi trưởng thành.", "<b>Lawrence Kohlberg: Thuyết Phát triển Đạo đức qua Song đề Heinz (Heinz Dilemma):</b>", "• <b>Mức 1: Tiền quy ước (Preconventional):</b> Giai đoạn 1 (Tuân phục & Tránh bị phạt); Giai đoạn 2 (Tư lợi cá nhân / Phần thưởng đổi chác).", "• <b>Mức 2: Quy ước (Conventional):</b> Giai đoạn 3 (Đứa con ngoan / Được mọi người quý mến); Giai đoạn 4 (Luật pháp & Trật tự xã hội).", "• <b>Mức 3: Hậu quy ước (Postconventional):</b> Giai đoạn 5 (Khế ước xã hội & Quyền con người); Giai đoạn 6 (Các nguyên lý đạo đức phổ quát trừu tượng)."]}], "tables": [{"title": "Bảng tổng hợp Bốn Giai đoạn Phát triển Nhận thức của Jean Piaget", "head": ["Giai đoạn", "Độ tuổi", "Đặc trưng tư duy cốt lõi", "Hiện tượng / Thí nghiệm tiêu biểu", "Hạn chế nhận thức"], "rows": [["Cảm giác – Vận động", "0 – 2 tuổi", "Nhận thức qua phối hợp giác quan và hành động cơ thể", "Tính vĩnh cửu của vật thể (Object permanence) xuất hiện ~8 tháng", "Không có tư duy biểu tượng trong giai đoạn đầu"], ["Tiền thao tác", "2 – 7 tuổi", "Tư duy biểu tượng, bùng nổ ngôn ngữ và trò chơi giả vờ", "Thuyết vật linh (Animism), Thí nghiệm 3 ngọn núi", "Tự trung (Egocentrism), Chưa hiểu quy luật bảo tồn, Tư duy tập trung 1 chiều"], ["Thao tác cụ thể", "7 – 11 tuổi", "Tư duy logic trên đối tượng thực tế cụ thể, đảo ngược được", "Thí nghiệm rót nước bảo tồn thể tích, phân loại phân cấp", "Chưa thể tư duy giả định trừu tượng thoát ly vật chất"], ["Thao tác hình thức", "11/12 tuổi trở lên", "Tư duy trừu tượng, tư duy giả thuyết – suy diễn, lý luận logic", "Thí nghiệm con lắc (Pendulum problem), suy luận đạo đức", "Chủ nghĩa duy tâm vị thành niên, huyền thoại cá nhân"]]}, {"title": "Bảng phân loại Bốn Kiểu Gắn bó của John Bowlby & Mary Ainsworth", "head": ["Kiểu gắn bó", "Phản ứng khi mẹ rời đi", "Phản ứng khi mẹ quay lại", "Phong cách chăm sóc của cha mẹ", "Biểu hiện trong Tình yêu Trưởng thành"], "rows": [["An toàn (Secure)", "Khóc, buồn bã nhưng chịu đựng được", "Mừng rỡ, ôm chầm lấy mẹ, nhanh chóng bình tĩnh", "Nhạy cảm, đáp ứng nhất quán và ấm áp", "Tự tin, tin tưởng người yêu, giao tiếp cởi mở, không sợ bị bỏ rơi"], ["Lo âu – Kháng cự (Anxious)", "Hoảng loạn, đau khổ tột cùng", "Vừa đòi bế vừa giận dữ đẩy mẹ ra, cắn mẹ", "Lúc vồ vập yêu thương, lúc bỏ mặc thất thường", "Luôn bất an, ghen tuông, sợ người yêu hết yêu mình, kiểm soát đối phương"], ["Né tránh (Avoidant)", "Thờ ơ, bình thản giả tạo", "Phớt lờ, quay mặt đi, không thèm nhìn mẹ", "Lạnh lùng, xa cách, từ chối tiếp xúc thân mật", "Sợ sự gần gũi quá mức, độc lập cực đoan, trốn chạy khi mối quan hệ sâu sắc"], ["Hỗn loạn (Disorganized)", "Bối rối, sợ hãi, nằm bất động", "Tiến lại gần rồi lùi bước, hành vi kỳ lạ", "Bạo hành, đe dọa, bỏ bê hoặc cha mẹ bị sang chấn", "Khó khăn tâm lý nặng nề, quan hệ yêu - ghét cực đoan, dễ rơi vào bạo lực"]]}], "tips": ["Phân biệt Piaget vs Vygotsky: Piaget coi sự phát triển nhận thức ĐI TRƯỚC học tập (phải đạt tuổi mới học được); Vygotsky coi học tập ĐI TRƯỚC và DẪN ĐƯỜNG sự phát triển!", "Công thức ZPD: Vùng ZPD nằm ở giữa 'việc quá dễ trẻ tự làm' và 'việc quá khó trẻ không thể làm nổi dù được giúp'. Giảng dạy hiệu quả phải nhắm đúng khoảng giữa này.", "Bảo tồn (Conservation) của Piaget: Đừng mắng trẻ 4 tuổi tham lam khi nó đòi cốc nước cao hẹp thay vì cốc bẹt rộng — não trẻ giai đoạn này chỉ biết 'tập trung một chiều' vào chiều cao!", "Thuyết Đạo đức Kohlberg: Quan trọng KHÔNG PHẢI là Heinz nên trộm thuốc hay không, mà là LÝ DO TẠI SAO người trả lời lựa chọn quyết định đó."], "cards": [["Jean Piaget", "Nhà tâm lý học Thụy Sĩ sáng lập Thuyết Phát triển Nhận thức qua 4 giai đoạn với các cơ chế Schema, Đồng hóa, Điều ứng."], ["Schema (Sơ đồ nhận thức)", "Khung khái niệm tinh thần dùng để tổ chức, phân loại và diễn giải các thông tin thu nhận từ môi trường."], ["Đồng hóa (Assimilation)", "Tiến trình tiếp nhận thông tin mới và đưa vào sơ đồ nhận thức đã có sẵn mà không làm thay đổi sơ đồ."], ["Điều ứng (Accommodation)", "Tiến trình điều chỉnh hoặc tạo lập sơ đồ nhận thức mới để thích ứng với thông tin mới không thể đồng hóa."], ["Tính vĩnh cửu của vật thể", "Hiểu rằng đồ vật vẫn tồn tại dù bị che khuất; thành tựu cốt lõi của giai đoạn Cảm giác - vận động (~8 tháng)."], ["Tư duy Tự trung (Egocentrism)", "Đặc trưng tư duy trẻ 2-7 tuổi: chỉ có khả năng nhìn nhận thế giới từ góc nhìn chủ quan của bản thân."], ["Bảo tồn (Conservation)", "Hiểu rằng đặc tính vật lý (thể tích, khối lượng) không đổi khi hình dạng bên ngoài biến đổi; đạt được ở tuổi 7-11."], ["Lev Vygotsky", "Nhà tâm lý học Nga sáng lập Thuyết Lịch sử - Xã hội, đề xuất khái niệm ZPD và xem ngôn ngữ là công cụ tư duy tối thượng."], ["ZPD (Vùng phát triển gần nhất)", "Khoảng cách giữa mức năng lực trẻ tự làm được và mức năng lực trẻ đạt được khi có người lớn hỗ trợ."], ["Scaffolding (Giàn giáo)", "Kỹ thuật sư phạm của Bruner: hỗ trợ tối đa khi bắt đầu và rút lui dần khi người học đã thành thạo."], ["Urie Bronfenbrenner", "Nhà tâm lý học đề xuất Thuyết Hệ thống Sinh thái với 5 tầng môi trường: Vi mô, Trung gian, Ngoại vi, Vĩ mô, Thời gian."], ["Hệ Vi mô (Microsystem)", "Tầng môi trường gần gũi nhất có tương tác trực tiếp hàng ngày với trẻ: gia đình, trường học, bạn bè."], ["Mary Ainsworth", "Nhà tâm lý học thiết kế thí nghiệm Tình huống lạ (Strange Situation) phân loại 4 kiểu gắn bó mẹ - con."], ["Gắn bó An toàn (Secure)", "Kiểu gắn bó lành mạnh nhất: trẻ tin tưởng mẹ, dùng mẹ làm điểm tựa an toàn để tự tin khám phá thế giới."], ["Lawrence Kohlberg", "Nhà tâm lý học đề xuất 3 mức độ và 6 giai đoạn phát triển đạo đức dựa trên song đề Heinz."], ["Heinz Dilemma", "Tình huống giả định kinh điển của Kohlberg: người chồng trộm thuốc cứu vợ mắc ung thư dùng để đo lường tư duy đạo đức."]], "qs": [["Theo Jean Piaget, một đứa trẻ nhìn thấy con mèo lần đầu tiên và reo lên 'Chó con ơi!' vì con mèo cũng có 4 chân và lông xù. Đứa trẻ đang thực hiện tiến trình nào?", ["Điều ứng (Accommodation)", "Đồng hóa (Assimilation)", "Bảo tồn (Conservation)", "Tự trung (Egocentrism)"], 1, "Đồng hóa (Assimilation) là việc đưa thông tin mới vào sơ đồ nhận thức có sẵn ('vật 4 chân lông xù là chó')."], ["Đứa trẻ sau đó được mẹ giải thích 'Đây là con mèo, nó kêu meo meo chứ không sủa gâu gâu'. Đứa trẻ sửa đổi lại sơ đồ nhận thức của mình. Tiến trình này là:", ["Đồng hóa", "Điều ứng (Accommodation)", "Thuyết vật linh", "Cân bằng hóa"], 1, "Điều ứng (Accommodation) là sự biến đổi hoặc tạo mới sơ đồ nhận thức để thích ứng với thông tin khác biệt."], ["Hiện tượng trẻ sơ sinh khoảng 8 tháng tuổi bắt đầu biết tìm kiếm món đồ chơi bị mẹ dùng khăn phủ kín là minh chứng cho thành tựu nhận thức nào?", ["Khái niệm bảo tồn thể tích", "Tính vĩnh cửu của vật thể (Object Permanence)", "Tư duy trừu tượng", "Ngôn ngữ nội tâm"], 1, "Tính vĩnh cửu của vật thể (Object permanence) xuất hiện khoảng 8 tháng tuổi ở giai đoạn Cảm giác - vận động."], ["Thí nghiệm 'Ba ngọn núi' của Jean Piaget nhằm chứng minh đặc điểm tư duy nào của trẻ em lứa tuổi Tiền thao tác (2 – 7 tuổi)?", ["Khả năng suy luận giả thuyết", "Tính tự trung (Egocentrism - không thể nhìn từ góc nhìn người khác)", "Khả năng phân loại phân cấp", "Sự suy giảm trí nhớ làm việc"], 1, "Thí nghiệm 3 ngọn núi chứng minh tính tự trung (Egocentrism): trẻ tin người đối diện nhìn thấy y hệt những gì mình thấy."], ["Rót cùng một lượng nước từ một chiếc cốc lùn bẹt sang một chiếc cốc cao hẹp, trẻ 5 tuổi khẳng định cốc cao có nhiều nước hơn. Trẻ chưa đạt được khái niệm nào?", ["Tính vĩnh cửu của vật thể", "Bảo tồn (Conservation)", "Đồng hóa", "Biểu tượng hóa"], 1, "Trẻ tiền thao tác chưa hiểu quy luật bảo tồn (Conservation) vì tư duy bị tập trung một chiều vào chiều cao."], ["Khái niệm 'Vùng Phát triển Gần nhất' (ZPD) của Lev Vygotsky được định nghĩa là:", ["Khoảng thời gian đứa trẻ ngủ sâu nhất trong ngày", "Khoảng cách giữa mức độ trẻ tự làm một mình và mức độ trẻ hoàn thành được dưới sự giúp đỡ của người có năng lực hơn", "Khoảng cách địa lý từ nhà đến trường mầm non", "Vùng não bộ phụ trách trí nhớ"], 1, "ZPD là khoảng cách giữa năng lực độc lập hiện tại và năng lực tiềm năng có hướng dẫn."], ["Kỹ thuật sư phạm người lớn hỗ trợ nâng đỡ nhiều khi trẻ mới học kỹ năng và rút dần sự hỗ trợ khi trẻ đã thành thạo được gọi là gì?", ["Kỹ thuật dập tắt hành vi", "Kỹ thuật Giàn giáo học tập (Scaffolding)", "Tự do khám phá không định hướng", "Phương pháp thưởng phạt Pavlov"], 1, "Scaffolding (Giàn giáo) là kỹ thuật sư phạm nâng đỡ nhận thức phát triển từ lý thuyết Vygotsky."], ["Theo thuyết Hệ thống Sinh thái của Urie Bronfenbrenner, mối quan hệ tương tác và hợp tác giữa cha mẹ đứa trẻ và cô giáo chủ nhiệm thuộc tầng hệ thống nào?", ["Hệ Vi mô (Microsystem)", "Hệ Trung gian (Mesosystem)", "Hệ Ngoại vi (Exosystem)", "Hệ Vĩ mô (Macrosystem)"], 1, "Hệ Trung gian (Mesosystem) là mạng lưới liên kết giữa các thành phần trong hệ vi mô (gia đình ↔ nhà trường)."], ["Trong thí nghiệm 'Tình huống lạ' của Mary Ainsworth, đứa trẻ khóc khi mẹ rời phòng, nhưng khi mẹ quay lại thì mừng rỡ, ôm chầm lấy mẹ và nhanh chóng bình tĩnh chơi tiếp. Đứa trẻ có kiểu gắn bó nào?", ["Gắn bó né tránh (Avoidant)", "Gắn bó an toàn (Secure)", "Gắn bó lo âu - kháng cự (Ambivalent)", "Gắn bó hỗn loạn"], 1, "Gắn bó an toàn (Secure) đặc trưng bởi sự tin tưởng và khả năng được xoa dịu nhanh chóng khi người chăm sóc quay về."], ["Một đứa trẻ khi mẹ quay lại phòng thì tỏ ra lạnh lùng, quay mặt đi chỗ khác và phớt lờ sự hiện diện của mẹ. Kiểu gắn bó này là:", ["Gắn bó an toàn", "Gắn bó né tránh (Insecure-Avoidant)", "Gắn bó lo âu", "Gắn bó đa chiều"], 1, "Gắn bó né tránh (Avoidant): trẻ kìm nén cảm xúc và phớt lờ mẹ do từng bị từ chối tình cảm nhiều lần."], ["Trong thí nghiệm của Mary Ainsworth, kiểu gắn bó nào thường gắn liền với hoàn cảnh trẻ bị bạo hành, bỏ bê hoặc cha mẹ có hành vi gây sợ hãi?", ["Gắn bó an toàn", "Gắn bó hỗn loạn (Disorganized attachment)", "Gắn bó né tránh", "Gắn bó tự chủ"], 1, "Gắn bó hỗn loạn (Disorganized) biểu hiện sự sợ hãi, bối rối không phương hướng, thường gặp ở trẻ bị sang chấn/bạo hành."], ["Trong Song đề Heinz của Lawrence Kohlberg, một người trả lời: 'Heinz không nên trộm thuốc vì nếu trộm thuốc anh ta sẽ bị cảnh sát bắt và tống vào tù'. Người này đang ở mức độ đạo đức nào?", ["Mức 1: Tiền quy ước (Preconventional - Giai đoạn tránh bị phạt)", "Mức 2: Quy ước (Conventional)", "Mức 3: Hậu quy ước (Postconventional)", "Mức vô đạo đức"], 0, "Tiền quy ước (Giai đoạn 1): đánh giá hành vi thuần túy dựa trên nguy cơ bị trừng phạt thể xác."], ["Một người lập luận: 'Heinz nên trộm thuốc vì mạng sống của người vợ thiêng liêng hơn quyền sở hữu tài sản của ông dược sĩ, luật pháp cần phục vụ con người'. Người này đạt mức đạo đức nào?", ["Tiền quy ước", "Quy ước", "Hậu quy ước (Postconventional - Quyền con người và nguyên lý phổ quát)", "Đạo đức tập thể"], 2, "Hậu quy ước (Giai đoạn 5-6): vượt lên trên luật pháp cứng nhắc để hướng tới giá trị nhân đạo phổ quát."], ["Điểm khác biệt căn bản nhất giữa quan điểm của Jean Piaget và Lev Vygotsky về mối quan hệ giữa học tập và phát triển nhận thức là:", ["Piaget cho rằng nhận thức tự thân đi trước học tập; Vygotsky khẳng định học tập và tương tác xã hội đi trước mở đường cho phát triển", "Piaget coi trọng văn hóa hơn Vygotsky", "Vygotsky chỉ nghiên cứu người già", "Cả hai đều phủ nhận vai trò của ngôn ngữ"], 0, "Piaget: sự trưởng thành sinh học định giới hạn nhận thức; Vygotsky: học tập xã hội qua ZPD kéo sự phát triển tiến lên."], ["Theo Jerome Bruner và Lev Vygotsky, 'Ngôn ngữ cá nhân / Tự thoại' (Private Speech) ở trẻ 3-6 tuổi có chức năng quan trọng nhất là:", ["Dấu hiệu trẻ bị chậm phát triển ngôn ngữ", "Công cụ tư duy tự hướng dẫn, tự kiểm soát và điều chỉnh hành vi của chính mình", "Chỉ để giải trí", "Phản xạ không điều kiện"], 1, "Tự thoại (Private speech) là cầu nối trung gian giúp trẻ tự điều chỉnh nhận thức trước khi chuyển hóa thành ngôn ngữ nội tâm."]], "trees": [["Jean Piaget: Nhận thức", "4 giai đoạn kiến tạo", "chia thành", [["Cơ chế Thích ứng", "Schema, Đồng hóa & Điều ứng", "gồm", [["Sơ đồ (Schema)", "khung khái niệm tinh thần phân loại thế giới", "", []], ["Đồng hóa (Assimilation)", "đưa dữ liệu mới vào sơ đồ sẵn có", "", []], ["Điều ứng (Accommodation)", "biến đổi sơ đồ để khớp với thực tế mới", "", []]]], ["4 Giai đoạn Nhận thức", "từ giác quan đến trừu tượng", "gồm", [["Cảm giác - vận động (0-2t)", "tính vĩnh cửu của vật thể (~8 tháng)", "", []], ["Tiền thao tác (2-7t)", "tư duy tự trung, thuyết vật linh, chưa bảo tồn", "", []], ["Thao tác cụ thể (7-11t)", "bảo tồn (conservation), đảo ngược, xếp chuỗi", "", []], ["Thao tác hình thức (11t+)", "tư duy trừu tượng, giả thuyết - suy diễn", "", []]]]]], ["Vygotsky & Bronfenbrenner", "văn hóa & hệ thống sinh thái", "chia thành", [["Lev Vygotsky", "Lịch sử - Xã hội", "gồm", [["ZPD", "vùng phát triển gần nhất: tự làm vs có trợ giúp", "", []], ["Giàn giáo (Scaffolding)", "nâng đỡ khi bắt đầu, rút dần khi thành thạo", "", []], ["Ngôn ngữ", "xã hội → tự thoại (private speech) → tư duy bên trong", "", []]]], ["Urie Bronfenbrenner", "5 tầng sinh thái", "gồm", [["Vi mô (Microsystem)", "gia đình, lớp học, bạn bè trực tiếp", "", []], ["Trung gian (Mesosystem)", "mối quan hệ giữa gia đình và nhà trường", "", []], ["Ngoại vi & Vĩ mô", "chính sách cha mẹ (Exo) & văn hóa thể chế (Macro)", "", []], ["Thời gian (Chrono)", "chiều biến cố lịch sử cuộc đời", "", []]]]]], ["Gắn bó & Đạo đức", "Bowlby & Kohlberg", "chia thành", [["Thuyết Gắn bó (Bowlby/Ainsworth)", "thí nghiệm Tình huống lạ", "gồm", [["An toàn (Secure, ~65%)", "tin tưởng, dùng mẹ làm bệ phóng khám phá", "", []], ["Lo âu - Kháng cự (Ambivalent)", "hoảng sợ khi đi, vừa bế vừa cự tuyệt khi về", "", []], ["Né tránh (Avoidant)", "thờ ơ lạnh nhạt, trốn tránh gắn kết", "", []], ["Hỗn loạn (Disorganized)", "sợ hãi, hành vi kỳ lạ (sang chấn/bạo hành)", "", []]]], ["Thuyết Đạo đức Kohlberg", "Song đề Heinz", "gồm", [["Tiền quy ước", "tránh bị phạt (gđ 1) & tư lợi cá nhân (gđ 2)", "", []], ["Quy ước", "con ngoan (gđ 3) & luật pháp trật tự (gđ 4)", "", []], ["Hậu quy ước", "khế ước xã hội (gđ 5) & nguyên lý phổ quát (gđ 6)", "", []]]]]]]}, {"id": "pt3", "part": "Phần II: Các Giai đoạn Phát triển Suốt Vòng đời", "code": "PT.3", "title": "Tâm lý Tuổi Thơ ấu: Từ Thai nhi đến 3 tuổi (0 – 3 tuổi)", "goals": ["Hiểu các giai đoạn phát triển trước sinh (Bào thai) và tác động của tác nhân gây dị tật (Teratogens).", "Nắm vững các phản xạ sơ sinh sinh tồn và ý nghĩa thích nghi.", "Phân tích đặc điểm giai đoạn Hài nhi (2-15 tháng): Hoạt động giao lưu cảm xúc trực tiếp, phức cảm hớn hở, sự phát triển gắn bó.", "Làm chủ giai đoạn Ấu nhi (1.5-3 tuổi): Hoạt động với đồ vật, ngôn ngữ bùng nổ, và bản chất Khủng hoảng tuổi lên 3."], "sections": [{"h": "Giai đoạn Trước sinh (Prenatal Development) & Tác nhân Dị tật", "items": ["<b>Ba giai đoạn phát triển trước sinh:</b>", "• <i>1. Giai đoạn Mầm (Germinal, 0–2 tuần):</i> Từ khi thụ tinh tạo hợp tử đến khi bám vào thành tử cung.", "• <i>2. Giai đoạn Phôi (Embryonic, 3–8 tuần):</i> Giai đoạn nhạy cảm nhất; hình thành các cơ quan nội tạng chính, tim đập và hệ thần kinh sơ khai.", "• <i>3. Giai đoạn Thai (Fetal, 9 tuần đến khi sinh):</i> Hoàn thiện cấu trúc cơ thể, não bộ phát triển vượt bậc với hàng tỷ nơ-ron kết nối; thai nhi phản ứng với âm thanh bên ngoài.", "<b>Tác nhân Gây Dị tật (Teratogens):</b> Mọi yếu tố môi trường gây tổn thương hoặc cản trở sự phát triển bình thường của thai nhi:", "• <i>Hóa chất & Thuốc:</i> Rượu (Hội chứng nhiễm độc rượu thai nhi - FAS gây dị tật mặt và chậm phát triển trí tuệ), Thuốc lá (sinh non, nhẹ cân), Ma túy.", "• <i>Nhiễm trùng:</i> Virus Rubella, Zika (teo não), HIV.", "• <i>Trạng thái tâm lý người mẹ:</i> Căng thẳng kéo dài (Chronic stress) làm tăng nồng độ hormone Cortisol qua nhau thai, ảnh hưởng đến tính khí nhút nhát, hay quấy khóc của trẻ sau này."]}, {"h": "Trẻ Sơ sinh (0 – 2 tháng): Các Phản xạ Bẩm sinh Sinh tồn", "items": ["Trẻ chào đời với một hệ thống các <b>phản xạ nguyên thủy bẩm sinh</b> (vận hành từ dưới vỏ não/tủy sống):", "• <b>Phản xạ Tìm vú (Rooting reflex):</b> Khi chạm nhẹ vào má, trẻ tự động quay đầu về hướng đó và mở miệng tìm núm vú.", "• <b>Phản xạ Mút (Sucking reflex):</b> Tự động mút bất cứ vật gì chạm vào vòm miệng → sinh tồn ăn uống.", "• <b>Phản xạ Nắm bắt (Grasping / Palmar reflex):</b> Khi đặt ngón tay vào lòng bàn tay trẻ, các ngón tay tự động siết chặt cực kỳ chắc chắn.", "• <b>Phản xạ Giật mình (Moro reflex):</b> Khi có tiếng động lớn bất ngờ hoặc cảm giác rơi hẫng, trẻ giật mình dang hai tay ra rồi co quắp lại vào ngực.", "• <b>Phản xạ Babinski:</b> Quẹt nhẹ vào lòng bàn chân từ gót lên ngón, các ngón chân xòe ra hình cánh quạt (biến mất sau 1 tuổi khi vỏ não trưởng thành).", "<b>Thang đo Apgar:</b> Đánh giá sức khỏe ngay sau sinh ở phút thứ 1 và thứ 5 dựa trên 5 chỉ số: Nhịp tim, Hô hấp, Trương lực cơ, Phản xạ và Màu da (7-10 điểm là an toàn)."]}, {"h": "Giai đoạn Hài nhi (2 – 15 tháng): Giao lưu Cảm xúc & Nhu cầu Gắn bó", "items": ["<b>Hoạt động Chủ đạo: Giao lưu Cảm xúc Trực tiếp với Người lớn (chủ yếu là mẹ):</b>", "• <b>Phức cảm Hớn hở (Animation Complex):</b> Xuất hiện từ tháng thứ 2–3; khi người lớn cúi xuống nhìn, mỉm cười và trò chuyện, trẻ phản ứng đồng loạt: cười toe toét, khua chân múa tay, phát ra âm thanh 'ê a'. Đây là <b>cột mốc tâm lý đánh dấu sự kết thúc của giai đoạn sơ sinh</b>.", "<b>Sự phát triển vận động theo 2 quy luật:</b>", "• <i>Từ đầu xuống chân (Cephalocaudal):</i> Nâng đầu (2 tháng) → Lẫy (4 tháng) → Ngồi vững (6 tháng) → Bò (8 tháng) → Đứng và đi chập chững (12 tháng).", "• <i>Từ gần ra xa (Proximodistal):</i> Kiểm soát cơ thân mình và vai trước khi điều khiển khéo léo ngón tay nhặt hạt nhỏ (*Pincer grasp*).", "<b>Hai Hiện tượng Cảm xúc Kinh điển cuối năm thứ nhất:</b>", "• <i>Nỗi sợ người lạ (Stranger Anxiety, ~7–8 tháng):</i> Khóc và sợ hãi khi người lạ tiếp cận.", "• <i>Nỗi lo âu xa cách (Separation Anxiety, ~8–9 tháng):</i> Đau khổ, gào khóc khi người mẹ rời khỏi tầm mắt (gắn liền với sự xuất hiện của Tính vĩnh cửu của vật thể và Gắn bó an toàn)."]}, {"h": "Giai đoạn Ấu nhi (1.5 – 3 tuổi): Hoạt động với Đồ vật & Khủng hoảng Tuổi lên 3", "items": ["<b>Hoạt động Chủ đạo: Hoạt động với Đồ vật (Công cụ):</b>", "• Trẻ không còn chỉ ném, gõ đồ vật để nghe tiếng kêu (như trẻ hài nhi), mà bắt đầu học <b>phương thức sử dụng đồ vật theo đúng chức năng xã hội</b> do loài người sáng tạo (cầm thìa xúc cơm, lấy lược chải đầu, đội mũ lên đầu).", "<b>Sự Bùng nổ Ngôn ngữ:</b>", "• Từ 1 tuổi (nói từ đơn) → 18-24 tháng (ghép từ đôi 'Mẹ bế', 'Xe đi', vốn từ tăng vọt lên hàng trăm từ) → 3 tuổi (nói câu hoàn chỉnh, biết hỏi 'Tại sao?').", "<b>Khủng hoảng Tuổi lên 3 (The Terrible Twos / Crisis of Age 3):</b>", "• <i>Nguyên nhân:</i> Xuất hiện cấu tạo tâm lý mới — <b>Tự ý thức về cái tôi ('Tôi', 'Con')</b>; trẻ nhận ra mình là một thực thể độc lập tách biệt khỏi người lớn và muốn tự khẳng định quyền lực của mình.", "• <i>7 triệu chứng điển hình (L.S. Vygotsky):</i>", "  1. <b>Tính tiêu cực (Negativism):</b> Từ chối làm theo mệnh lệnh của người lớn chỉ vì đó là lời người lớn bảo (dù thực tâm trẻ muốn làm).", "  2. <b>Tính bướng bỉnh (Stubbornness):</b> Khăng khăng đòi làm theo ý mình chỉ để bảo vệ ý muốn đó chứ không vì giá trị món đồ.", "  3. <b>Tính chống đối (Obstinacy):</b> Nổi loạn chống lại toàn bộ nếp sống gia đình.", "  4. <b>Tính tự tiện / Độc đoán (Willfulness):</b> 'Để con tự làm!', gạt tay người lớn ra.", "  5. <b>Bạo loạn / Chống đối xã hội:</b> Cắn, đập phá đồ chơi, xung đột với anh chị em.", "  6. <b>Mất giá trị (Depreciation):</b> Nói xấu, gọi đồ vật yêu quý bằng từ ngữ chê bai.", "  7. <b>Chuyên chế (Tyranny):</b> Bắt cả nhà phải phục tùng mệnh lệnh của mình.", "• <i>Cách ứng phó của cha mẹ:</i> Tôn trọng nhu cầu độc lập của trẻ; cho trẻ quyền lựa chọn có giới hạn ('Con muốn mặc áo đỏ hay áo xanh?'); kiên định nhưng ấm áp, tránh đối đầu bạo lực làm tổn thương nhân cách tự chủ của trẻ."]}], "tables": [{"title": "Bảng đối chiếu Các Phản xạ Bẩm sinh Nguyên thủy ở Trẻ Sơ sinh", "head": ["Tên phản xạ", "Kích thích khởi phát", "Phản ứng của trẻ", "Ý nghĩa Thích nghi & Lâm sàng"], "rows": [["Tìm vú (Rooting)", "Chạm nhẹ vào khóe môi hoặc má", "Quay đầu về phía kích thích, mở miệng tìm bú", "Sinh tồn ăn uống; biến mất sau khoảng 3-4 tháng"], ["Mút (Sucking)", "Có vật chạm vào vòm miệng", "Tự động mút nhịp nhàng", "Hút sữa mẹ; chuyển dần thành hành vi có ý thức sau 4 tháng"], ["Nắm bắt (Palmar grasp)", "Đặt ngón tay vào lòng bàn tay trẻ", "Các ngón tay siết chặt ngón tay người lớn", "Chuẩn bị cho kỹ năng cầm nắm; biến mất sau 4-6 tháng"], ["Giật mình (Moro)", "Tiếng động lớn hoặc thay đổi đột ngột tư thế", "Dang rộng hai tay, ưỡn lưng, sau đó khép tay lại khóc", "Bảo vệ sinh tồn; nếu kéo dài quá 6 tháng là dấu hiệu thần kinh bất thường"], ["Babinski", "Gãi dọc rìa ngoài lòng bàn chân từ gót lên ngón", "Ngón chân cái uốn cong lên, các ngón khác xòe ra", "Kiểm tra sự myelin hóa của bó tháp vỏ não - tủy sống (biến mất sau 1 tuổi)"]]}, {"title": "Bảng tiến trình Phát triển Vận động & Tâm lý từ 0 đến 3 tuổi", "head": ["Mốc tháng tuổi", "Cột mốc Vận động", "Cột mốc Nhận thức & Ngôn ngữ", "Đặc trưng Cảm xúc & Xã hội"], "rows": [["2 – 3 tháng", "Nâng đầu vững khi nằm sấp", "Phát ra âm thanh 'ê a' (Cooing)", "Xuất hiện Phức cảm hớn hở khi nhìn thấy mẹ"], ["4 – 6 tháng", "Biết lẫy, với tay cầm đồ chơi", "Bập bẹ phụ âm 'ba-ba, ma-ma' (Babbling)", "Nhận ra người quen, mỉm cười có chọn lọc"], ["7 – 9 tháng", "Ngồi vững không cần đỡ, bắt đầu bò", "Hiểu từ 'Không', biết vẫy tay 'Bai-bai'", "Xuất hiện Nỗi sợ người lạ và Nỗi lo xa cách mẹ"], ["12 tháng", "Đứng vịn, chập chững bước đi đầu tiên", "Nói được từ đơn đầu tiên có nghĩa ('Mẹ', 'Bố')", "Hình thành kiểu gắn bó rõ nét (An toàn / Bất an)"], ["18 – 24 tháng", "Chạy vững, đá bóng, leo cầu thang", "Bùng nổ ngôn ngữ ghép từ đôi ('Mẹ bế', 'Uống sữa')", "Nhận diện bản thân trong gương (Thí nghiệm vệt son Rouge test)"], ["36 tháng (3 tuổi)", "Nhảy lò cò, cầm thìa xúc cơm thuần thục", "Nói câu hoàn chỉnh, hỏi 'Tại sao?' liên tục", "Khủng hoảng tuổi lên 3: khẳng định cái Tôi 'Con tự làm'"]]}], "tips": ["Công thức nhận diện Phức cảm hớn hở: Trẻ 2-3 tháng thấy mặt mẹ = Cười + Vung tay chân + Mắt mở to + Kêu ê a. Thiếu vắng dấu hiệu này cần tầm soát tương tác sớm!", "Thí nghiệm Vệt son trên mũi (Rouge test): Chấm vết son lên mũi trẻ rồi cho soi gương; nếu trẻ đưa tay lên SỜ MŨI MÌNH (khoảng 18 tháng) → Trẻ đã có Ý thức về bản thân!", "Đối phó Khủng hoảng tuổi lên 3: Đừng bao giờ hỏi 'Con có đi tắm không?' (trẻ sẽ nói 'KHÔNG!'). Hãy hỏi: 'Con muốn tắm vịt vàng hay thuyền buồm?' → Trao quyền tự chủ trong khuôn khổ.", "Tác nhân Teratogens: 8 tuần đầu của thai kỳ là giai đoạn 'Cửa sổ mong manh' nhất vì đây là lúc các cơ quan cơ thể hình thành."], "cards": [["Teratogens", "Mọi tác nhân từ môi trường (hóa chất, virus, thuốc, phóng xạ) có khả năng gây dị tật bẩm sinh cho thai nhi."], ["Hội chứng FAS", "Hội chứng nhiễm độc rượu thai nhi do người mẹ uống rượu khi mang thai, gây dị tật mặt và chậm phát triển trí tuệ."], ["Thang điểm Apgar", "Hệ thống đánh giá sức khỏe sơ sinh ở phút 1 và 5 sau sinh dựa trên Tim, Thở, Trương lực, Phản xạ và Màu da."], ["Phản xạ Moro", "Phản xạ giật mình dang hai tay rồi khép lại ôm ngực khi trẻ sơ sinh nghe tiếng động lớn hoặc cảm giác hẫng ngã."], ["Phản xạ Babinski", "Phản xạ xòe ngón chân khi vuốt lòng bàn chân; biến mất sau 1 tuổi khi vỏ não hoàn thiện quá trình Myelin hóa."], ["Phức cảm hớn hở", "Phản ứng cảm xúc đồng loạt (cười, hoa chân múa tay, ê a) của trẻ 2-3 tháng khi người lớn trò chuyện; kết thúc sơ sinh."], ["Vận động Cephalocaudal", "Quy luật phát triển vận động từ trên đầu xuống dưới chân (kiểm soát đầu cổ trước, đi lại sau cùng)."], ["Vận động Proximodistal", "Quy luật phát triển vận động từ trung tâm cơ thể ra ngoại vi (vung cả cánh tay trước khi nhặt bằng đầu ngón tay)."], ["Nỗi sợ người lạ", "Hiện tượng trẻ khóc và hoảng sợ khi tiếp xúc người lạ, xuất hiện quanh mốc 7-8 tháng tuổi."], ["Nỗi lo âu xa cách", "Phản ứng đau khổ, khóc lóc của trẻ khi người gắn bó chính (mẹ) rời khỏi tầm mắt, xuất hiện quanh 8-9 tháng."], ["Hoạt động với đồ vật", "Hoạt động chủ đạo của trẻ 1-3 tuổi: học phương thức sử dụng đồ vật theo đúng chức năng xã hội của loài người."], ["Rouge Test (Vệt son)", "Thí nghiệm chấm son lên mũi soi gương; trẻ 18 tháng chạm vào mũi mình chứng minh sự ra đời của Ý thức về Bản thân."], ["Khủng hoảng tuổi lên 3", "Thời kỳ bùng nổ xung đột giữa nhu cầu tự lập mới xuất hiện của trẻ và sự can thiệp của người lớn."], ["Tính tiêu cực (Negativism)", "Hành vi từ chối làm theo yêu cầu của người lớn chỉ vì muốn chống lại mệnh lệnh, triệu chứng số 1 của tuổi lên 3."], ["Terrible Twos", "Thuật ngữ dân gian phương Tây chỉ giai đoạn khủng hoảng bướng bỉnh và giận dữ bộc phát quanh mốc 2-3 tuổi."], ["Object Permanence", "Nhận thức đồ vật vẫn tồn tại dù bị che khuất; cơ sở để trẻ bắt đầu xuất hiện nỗi lo xa cách khi mẹ khuất bóng."]], "qs": [["Giai đoạn nào trong sự phát triển trước sinh (thai kỳ) có tính nhạy cảm cao nhất đối với các tác nhân gây dị tật bẩm sinh (Teratogens)?", ["Giai đoạn Mầm (0 - 2 tuần)", "Giai đoạn Phôi (Embryonic period, 3 - 8 tuần)", "Giai đoạn Thai tháng thứ 8", "Tuần sinh nở"], 1, "Giai đoạn Phôi (3-8 tuần) là lúc các cơ quan nội tạng hình thành, nhạy cảm nhất với dị tật."], ["Khi một người dùng ngón tay chạm nhẹ vào khóe môi của em bé sơ sinh, em bé tự động quay đầu sang hướng đó và há miệng. Đây là phản xạ:", ["Phản xạ Moro", "Phản xạ Tìm vú (Rooting reflex)", "Phản xạ Babinski", "Phản xạ nắm bắt"], 1, "Phản xạ Tìm vú (Rooting reflex) giúp trẻ sơ sinh tìm được núm vú mẹ để sinh tồn."], ["Khi quẹt nhẹ vào lòng bàn chân của trẻ sơ sinh 3 tháng tuổi, các ngón chân của bé xòe rộng hình cánh quạt. Phản xạ này là:", ["Phản xạ bước đi", "Phản xạ Babinski", "Phản xạ bơi lội", "Phản xạ giật mình"], 1, "Phản xạ Babinski là phản xạ bẩm sinh bình thường ở trẻ dưới 1 tuổi; nếu tồn tại ở người lớn là dấu hiệu tổn thương bó tháp."], ["Dấu hiệu tâm lý nào xuất hiện ở tháng thứ 2 – 3 đánh dấu bước ngoặt kết thúc thời kỳ sơ sinh và mở đầu thời kỳ hài nhi?", ["Trẻ biết tự cầm bình sữa", "Xuất hiện 'Phức cảm hớn hở' khi người lớn mỉm cười và trò chuyện với trẻ", "Trẻ mọc chiếc răng đầu tiên", "Trẻ biết nói từ đơn"], 1, "Phức cảm hớn hở (Animation complex) là cột mốc tâm lý đầu tiên chứng minh trẻ có nhu cầu giao lưu xã hội."], ["Theo quy luật phát triển vận động từ đầu xuống chân (Cephalocaudal), kỹ năng nào dưới đây sẽ được đứa trẻ hoàn thiện ĐẦU TIÊN?", ["Ngồi vững không cần tựa", "Nâng đầu và giữ thẳng cổ khi bế", "Đứng chập chững", "Đi lại độc lập"], 1, "Trẻ kiểm soát cơ cổ và nâng đầu vững trước (2-3 tháng), sau đó mới tới ngồi và đi đứng."], ["Hiện tượng trẻ khoảng 8 tháng tuổi khóc thét và bám chặt lấy mẹ khi thấy một người lạ bước vào nhà được gọi là:", ["Hội chứng sợ đám đông", "Nỗi sợ người lạ (Stranger Anxiety)", "Khủng hoảng tuổi lên 3", "Rối loạn gắn bó né tránh"], 1, "Nỗi sợ người lạ (Stranger anxiety) xuất hiện quanh 7-8 tháng tuổi cùng với sự phát triển của nhận thức phân biệt người thân/người lạ."], ["Thí nghiệm chấm vệt son lên mũi rồi cho trẻ soi gương (Rouge Test) chứng minh điều gì khi đứa trẻ 18 tháng tuổi tự đưa tay lên sờ vào mũi mình?", ["Trẻ bị ngứa mũi", "Đứa trẻ đã hình thành Ý thức về bản thân (Self-awareness / Nhận diện cái tôi)", "Trẻ thích trang điểm", "Trẻ thị lực kém"], 1, "Rouge Test chứng minh trẻ nhận ra hình ảnh trong gương là chính mình chứ không phải đứa trẻ khác."], ["Hoạt động chủ đạo của trẻ em trong giai đoạn Ấu nhi (1.5 – 3 tuổi) là hoạt động nào?", ["Giao lưu cảm xúc trực tiếp với mẹ", "Hoạt động với đồ vật (sử dụng công cụ theo chức năng xã hội)", "Trò chơi đóng vai có chủ đề", "Hoạt động học tập"], 1, "Hoạt động với đồ vật là hoạt động chủ đạo của tuổi ấu nhi (1.5-3 tuổi)."], ["Nguyên nhân cốt lõi dẫn đến hiện tượng 'Khủng hoảng tuổi lên 3' ở trẻ em là gì?", ["Do trẻ bị thiếu hụt canxi", "Sự xuất hiện của cấu tạo tâm lý mới: Ý thức về cái tôi ('Tôi', 'Con tự làm') xung đột với sự bao bọc của người lớn", "Do trẻ bắt đầu đi học mầm non", "Do cha mẹ quá nuông chiều"], 1, "Khủng hoảng tuổi lên 3 nảy sinh do sự ra đời của ý thức về cái tôi và khao khát tự chủ độc lập."], ["Triệu chứng 'Tính tiêu cực' (Negativism) trong khủng hoảng tuổi lên 3 được biểu hiện như thế nào?", ["Trẻ luôn suy nghĩ bi quan", "Trẻ từ chối làm theo yêu cầu của người lớn chỉ vì đó là lời người lớn nói, dù thực tâm trẻ muốn làm", "Trẻ không chịu chơi với bạn", "Trẻ không chịu ăn rau"], 1, "Tính tiêu cực là hành vi chống đối mệnh lệnh thuần túy để khẳng định sự độc lập của bản thân."], ["Để ứng phó hiệu quả và khoa học nhất với tính bướng bỉnh của trẻ trong giai đoạn khủng hoảng tuổi lên 3, cha mẹ nên làm gì?", ["Đánh phạt thật nặng để dập tắt thói bướng bỉnh ngay từ đầu", "Trao cho trẻ quyền lựa chọn có giới hạn (vd: 'Con muốn mặc áo đỏ hay áo xanh?') và tôn trọng sự tự lập của trẻ", "Bỏ mặc hoàn toàn muốn làm gì thì làm", "Nhốt trẻ vào phòng tối"], 1, "Cho trẻ quyền lựa chọn trong giới hạn giúp thỏa mãn nhu cầu tự chủ mà vẫn đảm bảo nề nếp gia đình."], ["Hội chứng nhiễm độc rượu thai nhi (FAS) do người mẹ sử dụng rượu bia khi mang thai thường để lại hậu quả nghiêm trọng nào cho đứa trẻ?", ["Làm trẻ có năng khiếu âm nhạc", "Dị tật cấu trúc khuôn mặt, tổn thương hệ thần kinh trung ương và suy giảm trí tuệ vĩnh viễn", "Chỉ làm trẻ ngủ nhiều hơn", "Làm trẻ cao hơn mức trung bình"], 1, "FAS là hội chứng tổn thương thần kinh và dị tật hình thái vĩnh viễn do độc chất cồn gây ra."], ["Thang đo Apgar được sử dụng ngay sau sinh nhằm mục đích gì?", ["Đo chỉ số thông minh IQ của trẻ", "Đánh giá nhanh tình trạng sinh tồn và sức khỏe thể chất của trẻ sơ sinh ở phút 1 và phút 5", "Dự đoán chiều cao tương lai", "Xác định nhóm máu"], 1, "Chỉ số Apgar đánh giá 5 dấu hiệu sinh tồn cấp cứu ngay sau khi trẻ lọt lòng mẹ."], ["Vì sao mẹ bầu bị stress, lo âu kéo dài trong thai kỳ lại có thể ảnh hưởng tiêu cực đến tính khí của đứa trẻ sau khi sinh?", ["Vì thai nhi nghe được tiếng khóc của mẹ", "Hormone căng thẳng Cortisol có thể vượt qua hàng rào nhau thai tác động lên sự phát triển não bộ thai nhi", "Stress làm thai nhi tăng cân quá mức", "Stress làm thay đổi nhóm máu thai nhi"], 1, "Cortisol và adrenaline truyền qua nhau thai ảnh hưởng trực tiếp đến hệ thần kinh và tính khí của trẻ sơ sinh."], ["Hiện tượng trẻ 1 tuổi phát ra những từ đơn đầu tiên như 'Mẹ', 'Bà', 'Ăn' là cột mốc phát triển ngôn ngữ thuộc giai đoạn nào?", ["Giai đoạn tiền ngôn ngữ", "Giai đoạn ngôn ngữ phát âm (Từ đơn có nghĩa / Holophrastic stage)", "Giai đoạn ngữ pháp phức hợp", "Giai đoạn tiếng lóng"], 1, "Mốc 12 tháng tuổi đánh dấu sự ra đời của những từ đơn có nghĩa đầu tiên gắn với nhu cầu thực tế."]], "trees": [["Thời kỳ Trước sinh & Sơ sinh", "bào thai đến 2 tháng", "chia thành", [["Phát triển Trước sinh", "3 giai đoạn", "gồm", [["Giai đoạn Mầm & Phôi", "0-2 tuần (mầm) & 3-8 tuần (phôi nhạy cảm nhất)", "", []], ["Giai đoạn Thai (9t-sinh)", "hoàn thiện nơ-ron não bộ và cử động", "", []], ["Teratogens", "rượu (FAS), thuốc lá, ma túy, stress cortisol mẹ", "", []]]], ["Trẻ Sơ sinh (0-2 tháng)", "phản xạ sinh tồn", "gồm", [["Phản xạ bú & tìm vú", "tự động quay đầu tìm núm vú và mút", "", []], ["Nắm bắt & Babinski", "siết chặt bàn tay & xòe ngón chân cánh quạt", "", []], ["Phản xạ Moro", "giật mình dang tay khi có tiếng động lớn", "", []], ["Thang điểm Apgar", "đánh giá tim, thở, cơ, phản xạ, da phút 1 và 5", "", []]]]]], ["Thời kỳ Hài nhi (2 – 15 tháng)", "giao lưu cảm xúc trực tiếp", "chia thành", [["Hoạt động Chủ đạo", "giao lưu cảm xúc với mẹ", "gồm", [["Phức cảm Hớn hở", "cười, múa tay chân, ê a khi mẹ trò chuyện (2-3th)", "", []], ["Cột mốc kết thúc sơ sinh", "chuyển sang giai đoạn hài nhi tích cực", "", []]]], ["Phát triển Vận động", "2 quy luật tiến hóa", "gồm", [["Cephalocaudal", "kiểm soát đầu cổ (2th) → ngồi (6th) → đi (12th)", "", []], ["Proximodistal", "vận động cơ thân mình trước khi nhặt bằng ngón tay", "", []]]], ["Hiện tượng Cảm xúc cuối năm 1", "7-9 tháng", "gồm", [["Nỗi sợ người lạ", "khóc hoảng sợ khi tiếp xúc người lạ (7-8th)", "", []], ["Nỗi lo xa cách mẹ", "đau khổ khi mẹ rời mắt (gắn với tính vĩnh cửu)", "", []]]]]], ["Thời kỳ Ấu nhi (1.5 – 3 tuổi)", "hoạt động với đồ vật", "chia thành", [["Hoạt động Chủ đạo", "sử dụng công cụ xã hội", "gồm", [["Học chức năng đồ vật", "cầm thìa xúc cơm, lấy lược chải đầu đúng cách", "", []], ["Bùng nổ ngôn ngữ", "từ đơn (1t) → từ đôi (18-24th) → câu hoàn chỉnh (3t)", "", []], ["Rouge Test (Vệt son)", "18 tháng sờ mũi mình: hình thành ý thức cái tôi", "", []]]], ["Khủng hoảng Tuổi lên 3", "7 triệu chứng Vygotsky", "gồm", [["Tính tiêu cực & Bướng bỉnh", "chống lại mệnh lệnh, khăng khăng ý mình", "", []], ["'Con tự làm!'", "đòi độc lập, tự tiện, nổi loạn chống quy chuẩn", "", []], ["Ứng phó cha mẹ", "trao quyền lựa chọn trong giới hạn, kiên định ấm áp", "", []]]]]]]}, {"id": "pt4", "part": "Phần II: Các Giai đoạn Phát triển Suốt Vòng đời", "code": "PT.4", "title": "Tâm lý Lứa tuổi Mẫu giáo & Nhi đồng Tiểu học (3 – 12 tuổi)", "goals": ["Hiểu bản chất Hoạt động chủ đạo Trò chơi đóng vai có chủ đề của trẻ mẫu giáo (3-6 tuổi).", "Nắm vững các bước chuyển biến nhận thức: Tư duy trực quan hình tượng, thuyết vật linh, và chuẩn bị vào lớp 1.", "Phân tích bước ngoặt vị thế xã hội khi trẻ bước vào Tiểu học (6-12 tuổi): Chuyển hoạt động chủ đạo sang Học tập.", "Làm chủ đặc điểm tư duy Thao tác cụ thể của Piaget và khủng hoảng Cần cù vs Tự ti của Erikson."], "sections": [{"h": "Trẻ Mẫu giáo (3 – 6 tuổi): Hoạt động Chủ đạo là Trò chơi Đóng vai", "items": ["<b>Trò chơi Đóng vai có Chủ đề (Role-playing Game):</b>", "• Là hoạt động chủ đạo của lứa tuổi mẫu giáo; trẻ tái tạo lại các mối quan hệ xã hội, nghề nghiệp và hành vi của người lớn trong hoàn cảnh giả định (chơi đóng vai bác sĩ khám bệnh, cô giáo dạy học, gia đình nấu cơm).", "• <b>Cấu trúc trò chơi gồm 4 thành phần:</b> <i>Chủ đề chơi</i> (mảng hiện thực xã hội được phản ánh), <i>Vai chơi</i> (nhân vật trẻ nhận đóng), <i>Hành động chơi</i> (thao tác mô phỏng nghề nghiệp) và <i>Quy tắc chơi</i> (chuẩn mực ứng xử gắn với vai).", "• <b>Ý nghĩa phát triển to lớn:</b> Trẻ học cách kiềm chế xung động bản năng để tuân thủ luật chơi; phát triển trí tưởng tượng, thấu cảm và năng lực hợp tác xã hội.", "<b>Các dạng chơi theo cấp độ phát triển xã hội (Mildred Parten):</b> Chơi một mình (*Solitary play*) → Chơi song song (*Parallel play*, ngồi cạnh nhau nhưng chơi riêng) → Chơi liên kết (*Associative play*, dùng chung đồ) → Chơi hợp tác (*Cooperative play*, cùng chung mục tiêu và phân vai)."]}, {"h": "Sự Phát triển Nhận thức & Nhân cách ở Tuổi Mẫu giáo (3 – 6 tuổi)", "items": ["<b>Đặc điểm Nhận thức (Giai đoạn Tiền thao tác của Piaget):</b>", "• <i>Tư duy Trực quan Hình tượng:</i> Trẻ suy nghĩ dựa trên các hình ảnh, biểu tượng trực quan cụ thể; trí tưởng tượng vô cùng bay bổng và phong phú.", "• <i>Thuyết vật linh (Animism):</i> Trẻ gán cảm xúc, ý chí và sự sống cho đồ vật vô tri ('Bàn làm em đau', 'Mặt trời đi ngủ').", "• <i>Tính tự trung (Egocentrism):</i> Chưa có khả năng đặt mình vào vị trí của người khác để nhìn nhận sự việc.", "<b>Ngôn ngữ & Sự hình thành Nhân cách:</b>", "• Vốn từ đạt 2.000 – 3.000 từ; xuất hiện hiện tượng <b>Tự thoại (Private speech)</b> — trẻ vừa chơi vừa tự lẩm bẩm hướng dẫn chính mình, là tiền đề của tư duy bên trong.", "• <b>Cảm giác Giới tính (Gender Identity):</b> Trẻ nhận biết vững chắc mình là con trai hay con gái và bắt đầu tiếp thu các khuôn mẫu hành vi giới tính xã hội.", "• <b>Sẵn sàng tâm lý vào lớp 1 (Khủng hoảng 6–7 tuổi):</b> Chuyển từ 'Tôi muốn' sang 'Tôi phải'; hình thành động cơ học tập xã hội và năng lực điều chỉnh chú ý có chủ định."]}, {"h": "Học sinh Tiểu học (6 – 12 tuổi): Hoạt động Chủ đạo chuyển sang Học tập", "items": ["<b>Bước ngoặt Vị thế Xã hội:</b>", "• Trẻ rời bỏ môi trường mẫu giáo (nơi hoạt động chủ yếu là chơi tự do) để bước vào trường tiểu học — nơi trẻ mang một vị thế xã hội mới: <b>Học sinh</b> với các trách nhiệm, bổn phận, nội quy và đánh giá điểm số.", "• <b>Hoạt động Chủ đạo: Hoạt động Học tập (Learning Activity):</b>", "  - Khác với việc chơi, hoạt động học tập là hoạt động có mục đích, có kế hoạch, có hệ thống tri thức khoa học và đòi hỏi nỗ lực ý chí cao.", "  - Đối tượng tiếp thu không phải là đồ vật trực tiếp mà là <i>hệ thống khái niệm khoa học trừu tượng</i> (chữ viết, toán học, quy luật tự nhiên xã hội)."]}, {"h": "Nhận thức Thao tác Cụ thể & Khủng hoảng Tâm lý Xã hội (6 – 12 tuổi)", "items": ["<b>Nhận thức ở Giai đoạn Thao tác Cụ thể (Piaget):</b>", "• Trẻ làm chủ <b>Khái niệm Bảo tồn (Conservation)</b> về số lượng (6 tuổi), khối lượng/chất rắn (7-8 tuổi), diện tích và thể tích chất lỏng (9-10 tuổi).", "• <i>Khả năng Đảo ngược (Reversibility):</i> Hiểu rằng nếu $2 + 3 = 5$ thì $5 - 3 = 2$; nước đổ từ cốc cao sang cốc bẹt có thể đổ ngược lại mà không đổi thể tích.", "• <i>Phân loại phân cấp (Classification) & Xếp chuỗi (Seriation):</i> Sắp xếp que gỗ từ ngắn đến dài, phân loại con vật theo loài - lớp - họ.", "• <i>Chuyển biến trí tuệ:</i> Từ chú ý không chủ định sang <b>Chú ý có chủ định</b>; từ ghi nhớ máy móc sang <b>Ghi nhớ có ý nghĩa (ghi nhớ logic)</b>.", "<b>Khủng hoảng Tâm lý Xã hội theo Erik Erikson:</b>", "• <b>Cần cù vs. Tự ti (Industry vs. Inferiority):</b>", "  - Trẻ khao khát được công nhận là người có năng lực, chăm chỉ làm bài tập, hoàn thành sản phẩm.", "  - Nếu được khuyến khích, khen ngợi nỗ lực → Hình thành phẩm chất <b>Năng lực (Competence)</b> và lòng tự tin.", "  - Nếu liên tục bị so sánh điểm kém, chê bai, trừng phạt thất bại → Hình thành mặc cảm <b>Tự ti, bất tài và né tránh thử thách</b>."]}], "tables": [{"title": "So sánh Đặc điểm Tâm lý Trẻ Mẫu giáo (3-6t) và Học sinh Tiểu học (6-12t)", "head": ["Tiêu chí đối sánh", "Trẻ Mẫu giáo (3 – 6 tuổi)", "Học sinh Tiểu học (6 – 12 tuổi)"], "rows": [["Hoạt động chủ đạo", "Trò chơi đóng vai có chủ đề (Vừa học vừa chơi)", "Hoạt động Học tập có hệ thống (Học là nghĩa vụ)"], ["Đặc trưng tư duy", "Tư duy trực quan hình tượng, tự trung, chưa bảo tồn", "Tư duy thao tác cụ thể, tư duy logic, nắm vững bảo tồn"], ["Tính chất chú ý & ghi nhớ", "Không chủ định chiếm ưu thế, ghi nhớ máy móc, dễ phân tâm", "Chú ý có chủ định phát triển mạnh, ghi nhớ logic có ý nghĩa"], ["Ý thức xã hội", "Ý thức về giới tính, bắt đầu hiểu quy tắc ứng xử", "Ý thức trách nhiệm học sinh, danh dự cá nhân trong tập thể"], ["Khủng hoảng tâm lý (Erikson)", "Chủ động vs. Tội lỗi (Initiative vs. Guilt)", "Cần cù vs. Tự ti (Industry vs. Inferiority)"], ["Quan hệ bạn bè", "Chơi với bạn có đồ chơi chung, dễ kết bạn dễ chia tay", "Hình thành tình bạn nhóm sâu sắc, ý thức tập thể lớp"]]}, {"title": "Bảng tiến trình Nắm vững Khái niệm Bảo tồn của Piaget (6 – 11 tuổi)", "head": ["Dạng bảo tồn", "Độ tuổi thành thục", "Thí nghiệm minh họa", "Cách lý giải của trẻ đạt thao tác cụ thể"], "rows": [["Bảo tồn Số lượng", "6 – 7 tuổi", "Xếp 2 hàng cúc áo bằng nhau, sau đó kéo giãn khoảng cách một hàng", "'Số cúc vẫn bằng nhau vì cô chỉ kéo giãn ra chứ không thêm bớt cái nào'"], ["Bảo tồn Khối lượng", "7 – 8 tuổi", "Hai viên đất nặn bằng nhau, nặn một viên dẹt ra thành chiếc bánh", "'Lượng đất nặn vẫn thế, nặn dẹt ra thì nó rộng hơn nhưng mỏng hơn' (Bù trừ)"], ["Bảo tồn Chiều dài", "7 – 8 tuổi", "Hai que gỗ dài bằng nhau, dịch chuyển một que sang phải", "'Hai que vẫn dài bằng nhau dù vị trí đặt khác nhau'"], ["Bảo tồn Diện tích", "8 – 9 tuổi", "Hai cánh đồng có số nhà bằng nhau nhưng xếp cụm hoặc xếp rải rác", "'Diện tích cỏ để bò ăn vẫn bằng nhau'"], ["Bảo tồn Thể tích lỏng", "9 – 11 tuổi", "Rót nước vào cốc có hình dạng kỳ lạ hoặc thả hòn đá vào nước dâng", "'Lượng nước thật sự không hề đổi, có thể đổ ngược lại cốc cũ' (Đảo ngược)"]]}], "tips": ["Mẫu giáo (3-6t): Trò chơi đóng vai không phải là giải trí vô bổ, mà là TRƯỜNG HỌC XÃ HỘI ĐẦU ĐỜI dạy trẻ luật chơi và thấu cảm.", "Chuẩn bị vào lớp 1: Điều quan trọng nhất KHÔNG PHẢI là ép trẻ đọc thông viết thạo từ 5 tuổi, mà là CHUẨN BỊ TÂM THẾ khao khát đi học và kỹ năng tự phục vụ.", "Tiểu học (6-12t): Khen ngợi TIẾN TRÌNH VÀ NỖ LỰC ('Con đã rất kiên trì giải bài toán này') thay vì khen thông minh bẩm sinh, để xây dựng lòng Cần cù (Industry) thay vì Tự ti.", "Tư duy tiểu học là Thao tác Cụ thể: Luôn cần đồ dùng trực quan, que tính, hình ảnh minh họa khi dạy các khái niệm mới."], "cards": [["Trò chơi đóng vai", "Hoạt động chủ đạo của trẻ mẫu giáo: nhập vai và mô phỏng lại các quan hệ xã hội trong hoàn cảnh giả tưởng."], ["Mildred Parten", "Nhà tâm lý học phân loại 4 cấp độ chơi xã hội: Chơi một mình, Chơi song song, Chơi liên kết và Chơi hợp tác."], ["Chơi song song", "Cấp độ chơi khi trẻ ngồi cạnh nhau, chơi đồ chơi giống nhau nhưng không tương tác hay can thiệp vào trò của bạn."], ["Chơi hợp tác", "Cấp độ chơi xã hội cao nhất khi các trẻ cùng phối hợp, phân công vai vế và hướng tới mục tiêu chung."], ["Thuyết vật linh (Animism)", "Đặc trưng tư duy trẻ mẫu giáo: gán sự sống, cảm xúc và ý chí cho các đồ vật vô tri vô giác."], ["Tư duy Trực quan Hình tượng", "Kiểu tư duy dựa trên các hình ảnh biểu tượng cụ thể, thống trị ở lứa tuổi mẫu giáo 3-6 tuổi."], ["Khủng hoảng 6-7 tuổi", "Giai đoạn chuyển giao khi trẻ bước từ mầm non vào lớp 1, đối mặt với sự thay đổi toàn diện về vị thế và hoạt động."], ["Hoạt động Học tập", "Hoạt động chủ đạo của học sinh tiểu học: hoạt động có mục đích, nội quy nhằm tiếp thu tri thức khoa học xã hội."], ["Khái niệm Bảo tồn", "Hiểu rằng bản chất số lượng, thể tích của vật không đổi khi hình dáng bên ngoài thay đổi (đạt được ở tuổi 7-11)."], ["Tính đảo ngược (Reversibility)", "Khả năng tư duy hình dung một tiến trình biến đổi có thể quay ngược lại trạng thái ban đầu (5 - 3 = 2)."], ["Xếp chuỗi (Seriation)", "Khả năng sắp xếp các đối tượng theo một trật tự định lượng tăng hoặc giảm dần (độ dài, cân nặng)."], ["Ghi nhớ có ý nghĩa", "Phương pháp ghi nhớ dựa trên việc hiểu bản chất logic và liên kết tri thức, phát triển mạnh ở tiểu học."], ["Cần cù vs Tự ti", "Khủng hoảng lứa tuổi tiểu học theo Erikson: nỗ lực thành công tạo lòng tự tin, thất bại bị chê bai tạo mặc cảm tự ti."], ["Competence (Năng lực)", "Phẩm chất tâm lý tích cực đạt được khi giải quyết thành công cuộc khủng hoảng Cần cù vs Tự ti của Erikson."], ["Gender Identity", "Nhận thức vững chắc về giới tính của bản thân, được củng cố và thể hiện rõ nét từ lứa tuổi mẫu giáo."], ["Chú ý có chủ định", "Khả năng huy động ý chí để tập trung vào đối tượng học tập dù không hấp dẫn bề ngoài, phát triển mạnh ở lớp 1."]], "qs": [["Hoạt động chủ đạo của trẻ em lứa tuổi Mẫu giáo (3 – 6 tuổi) là gì?", ["Giao lưu cảm xúc trực tiếp", "Hoạt động với đồ vật", "Trò chơi đóng vai có chủ đề", "Hoạt động học tập"], 2, "Trò chơi đóng vai có chủ đề là hoạt động chủ đạo của lứa tuổi mẫu giáo."], ["Hai đứa trẻ 3 tuổi ngồi cạnh nhau trong góc lớp, cùng cầm ô tô đồ chơi đẩy qua đẩy lại nhưng không nói chuyện và không chơi chung kịch bản. Đây là cấp độ chơi nào theo Mildred Parten?", ["Chơi một mình (Solitary play)", "Chơi song song (Parallel play)", "Chơi liên kết (Associative play)", "Chơi hợp tác (Cooperative play)"], 1, "Chơi song song (Parallel play): trẻ chơi cạnh nhau với đồ chơi tương tự nhưng không tương tác chung."], ["Một bé gái 4 tuổi vấp phải chân bàn bị ngã đau liền quay sang đánh cái bàn và nói: 'Bàn hư làm đau em!'. Biểu hiện này minh họa cho:", ["Rối loạn hành vi chống đối", "Thuyết vật linh (Animism)", "Tính tự trung", "Ảo giác thị giác"], 1, "Thuyết vật linh (Animism): trẻ tiền thao tác gán sự sống và cảm xúc cho đồ vật vô tri."], ["Nội dung quan trọng nhất trong việc chuẩn bị tâm lý cho trẻ mẫu giáo 5 tuổi bước vào lớp 1 là gì?", ["Bắt trẻ học thuộc lòng bảng cửu chương và làm toán lớp 2", "Hình thành tâm thế khao khát trở thành học sinh, chuẩn bị năng lực chú ý, tự phục vụ và hứng thú học tập", "Cho trẻ uống thuốc bổ não", "Cấm trẻ không được chơi đồ chơi nữa"], 1, "Chuẩn bị tâm thế học tập, hứng thú nhận thức và kỹ năng tự lập là cốt lõi của sự sẵn sàng vào lớp 1."], ["Sự chuyển đổi căn bản nhất về hoạt động của trẻ khi bước từ mầm non vào trường tiểu học là gì?", ["Chuyển từ Hoạt động ăn ngủ sang Hoạt động thể thao", "Chuyển từ Hoạt động chơi là chủ đạo sang Hoạt động Học tập là nghĩa vụ xã hội", "Chuyển từ hoạt động nhóm sang hoạt động đơn lẻ", "Không có sự thay đổi nào"], 1, "Bước ngoặt vị thế: chuyển từ hoạt động Chơi sang hoạt động Học tập có mục đích và đánh giá xã hội."], ["Theo Jean Piaget, học sinh tiểu học (7 – 11 tuổi) nằm trong giai đoạn phát triển nhận thức nào?", ["Giai đoạn Cảm giác - vận động", "Giai đoạn Tiền thao tác", "Giai đoạn Thao tác cụ thể (Concrete Operational)", "Giai đoạn Thao tác hình thức"], 2, "Lứa tuổi tiểu học (7-11 tuổi) thuộc giai đoạn Thao tác cụ thể."], ["Khả năng hiểu rằng một thanh đất nặn dù bị đập dẹt ra thành chiếc đĩa thì lượng đất sét vẫn giữ nguyên không đổi được gọi là:", ["Tính vĩnh cửu của vật thể", "Khái niệm Bảo tồn (Conservation) khối lượng", "Khả năng phân loại", "Tư duy trừu tượng"], 1, "Khái niệm bảo tồn (Conservation) khối lượng đạt được ở khoảng 7-8 tuổi."], ["Theo Erik Erikson, cuộc khủng hoảng tâm lý - xã hội trọng tâm của lứa tuổi học sinh tiểu học (6 – 12 tuổi) là:", ["Tin tưởng vs Hoài nghi", "Tự chủ vs Xấu hổ", "Chủ động vs Tội lỗi", "Cần cù vs Tự ti (Industry vs. Inferiority)"], 3, "Cuộc khủng hoảng Cần cù vs Tự ti là tâm điểm của lứa tuổi tiểu học."], ["Nếu một học sinh tiểu học liên tục bị cô giáo và cha mẹ so sánh điểm kém với bạn bè, chê bai là 'kém cỏi, chậm chạp', đứa trẻ có nguy cơ cao hình thành nét tâm lý nào?", ["Tính tự chủ cao", "Mặc cảm tự ti (Inferiority) và né tránh thử thách học tập", "Hội chứng ái kỷ", "Trí tưởng tượng bay bổng"], 1, "Liên tục bị chê bai thất bại khiến trẻ hình thành mặc cảm tự ti sâu sắc về năng lực của mình."], ["Đặc điểm nào dưới đây là bước tiến nhảy vọt trong sự phát triển trí tuệ của học sinh tiểu học so với trẻ mẫu giáo?", ["Từ chú ý không chủ định chuyển dần sang Chú ý có chủ định và Ghi nhớ có ý nghĩa (logic)", "Không còn cần sự giúp đỡ của cha mẹ", "Mất khả năng tưởng tượng", "Bộ não ngừng tăng trưởng"], 0, "Ở tiểu học, khả năng tập trung chú ý có chủ định và ghi nhớ logic có ý nghĩa phát triển vượt bậc."], ["Khái niệm 'Tính đảo ngược' (Reversibility) trong tư duy thao tác cụ thể của Piaget có nghĩa là:", ["Trẻ đi giật lùi", "Khả năng tinh thần hình dung một thao tác có thể quay ngược trở lại trạng thái xuất phát ban đầu (như $3 + 4 = 7$ thì $7 - 4 = 3$)", "Trẻ đổi tính nết", "Sự suy giảm nhận thức"], 1, "Tính đảo ngược (Reversibility) là năng lực tư duy cốt lõi của giai đoạn thao tác cụ thể."], ["Tại sao khi dạy học sinh lớp 1 và lớp 2 làm toán, giáo viên luôn cần sử dụng que tính, hạt sỏi hoặc hình vẽ trực quan?", ["Vì trẻ lười suy nghĩ", "Vì nhận thức của trẻ vẫn ở giai đoạn Thao tác Cụ thể, tư duy logic cần điểm tựa trên các vật thể thực tế", "Vì sách giáo khoa thiếu chỗ viết", "Vì quy định bắt buộc"], 1, "Tư duy của học sinh tiểu học là tư duy thao tác cụ thể, gắn chặt với hình ảnh và đồ vật trực quan."], ["Trẻ em mẫu giáo 4-5 tuổi thường thích chơi trò 'Bác sĩ - Bệnh nhân'. Ý nghĩa tâm lý học lớn nhất của trò chơi này là gì?", ["Giúp trẻ sau này thi đậu trường y", "Giúp trẻ học cách tuân thủ quy tắc xã hội, phát triển sự đồng cảm và thấu hiểu vai trò của người khác", "Chỉ để giết thời gian", "Trẻ bị ám ảnh sợ bệnh viện"], 1, "Trò chơi đóng vai giúp trẻ học cách tuân thủ quy tắc xã hội và phát triển sự thấu cảm."], ["Trong nghiên cứu của Mildred Parten, cấp độ chơi xã hội nào thể hiện sự phối hợp cao nhất khi các trẻ cùng phân công vai diễn và cùng chung mục tiêu trò chơi?", ["Chơi song song (Parallel)", "Chơi một mình (Solitary)", "Chơi hợp tác (Cooperative play)", "Chơi ngắm nhìn"], 2, "Chơi hợp tác (Cooperative play) là đỉnh cao của sự tương tác xã hội giữa các trẻ."], ["Phẩm chất đạo đức tích cực (Virtue) mà đứa trẻ đạt được nếu giải quyết thành công cuộc khủng hoảng lứa tuổi tiểu học theo Erikson là gì?", ["Hy vọng (Hope)", "Ý chí (Will)", "Mục đích (Purpose)", "Năng lực / Sự thành thạo (Competence)"], 3, "Thành công trong giai đoạn Cần cù vs Tự ti đem lại phẩm chất Năng lực (Competence) — niềm tin vào khả năng làm chủ nhiệm vụ."]], "trees": [["Trẻ Mẫu giáo (3 – 6 tuổi)", "trò chơi đóng vai", "chia thành", [["Trò chơi Đóng vai có Chủ đề", "hoạt động chủ đạo", "gồm", [["4 Thành phần cấu trúc", "chủ đề, vai chơi, hành động chơi, luật chơi", "", []], ["Ý nghĩa phát triển", "tập kiềm chế xung động, thấu cảm, hợp tác xã hội", "", []], ["4 Cấp độ chơi Parten", "một mình → song song → liên kết → hợp tác", "", []]]], ["Nhận thức & Nhân cách", "tiền thao tác Piaget", "gồm", [["Tư duy hình tượng & Thuyết vật linh", "tưởng tượng bay bổng, tin đồ vật có hồn", "", []], ["Tự thoại (Private speech)", "lẩm bẩm hướng dẫn mình, tiền đề tư duy trong", "", []], ["Ý thức giới tính", "Gender Identity: nhận biết mình là trai hay gái", "", []], ["Sẵn sàng vào lớp 1", "khủng hoảng 6-7 tuổi: chuyển từ muốn sang phải", "", []]]]]], ["Học sinh Tiểu học (6 – 12 tuổi)", "hoạt động học tập", "chia thành", [["Bước ngoặt Vị thế Xã hội", "từ chơi sang học", "gồm", [["Vị thế Học sinh", "trách nhiệm, nội quy, điểm số, đánh giá xã hội", "", []], ["Hoạt động Học tập", "tiếp thu hệ thống tri thức khoa học trừu tượng", "", []]]], ["Nhận thức Thao tác Cụ thể", "Piaget (7-11 tuổi)", "gồm", [["Khái niệm Bảo tồn", "số lượng (6-7t), khối lượng (7-8t), thể tích (9-11t)", "", []], ["Tính đảo ngược (Reversibility)", "hiểu phép toán quay ngược (5 - 3 = 2)", "", []], ["Phân loại & Xếp chuỗi", "sắp xếp tăng giảm, phân nhóm phân cấp", "", []]]], ["Chuyển biến Trí tuệ", "chú ý có chủ định & ghi nhớ logic có ý nghĩa", "", []]]], ["Khủng hoảng Cần cù vs Tự ti", "Erikson (6-12 tuổi)", "chia thành", [["Cần cù (Industry)", "được khen ngợi nỗ lực, tự tin làm chủ nhiệm vụ", "đạt được", [["Năng lực (Competence)", "niềm tin vào bản thân", "", []]]], ["Tự ti (Inferiority)", "bị so sánh điểm kém, chê bai, hình thành mặc cảm", "", []], ["Tập thể lớp & Tình bạn", "quan hệ bạn bè gắn kết sâu sắc, ý thức tập thể", "", []]]]]}, {"id": "pt5", "part": "Phần II: Các Giai đoạn Phát triển Suốt Vòng đời", "code": "PT.5", "title": "Tâm lý Lứa tuổi Vị thành niên & Thanh niên (12 – 24 tuổi)", "goals": ["Hiểu bước nhảy vọt thể chất tuổi dậy thì và cơ chế thần kinh: Sự phát triển lệch pha giữa Hệ viền và Vỏ não trước trán.", "Làm chủ khủng hoảng Đồng nhất bản ngã vs Mơ hồ vai trò (Erikson), tư duy Thao tác hình thức, Khán giả tưởng tượng & Huyền thoại cá nhân.", "Phân tích 5 đặc trưng của giai đoạn 'Trưởng thành mới nổi' (Emerging Adulthood, 18-24 tuổi) của Jeffrey Arnett.", "Nắm vững Chu kỳ MAMA của James Marcia, tư duy Hậu hình thức và các mối quan hệ thân tình (tình bạn, tình yêu, sự lây lan xã hội)."], "sections": [{"h": "Tuổi Thiếu niên (12 – 18 tuổi): Bước nhảy Dậy thì & Khoa học Não bộ", "items": ["<b>Bước nhảy vọt Dậy thì (Puberty):</b>", "• Sự bùng nổ của các hormone sinh dục (Testosterone ở nam, Estrogen ở nữ) kích hoạt sự tăng trưởng thể chất vượt bậc và sự hoàn thiện cơ quan sinh dục.", "• Xuất hiện các đặc tính sinh dục thứ cấp (vỡ giọng, mọc râu, phát triển ngực, kinh nguyệt).", "<b>Cơ chế Khoa học Não bộ: Sự phát triển Lệch pha (Developmental Mismatch):</b>", "• <b>Hệ viền (Limbic system / Amygdala):</b> Trung tâm cảm xúc, tìm kiếm khoái cảm và cảm giác mới lạ — <b>chín muồi rất sớm ngay từ đầu tuổi dậy thì</b>.", "• <b>Vỏ não trước trán (Prefrontal Cortex - PFC):</b> Trung tâm kiểm soát xung động, lập kế hoạch, cân nhắc rủi ro — <b>chậm hoàn thiện, tiếp tục phát triển đến tận mốc 25 tuổi</b>.", "• <i>Hệ quả tâm lý:</i> Tuổi thiếu niên như 'cỗ máy Ferrari có động cơ cực mạnh (hệ viền) nhưng bàn đạp phanh còn yếu (PFC)' → Dẫn đến xu hướng bốc đồng, dễ xúc động, tìm kiếm cảm giác mạnh và dễ bị cuốn vào hành vi rủi ro."]}, {"h": "Nhận thức Thao tác Hình thức & Bản ngã Vị thành niên", "items": ["<b>Tư duy Thao tác Hình thức (Formal Operational - Piaget):</b>", "• Khả năng tư duy trừu tượng, thoát ly khỏi vật chất cụ thể; suy luận giả thuyết – suy diễn (*Hypothetical-deductive reasoning*).", "• Trẻ bắt đầu say mê các chủ đề công lý, lý tưởng xã hội, triết học và chính trị.", "<b>Tính Tự trung Vị thành niên (Adolescent Egocentrism - David Elkind):</b>", "• <b>1. Khán giả tưởng tượng (Imaginary Audience):</b> Trẻ luôn có ảo tưởng rằng mọi người xung quanh đang liên tục chăm chú nhìn ngó, phán xét từng cử chỉ, bộ quần áo hay nốt mụn trên mặt mình → Dẫn đến sự e thẹn, ngượng ngùng và cực kỳ nhạy cảm về ngoại hình.", "• <b>2. Huyền thoại cá nhân (Personal Fable):</b> Niềm tin rằng trải nghiệm, cảm xúc của mình là độc nhất vô nhị trên đời ('Không ai trên đời này hiểu được con!') và niềm tin mình là 'bất khả xâm phạm' ('Tai nạn chỉ xảy ra với người khác, không bao giờ xảy ra với mình' → dẫn đến hành vi mạo hiểm nguy hiểm).", "<b>Khủng hoảng Đồng nhất Bản ngã vs. Mơ hồ Vai trò (Identity vs. Role Confusion - Erikson):</b>", "• Câu hỏi trăn trở số 1: <i>'Tôi là ai? Tôi sẽ trở thành người như thế nào trong xã hội?'</i>.", "• <b>Hoạt động chủ đạo: Giao lưu cá nhân thân tình với bạn cùng lứa:</b> Nhóm bạn đồng đẳng trở thành không gian thử nghiệm các vai trò và bộc lộ con người thật; áp lực bạn bè (*Peer pressure*) đạt đỉnh điểm."]}, {"h": "Giai đoạn 'Trưởng thành Mới nổi' (18 – 24 tuổi - Jeffrey J. Arnett)", "items": ["<b>Emerging Adulthood (Khái niệm đột phá của Jeffrey Jensen Arnett, 2000):</b>", "• Không đơn thuần là giai đoạn cuối vị thành niên, mà là giai đoạn chuyển tiếp đặc thù của xã hội hiện đại (khi việc học đại học kéo dài, kết hôn muộn).", "<b>Năm Đặc trưng Cốt lõi của Tuổi 18 – 24:</b>", "• <b>1. Khám phá bản sắc (Identity exploration):</b> Thử nghiệm sâu rộng nhất trong tình yêu, nghề nghiệp và thế giới quan.", "• <b>2. Bất ổn định (Instability):</b> Thường xuyên thay đổi chỗ ở, chuyển đổi công việc, thay đổi bạn bè và định hướng học tập.", "• <b>3. Tập trung vào bản thân (Self-focused):</b> Tự do phát triển kỹ năng cá nhân và tự chủ tài chính mà chưa bị ràng buộc bởi con cái hay trách nhiệm gia đình lớn.", "• <b>4. Cảm giác đứng ở 'lưng chừng' (Feeling in-between):</b> Cảm giác mình không còn là trẻ con, nhưng cũng chưa hoàn toàn là người lớn thực thụ.", "• <b>5. Thời kỳ của những khả năng (Age of possibilities):</b> Niềm tin lạc quan mãnh liệt vào tiềm năng tái định hình tương lai cuộc đời.", "<b>Sự chuyển hóa sang Tư duy Hậu hình thức (Post-formal Thought):</b> Nhận ra thế giới không chỉ có 2 màu trắng - đen tuyệt đối; học cách chấp nhận sự mơ hồ, tính tương đối, mâu thuẫn và các nghịch lý trong đời sống."]}, {"h": "Chu kỳ MAMA (James Marcia) & Các Mối quan hệ Thân tình", "items": ["<b>Chu kỳ MAMA (Moratorium – Achievement – Moratorium – Achievement):</b>", "• Bản sắc cá nhân không phải một đích đến cố định một lần là xong, mà là tiến trình thích ứng liên tục suốt đời.", "• Khi đạt trạng thái thành tựu bản sắc (*Achievement*), các biến cố cuộc đời hoặc thay đổi môi trường sống sẽ phá vỡ cân bằng, đẩy cá nhân quay lại giai đoạn tạm hoãn xã hội có chủ đích (*Moratorium*) để khám phá, trước khi thiết lập cam kết mới sâu sắc hơn.", "<b>Các Mối quan hệ Thân tình ở Tuổi Thanh niên (18 – 24 tuổi):</b>", "• <i>Giao tiếp với Người lớn (Cha mẹ):</i> Chuyển từ quan hệ phụ thuộc sang quan hệ tin cậy, bình đẳng như những người bạn trưởng thành; xây dựng ranh giới tâm lý tự chủ (*Individuation*).", "• <i>Tình bạn:</i> Gắn kết sâu sắc qua sự thấu cảm nội tâm, giãi bày bí mật và hỗ trợ nhau vượt qua khủng hoảng học tập/sự nghiệp.", "• <i>Tình yêu lãng mạn:</i> Bước vào tình yêu thực sự với sự gắn bó tâm hồn, trách nhiệm và tính dục; xu hướng tìm kiếm đối tượng đồng điệu về học vấn, giá trị (*Mô hình tương đồng*).", "• <i>Hiện tượng 'Lây lan xã hội' (Social Contagion / Clustering Effect):</i> Trạng thái hẹn hò trong nhóm bạn có xu hướng lây lan theo cụm (bắt chước mẫu theo Bandura, nỗi sợ bị bỏ lại FOMO, tái cấu trúc hoạt động nhóm sang hẹn hò đôi)."]}], "tables": [{"title": "Bảng Bốn Trạng thái Bản sắc Bản ngã của James Marcia (Identity Statuses)", "head": ["Trạng thái bản sắc", "Đã trải qua Khám phá (Crisis/Exploration)?", "Đã đưa ra Cam kết (Commitment)?", "Đặc điểm tâm lý & Hành vi"], "rows": [["1. Khủng hoảng / Tạm hoãn (Moratorium)", "CÓ (Đang khám phá quyết liệt)", "CHƯA (Chưa quyết định)", "Đang trăn trở tìm kiếm, thử nhiều ngành nghề, cởi mở nhưng nhiều lo âu"], ["2. Đạt được bản sắc (Identity Achievement)", "CÓ (Đã vượt qua khám phá)", "CÓ (Đã cam kết vững chắc)", "Tự tin, định hướng rõ ràng, tự chủ, sức khỏe tâm thần tốt nhất"], ["3. Đóng sớm bản sắc (Identity Foreclosure)", "CHƯA (Không hề tự khám phá)", "CÓ (Cam kết cứng nhắc)", "Tiếp thu thụ động định hướng của cha mẹ ('Bố mẹ bắt làm bác sĩ thì làm'), bảo thủ"], ["4. Mơ hồ bản sắc (Identity Diffusion)", "CHƯA (Không tìm kiếm)", "CHƯA (Không buồn cam kết)", "Thờ ơ, vô định, phó mặc cuộc đời cho số phận, né tránh đưa ra quyết định"]]}, {"title": "So sánh Đặc điểm Lứa tuổi Thiếu niên (12-18t) và Thanh niên Trưởng thành mới nổi (18-24t)", "head": ["Tiêu chí", "Tuổi Thiếu niên / Vị thành niên (12 – 18 tuổi)", "Thanh niên / Trưởng thành mới nổi (18 – 24 tuổi)"], "rows": [["Trọng tâm thể chất & não bộ", "Bùng nổ dậy thì; Hệ viền phát triển trước vỏ não PFC", "Thể chất đạt đỉnh; Vỏ não trước trán (PFC) hoàn thiện quanh 25 tuổi"], ["Đặc trưng tư duy", "Thao tác hình thức; Khán giả tưởng tượng & Huyền thoại cá nhân", "Tư duy hậu hình thức (Post-formal); Chấp nhận nghịch lý và tương đối"], ["Nhiệm vụ phát triển (Erikson)", "Đồng nhất bản ngã vs. Mơ hồ vai trò (Identity vs. Role Confusion)", "Khám phá bản sắc chuyển dần sang Thân mật vs. Cô lập (Intimacy vs. Isolation)"], ["Hoạt động chủ đạo", "Giao lưu cá nhân thân tình với nhóm bạn cùng lứa", "Học tập nghề nghiệp, chuẩn bị việc làm và thiết lập tình yêu cam kết"], ["Mối quan hệ với cha mẹ", "Mâu thuẫn thế hệ, đấu tranh đòi quyền độc lập", "Tách rời tâm lý lành mạnh (Individuation), xem cha mẹ như bạn đồng hành"], ["Đặc trưng đời sống", "Chịu áp lực đồng đẳng lớn, nhạy cảm với ngoại hình", "5 đặc trưng của Arnett: Bất ổn, khám phá, tập trung bản thân, lưng chừng"]]}], "tips": ["Tại sao tuổi teen bốc đồng?: Hãy nhớ cơ chế NÃO BỘ: Động cơ cảm xúc (Hệ viền) đã nạp đầy xăng ở tuổi 13, nhưng Bàn đạp phanh (Vỏ não trước trán) phải đến 25 tuổi mới lắp ráp xong!", "Khán giả tưởng tượng (Imaginary Audience): Khi trẻ vị thành niên soi gương 45 phút trước khi ra đường, trẻ tin cả thế giới đang chờ phán xét nó — Hãy kiên nhẫn và thấu hiểu.", "Chu kỳ MAMA của Marcia: Đổi ngành học hoặc đổi nghề ở tuổi 22 không phải là thất bại, mà là bước chuyển 'Moratorium' cần thiết để đạt tới bản sắc vững vàng hơn.", "Tình yêu 18-24 tuổi: Không thể có sự 'Thân mật' (Intimacy) chân chính nếu chưa có sự 'Đồng nhất bản ngã' (Identity) — Phải biết mình là ai trước khi hòa nhập vào người khác."], "cards": [["Dậy thì (Puberty)", "Thời kỳ phát triển sinh học nhảy vọt kích hoạt bởi hormone, hoàn thiện cơ quan sinh dục và đặc tính sinh dục phụ."], ["Lệch pha não bộ", "Hiện tượng Hệ viền (cảm xúc) trưởng thành sớm ở tuổi dậy thì trong khi Vỏ não trước trán (lý trí) đến 25 tuổi mới hoàn thiện."], ["Tư duy Thao tác Hình thức", "Giai đoạn nhận thức cao nhất của Piaget (11+ tuổi): tư duy trừu tượng, logic giả thuyết - suy diễn."], ["Khán giả tưởng tượng", "Ảo tưởng của tuổi thiếu niên rằng mọi người xung quanh đang liên tục chăm chú nhìn ngó và phán xét mình."], ["Huyền thoại cá nhân", "Niềm tin của tuổi thiếu niên rằng trải nghiệm của mình là độc nhất vô nhị và bản thân mình bất khả xâm phạm."], ["Identity Crisis", "Khủng hoảng bản sắc cá nhân theo Erikson ở tuổi 12-18: trăn trở trả lời câu hỏi 'Tôi là ai trong xã hội này?'."], ["Emerging Adulthood", "Giai đoạn Trưởng thành mới nổi (18-24 tuổi) do Jeffrey Arnett đề xuất với 5 đặc trưng chuyển tiếp độc đáo."], ["Jeffrey Jensen Arnett", "Nhà tâm lý học đề xuất khái niệm Trưởng thành mới nổi (Emerging Adulthood) vào năm 2000."], ["Tư duy Hậu hình thức", "Dạng tư duy nhận thức của người lớn: linh hoạt, chấp nhận tính tương đối, mâu thuẫn và bối cảnh thực tiễn."], ["James Marcia", "Nhà tâm lý học đề xuất 4 trạng thái bản sắc bản ngã dựa trên 2 chiều kích: Khám phá (Crisis) và Cam kết (Commitment)."], ["Chu kỳ MAMA", "Mô hình Marcia mở rộng: bản sắc tái cấu trúc liên tục qua các vòng lặp Tạm hoãn (Moratorium) và Đạt được (Achievement)."], ["Đóng sớm bản sắc (Foreclosure)", "Trạng thái cam kết cứng nhắc theo áp đặt của cha mẹ mà không hề trải qua quá trình tự khám phá bản thân."], ["Individuation (Cá nhân hóa)", "Tiến trình thanh niên tách rời tâm lý khỏi cha mẹ, xây dựng ranh giới cá nhân và tự chịu trách nhiệm."], ["Áp lực đồng đẳng", "Áp lực từ nhóm bạn cùng lứa buộc cá nhân phải tuân theo chuẩn mực, thái độ và hành vi của nhóm."], ["Lây lan xã hội (Contagion)", "Hiện tượng các hành vi và trạng thái (như hẹn hò, chọn ngành) lan truyền nhanh chóng trong mạng lưới bạn bè."], ["Psychosocial Moratorium", "Thời kỳ tạm hoãn xã hội theo Erikson: người trẻ được quyền thử nghiệm các vai trò mà chưa phải chịu trách nhiệm nặng nề."]], "qs": [["Nguyên nhân khoa học thần kinh nào giải thích vì sao thanh thiếu niên tuổi dậy thì (12 – 18 tuổi) thường dễ bốc đồng, xúc động mạnh và thích tìm kiếm cảm giác mạo hiểm?", ["Vỏ não trước trán phát triển trước hệ viền", "Hệ viền (trung tâm cảm xúc) chín muồi sớm, trong khi Vỏ não trước trán (kiểm soát xung động) tiếp tục hoàn thiện đến tận 25 tuổi", "Não bộ ngừng sản sinh nơ-ron", "Do suy giảm thính lực"], 1, "Sự phát triển lệch pha: Hệ viền cảm xúc phát triển rất sớm, trong khi Vỏ não trước trán kiểm soát lý trí đến 25 tuổi mới hoàn thiện."], ["Một học sinh cấp hai từ chối đi học chỉ vì sáng nay có một nốt mụn nhỏ trên má và đinh ninh rằng 'tất cả mọi người trong trường sẽ chỉ nhìn chằm chằm vào nốt mụn này'. Đây là hiện tượng:", ["Huyền thoại cá nhân (Personal fable)", "Khán giả tưởng tượng (Imaginary audience)", "Mơ hồ vai trò", "Ảo giác tâm thần"], 1, "Khán giả tưởng tượng (Imaginary audience) là niềm tin rằng mọi người đang liên tục chú ý phán xét mình."], ["Một thiếu niên 16 tuổi lái xe máy kẹp ba, lạng lách đánh võng với suy nghĩ: 'Tai nạn giao thông chỉ xảy ra với người khác trên báo, còn mình thì không bao giờ bị sao đâu!'. Suy nghĩ này phản ánh:", ["Huyền thoại cá nhân (Personal fable)", "Khán giả tưởng tượng", "Tư duy thao tác cụ thể", "Trầm cảm"], 0, "Huyền thoại cá nhân (Personal fable) tạo ra ảo tưởng rằng bản thân mình bất khả xâm phạm trước rủi ro."], ["Theo Erik Erikson, nhiệm vụ tâm lý xã hội trọng tâm mà lứa tuổi vị thành niên (12 – 18 tuổi) cần giải quyết là cuộc khủng hoảng nào?", ["Tự chủ vs Xấu hổ", "Cần cù vs Tự ti", "Đồng nhất bản ngã vs Mơ hồ vai trò (Identity vs. Role Confusion)", "Tạo sinh vs Trì trệ"], 2, "Đồng nhất bản ngã vs Mơ hồ vai trò là cuộc khủng hoảng cốt lõi của tuổi vị thành niên."], ["Theo Jeffrey Jensen Arnett (2000), giai đoạn lứa tuổi từ 18 đến 24 tuổi trong xã hội hiện đại được gọi là giai đoạn gì?", ["Tuổi vị thành niên muộn", "Trưởng thành mới nổi (Emerging Adulthood)", "Tuổi trung niên sớm", "Giai đoạn tiền hưu trí"], 1, "Jeffrey Arnett đề xuất thuật ngữ 'Trưởng thành mới nổi' (Emerging Adulthood) cho lứa tuổi 18-24."], ["Đặc trưng nào dưới đây KHÔNG PHẢI là một trong 5 đặc trưng của giai đoạn 'Trưởng thành mới nổi' theo Jeffrey Arnett?", ["Thời kỳ khám phá bản sắc", "Cảm giác đứng ở lưng chừng", "Thời kỳ ổn định tuyệt đối về chỗ ở, việc làm và hôn nhân", "Thời kỳ của những khả năng"], 2, "Tuổi 18-24 là thời kỳ BẤT ỔN ĐỊNH (Instability) cao độ về chỗ ở và công việc, không phải ổn định tuyệt đối."], ["Theo James Marcia, một sinh viên 20 tuổi chọn học ngành Ngân hàng đơn thuần vì 'Bố mẹ bắt học và sắp xếp việc sau này', bản thân em chưa từng tìm hiểu hay khám phá ngành khác. Sinh viên này ở trạng thái bản sắc nào?", ["Đạt được bản sắc (Identity Achievement)", "Đóng sớm bản sắc (Identity Foreclosure)", "Tạm hoãn bản sắc (Moratorium)", "Mơ hồ bản sắc (Identity Diffusion)"], 1, "Đóng sớm bản sắc (Identity Foreclosure): cam kết cứng nhắc theo kỳ vọng cha mẹ mà không tự khám phá."], ["Mô hình 'Chu kỳ MAMA' mở rộng từ lý thuyết của James Marcia chứng minh điều gì về bản sắc cá nhân?", ["Bản sắc được định hình cố định vĩnh viễn ở tuổi 18", "Bản sắc là tiến trình thích ứng liên tục suốt đời qua các chu kỳ Tạm hoãn (Moratorium) và Đạt được (Achievement)", "Bản sắc do gen quyết định 100%", "Con người không bao giờ có bản sắc"], 1, "Chu kỳ MAMA: bản sắc liên tục tái cấu trúc khi gặp biến cố môi trường mới xuyên suốt cuộc đời."], ["Đặc điểm nào dưới đây là biểu hiện tiêu biểu của 'Tư duy Hậu hình thức' (Post-formal Thought) ở người trẻ tuổi?", ["Luôn đòi hỏi câu trả lời nhị nguyên tuyệt đối đúng hoặc sai", "Khả năng chấp nhận sự mơ hồ, tính tương đối và các nghịch lý trong cuộc sống thực tế", "Mất khả năng suy luận toán học", "Quay trở lại tư duy trực quan hình tượng"], 1, "Tư duy hậu hình thức vượt lên tư duy logic cứng nhắc, nhìn nhận tính đa chiều và tương đối của cuộc sống."], ["Hoạt động chủ đạo của lứa tuổi Thiếu niên (12 – 18 tuổi) là hoạt động nào?", ["Hoạt động học tập tri thức khoa học thuần túy", "Giao lưu cá nhân thân tình với bạn cùng lứa", "Lao động sản xuất tạo ra của cải", "Trò chơi đóng vai có chủ đề"], 1, "Giao lưu cá nhân thân tình với bạn cùng lứa là hoạt động chủ đạo của tuổi thiếu niên."], ["Hiện tượng trong một nhóm bạn thân sinh viên, khi một vài cặp đôi bắt đầu công khai hẹn hò khiến những bạn độc thân còn lại cảm thấy sốt ruột và tích cực tìm người yêu được giải thích bởi cơ chế nào?", ["Quy luật di truyền Mendel", "Hiện tượng lây lan xã hội (Social contagion) và chuẩn mực nhóm đồng đẳng (FOMO)", "Rối loạn lo âu lan tỏa", "Khủng hoảng tuổi trung niên"], 1, "Hiện tượng lây lan xã hội và nỗi sợ bị bỏ lại (FOMO) trong nhóm bạn thúc đẩy hành vi hẹn hò."], ["Tiến trình 'Cá nhân hóa' (Individuation) ở tuổi thanh niên được hiểu là:", ["Sống cô độc lập dị không cần ai", "Quá trình thanh niên xây dựng quyền tự chủ tâm lý, tách rời sự lệ thuộc cha mẹ và tự chịu trách nhiệm về cuộc đời mình", "Việc đổi tên trên giấy khai sinh", "Sự ích kỷ chỉ nghĩ cho bản thân"], 1, "Cá nhân hóa (Individuation) là bước ngoặt tâm lý xác lập ranh giới độc lập và trách nhiệm tự thân."], ["Giai đoạn phát triển nhận thức cao nhất theo Jean Piaget bắt đầu xuất hiện từ khoảng 11-12 tuổi là giai đoạn nào?", ["Giai đoạn Cảm giác - vận động", "Giai đoạn Tiền thao tác", "Giai đoạn Thao tác cụ thể", "Giai đoạn Thao tác hình thức (Formal Operational)"], 3, "Thao tác hình thức (Formal Operational) là giai đoạn cao nhất với tư duy trừu tượng giả thuyết - suy diễn."], ["Tại sao Erik Erikson lại cho rằng khủng hoảng 'Đồng nhất bản ngã' phải được giải quyết cơ bản trước khi một người có thể bước vào giai đoạn 'Thân mật' trong tình yêu?", ["Vì pháp luật quy định", "Vì nếu chưa biết 'Tôi là ai' và có bản sắc vững vàng, cá nhân sẽ sợ bị người khác nuốt chửng bản ngã khi hòa nhập thân mật", "Vì tình yêu không cần cảm xúc", "Vì người trẻ tuổi không biết yêu"], 1, "Chỉ khi có bản ngã vững vàng, cá nhân mới tự tin mở lòng hòa nhập vào mối quan hệ thân mật mà không sợ đánh mất chính mình."], ["Phẩm chất đạo đức tích cực (Virtue) mà một người trẻ tuổi đạt được khi giải quyết thành công cuộc khủng hoảng bản sắc lứa tuổi vị thành niên theo Erikson là gì?", ["Lòng trung thành / Sự tận tụy (Fidelity)", "Tình yêu (Love)", "Sự khôn ngoan (Wisdom)", "Lòng can đảm (Will)"], 0, "Giải quyết thành công khủng hoảng bản sắc đem lại phẩm chất Trung thành / Tận tụy (Fidelity) với lý tưởng và giá trị đã chọn."]], "trees": [["Tuổi Thiếu niên (12 – 18 tuổi)", "bước nhảy dậy thì & não bộ", "chia thành", [["Dậy thì & Lệch pha Não bộ", "Developmental Mismatch", "gồm", [["Hệ viền (Amygdala)", "cảm xúc chín muồi sớm, tìm kiếm khoái cảm mạo hiểm", "", []], ["Vỏ não trước trán (PFC)", "phanh lý trí chưa hoàn thiện (đến 25 tuổi)", "", []], ["Hệ quả", "bốc đồng, xúc động mạnh, tìm kiếm cảm giác mạnh", "", []]]], ["Tư duy & Tự trung Thiếu niên", "David Elkind", "gồm", [["Thao tác hình thức (Piaget)", "tư duy trừu tượng, giả thuyết - suy diễn", "", []], ["Khán giả tưởng tượng", "ảo tưởng mọi người đang chăm chú soi mói mình", "", []], ["Huyền thoại cá nhân", "tin mình là độc nhất vô nhị và bất khả xâm phạm", "", []]]], ["Khủng hoảng Bản sắc", "Erikson: Identity vs Role Confusion", "gồm", [["Câu hỏi cốt lõi", "Tôi là ai? Tôi sẽ là ai trong xã hội?", "", []], ["Giao lưu bạn cùng lứa", "hoạt động chủ đạo: áp lực đồng đẳng (peer pressure)", "", []]]]]], ["Trưởng thành Mới nổi (18 – 24 tuổi)", "Jeffrey J. Arnett", "chia thành", [["5 Đặc trưng Cốt lõi", "Emerging Adulthood", "gồm", [["1. Khám phá bản sắc", "thử nghiệm sâu sắc nghề nghiệp và tình yêu", "", []], ["2. Bất ổn định", "thường xuyên đổi chỗ ở, bạn bè, định hướng", "", []], ["3. Tập trung bản thân", "tự do phát triển kỹ năng mà chưa vướng bận con cái", "", []], ["4. Cảm giác lưng chừng", "không còn là trẻ con, chưa là người lớn hoàn toàn", "", []], ["5. Thời kỳ những khả năng", "lạc quan tái định hình tương lai cuộc đời", "", []]]], ["Tư duy Hậu hình thức", "Post-formal: chấp nhận nghịch lý, tính tương đối", "", []]]], ["Chu kỳ MAMA & Quan hệ Thân tình", "Marcia & Tình yêu", "chia thành", [["Chu kỳ MAMA (James Marcia)", "tái cấu trúc bản sắc suốt đời", "gồm", [["Moratorium", "tạm hoãn khám phá khủng hoảng tích cực", "", []], ["Achievement", "đạt cam kết bản sắc vững vàng", "", []], ["Foreclosure & Diffusion", "đóng sớm thụ động & mơ hồ vô định", "", []]]], ["Các Mối quan hệ Thân tình", "bước đệm hôn nhân", "gồm", [["Quan hệ với cha mẹ", "Cá nhân hóa (Individuation), bình đẳng như bạn", "", []], ["Tình yêu lãng mạn", "cam kết trách nhiệm & gắn kết tâm hồn sâu sắc", "", []], ["Lây lan xã hội", "hiệu ứng cụm bạn bè hẹn hò (FOMO, kết cụm)", "", []]]]]]]}, {"id": "pt6", "part": "Phần II: Các Giai đoạn Phát triển Suốt Vòng đời", "code": "PT.6", "title": "Tâm lý Tuổi Trưởng thành, Trung niên & Người cao tuổi (25+ tuổi)", "goals": ["Hiểu đặc điểm tuổi Trưởng thành (25-40 tuổi): Đỉnh cao sinh học, khủng hoảng Thân mật vs Cô lập, Thuyết tình yêu tam giác Sternberg.", "Nắm vững đặc điểm tuổi Trung niên (40-60 tuổi): Biến đổi mãn kinh/mãn dục, Khủng hoảng tuổi trung niên, Tạo sinh vs Trì trệ (Erikson).", "Phân tích sự lão hóa ở Tuổi già (60+ tuổi): Trí tuệ mềm vs Trí tuệ kết tinh, sự thích ứng nghỉ hưu, và Trọn vẹn bản ngã vs Tuyệt vọng.", "Tổng kết bức tranh toàn cảnh về sự phát triển tâm lý con người trong suốt vòng đời."], "sections": [{"h": "Tuổi Trưởng thành (25 – 40 tuổi): Gia đình, Sự nghiệp & Khủng hoảng Thân mật", "items": ["<b>Đỉnh cao Sinh học & Thể chất:</b>", "• Sức mạnh cơ bắp, tốc độ phản ứng, dung tích phổi và khả năng sinh sản đạt mức đỉnh cao trong khoảng 20–30 tuổi; từ sau 30 tuổi bắt đầu có dấu hiệu lão hóa sinh học nhẹ (*Senescence*).", "<b>Khủng hoảng Tâm lý Xã hội theo Erikson: Thân mật vs. Cô lập (Intimacy vs. Isolation):</b>", "• <b>Thân mật (Intimacy):</b> Khả năng gắn kết sâu sắc, bộc lộ tổn thương và cam kết bền vững với một người khác (trong tình bạn tri kỷ và tình yêu hôn nhân) mà không sợ đánh mất bản sắc cá nhân.", "• <b>Cô lập (Isolation):</b> Sự né tránh gần gũi, xa cách xã hội, sợ bị tổn thương hoặc từ chối; dẫn đến cảm giác cô đơn sâu sắc.", "• <i>Phẩm chất đạt được:</i> <b>Tình yêu (Love)</b>.", "<b>Thuyết Tình yêu Tam giác của Robert Sternberg (Triangular Theory of Love):</b>", "• Tình yêu trọn vẹn kết hợp từ 3 đỉnh tam giác:", "  - <b>1. Sự Thân mật (Intimacy):</b> Cảm giác gần gũi, gắn bó, tin tưởng và chia sẻ tâm hồn.", "  - <b>2. Sự Đam mê (Passion):</b> Sự cuốn hút thể xác, hấp dẫn giới tính và khát khao tình dục.", "  - <b>3. Sự Cam kết (Commitment):</b> Quyết định gắn bó lâu dài và cùng nhau vượt qua thử thách cuộc sống.", "• <i>Tình yêu Trọn vẹn (Consummate Love):</i> Khi hội tụ đủ cả 3 yếu tố (Thân mật + Đam mê + Cam kết)."]}, {"h": "Tuổi Trung niên (40 – 60 tuổi): Đánh giá lại Giá trị & Khủng hoảng Tạo sinh", "items": ["<b>Những Biến đổi Sinh học:</b>", "• Phụ nữ trải qua giai đoạn <b>Mãn kinh (Menopause, ~45–55 tuổi)</b>: Buồng trứng ngừng sản xuất Estrogen, chấm dứt khả năng sinh sản, kèm theo các triệu chứng bốc hỏa, thay đổi tâm trạng.", "• Nam giới trải qua <b>Mãn dục nam (Andropause)</b>: Nồng độ Testosterone giảm từ từ.", "• Suy giảm thị lực (viễn thị tuổi già *Presbyopia*) và thính lực (*Presbycusis*).", "<b>Khủng hoảng Tâm lý Xã hội theo Erikson: Tạo sinh vs. Trì trệ (Generativity vs. Stagnation):</b>", "• <b>Tạo sinh (Generativity):</b> Khao khát nuôi dưỡng, truyền dạy kinh nghiệm, dẫn dắt thế hệ trẻ và cống hiến cho xã hội để lại di sản lâu dài.", "• <b>Trì trệ (Stagnation):</b> Tự thu mình, chỉ biết tư lợi cho bản thân, cảm giác cuộc sống vô vị, bế tắc và không tạo ra giá trị mới.", "• <i>Phẩm chất đạt được:</i> <b>Sự quan tâm chăm sóc (Care)</b>.", "<b>Hiện tượng Tâm lý Tiêu biểu tuổi Trung niên:</b>", "• <b>Khủng hoảng tuổi trung niên (Midlife Crisis):</b> Nhận thức thời gian sống còn lại đang ngắn dần; đánh giá lại các giấc mơ tuổi trẻ chưa đạt được.", "• <b>Hội chứng Tổ chim trống (Empty Nest Syndrome):</b> Cảm giác buồn bã, trống vắng của cha mẹ khi đứa con cuối cùng trưởng thành dọn ra ở riêng.", "• <b>Thế hệ bánh kẹp (Sandwich Generation):</b> Áp lực kép khi vừa phải chăm sóc con cái đang lớn vừa phải phụng dưỡng cha mẹ già yếu."]}, {"h": "Tuổi Già (Trên 60 tuổi): Trí tuệ Uyên bác & Trọn vẹn Bản ngã", "items": ["<b>Sự Biến đổi Nhận thức: Trí tuệ Mềm vs. Trí tuệ Kết tinh (Cattell & Horn):</b>", "• <b>Trí tuệ Mềm (Fluid Intelligence):</b> Năng lực xử lý thông tin nhanh, tư duy trừu tượng và giải quyết các bài toán hoàn toàn mới lạ → <b>Có xu hướng suy giảm dần theo tuổi tác</b> do sự lão hóa hệ thần kinh.", "• <b>Trí tuệ Kết tinh (Crystallized Intelligence):</b> Vốn tri thức, từ vựng và kinh nghiệm sống tích lũy được qua nhiều thập kỷ → <b>Tiếp tục duy trì ổn định và thậm chí phát triển tăng lên ở tuổi già</b>.", "• <b>Sự Uyên bác (Wisdom):</b> Khả năng thấu hiểu sâu sắc các nghịch lý nhân sinh và đưa ra lời khuyên đạo đức sáng suốt.", "<b>Biến đổi Đời sống Xã hội:</b>", "• Sự kiện <b>Nghỉ hưu (Retirement)</b>: Thay đổi căn bản nhịp sống, thu nhập và vị thế xã hội; người già cần tái cấu trúc hoạt động (tham gia hội đồng niên, từ thiện, tập dưỡng sinh).", "• Đối diện với sự mất mát bạn đời (*Widowhood*) và sự suy giảm các chức năng giác quan.", "<b>Khủng hoảng Tâm lý Xã hội theo Erikson: Trọn vẹn Bản ngã vs. Thất vọng Tuyệt vọng (Ego Integrity vs. Despair):</b>", "• <b>Hồi tưởng Cuộc đời (Life Review - Robert Butler):</b> Quá trình người cao tuổi nhìn lại toàn bộ chặng đường đời đã qua:", "  - <i>Trọn vẹn bản ngã (Integrity):</i> Cảm thấy cuộc đời mình đã sống có ý nghĩa, chấp nhận mọi thành công và thất bại; đạt được sự thanh thản và phẩm chất <b>Khôn ngoan / Uyên bác (Wisdom)</b>, không còn sợ hãi cái chết.", "  - <i>Thất vọng tuyệt vọng (Despair):</i> Cảm giác cuộc đời trôi qua vô nghĩa, đầy ắp nuối tiếc cay đắng nhưng đã quá muộn để bắt đầu lại → Sinh ra oán hận, cay nghiệt và sợ chết."]}, {"h": "Bức tranh Toàn cảnh: Vòng đời Con người theo Tâm lý học Phát triển", "items": ["<b>Mô hình Tối ưu hóa có Chọn lọc và Bù trừ (SOC - Paul & Margret Baltes):</b>", "• Để già đi thành công (*Successful Aging*), người cao tuổi áp dụng chiến lược SOC: <b>Chọn lọc (Selection)</b> mục tiêu quan trọng nhất → <b>Tối ưu hóa (Optimization)</b> rèn luyện nguồn lực sẵn có → <b>Bù trừ (Compensation)</b> sử dụng công nghệ hỗ trợ khi suy giảm thể chất (vd: nghệ sĩ dương cầm lớn tuổi chọn chơi ít bản nhạc hơn, tập luyện nhiều hơn và chơi đoạn chậm chậm hơn để tạo cảm giác đoạn nhanh nhanh hơn).", "<b>Ý nghĩa Nhân văn của Môn học:</b> Hiểu tâm lý phát triển giúp ta không chỉ thấu hiểu chính mình ở từng cột mốc cuộc đời, mà còn biết bao dung, tôn trọng và yêu thương con trẻ, cha mẹ và đấng sinh thành."]}], "tables": [{"title": "Bảng đối chiếu Trí tuệ Mềm (Fluid) và Trí tuệ Kết tinh (Crystallized) ở Tuổi già", "head": ["Đặc điểm đối sánh", "Trí tuệ Mềm (Fluid Intelligence)", "Trí tuệ Kết tinh (Crystallized Intelligence)"], "rows": [["Bản chất khái niệm", "Năng lực tư duy logic nhanh, xử lý thông tin mới lạ", "Kho tàng tri thức, từ vựng và kinh nghiệm tích lũy"], ["Nền tảng chi phối", "Cấu trúc sinh học thần kinh bẩm sinh", "Học vấn, văn hóa và vốn sống thực tiễn"], ["Quỹ đạo theo tuổi tác", "Đạt đỉnh ở tuổi thanh niên (~20-25t), sau đó giảm dần", "Duy trì ổn định và tiếp tục tăng trưởng tới tận tuổi già"], ["Ví dụ đo lường", "Trò chơi ghép hình ma trận mới, ghi nhớ dãy số ngược", "Vốn từ vựng, giải ô chữ, đưa ra lời khuyên xử lý mâu thuẫn gia đình"], ["Tác động của rèn luyện", "Khó cải thiện khi não bộ bị lão hóa tự nhiên", "Càng đọc sách và chiêm nghiệm thì càng uyên bác"]]}, {"title": "Bảng tổng hợp Tám Giai đoạn Phát triển Tâm lý - Xã hội của Erik Erikson", "head": ["Giai đoạn", "Độ tuổi", "Cuộc khủng hoảng Cốt lõi", "Mối quan hệ Quan trọng nhất", "Phẩm chất Đạt được (Virtue)"], "rows": [["1. Nhũ nhi", "0 – 1 tuổi", "Tin tưởng vs. Hoài nghi (Trust vs. Mistrust)", "Mẹ / Người chăm sóc chính", "Hy vọng (Hope)"], ["2. Ấu nhi", "1 – 3 tuổi", "Tự chủ vs. Xấu hổ/Nghi ngờ (Autonomy vs. Shame)", "Cha mẹ", "Ý chí (Will)"], ["3. Mẫu giáo", "3 – 6 tuổi", "Chủ động vs. Tội lỗi (Initiative vs. Guilt)", "Gia đình", "Mục đích (Purpose)"], ["4. Tiểu học", "6 – 12 tuổi", "Cần cù vs. Tự ti (Industry vs. Inferiority)", "Hàng xóm, Trường học, Bạn bè", "Năng lực (Competence)"], ["5. Thiếu niên", "12 – 18 tuổi", "Đồng nhất bản ngã vs. Mơ hồ vai trò", "Nhóm bạn cùng lứa", "Sự trung thành (Fidelity)"], ["6. Trưởng thành", "20 – 40 tuổi", "Thân mật vs. Cô lập (Intimacy vs. Isolation)", "Bạn đời, Người yêu, Bạn thân", "Tình yêu (Love)"], ["7. Trung niên", "40 – 60 tuổi", "Tạo sinh vs. Trì trệ (Generativity vs. Stagnation)", "Gia đình, Đồng nghiệp, Cộng đồng", "Sự chăm sóc (Care)"], ["8. Tuổi già", "60+ tuổi", "Trọn vẹn bản ngã vs. Thất vọng (Integrity vs. Despair)", "Toàn thể nhân loại", "Sự khôn ngoan / Uyên bác (Wisdom)"]]}], "tips": ["Tam giác Tình yêu Sternberg: Đam mê (Passion) bùng nổ rất nhanh nhưng cũng tàn nhanh nhất; Sự Thân mật (Intimacy) và Cam kết (Commitment) mới là chất keo giữ hôn nhân bền vững suốt đời.", "Khủng hoảng tuổi trung niên: Không phải ai cũng mua xe thể thao hay ly hôn; phần lớn là sự 'tỉnh ngộ' để sắp xếp lại các ưu tiên cuộc đời hướng về gia đình và di sản.", "Trí tuệ tuổi già: Người già phản xạ bấm nút chậm hơn thanh niên, nhưng khi cần giải quyết mâu thuẫn phức tạp giữa con người, sự Uyên bác (Wisdom) của họ vượt trội hơn hẳn.", "Chiến lược SOC của Baltes: Già đi thành công không phải là cố gắng làm tất cả như hồi 20 tuổi, mà là biết CHỌN LỌC việc quan trọng nhất để làm thật xuất sắc."], "cards": [["Thân mật vs Cô lập", "Khủng hoảng tuổi trưởng thành trẻ tuổi (20-40t) theo Erikson: khả năng gắn kết sâu sắc và cam kết với người khác."], ["Tam giác Tình yêu", "Lý thuyết của Robert Sternberg gồm 3 thành phần: Thân mật (Intimacy), Đam mê (Passion), và Cam kết (Commitment)."], ["Consummate Love", "Tình yêu trọn vẹn theo Sternberg: sự kết hợp hoàn hảo của cả 3 đỉnh Thân mật, Đam mê và Cam kết."], ["Senescence", "Quá trình lão hóa sinh học tự nhiên của các tế bào và cơ quan cơ thể, bắt đầu diễn ra nhẹ từ sau 30 tuổi."], ["Mãn kinh (Menopause)", "Giai đoạn buồng trứng phụ nữ ngừng sản xuất Estrogen và chấm dứt chu kỳ sinh sản, thường quanh 45-55 tuổi."], ["Tạo sinh vs Trì trệ", "Khủng hoảng tuổi trung niên (40-60t) theo Erikson: khao khát dẫn dắt thế hệ sau và để lại di sản xã hội."], ["Khủng hoảng Trung niên", "Thời kỳ đánh giá lại các giá trị và mục tiêu cuộc đời khi nhận ra thời gian sống đang ngắn lại."], ["Empty Nest Syndrome", "Hội chứng tổ chim trống: cảm giác cô đơn, trống trải của cha mẹ khi con cái trưởng thành dọn ra ở riêng."], ["Thế hệ bánh kẹp", "Nhóm người trung niên chịu áp lực kép: vừa phải chăm sóc con cái vừa phải phụng dưỡng cha mẹ già."], ["Trí tuệ Mềm (Fluid)", "Năng lực tư duy logic nhanh và giải quyết vấn đề mới lạ; suy giảm dần theo tuổi già."], ["Trí tuệ Kết tinh", "Vốn hiểu biết, từ vựng và kinh nghiệm sống tích lũy qua nhiều năm tháng; duy trì bền vững ở tuổi già."], ["Wisdom (Sự uyên bác)", "Khả năng am hiểu sâu sắc các nghịch lý nhân sinh và phán đoán đạo đức sáng suốt ở người cao tuổi."], ["Life Review (Hồi tưởng)", "Tiến trình người già nhìn lại và đánh giá toàn bộ cuộc đời đã qua theo nhà tâm thần học Robert Butler."], ["Trọn vẹn bản ngã", "Trạng thái thanh thản, tự hào và chấp nhận cuộc đời mình đã sống có ý nghĩa theo Erikson (Ego Integrity)."], ["Chiến lược SOC", "Mô hình lão hóa thành công của Paul Baltes: Chọn lọc (Selection), Tối ưu hóa (Optimization), và Bù trừ (Compensation)."], ["Successful Aging", "Khái niệm 'Già đi thành công': duy trì sức khỏe thể chất, trí tuệ minh mẫn và gắn kết xã hội tích cực khi về già."]], "qs": [["Theo Erik Erikson, cuộc khủng hoảng tâm lý xã hội trọng tâm của giai đoạn trưởng thành trẻ tuổi (20 – 40 tuổi) là:", ["Đồng nhất bản ngã vs Mơ hồ vai trò", "Thân mật vs Cô lập (Intimacy vs. Isolation)", "Tạo sinh vs Trì trệ", "Cần cù vs Tự ti"], 1, "Thân mật vs Cô lập là cuộc khủng hoảng trung tâm của tuổi trưởng thành trẻ tuổi."], ["Theo Thuyết Tình yêu Tam giác của Robert Sternberg, ba thành phần tạo nên tình yêu trọn vẹn (Consummate Love) là:", ["Tiền bạc, Nhan sắc, Danh tiếng", "Sự Thân mật (Intimacy), Sự Đam mê (Passion), và Sự Cam kết (Commitment)", "Lãng mạn, Thói quen, Tình dục", "Lòng trung thành, Sự kiên nhẫn, Sự hy sinh"], 1, "Mô hình tam giác Sternberg: Thân mật (gắn bó tâm hồn) + Đam mê (thể xác) + Cam kết (gắn bó trách nhiệm)."], ["Một mối quan hệ có sự thân mật sâu sắc và đam mê mãnh liệt nhưng hoàn toàn thiếu sự cam kết lâu dài được Sternberg xếp vào loại tình yêu nào?", ["Tình yêu cuồng dại (Infatuation)", "Tình yêu lãng mạn (Romantic Love)", "Tình bạn đơn thuần", "Tình yêu trống rỗng"], 1, "Tình yêu lãng mạn (Romantic Love) = Thân mật + Đam mê (chưa có cam kết)."], ["Hiện tượng phụ nữ khoảng 45 – 55 tuổi chấm dứt chu kỳ kinh nguyệt và kết thúc khả năng sinh sản do suy giảm hormone Estrogen được gọi là:", ["Mãn dục nam", "Mãn kinh (Menopause)", "Hội chứng tổ chim trống", "Lão hóa sớm"], 1, "Mãn kinh (Menopause) là biến đổi sinh học tự nhiên ở tuổi trung niên của phụ nữ."], ["Theo Erik Erikson, cuộc khủng hoảng tâm lý xã hội trọng tâm của lứa tuổi trung niên (40 – 60 tuổi) là gì?", ["Thân mật vs Cô lập", "Tạo sinh vs Trì trệ (Generativity vs. Stagnation)", "Trọn vẹn bản ngã vs Thất vọng", "Chủ động vs Tội lỗi"], 1, "Tạo sinh vs Trì trệ (Generativity vs. Stagnation) là cuộc khủng hoảng của tuổi trung niên."], ["Biểu hiện nào dưới đây thể hiện phẩm chất 'Tạo sinh' (Generativity) tích cực ở người trung niên?", ["Chỉ lo tích lũy tài sản cá nhân và không quan tâm tới ai", "Tận tâm nuôi dạy con cái, truyền đạt kinh nghiệm cho thế hệ trẻ và tham gia đóng góp cho cộng đồng", "Mua sắm xa xỉ để chứng tỏ bản thân", "Trầm cảm vì sợ già"], 1, "Tạo sinh là khao khát dẫn dắt, bồi dưỡng thế hệ sau và để lại di sản có ích cho xã hội."], ["Thuật ngữ 'Thế hệ bánh kẹp' (Sandwich Generation) dùng để chỉ nhóm đối tượng nào?", ["Những người thích ăn đồ ăn nhanh", "Người trung niên chịu áp lực kép: vừa phải chăm sóc con cái đang tuổi lớn, vừa phải phụng dưỡng cha mẹ già yếu", "Trẻ em tiểu học", "Những người độc thân"], 1, "Thế hệ bánh kẹp chỉ người trung niên bị kẹp giữa nghĩa vụ nuôi con và phụng dưỡng cha mẹ già."], ["Sự khác biệt căn bản giữa 'Trí tuệ Mềm' (Fluid Intelligence) và 'Trí tuệ Kết tinh' (Crystallized Intelligence) khi con người về già là gì?", ["Cả hai đều giảm sút hoàn toàn", "Trí tuệ mềm (tốc độ xử lý thông tin mới) suy giảm dần, trong khi Trí tuệ kết tinh (vốn sống và tri thức tích lũy) vẫn duy trì ổn định và tăng trưởng", "Trí tuệ mềm tăng lên còn kết tinh giảm đi", "Người già không còn trí tuệ"], 1, "Trí tuệ mềm suy giảm do lão hóa sinh học; Trí tuệ kết tinh duy trì và phát triển nhờ vốn sống tích lũy."], ["Cuộc khủng hoảng tâm lý xã hội cuối cùng trong cuộc đời theo Erik Erikson ở tuổi già (trên 60 tuổi) là:", ["Tạo sinh vs Trì trệ", "Trọn vẹn bản ngã vs Thất vọng tuyệt vọng (Ego Integrity vs. Despair)", "Thân mật vs Cô lập", "Đồng nhất vs Mơ hồ"], 1, "Trọn vẹn bản ngã vs Thất vọng tuyệt vọng là cuộc khủng hoảng cuối cùng ở chặng cuối cuộc đời."], ["Theo Robert Butler, quá trình một người cao tuổi thường xuyên hồi tưởng, kể lại những kỷ niệm quá khứ và đánh giá lại cuộc đời mình được gọi là:", ["Chứng mất trí nhớ Alzheimer", "Tiến trình Hồi tưởng Cuộc đời (Life Review)", "Sự thoái lui tâm lý", "Mê sảng tuổi già"], 1, "Tiến trình Hồi tưởng cuộc đời (Life review) là hoạt động tâm lý bình thường giúp người già tìm kiếm sự an bình."], ["Một cụ ông 75 tuổi nhìn lại cuộc đời mình, cảm thấy thanh thản, tự hào vì đã sống trọn vẹn và chấp nhận cái chết một cách bình thản. Cụ đã đạt được trạng thái nào?", ["Tuyệt vọng (Despair)", "Trọn vẹn bản ngã (Ego Integrity) và sự Khôn ngoan (Wisdom)", "Trì trệ", "Né tránh thực tế"], 1, "Trọn vẹn bản ngã đem lại sự bình an, phẩm chất khôn ngoan (Wisdom) và thái độ thanh thản trước quy luật sinh tử."], ["Mô hình chiến lược 'Tối ưu hóa có Chọn lọc và Bù trừ' (SOC) của Paul Baltes nhằm giúp người cao tuổi đạt được mục tiêu gì?", ["Già đi thành công (Successful Aging) bằng cách thích nghi linh hoạt với sự suy giảm thể chất", "Trở lại tuổi 20", "Làm giàu nhanh chóng", "Trở thành vận động viên điền kinh"], 0, "Chiến lược SOC giúp người cao tuổi già đi thành công (Successful aging) thông qua thích nghi tối ưu."], ["'Hội chứng tổ chim trống' (Empty Nest Syndrome) ở các bậc phụ huynh tuổi trung niên thường xuất hiện vào thời điểm nào?", ["Khi đứa con đầu lòng chào đời", "Khi đứa con cuối cùng trưởng thành và dọn ra khỏi nhà để sống tự lập", "Khi cha mẹ về hưu", "Khi con cái kết hôn ở cùng nhà"], 1, "Hội chứng tổ chim trống xảy ra khi con cái trưởng thành rời tổ ấm gia đình ra ở riêng."], ["Hiện tượng mắt bắt đầu khó đọc chữ nhỏ ở cự ly gần và phải đưa sách ra xa (viễn thị tuổi già - Presbyopia) thường bắt đầu xuất hiện rõ rệt ở độ tuổi nào?", ["Khoảng 15 - 20 tuổi", "Khoảng 40 - 45 tuổi (tuổi trung niên)", "Sau 85 tuổi", "Ngay từ khi mới sinh"], 1, "Viễn thị tuổi già (Presbyopia) do thủy tinh thể giảm tính đàn hồi thường xuất hiện quanh tuổi 40-45."], ["Phẩm chất đạo đức tích cực (Virtue) mà người cao tuổi đạt được khi vượt qua thành công cuộc khủng hoảng cuối đời theo Erikson là gì?", ["Tình yêu (Love)", "Sự khôn ngoan / Uyên bác (Wisdom)", "Sự chăm sóc (Care)", "Mục đích sống"], 1, "Vượt qua khủng hoảng tuổi già đem lại phẩm chất Uyên bác / Khôn ngoan (Wisdom) — sự thấu hiểu trọn vẹn ý nghĩa nhân sinh."]], "trees": [["Tuổi Trưởng thành (25 – 40 tuổi)", "gia đình & sự nghiệp", "chia thành", [["Đỉnh cao Sinh học", "thể lực, giác quan đạt đỉnh (~20-30t); sau 30 lão hóa nhẹ", "", []], ["Thân mật vs Cô lập", "Erikson: Intimacy vs Isolation", "gồm", [["Thân mật (Intimacy)", "dám mở lòng cam kết bền vững; đạt Tình yêu (Love)", "", []], ["Cô lập (Isolation)", "né tránh gần gũi vì sợ tổn thương, cô đơn sâu sắc", "", []]]], ["Tam giác Tình yêu Sternberg", "3 thành phần cốt lõi", "gồm", [["Thân mật (Intimacy)", "gần gũi, sẻ chia tâm hồn, tin cậy", "", []], ["Đam mê (Passion)", "cuốn hút thể xác, hấp dẫn giới tính", "", []], ["Cam kết (Commitment)", "gắn bó lâu dài, vượt qua thử thách", "", []], ["Consummate Love", "tình yêu trọn vẹn kết hợp cả 3 đỉnh", "", []]]]]], ["Tuổi Trung niên (40 – 60 tuổi)", "tạo sinh vs trì trệ", "chia thành", [["Biến đổi Sinh học", "mãn kinh nữ & mãn dục nam, viễn thị tuổi già", "", []], ["Tạo sinh vs Trì trệ", "Erikson: Generativity vs Stagnation", "gồm", [["Tạo sinh (Generativity)", "dẫn dắt thế hệ trẻ, cống hiến di sản; đạt Care", "", []], ["Trì trệ (Stagnation)", "tư lợi cá nhân, cảm giác cuộc sống vô vị", "", []]]], ["Hiện tượng Tâm lý", "khủng hoảng & gia đình", "gồm", [["Khủng hoảng trung niên", "đánh giá lại giấc mơ tuổi trẻ khi thời gian ngắn lại", "", []], ["Tổ chim trống", "trống trải khi con cái trưởng thành dọn ra riêng", "", []], ["Thế hệ bánh kẹp", "vừa nuôi dạy con vừa phụng dưỡng cha mẹ già", "", []]]]]], ["Tuổi Già (Trên 60 tuổi)", "trọn vẹn bản ngã & uyên bác", "chia thành", [["Trí tuệ Mềm vs Kết tinh", "Cattell & Horn", "gồm", [["Trí tuệ Mềm (Fluid)", "xử lý thông tin mới lạ nhanh; suy giảm dần theo tuổi", "", []], ["Trí tuệ Kết tinh", "kinh nghiệm sống, từ vựng; duy trì ổn định & tăng", "", []], ["Sự Uyên bác (Wisdom)", "thấu hiểu nhân sinh, phán đoán đạo đức sáng suốt", "", []]]], ["Trọn vẹn vs Thất vọng", "Erikson: Integrity vs Despair", "gồm", [["Hồi tưởng cuộc đời", "Life review: nhìn nhận lại toàn bộ chặng đường", "", []], ["Trọn vẹn (Integrity)", "thanh thản chấp nhận cuộc đời; không sợ cái chết", "", []], ["Thất vọng (Despair)", "nuối tiếc cay đắng, cay nghiệt, sợ hãi cái chết", "", []]]], ["Chiến lược SOC (Baltes)", "già đi thành công: Chọn lọc - Tối ưu - Bù trừ", "", []]]]]}];
+const BYID = {};
+LESSONS.forEach(l => { BYID[l.id] = l; });
+
+/* ---------- Storage & State ---------- */
+const STORE_KEY = "tlhpt_review_v1";
+let S = { q: {}, c: {}, exam: [] };
+try {
+  const saved = localStorage.getItem(STORE_KEY);
+  if(saved) S = JSON.parse(saved);
+} catch(e) {}
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch(e){}
+}
+
+let state = { view: "home", tab: "sum" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function mastery(l) {
+  let ok = 0, done = 0;
+  l.qs.forEach((q, idx) => {
+    const st = S.q[l.id + "-" + idx];
+    if(st && st.done) { done++; if(st.ok) ok++; }
+  });
+  return { ok, done, total: l.qs.length, pct: l.qs.length ? Math.round(ok / l.qs.length * 100) : 0 };
+}
+
+function wrongIds() {
+  const res = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      const qid = l.id + "-" + idx;
+      if(S.q[qid] && S.q[qid].done && !S.q[qid].ok) res.push(qid);
+    });
+  });
+  return res;
+}
+
+function cardStats(l) {
+  let known = 0;
+  l.cards.forEach((c, idx) => {
+    if(S.c[l.id + "-" + idx] === "known") known++;
+  });
+  return { known, total: l.cards.length };
+}
+
+/* ---------- Navigation ---------- */
+function go(v, tab) {
+  state.view = v;
+  if(tab) state.tab = tab;
+  $("#side").classList.remove("open");
+  renderSide();
+  renderMain();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderSide() {
+  const c = $("#sideLessons");
+  let curPart = "";
+  let html = "";
+  LESSONS.forEach(l => {
+    if(l.part !== curPart) {
+      curPart = l.part;
+      html += `<div class="part-label">${esc(curPart)}</div>`;
+    }
+    const on = state.view === l.id ? "on" : "";
+    const m = mastery(l);
+    html += `
+    <button class="lesson-btn ${on}" data-go="${l.id}" data-tab="sum">
+      <span class="code">${l.code}</span>
+      <span class="name">${esc(l.title)}</span>
+      <span class="mini"><i style="width:${m.pct}%"></i></span>
+    </button>`;
+  });
+  c.innerHTML = html;
+  $(".nav-home").classList.toggle("on", state.view === "home");
+}
+
+// Global click delegation for all navigation elements (nav-home, brand, lessons, exam, axon map)
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-go]");
+  if(btn) {
+    const g = btn.getAttribute("data-go");
+    const t = btn.getAttribute("data-tab") || (g === "home" ? "sum" : state.tab);
+    go(g, t);
+  }
+});
+
+/* ---------- Home View ---------- */
+function renderHome(m) {
+  const totQ = LESSONS.reduce((a, l) => a + l.qs.length, 0);
+  const totC = LESSONS.reduce((a, l) => a + l.cards.length, 0);
+  let ok = 0, done = 0;
+  LESSONS.forEach(l => { const s = mastery(l); ok += s.ok; done += s.done; });
+
+  let segs = LESSONS.map(l => {
+    const s = mastery(l);
+    return `<button class="seg" data-go="${l.id}" data-tab="sum" title="${esc(l.code + ' ' + l.title)}: ${s.pct}% đúng">
+      <span class="fill" style="width:${s.pct}%"></span>
+      <span class="lbl">${l.code}</span>
+    </button>`;
+  }).join("");
+
+  m.innerHTML = `
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Tâm lý học Phát triển – Góc ôn tập & Tự học</h2>
+      <p>Nền tảng ôn tập tương tác hoàn chỉnh dựa trên chương trình học phần của <b>Khoa Tâm lý học, ĐH KHXH&NV TP.HCM</b> (Đề cương TLH026 - TS. Nguyễn Thị Vân, TS. Lê Thị Mai Liên, ThS. Lê Ngọc Bảo Trâm): ${LESSONS.length} bài học trọng tâm, tích hợp <b>Sơ đồ tư duy SVG</b>, ${totC} thẻ flashcards 3D và ${totQ} câu hỏi trắc nghiệm có giải thích chi tiết toàn diện.</p>
+      <div class="lead-q">“Giáo dục đi trước sự phát triển, dẫn dắt và kéo sự phát triển theo sau.” – Lev Vygotsky</div>
+    </div>
+    <div class="exam-card">
+      <h3>Cấu trúc môn học & Đánh giá</h3>
+      <div class="exam-facts">
+        <div class="fact"><strong>10%</strong><span>Thuyết trình nhóm</span></div>
+        <div class="fact"><strong>30%</strong><span>Bài tập giữa kỳ (Trò chơi/Video)</span></div>
+        <div class="fact"><strong>60%</strong><span>Cuối kỳ (Trắc nghiệm)</span></div>
+        <div class="fact"><strong>${totQ}</strong><span>Câu hỏi trắc nghiệm toàn khóa</span></div>
+      </div>
+      <div class="exam-foot">Chuyên cần tối thiểu 80% • Đầy đủ 6 giai đoạn phát triển vòng đời</div>
+    </div>
+  </div>
+  </section>
+
+  <h3 style="font-size:18px; margin:32px 0 14px; font-weight:750">Danh sách bài học trọng tâm</h3>
+  <div class="grid-lessons">
+    ${LESSONS.map(l => {
+      const s = mastery(l);
+      const cs = cardStats(l);
+      return `
+      <div class="lcard" data-go="${l.id}" data-tab="sum">
+        <span class="code">${l.code}</span>
+        <div class="t">${esc(l.title)}</div>
+        <div class="meta">
+          <span>${l.qs.length} câu trắc nghiệm • ${cs.known}/${cs.total} thẻ nhớ</span>
+          <strong>${s.pct}%</strong>
+        </div>
+        <div class="bar"><i style="width:${s.pct}%"></i></div>
+      </div>`;
+    }).join("")}
+  </div>`;
+  bindNavClicks(m);
+}
+
+/* ---------- Mindmap SVG Engine ---------- */
+const MMC = ["#3B4A8C", "#D98A1F", "#1E8C86", "#C8366E", "#7A5BC7", "#2A7FB8", "#6F8A2E", "#B0683A", "#4F6D7A"];
+
+function treeSVG(root, ci0) {
+  const LH = 36, PX = 14, NX = 12;
+  const tw = (t, px, b) => t.length * px * (b ? 0.6 : 0.53);
+  let leaves = 0, cc = 0;
+  const nodes = [];
+
+  (function walk(n, d, parent, ci) {
+    if (d === 1 || d === 2) ci = cc++;
+    const o = { t: n[0], note: n[1] || "", rel: n[2] || "", d, parent, ci, kids: [] };
+    o.w = tw(o.t, PX, 1) + (o.note ? tw(" – " + o.note, NX) : 0) + 28;
+    o.rw = o.rel ? tw(o.rel, 12) + 20 : 0;
+    nodes.push(o);
+
+    const ch = n[3] || [];
+    if (!ch.length) {
+      o.y = leaves * LH + LH / 2 + 8;
+      leaves++;
+    }
+    ch.forEach(c => o.kids.push(walk(c, d + 1, o, ci)));
+    if (ch.length) o.y = (o.kids[0].y + o.kids[o.kids.length - 1].y) / 2;
+    return o;
+  })(root, 0, null, 0);
+
+  const maxD = Math.max(...nodes.map(n => n.d));
+  const colX = [12];
+  for (let d = 0; d < maxD; d++) {
+    const at = nodes.filter(n => n.d === d);
+    colX[d + 1] = colX[d] + Math.max(...at.map(n => n.w)) + Math.max(56, Math.max(...at.map(n => n.rw)) + 44);
+  }
+
+  const W = Math.max(...nodes.map(n => colX[n.d] + n.w)) + 24;
+  const H = Math.max(leaves * LH + 24, 70);
+
+  let edges = "", body = "";
+  nodes.forEach(n => {
+    const x = colX[n.d], col = MMC[(n.ci + ci0) % MMC.length];
+    if (n.kids.length) {
+      const sx = x + n.w;
+      let ex = sx;
+      if (n.rel) {
+        const px = sx + 8;
+        body += `<rect x="${px}" y="${n.y - 11}" width="${n.rw}" height="22" rx="11" fill="var(--surface)" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="1.2"/><text x="${px + n.rw / 2}" y="${n.y + 4.3}" text-anchor="middle" font-size="11.5" font-style="italic" fill="${n.d === 0 ? "var(--muted)" : col}">${esc(n.rel)}</text>`;
+        edges += `<path d="M${sx},${n.y} H${px}" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="2"/>`;
+        ex = px + n.rw;
+      }
+      n.kids.forEach(k => {
+        const kc = MMC[(k.ci + ci0) % MMC.length];
+        const kx = colX[k.d];
+        const mx = (ex + kx) / 2;
+        edges += `<path d="M${ex},${n.y} C${mx},${n.y} ${mx},${k.y} ${kx},${k.y}" fill="none" stroke="${kc}" stroke-width="2" opacity=".75"/>`;
+      });
+    }
+
+    const fill = n.d === 0 ? "var(--ink)" : n.d === 1 ? col : "var(--surface)";
+    const tcol = n.d === 0 ? "var(--paper)" : n.d === 1 ? "#fff" : "var(--ink)";
+    body += `<rect x="${x}" y="${n.y - 14}" width="${n.w}" height="28" rx="${n.d < 2 ? 14 : 8}" fill="${fill}" ${n.d >= 2 ? `stroke="${col}" stroke-width="1.5"` : ""}/>`;
+    body += `<text x="${x + 14}" y="${n.y + 5}" font-size="${PX}" fill="${tcol}"><tspan font-weight="700">${esc(n.t)}</tspan>${n.note ? `<tspan font-size="${NX}" ${n.d >= 2 ? `fill="var(--muted)"` : `fill-opacity=".85"`}> – ${esc(n.note)}</tspan>` : ""}</text>`;
+  });
+
+  return `<svg viewBox="0 0 ${Math.ceil(W)} ${H}" style="min-width:${Math.round(W * 0.72)}px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ tư duy: ${esc(root[0])}" font-family="inherit">${edges}${body}</svg>`;
+}
+
+function renderTrees(l) {
+  if (!l.trees || !l.trees.length) return "";
+  return l.trees.map((t, i) => `
+    <div class="tree">
+      <div class="mm-scroll">${treeSVG(t, i * 2)}</div>
+    </div>
+  `).join("");
+}
+
+/* ---------- Lesson View ---------- */
+function renderLesson(m, l) {
+  const tabs = [
+    { id: "sum", label: "Tóm tắt cốt lõi" },
+    { id: "tbl", label: "Bảng so sánh", count: l.tables.length },
+    { id: "fc",  label: "Thẻ ghi nhớ", count: l.cards.length },
+    { id: "q",   label: "Trắc nghiệm", count: l.qs.length },
+    { id: "tip", label: "Mẹo nhớ", count: l.tips.length }
+  ];
+
+  let tabNav = tabs.map(t => `
+    <button class="tab ${state.tab === t.id ? "on" : ""}" data-tab="${t.id}">
+      ${t.label}${t.count !== undefined ? `<span class="count">${t.count}</span>` : ""}
+    </button>
+  `).join("");
+
+  m.innerHTML = `
+  <div class="lhead">
+    <div class="bigcode">${l.code}</div>
+    <div>
+      <div class="part">${esc(l.part)}</div>
+      <h2>${esc(l.title)}</h2>
+    </div>
+  </div>
+
+  <div class="goals">
+    <h4>Mục tiêu bài học cần đạt</h4>
+    <ul>${l.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+  </div>
+
+  <div class="tabs">${tabNav}</div>
+  <div id="tabBody"></div>`;
+
+  m.querySelectorAll(".tab").forEach(b => {
+    b.onclick = () => {
+      state.tab = b.getAttribute("data-tab");
+      m.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      renderTabBody(l);
+    };
+  });
+
+  renderTabBody(l);
+}
+
+function renderTabBody(l) {
+  const tb = $("#tabBody");
+  if(state.tab === "sum") renderTabSum(tb, l);
+  else if(state.tab === "tbl") renderTabTbl(tb, l);
+  else if(state.tab === "fc") renderTabFc(tb, l);
+  else if(state.tab === "q") renderTabQ(tb, l);
+  else if(state.tab === "tip") renderTabTip(tb, l);
+}
+
+/* Tab: Tóm tắt (Summary + Mindmap Trees + Content Blocks + Tables + Tips) */
+function renderTabSum(tb, l) {
+  let treeSection = "";
+  if (l.trees && l.trees.length) {
+    treeSection = `
+    <div class="mm-wrap">
+      <div class="mm-head">
+        <h4>Sơ đồ tư duy dạng nhánh cây (SVG Mindmap Tree)</h4>
+        <span class="muted" style="font-size:12.5px">Kéo ngang để xem toàn bộ cấu trúc phân nhánh</span>
+      </div>
+      ${renderTrees(l)}
+    </div>`;
+  }
+
+  let blocks = l.sections.map((s, idx) => `
+    <details class="block" ${idx < 2 ? "open" : ""}>
+      <summary>${esc(s.h)}</summary>
+      <ul>
+        ${s.items.map(it => `<li>${it}</li>`).join("")}
+      </ul>
+    </details>
+  `).join("");
+
+  let tablesPreview = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+
+  let tipsPreview = `
+    <h4 style="margin:24px 0 10px; font-size:15px; font-weight:750">Mẹo ghi nhớ nhanh</h4>
+    <div class="tips-wrap">
+      ${l.tips.map(tp => `
+        <div class="tip-card">
+          <span class="tip-badge">Pro-tip</span>
+          <div class="tip-body">${tp}</div>
+        </div>
+      `).join("")}
+    </div>`;
+
+  tb.innerHTML = treeSection + blocks + tablesPreview + tipsPreview;
+}
+
+/* Tab: Bảng so sánh */
+function renderTabTbl(tb, l) {
+  if(!l.tables || !l.tables.length) {
+    tb.innerHTML = `<div class="empty">Bài này chưa có bảng so sánh tổng hợp.</div>`;
+    return;
+  }
+  tb.innerHTML = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+}
+
+/* Tab: Thẻ ghi nhớ Flashcards */
+let fcIdx = 0;
+function renderTabFc(tb, l) {
+  if(!l.cards || !l.cards.length) {
+    tb.innerHTML = `<div class="empty">Chưa có thẻ ghi nhớ.</div>`;
+    return;
+  }
+  if(fcIdx >= l.cards.length) fcIdx = 0;
+  const c = l.cards[fcIdx];
+  const cid = l.id + "-" + fcIdx;
+  const isKnown = S.c[cid] === "known";
+
+  tb.innerHTML = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Thẻ <b>${fcIdx + 1}</b> / ${l.cards.length} • Phím tắt: <b>Space</b> (lật), <b>1</b> (quên), <b>2</b> (thuộc), <b>←/→</b> (chuyển)</span>
+    <span class="chip-btn">${isKnown ? "✓ Đã thuộc" : "○ Cần ôn"}</span>
+  </div>
+
+  <div class="fc-stage">
+    <div class="fc" id="fcCard" tabindex="0" role="button" aria-label="Bấm hoặc gõ Space để lật thẻ">
+      <div class="fc-inner">
+        <div class="fc-face front">
+          <div class="fc-tag">Thuật ngữ / Khái niệm</div>
+          <div class="fc-text">${esc(c[0])}</div>
+          <div class="fc-hint">Bấm để xem định nghĩa & cơ chế</div>
+        </div>
+        <div class="fc-face back">
+          <div class="fc-tag">Bản chất Sinh lý & Giải phẫu</div>
+          <div class="fc-text" style="font-size:16px; font-weight:550">${esc(c[1])}</div>
+          <div class="fc-hint">Bấm để lật lại mặt trước</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-controls">
+      <button class="btn ghost" id="fcPrev">← Thẻ trước</button>
+      <button class="btn ${!isKnown ? "primary" : "ghost"}" id="fcAgain">Quên / Cần ôn lại (1)</button>
+      <button class="btn ${isKnown ? "primary" : "ghost"}" id="fcKnow">Đã thuộc (2)</button>
+      <button class="btn ghost" id="fcNext">Thẻ tiếp →</button>
+    </div>
+  </div>`;
+
+  const cardEl = $("#fcCard");
+  cardEl.onclick = () => cardEl.classList.toggle("flip");
+
+  $("#fcPrev").onclick = () => { if(fcIdx > 0) { fcIdx--; renderTabFc(tb, l); } };
+  $("#fcNext").onclick = () => { if(fcIdx < l.cards.length - 1) { fcIdx++; renderTabFc(tb, l); } };
+  $("#fcAgain").onclick = () => {
+    S.c[cid] = "again";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+  $("#fcKnow").onclick = () => {
+    S.c[cid] = "known";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+}
+
+/* Tab: Trắc nghiệm */
+function renderTabQ(tb, l) {
+  if(!l.qs || !l.qs.length) {
+    tb.innerHTML = `<div class="empty">Chưa có câu hỏi trắc nghiệm.</div>`;
+    return;
+  }
+  const m = mastery(l);
+  let html = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Đã làm: <b>${m.done}/${m.total}</b> câu • Đúng: <b>${m.ok}</b> (${m.pct}%)</span>
+    <button class="btn ghost" id="resetQBtn" style="font-size:12.5px; padding:6px 12px">↺ Làm lại bài này</button>
+  </div>`;
+
+  html += l.qs.map((q, idx) => {
+    const qid = l.id + "-" + idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1}.</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  tb.innerHTML = html;
+
+  tb.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const qidx = parseInt(qid.split("-")[1], 10);
+      const q = l.qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    };
+  });
+
+  $("#resetQBtn").onclick = () => {
+    if(confirm("Bạn muốn xóa kết quả trắc nghiệm của bài này để luyện lại từ đầu?")) {
+      l.qs.forEach((_, idx) => { delete S.q[l.id + "-" + idx]; });
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    }
+  };
+}
+
+/* Tab: Mẹo nhớ */
+function renderTabTip(tb, l) {
+  if(!l.tips || !l.tips.length) {
+    tb.innerHTML = `<div class="empty">Chưa có mẹo nhớ.</div>`;
+    return;
+  }
+  tb.innerHTML = `
+  <div class="tips-wrap">
+    ${l.tips.map(tp => `
+      <div class="tip-card">
+        <span class="tip-badge">Pro-tip</span>
+        <div class="tip-body">${tp}</div>
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+/* ---------- Exam Simulation View ---------- */
+function renderExam(m) {
+  let allQ = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      allQ.push({ q, lid: l.id, idx, code: l.code });
+    });
+  });
+
+  if(!S.exam || !S.exam.length) {
+    allQ.sort(() => Math.random() - 0.5);
+    S.exam = allQ.slice(0, 30);
+  }
+
+  let doneCount = 0, okCount = 0;
+  S.exam.forEach(item => {
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid];
+    if(st && st.done) { doneCount++; if(st.ok) okCount++; }
+  });
+
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px">
+    <h2>Phòng Thi thử Trắc nghiệm HĐTK Cấp cao</h2>
+    <p>Đề thi mô phỏng gồm <b>30 câu hỏi ngẫu nhiên</b> từ toàn bộ 6 bài học. Phản hồi kết quả và giải thích chi tiết ngay khi chọn đáp án.</p>
+    <div style="margin-top:14px; font-weight:700">Đã hoàn thành: ${doneCount}/30 câu • Điểm số: ${doneCount ? Math.round(okCount / doneCount * 100) : 0}% (${okCount}/${doneCount})</div>
+  </div>
+  <div class="toolbar">
+    <button class="btn primary" id="newExamBtn">🔄 Tạo đề thi mới ngẫu nhiên</button>
+  </div>`;
+
+  html += S.exam.map((item, exIdx) => {
+    const q = item.q;
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+        <div style="margin-top:4px; font-size:12px; color:var(--muted)">Thuộc: <b>${item.code} – ${esc(BYID[item.lid].title)}</b></div>
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${exIdx + 1} (${item.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderExam(m);
+      renderSide();
+    };
+  });
+
+  $("#newExamBtn").onclick = () => {
+    if(confirm("Tạo đề thi mới ngẫu nhiên 30 câu khác?")) {
+      S.exam = [];
+      renderExam(m);
+    }
+  };
+}
+
+/* ---------- Wrong Questions View ---------- */
+function renderWrong(m) {
+  const wids = wrongIds();
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px; background:#4A1E2E">
+    <h2>Ôn tập các câu đã làm sai</h2>
+    <p>Hiện bạn đang có <b>${wids.length} câu làm sai</b> cần khắc phục. Hãy làm lại cẩn thận để biến điểm yếu thành điểm mạnh trước kỳ thi!</p>
+  </div>`;
+
+  if(!wids.length) {
+    html += `<div class="empty">🎉 Tuyệt vời! Bạn không có câu hỏi nào bị làm sai.</div>`;
+    m.innerHTML = html;
+    bindNavClicks(m);
+    return;
+  }
+
+  html += wids.map((qid, idx) => {
+    const [lid, qidxStr] = qid.split("-");
+    const qidx = parseInt(qidxStr, 10);
+    const l = BYID[lid];
+    const q = l.qs[qidx];
+
+    const optHtml = q[1].map((opt, oidx) => {
+      return `<button class="opt" data-qid="${qid}" data-oidx="${oidx}">
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    return `
+    <div class="qcard">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1} (${l.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      <div class="exp" style="margin-top:10px">
+        <b>Gợi ý đáp án đúng:</b> ${String.fromCharCode(65 + q[2])}. ${esc(q[1][q[2]])}<br>
+        <b>Giải thích:</b> ${esc(q[3])}
+      </div>
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderWrong(m);
+      renderSide();
+    };
+  });
+}
+
+/* ---------- Main Render Entrypoint ---------- */
+function renderMain() {
+  const m = $("#main");
+  if(state.view === "home") renderHome(m);
+  else if(state.view === "exam") renderExam(m);
+  else if(state.view === "wrong") renderWrong(m);
+  else if(BYID[state.view]) renderLesson(m, BYID[state.view]);
+  else renderHome(m);
+}
+
+/* ---------- Search Modal ---------- */
+const searchBtn = $("#searchBtn");
+const searchBtnTop = $("#searchBtnTop");
+if(searchBtn) searchBtn.onclick = openSearch;
+if(searchBtnTop) searchBtnTop.onclick = openSearch;
+
+function openSearch() {
+  const mask = document.createElement("div");
+  mask.className = "modal-mask";
+  mask.innerHTML = `
+  <div class="modal">
+    <div class="modal-head">
+      <input type="text" class="modal-input" id="modalInput" placeholder="Nhập thuật ngữ cần tìm (vd: Pavlov, Amygdala, Synapse, LTP, Giao cảm...)..." autofocus>
+      <button class="btn ghost" id="closeSearch">✕</button>
+    </div>
+    <div class="modal-results" id="modalRes">
+      <div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm thuật ngữ trong toàn bộ 6 bài học.</div>
+    </div>
+  </div>`;
+  document.body.appendChild(mask);
+
+  const input = $("#modalInput");
+  const res = $("#modalRes");
+  $("#closeSearch").onclick = () => mask.remove();
+  mask.onclick = e => { if(e.target === mask) mask.remove(); };
+
+  const run = () => {
+    const q = input.value.trim().toLowerCase();
+    if(q.length < 2) {
+      res.innerHTML = `<div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm...</div>`;
+      return;
+    }
+
+    const matches = [];
+    LESSONS.forEach(l => {
+      l.sections.forEach(s => {
+        s.items.forEach(it => {
+          if(it.toLowerCase().includes(q) || s.h.toLowerCase().includes(q)) {
+            matches.push({ type: "Lý thuyết", title: s.h, desc: it.replace(/<[^>]+>/g, ''), lid: l.id });
+          }
+        });
+      });
+      l.cards.forEach(c => {
+        if(c[0].toLowerCase().includes(q) || c[1].toLowerCase().includes(q)) {
+          matches.push({ type: "Thẻ nhớ", title: c[0], desc: c[1], lid: l.id });
+        }
+      });
+      l.qs.forEach(question => {
+        if(question[0].toLowerCase().includes(q) || question[3].toLowerCase().includes(q)) {
+          matches.push({ type: "Câu trắc nghiệm", title: question[0], desc: "Giải thích: " + question[3], lid: l.id });
+        }
+      });
+    });
+
+    if(!matches.length) {
+      res.innerHTML = `<div class="empty">Không tìm thấy nội dung nào chứa từ khóa "${esc(q)}".</div>`;
+      return;
+    }
+
+    res.innerHTML = matches.slice(0, 30).map(m => `
+      <div class="item" data-go="${m.lid}" data-tab="sum">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px">
+          <span class="w">${esc(m.title)}</span>
+          <span class="chip-btn" style="padding:2px 8px; font-size:11px">${m.type}</span>
+        </div>
+        <div style="font-size:13.5px; line-height:1.45; color:var(--ink)">${esc(m.desc)}</div>
+        <div class="from">Thuộc bài: <b>${BYID[m.lid].code} – ${esc(BYID[m.lid].title)}</b></div>
+      </div>
+    `).join("");
+
+    res.querySelectorAll("[data-go]").forEach(item => {
+      item.onclick = () => {
+        const lid = item.getAttribute("data-go");
+        mask.remove();
+        go(lid, "sum");
+      };
+    });
+  };
+
+  input.oninput = run;
+  run();
+}
+
+/* ---------- Theme toggle & Mobile menu ---------- */
+$("#menuBtn").onclick = () => $("#side").classList.toggle("open");
+$("#themeBtn").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("tlhpt_theme", next); } catch(e){}
+};
+try {
+  const savedTheme = localStorage.getItem("tlhpt_theme");
+  if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+} catch(e){}
+
+// Keyboard shortcuts for flashcard
+window.addEventListener("keydown", (e) => {
+  if(state.tab === "fc") {
+    if(e.code === "Space") {
+      const f = $("#fcCard");
+      if(f) { e.preventDefault(); f.classList.toggle("flip"); }
+    } else if(e.key === "1") {
+      const b = $("#fcAgain"); if(b) b.click();
+    } else if(e.key === "2") {
+      const b = $("#fcKnow"); if(b) b.click();
+    } else if(e.code === "ArrowRight") {
+      const b = $("#fcNext"); if(b) b.click();
+    } else if(e.code === "ArrowLeft") {
+      const b = $("#fcPrev"); if(b) b.click();
+    }
+  }
+});
+
+// Global event delegation for navigation and goals modal
+document.addEventListener("click", (e) => {
+  const goBtn = e.target.closest("[data-go]");
+  if (goBtn) {
+    e.preventDefault();
+    go(goBtn.dataset.go, goBtn.dataset.tab);
+    return;
+  }
+  if (e.target.closest("#goalsBtn")) {
+    e.preventDefault();
+    const modal = $("#goalsModal");
+    if(modal) modal.style.display = "flex";
+    return;
+  }
+  if (e.target.closest("#closeGoalsModal") || e.target.closest("#okGoalsBtn") || e.target === $("#goalsModal")) {
+    const modal = $("#goalsModal");
+    if(modal) modal.style.display = "none";
+    return;
+  }
+});
+
+// Initial boot
+go("home");
+</script>
+
+<!-- ================= STUDY TIME TRACKER & HUB NAVIGATION ================= -->
+<script>
+(function() {
+  const COURSE_ID = 'tlhpt';
+  const TIME_KEY = 'study_time_' + COURSE_ID;
+  const LAST_KEY = 'last_accessed_' + COURSE_ID;
+  
+  let lastActive = Date.now();
+  let accumulatedSeconds = parseInt(localStorage.getItem(TIME_KEY) || '0', 10);
+  
+  // Set last accessed time
+  localStorage.setItem(LAST_KEY, Date.now().toString());
+
+  // Listen to user activity
+  const markActive = () => { lastActive = Date.now(); };
+  ['mousemove', 'keydown', 'scroll', 'touchstart', 'click'].forEach(evt => {
+    window.addEventListener(evt, markActive, { passive: true });
+  });
+
+  // Ticking interval every 1 second
+  setInterval(() => {
+    const isVisible = document.visibilityState === 'visible';
+    const isRecentlyActive = (Date.now() - lastActive) < 180000; // 3 minutes timeout
+    
+    if (isVisible && isRecentlyActive) {
+      accumulatedSeconds += 1;
+      if (accumulatedSeconds % 5 === 0) {
+        localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+        localStorage.setItem(LAST_KEY, Date.now().toString());
+      }
+    }
+  }, 1000);
+
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+    localStorage.setItem(LAST_KEY, Date.now().toString());
+  });
+
+  // Handle URL mode parameter (e.g., ?mode=exam)
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+    if (mode === 'exam') {
+      setTimeout(() => {
+        const btn = document.querySelector('[data-go="exam"]');
+        if (btn) btn.click();
+      }, 350);
+    }
+  });
+})();
+</script>
+<!-- ======================================================================= -->
+
+</body>
+</html>
