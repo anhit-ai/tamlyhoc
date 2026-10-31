@@ -573,6 +573,11 @@
       --c-accent: var(--rose);
       --c-accent-rgb: var(--rose-rgb);
     }
+    .course-lstlh {
+      --card-border-hover: var(--amber);
+      --c-accent: var(--amber);
+      --c-accent-rgb: var(--amber-rgb);
+    }
     .course-tlhpt {
       --card-border-hover: var(--violet);
       --c-accent: var(--violet);
@@ -802,7 +807,7 @@
         <div class="hero-tag">🏛️ Trung tâm điều phối học tập & Ôn thi trắc nghiệm</div>
         <h2 class="hero-title">Chào mừng bạn đến với Không gian Tự học Chuyên sâu Tâm lý học</h2>
         <p class="hero-desc">
-          Nền tảng tích hợp đầy đủ 4 học phần nền tảng: <b>Tâm lý học Đại cương</b>, <b>Giải phẫu & Sinh lý HĐTK Cấp cao</b>, <b>Tâm lý học Nhân cách</b> và <b>Tâm lý học Phát triển</b>. Tự động ghi nhận thời gian học thực tế, theo dõi tiến độ thẻ flashcard 3D và ngân hàng 352 câu hỏi trắc nghiệm có giải thích chi tiết.
+          Nền tảng tích hợp đầy đủ 5 học phần nền tảng cử nhân: <b>Tâm lý học Đại cương</b>, <b>Giải phẫu & Sinh lý HĐTK Cấp cao</b>, <b>Tâm lý học Nhân cách</b>, <b>Tâm lý học Phát triển</b> và <b>Lịch sử Tâm lý học</b>. Tự động ghi nhận thời gian học thực tế, theo dõi tiến độ 478 thẻ flashcards 3D và ngân hàng 450 câu hỏi trắc nghiệm có giải thích chi tiết.
         </p>
       </div>
 
@@ -830,7 +835,7 @@
             <span class="stat-icon">📈</span>
           </div>
           <div class="stat-value" id="globalProgressPct">0%</div>
-          <div class="stat-sub" id="globalCoursesCount">4 / 4 Môn học trực tuyến</div>
+          <div class="stat-sub" id="globalCoursesCount">5 / 5 Môn học trực tuyến</div>
           <div class="stat-progress">
             <div class="stat-fill" id="globalProgressBar" style="width: 0%; background: linear-gradient(90deg, var(--myelin), var(--axon));"></div>
           </div>
@@ -842,7 +847,7 @@
             <span>FLASHCARDS THUỘC LÒNG</span>
             <span class="stat-icon">🧠</span>
           </div>
-          <div class="stat-value" id="globalCardsCount">0 / 342</div>
+          <div class="stat-value" id="globalCardsCount">0 / 478</div>
           <div class="stat-sub" id="globalCardsPct">0% thuộc lòng (Spaced Rep.)</div>
           <div class="stat-progress">
             <div class="stat-fill" id="cardsFillBar" style="width: 0%; background: linear-gradient(90deg, var(--rose), var(--amber));"></div>
@@ -855,7 +860,7 @@
             <span>TRẮC NGHIỆM ĐÃ VƯỢT QUA</span>
             <span class="stat-icon">📝</span>
           </div>
-          <div class="stat-value" id="globalQuizCount">0 / 352</div>
+          <div class="stat-value" id="globalQuizCount">0 / 450</div>
           <div class="stat-sub" id="globalExamScore">Điểm thi thử TB: Chưa thi</div>
           <div class="stat-progress">
             <div class="stat-fill" id="quizFillBar" style="width: 0%; background: linear-gradient(90deg, var(--amber), var(--myelin));"></div>
@@ -867,8 +872,8 @@
     <!-- Controls & Filter Bar -->
     <div class="controls-bar">
       <div class="section-title">
-        <span>Danh mục 4 Môn học</span>
-        <span class="count">4 Môn</span>
+        <span>Danh mục 5 Môn học</span>
+        <span class="count">5 Môn</span>
       </div>
 
       <div class="filter-group">
@@ -886,8 +891,8 @@
         <div>
           <div class="course-card-top">
             <div class="course-meta">
-              <span class="badge-code" style="background:rgba(var(--axon-rgb),0.15); color:var(--axon); border:1px solid rgba(var(--axon-rgb),0.3);">TLHĐC • 4 Bài</span>
-              <span class="badge-lecturer">ThS. Dương Trần Minh Đoàn</span>
+              <span class="badge-code" style="background:rgba(var(--axon-rgb),0.15); color:var(--axon); border:1px solid rgba(var(--axon-rgb),0.3);">TLHĐC • 6 Bài</span>
+              <span class="badge-lecturer">ThS. Dương Trần Minh Đoàn & CS</span>
             </div>
             <span class="badge-status" id="badge-tlhdc" style="background:rgba(var(--axon-rgb),0.12); color:var(--axon);">
               <span>●</span> <span class="st-text">Đang học</span>
@@ -896,7 +901,7 @@
 
           <h3 class="course-title">Tâm lý học Đại cương</h3>
           <p class="course-desc">
-            Bản chất hiện tượng tâm lý, cơ sở sinh lý não bộ, các quá trình nhận thức (Cảm giác, Tri giác, Chú ý, Trí nhớ, Tư duy), tình cảm và ý chí con người.
+            Bản chất tâm lý, khoa học thần kinh, cảm giác - tri giác - chú ý, trí nhớ (Atkinson-Shiffrin, Ebbinghaus), tư duy & giải quyết vấn đề, ngôn ngữ và trí tuệ.
           </p>
 
           <!-- Study Box -->
@@ -914,11 +919,11 @@
             </div>
             <div class="stats-trio">
               <div class="stat-trio-item">
-                <strong id="cards-tlhdc">0 / 54</strong>
+                <strong id="cards-tlhdc">0 / 94</strong>
                 <span>Thẻ thuộc</span>
               </div>
               <div class="stat-trio-item">
-                <strong id="quiz-tlhdc">0 / 82</strong>
+                <strong id="quiz-tlhdc">0 / 90</strong>
                 <span>Câu đúng</span>
               </div>
               <div class="stat-trio-item">
@@ -1113,6 +1118,51 @@
         </div>
       </div>
 
+          <!-- Course 5: Lịch sử Tâm lý học -->
+      <div class="course-card course-lstlh" data-course="lstlh">
+        <div>
+          <div class="course-card-top">
+            <div class="course-meta">
+              <span class="badge-code" style="background:rgba(var(--amber-rgb),0.15); color:var(--amber); border:1px solid rgba(var(--amber-rgb),0.3);">TLH007 • 6 Bài</span>
+              <span class="badge-lecturer">ThS. Nguyễn Thị Thanh Hằng</span>
+            </div>
+            <span class="badge-status" id="badge-lstlh" style="background:rgba(var(--amber-rgb),0.12); color:var(--amber);">
+              <span>●</span> <span class="st-text">Đang học</span>
+            </span>
+          </div>
+
+          <h3 class="course-title">Lịch sử Tâm lý học</h3>
+          <p class="course-desc">
+            Khởi nguyên tư tưởng triết học phương Đông (Phật, Nho, Đạo), phương Tây cổ đại & Khai sáng, tiền đề sinh lý thế kỷ XIX, các đại trường phái thế kỷ XX đến lịch sử Tâm lý học Việt Nam.
+          </p>
+
+          <!-- Study Box -->
+          <div class="study-box">
+            <div class="study-row">
+              <div class="study-time-chip">
+                <span class="clock">⏱️</span>
+                <span>Thời lượng đã học:</span>
+                <strong id="time-lstlh" style="color:var(--amber);">0 phút</strong>
+              </div>
+              <div class="study-pct" id="pct-lstlh" style="color:var(--amber);">0%</div>
+            </div>
+            <div class="study-bar-wrap">
+              <div class="study-bar" id="bar-lstlh" style="width:0%; background:var(--amber);"></div>
+            </div>
+            <div class="study-foot">
+              <span>Đã thuộc: <b id="cards-lstlh">0</b>/96 thẻ</span>
+              <span>Trắc nghiệm: <b id="quiz-lstlh">0</b>/90 câu</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-actions">
+          <a href="lstlg_index.html" class="btn-learn" style="background:linear-gradient(135deg, var(--amber), #b45309);" onclick="markAccess('lstlh')">
+            <span>Vào học ngay</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- Bottom Section: Time Distribution Chart & Study Roadmap -->
@@ -1163,6 +1213,16 @@
               <div class="chart-bar-fill" id="chartBar-tlhpt" style="width:0%; background:var(--violet);"></div>
             </div>
           </div>
+
+          <div class="chart-bar-item">
+            <div class="chart-label-row">
+              <span class="name" style="color:var(--amber);">Lịch sử Tâm lý học</span>
+              <span class="time" id="chartTime-lstlh">0 phút (0%)</span>
+            </div>
+            <div class="chart-bar-track">
+              <div class="chart-bar-fill" id="chartBar-lstlh" style="width:0%; background:var(--amber);"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1177,7 +1237,7 @@
             <div class="guide-num">1</div>
             <div class="guide-text">
               <strong>Tâm lý học Đại cương (Khởi đầu)</strong>
-              <span>Xây nền tảng về khái niệm tâm lý, nhận thức, cảm xúc và động cơ.</span>
+              <span>Xây nền tảng về khái niệm tâm lý, nhận thức, cảm xúc, trí nhớ và ngôn ngữ.</span>
             </div>
           </div>
           <div class="guide-item">
@@ -1211,7 +1271,7 @@
   <footer class="footer">
     <div class="wrap">
       <p>© 2026 Psychology Study Hub • Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM</p>
-      <p style="margin-top: 4px; font-size: 11.5px; color: var(--submuted);">Hệ thống ôn thi tương tác độc quyền • 4 Chuyên đề • 22 Bài học • 342 Thẻ Flashcards • 352 Câu hỏi Trắc nghiệm</p>
+      <p style="margin-top: 4px; font-size: 11.5px; color: var(--submuted);">Hệ thống ôn thi tương tác độc quyền • 5 Chuyên đề • 30 Bài học • 478 Thẻ Flashcards • 450 Câu hỏi Trắc nghiệm</p>
     </div>
   </footer>
 
@@ -1229,19 +1289,19 @@
 
       <div style="display:flex; flex-direction:column; gap:12px; font-size:13px; margin-bottom:20px;">
         <div style="background:var(--surface2); padding:14px; border-radius:var(--r-md); border:1px solid var(--line);">
-          <strong style="color:var(--axon); display:block; margin-bottom:4px;">Cách 1: Kéo thả trực tiếp (1 Phút - Đơn giản nhất)</strong>
+          <strong style="color:var(--axon); display:block; margin-bottom:4px;">Cách 1: Cập nhật qua GitHub (Khuyên dùng)</strong>
           <ol style="margin-left:18px; color:var(--muted); line-height:1.6;">
-            <li>Truy cập <a href="https://vercel.com" target="_blank" style="color:var(--axon); font-weight:700; text-decoration:underline;">vercel.com</a> và đăng nhập tài khoản.</li>
-            <li>Tại bảng điều khiển (Dashboard), chọn <b>Add New... -> Project</b>.</li>
-            <li>Kéo thả toàn bộ thư mục chứa các file HTML này vào ô tải lên.</li>
-            <li>Nhấn <b>Deploy</b>. Sau 30 giây, bạn sẽ nhận được đường link dạng <code>https://tamlyhoc-hub.vercel.app</code> có thể truy cập toàn cầu trên máy tính và điện thoại.</li>
+            <li>Truy cập kho GitHub <a href="https://github.com/anhit-ai/tamlyhoc" target="_blank" style="color:var(--axon); font-weight:700; text-decoration:underline;">anhit-ai/tamlyhoc</a>.</li>
+            <li>Chọn <b>Add file -> Upload files</b>.</li>
+            <li>Kéo thả các file <code>index.html</code>, <code>tlhdc_index.html</code>, <code>hdtkcc_index.html</code>, <code>tlhnc_index.html</code>, <code>tlhpt_index.html</code>, <code>vercel.json</code>.</li>
+            <li>Nhấn <b>Commit changes</b>. Vercel sẽ tự động build lại trang web sau 20 giây!</li>
           </ol>
         </div>
 
         <div style="background:var(--surface2); padding:14px; border-radius:var(--r-md); border:1px solid var(--line);">
-          <strong style="color:var(--myelin); display:block; margin-bottom:4px;">Cách 2: Đẩy lên GitHub rồi kết nối Vercel</strong>
+          <strong style="color:var(--myelin); display:block; margin-bottom:4px;">Cách 2: Kéo thả trực tiếp lên Vercel Dashboard</strong>
           <p style="color:var(--muted); line-height:1.5;">
-            Tạo kho lưu trữ (Repository) trên GitHub, đưa code lên và bấm <i>Import</i> từ Vercel. Mỗi lần bạn chỉnh sửa câu hỏi hay bài giảng, website trên Vercel sẽ tự động cập nhật ngay lập tức.
+            Bấm nút <b>Add New... -> Project</b> trên Vercel rồi kéo thả toàn bộ thư mục <code>Tamlyhoc</code> vào khung tải lên.
           </p>
         </div>
       </div>
@@ -1261,7 +1321,7 @@
         <h3 style="font-size:18px; font-weight:800; color:var(--rose);">Đặt lại Toàn bộ Dữ liệu?</h3>
       </div>
       <p style="font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:18px;">
-        Thao tác này sẽ xóa toàn bộ số giờ đã học, trạng thái thẻ Flashcards và lịch sử làm bài trắc nghiệm của cả 4 môn trên trình duyệt này.
+        Thao tác này sẽ xóa toàn bộ số giờ đã học, trạng thái thẻ Flashcards và lịch sử làm bài trắc nghiệm của cả 5 môn trên trình duyệt này.
       </p>
       <div style="display:flex; justify-content:flex-end; gap:10px;">
         <button class="btn btn-subtle" id="btnCancelReset">Hủy bỏ</button>
@@ -1281,8 +1341,8 @@
         storeKey: 'tamlyhoc_review_v2',
         timeKey: 'study_time_tlhdc',
         lastAccessKey: 'last_accessed_tlhdc',
-        totalCards: 54,
-        totalQuiz: 82,
+        totalCards: 94,
+        totalQuiz: 90,
         colorVar: 'var(--axon)'
       },
       {
@@ -1317,8 +1377,22 @@
         totalCards: 96,
         totalQuiz: 90,
         colorVar: 'var(--violet)'
+      ,
+      {
+        id: 'lstlh',
+        name: 'Lịch sử Tâm lý học',
+        file: 'lstlg_index.html',
+        storeKey: 'lstlh_review_v1',
+        timeKey: 'study_time_lstlh',
+        lastAccessKey: 'last_accessed_lstlh',
+        totalCards: 96,
+        totalQuiz: 90,
+        colorVar: 'var(--amber)'
       }
     ];
+
+    const GRAND_TOTAL_CARDS = 478;
+    const GRAND_TOTAL_QUIZ = 450;
 
     // Format seconds into human readable string
     function formatDuration(sec) {
@@ -1459,20 +1533,20 @@
       if (globalProgressBar) globalProgressBar.style.width = `${overallPct}%`;
 
       const globalCardsCount = document.getElementById('globalCardsCount');
-      if (globalCardsCount) globalCardsCount.textContent = `${grandCardsMastered} / 342`;
+      if (globalCardsCount) globalCardsCount.textContent = `${grandCardsMastered} / ${GRAND_TOTAL_CARDS}`;
 
       const globalCardsPct = document.getElementById('globalCardsPct');
-      const cardsPctVal = Math.round((grandCardsMastered / 342) * 100);
+      const cardsPctVal = Math.round((grandCardsMastered / GRAND_TOTAL_CARDS) * 100);
       if (globalCardsPct) globalCardsPct.textContent = `${cardsPctVal}% thuộc lòng (Spaced Rep.)`;
 
       const cardsFillBar = document.getElementById('cardsFillBar');
       if (cardsFillBar) cardsFillBar.style.width = `${cardsPctVal}%`;
 
       const globalQuizCount = document.getElementById('globalQuizCount');
-      if (globalQuizCount) globalQuizCount.textContent = `${grandQuizCorrect} / 352`;
+      if (globalQuizCount) globalQuizCount.textContent = `${grandQuizCorrect} / ${GRAND_TOTAL_QUIZ}`;
 
       const quizFillBar = document.getElementById('quizFillBar');
-      const quizPctVal = Math.round((grandQuizCorrect / 352) * 100);
+      const quizPctVal = Math.round((grandQuizCorrect / GRAND_TOTAL_QUIZ) * 100);
       if (quizFillBar) quizFillBar.style.width = `${quizPctVal}%`;
 
       const globalExamScore = document.getElementById('globalExamScore');
@@ -1570,7 +1644,7 @@
       });
       resetModal.classList.remove('open');
       refreshMetrics();
-      alert('Đã xóa sạch tiến độ học tập và thời lượng của tất cả 4 môn.');
+      alert('Đã xóa sạch tiến độ học tập và thời lượng của tất cả 5 môn.');
     });
 
     // Close modal on click outside

@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lịch sử Tâm lý học – Góc ôn tập & Tự học tương tác</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F9; --surface:#FFFFFF; --surface2:#EAEEF5; --ink:#1A2340; --muted:#5E6785; --line:#D6DCE8;
+  --myelin:#E9A23B; --myelin-soft:#FBEBD0; --axon:#D97706; --axon-soft:#FEF3C7; --rose:#C8366E; --rose-soft:#F7DCE6;
+  --indigo:#3B4A8C; --shadow:0 1px 3px rgba(26,35,64,.08);
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --font:"Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --paper:#11162A; --surface:#1A2039; --surface2:#232A47; --ink:#E7EAF4; --muted:#A1A8C3; --line:#2F3758;
+  --myelin:#F0B254; --myelin-soft:#3A3020; --axon:#3CB7AF; --axon-soft:#173B3A; --rose:#E35B8F; --rose-soft:#3D1F2C; --indigo:#9AA8F0; --shadow:none;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:20px; height:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100%}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--myelin); outline-offset:2px; border-radius:6px}
+b{font-weight:650}
+.app{display:grid; grid-template-columns:300px 1fr; min-height:100vh}
+
+/* Sidebar */
+.side{background:var(--surface); border-right:1px solid var(--line); padding:22px 16px 28px; position:sticky; top:0; height:100vh; overflow-y:auto; display:flex; flex-direction:column}
+.brand{display:flex; gap:12px; align-items:center; padding:4px 8px 18px; border-bottom:1px solid var(--line); margin-bottom:14px; background:none; border-left:0; border-right:0; border-top:0; width:100%; text-align:left; cursor:pointer}
+.brand-mark{width:42px; height:42px; flex:none; border-radius:12px; background:linear-gradient(135deg,var(--indigo),var(--axon)); display:grid; place-items:center; color:#fff}
+.brand-mark svg{width:24px; height:24px; fill:currentColor}
+.brand h1{font-size:15px; line-height:1.25; margin:0; font-weight:750; color:var(--ink)}
+.brand small{display:block; color:var(--muted); font-size:12px; font-weight:500; margin-top:2px}
+.nav-home{display:flex; align-items:center; gap:10px; width:100%; padding:10px 12px; border-radius:var(--r-md); border:0; background:none; text-align:left; font-weight:650; font-size:14.5px}
+.nav-home:hover{background:var(--surface2)}
+.nav-home.on{background:var(--ink); color:var(--paper)}
+.part-label{font-size:12px; color:var(--muted); margin:18px 10px 6px; font-weight:700; text-transform:uppercase; letter-spacing:.05em}
+.lesson-btn{display:grid; grid-template-columns:46px 1fr; align-items:center; gap:4px 8px; width:100%; padding:10px 12px; border:0; border-radius:var(--r-md); background:none; text-align:left; margin-bottom:3px}
+.lesson-btn:hover{background:var(--surface2)}
+.lesson-btn.on{background:var(--myelin-soft)}
+.lesson-btn .code{font-weight:800; font-size:13px; color:var(--indigo)}
+.lesson-btn .name{font-size:13.5px; font-weight:600; line-height:1.3}
+.lesson-btn .mini{grid-column:2; height:4px; border-radius:4px; background:var(--surface2); overflow:hidden; margin-top:4px}
+.lesson-btn.on .mini{background:rgba(0,0,0,.15)}
+.mini i{display:block; height:100%; background:var(--axon); border-radius:4px; transition:width .3s}
+.side-foot{margin-top:auto; padding:16px 8px 0; border-top:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap}
+.chip-btn{border:1px solid var(--line); background:var(--surface2); border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px}
+.chip-btn:hover{border-color:var(--ink)}
+
+/* Main Container */
+.main{padding:30px clamp(16px,4vw,48px) 64px; max-width:1120px; width:100%}
+.topbar{display:none}
+
+/* Hero & Exam Dashboard */
+.hero{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:stretch; margin-bottom:26px}
+.hero-card{background:var(--ink); color:var(--paper); border-radius:var(--r-lg); padding:26px 28px; position:relative; overflow:hidden; box-shadow:var(--shadow)}
+.hero-card h2{font-size:clamp(22px,3vw,32px); line-height:1.2; margin:0 0 10px; font-weight:800; letter-spacing:-.01em}
+.hero-card p{margin:0; opacity:.85; font-size:14.5px; line-height:1.55}
+.hero-card .lead-q{margin-top:18px; font-size:13.5px; opacity:.92; border-left:3px solid var(--myelin); padding-left:12px; font-style:italic}
+.exam-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px; display:flex; flex-direction:column; gap:14px; box-shadow:var(--shadow)}
+.exam-card h3{margin:0; font-size:16px; font-weight:750}
+.exam-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+.fact{background:var(--surface2); border-radius:var(--r-md); padding:10px 12px}
+.fact strong{display:block; font-size:20px; font-weight:800; line-height:1.1; color:var(--indigo)}
+.fact span{font-size:12px; color:var(--muted); font-weight:550}
+
+.btn{border:0; border-radius:var(--r-md); padding:10px 16px; font-weight:650; font-size:14px; background:var(--surface2); color:var(--ink); transition:all .2s; display:inline-flex; align-items:center; justify-content:center; gap:6px}
+.btn:hover{filter:brightness(.95)}
+.btn.primary{background:var(--myelin); color:#1A2340; font-weight:750}
+.btn.dark{background:var(--ink); color:var(--paper)}
+.btn.ghost{background:none; border:1px solid var(--line)}
+.btn:disabled{opacity:.45; cursor:not-allowed}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+/* Axon Map */
+.map{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px 18px; margin-bottom:26px; box-shadow:var(--shadow)}
+.map-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.map-head h3{margin:0; font-size:16px; font-weight:750}
+.map-head p{margin:0; color:var(--muted); font-size:13px}
+.axon-wrap{overflow-x:auto; padding-bottom:6px}
+.axon{display:flex; align-items:center; min-width:600px; padding:8px 4px}
+.soma{width:44px; height:44px; border-radius:50%; background:var(--indigo); flex:none; position:relative; box-shadow:0 0 0 6px var(--surface2)}
+.soma::after{content:""; position:absolute; inset:14px; border-radius:50%; background:var(--surface)}
+.seg{flex:1; height:32px; margin:0 4px; border-radius:16px; background:var(--surface2); position:relative; overflow:hidden; border:0; padding:0; min-width:70px; cursor:pointer}
+.seg .fill{position:absolute; inset:0 auto 0 0; background:var(--myelin); border-radius:16px; transition:width .4s ease}
+.seg .lbl{position:relative; font-size:12.5px; font-weight:800; color:var(--ink); line-height:32px; display:block; text-align:center}
+.seg:hover{outline:2px solid var(--ink); outline-offset:1px}
+.terminal{width:26px; height:26px; flex:none; border-radius:50%; border:5px solid var(--axon); margin-left:4px}
+
+/* Grid Lessons Cards */
+.grid-lessons{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px}
+.lcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px; text-align:left; display:flex; flex-direction:column; gap:8px; min-height:140px; cursor:pointer; transition:border-color .2s}
+.lcard:hover{border-color:var(--ink); transform:translateY(-2px); box-shadow:var(--shadow)}
+.lcard .code{font-weight:800; color:var(--indigo); font-size:13px}
+.lcard .t{font-weight:700; font-size:15px; line-height:1.35; margin:2px 0}
+.lcard .meta{font-size:12px; color:var(--muted); margin-top:auto; display:flex; justify-content:space-between}
+.bar{height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-top:4px}
+.bar i{display:block; height:100%; background:var(--axon); transition:width .3s}
+
+/* Lesson Detail View */
+.lhead{display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; margin-bottom:8px}
+.lhead .bigcode{font-size:clamp(44px,6vw,68px); font-weight:850; line-height:.9; color:var(--myelin); letter-spacing:-.03em}
+.lhead .part{color:var(--muted); font-size:13px; font-weight:600}
+.lhead h2{margin:2px 0 0; font-size:clamp(22px,3vw,30px); line-height:1.2; font-weight:800}
+.goals{background:var(--axon-soft); border-radius:var(--r-md); padding:14px 18px; margin:16px 0; border-left:4px solid var(--axon)}
+.goals h4{margin:0 0 6px; font-size:13.5px; font-weight:750}
+.goals ul{margin:0; padding-left:18px; font-size:14px}
+.goals li{margin:3px 0}
+
+/* Mindmap Tree Wrapper & SVG */
+.mm-wrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); margin:18px 0 24px; overflow:hidden; box-shadow:var(--shadow)}
+.mm-head{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap; background:var(--surface2)}
+.mm-head h4{margin:0; font-size:14.5px; font-weight:750}
+.mm-scroll{overflow-x:auto; padding:14px 16px; -webkit-overflow-scrolling:touch}
+.tree{padding:12px 6px; border-bottom:1px dashed var(--line)}
+.tree:last-child{border-bottom:0}
+.mm-scroll svg{display:block; height:auto}
+
+/* Tabs */
+.tabs{display:flex; gap:6px; margin:20px 0 22px; border-bottom:1px solid var(--line); overflow-x:auto}
+.tab{border:0; background:none; padding:10px 16px 12px; font-weight:650; font-size:15px; color:var(--muted); border-bottom:3px solid transparent; margin-bottom:-1px; white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink); border-bottom-color:var(--myelin)}
+.tab .count{font-size:11.5px; background:var(--surface2); border-radius:999px; padding:1px 8px; margin-left:6px; color:var(--muted)}
+
+/* Toolbar */
+.toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:14px 0}
+.muted{color:var(--muted)}
+
+/* Content Blocks (Details / Accordion) */
+.block{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); margin-bottom:12px; overflow:hidden}
+.block summary{list-style:none; cursor:pointer; padding:14px 18px; font-weight:700; font-size:15.5px; display:flex; justify-content:space-between; align-items:center; gap:10px}
+.block summary::-webkit-details-marker{display:none}
+.block summary::after{content:"+"; font-size:22px; font-weight:400; color:var(--muted); line-height:1}
+.block[open] summary::after{content:"–"}
+.block ul{margin:0; padding:0 22px 16px 36px}
+.block li{margin:7px 0; max-width:82ch; font-size:14.5px}
+.block li b{color:var(--indigo)}
+
+/* Tables */
+.tblwrap{overflow-x:auto; margin:18px 0; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface)}
+.tblwrap h4{margin:0; padding:12px 16px; font-size:14.5px; font-weight:750; border-bottom:1px solid var(--line); background:var(--surface2)}
+table.data{width:100%; border-collapse:collapse; font-size:14px; text-align:left}
+table.data th, table.data td{padding:10px 16px; border-bottom:1px solid var(--line); vertical-align:top}
+table.data th{background:var(--surface2); font-weight:700; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.03em}
+table.data tr:last-child td{border-bottom:0}
+
+/* Pro Tips */
+.tips-wrap{display:grid; gap:12px; margin:18px 0}
+.tip-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 18px; display:flex; gap:14px; align-items:flex-start}
+.tip-badge{flex:none; background:var(--myelin-soft); color:#8B5A10; font-weight:800; font-size:12px; border-radius:6px; padding:3px 8px; text-transform:uppercase}
+.tip-body{font-size:14.5px; line-height:1.55}
+
+/* Flashcard Component */
+.fc-stage{display:flex; flex-direction:column; align-items:center; gap:16px; margin:20px 0}
+.fc{perspective:1000px; width:100%; max-width:560px; height:280px; cursor:pointer}
+.fc-inner{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .4s ease; border-radius:var(--r-lg); box-shadow:var(--shadow)}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--r-lg); border:1px solid var(--line); background:var(--surface); padding:26px 28px; display:flex; flex-direction:column; justify-content:space-between}
+.fc-face.back{transform:rotateY(180deg); background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.fc-tag{font-size:12px; font-weight:750; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+.fc-face.back .fc-tag{color:var(--myelin)}
+.fc-text{font-size:clamp(16px,2.2vw,20px); font-weight:700; line-height:1.45; margin:auto 0}
+.fc-hint{font-size:12.5px; color:var(--muted)}
+.fc-face.back .fc-hint{color:rgba(255,255,255,.65)}
+.fc-controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+/* Quiz Question Cards */
+.qcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; margin-bottom:14px}
+.qcard.answered{border-color:var(--line)}
+.qcard .qtxt{font-weight:700; font-size:15px; margin-bottom:12px; line-height:1.45}
+.qnum{display:inline-block; font-size:12px; font-weight:800; color:var(--indigo); margin-right:6px}
+.opts{display:grid; gap:8px}
+.opt{border:1px solid var(--line); background:var(--surface2); border-radius:var(--r-sm); padding:10px 14px; text-align:left; font-size:14px; display:flex; gap:10px; align-items:center; transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.correct{background:var(--axon-soft); border-color:var(--axon); color:#0B4A45; font-weight:650}
+.opt.wrong{background:var(--rose-soft); border-color:var(--rose); color:#6E163B; font-weight:650}
+.exp{margin-top:12px; padding:10px 14px; border-radius:var(--r-sm); background:var(--surface2); font-size:13.5px; line-height:1.5; border-left:3px solid var(--indigo)}
+
+/* Search Modal */
+.modal-mask{position:fixed; inset:0; background:rgba(17,22,42,.6); backdrop-filter:blur(4px); display:grid; place-items:center; z-index:999; padding:16px}
+.modal{background:var(--surface); border-radius:var(--r-lg); width:100%; max-width:640px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--line); box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.modal-head{display:flex; gap:10px; padding:16px; border-bottom:1px solid var(--line)}
+.modal-input{flex:1; border:1px solid var(--line); border-radius:var(--r-md); padding:10px 14px; font:inherit; background:var(--surface2); color:var(--ink)}
+.modal-input:focus{outline:2px solid var(--myelin); background:var(--surface)}
+.modal-results{overflow-y:auto; padding:12px; display:grid; gap:8px}
+.modal-results .item{padding:10px 14px; border-radius:var(--r-md); border:1px solid var(--line); cursor:pointer; background:var(--surface)}
+.modal-results .item:hover{border-color:var(--ink); background:var(--surface2)}
+.modal-results .w{font-weight:750; color:var(--indigo); font-size:14px}
+.modal-results .from{font-size:12px; color:var(--muted); margin-top:2px}
+.empty{padding:30px; text-align:center; color:var(--muted); font-size:14px}
+
+/* Mobile Topbar */
+@media (max-width:880px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed; inset:0 auto 0 0; width:290px; transform:translateX(-100%); transition:transform .3s ease; z-index:100; box-shadow:4px 0 16px rgba(0,0,0,.15)}
+  .side.open{transform:translateX(0)}
+  .topbar{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--surface); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:90}
+  .hero{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="btn ghost" id="menuBtn">☰ Mục lục</button>
+  <span style="font-weight:750; font-size:14.5px">Lịch sử Tâm lý học</span>
+  <button class="btn ghost" id="searchBtnTop">🔍</button>
+</div>
+
+<div class="app">
+  <aside class="side" id="side">
+    <button class="brand" data-go="home">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 0 0-9 9c0 3.6 2.1 6.7 5.2 8.1v1.9c0 .6.4 1 1 1h5.6c.6 0 1-.4 1-1v-1.9c3.1-1.4 5.2-4.5 5.2-8.1a9 9 0 0 0-9-9zm-1 18h-2v-1h2v1zm4 0h-2v-1h2v1zm1.2-2.8l-.2.1v.7h-8v-.7l-.2-.1C5.1 16.6 3.5 13.9 3.5 11 3.5 6.3 7.3 2.5 12 2.5s8.5 3.8 8.5 8.5c0 2.9-1.6 5.6-4.3 6.2z"/></svg>
+      </div>
+      <div>
+        <h1>Lịch sử Tâm lý học</h1>
+        <small>Góc ôn tập & Tự học tương tác</small>
+      </div>
+    </button>
+        <a href="./index.html" class="nav-dashboard" style="display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:var(--r-md); background:var(--surface2); color:var(--ink); font-weight:700; font-size:13px; text-decoration:none; margin-bottom:8px; border:1px solid var(--line); transition:all .15s ease;">
+      <span style="font-size:16px;">🏛️</span>
+      <span>Cổng Dashboard</span>
+      <span style="margin-left:auto; font-size:10.5px; padding:2px 6px; border-radius:4px; background:var(--axon); color:#fff; font-weight:800;">HUB</span>
+    </a>
+    <button class="nav-home" data-go="home">🏠 Tổng quan môn học</button>
+    <div id="sideLessons"></div>
+    <div class="side-foot">
+      <button class="chip-btn" data-go="exam">📝 Thi thử</button>
+      <button class="chip-btn" data-go="wrong">⚠️ Câu sai (<span id="wrongCount">0</span>)</button>
+      <button class="chip-btn" id="searchBtn">🔍 Tra cứu</button>
+      <button class="chip-btn" id="themeBtn">🌓 Giao diện</button>
+      <button class="chip-btn" id="goalsBtn" style="border-color:var(--myelin); color:var(--ink); font-weight:700">🎯 Chuẩn đầu ra (CLO1 - CLO5)</button>
+    </div>
+  </aside>
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<!-- Modal Chuẩn đầu ra (CLO1 - CLO5) -->
+<div id="goalsModal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:9999; overflow-y:auto; padding:20px; align-items:center; justify-content:center;">
+  <div class="modal-card" style="background:var(--surface); color:var(--ink); border-radius:var(--r-lg); max-width:920px; width:100%; max-height:90vh; overflow-y:auto; padding:28px 32px; box-shadow:0 12px 36px rgba(0,0,0,.25); border:1px solid var(--line); position:relative; margin:auto;">
+    <button id="closeGoalsModal" style="position:absolute; top:20px; right:20px; background:var(--surface2); border:0; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:18px; font-weight:bold; color:var(--muted); display:flex; align-items:center; justify-content:center;">✕</button>
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px">
+      <span style="background:var(--myelin-soft); color:var(--myelin); font-weight:800; padding:4px 10px; border-radius:6px; font-size:13px">KHUNG NĂNG LỰC CHUẨN ĐẦU RA</span>
+      <span style="font-size:13px; color:var(--muted)">ĐH KHXH&NV – ĐHQG TP.HCM (Mã HP: TLH007 – 3 Tín chỉ)</span>
+    </div>
+    <h2 style="font-size:24px; font-weight:800; margin:0 0 14px; color:var(--ink)">Đối chiếu Mục tiêu Môn học Lịch sử Tâm lý học</h2>
+    <p style="font-size:14.5px; color:var(--muted); line-height:1.55; margin-bottom:24px">Hệ thống ôn tập được thiết kế bao phủ 100% các chuẩn đầu ra (CLO1 – CLO5) và chỉ số kết quả thực hiện (PI 6.1, 6.2, 6.3) của đề cương đào tạo cử nhân:</p>
+    
+    <div style="display:flex; flex-direction:column; gap:18px;">
+      <div style="background:var(--surface2); border-radius:var(--r-md); padding:16px 20px; border-left:4px solid var(--myelin);">
+        <h3 style="margin:0 0 10px; font-size:16px; font-weight:750; color:var(--myelin)">CHUẨN ĐẦU RA HỌC PHẦN (CLOs & PIs)</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+          <thead>
+            <tr style="text-align:left; border-bottom:1px solid var(--line); color:var(--muted);">
+              <th style="padding:8px 6px; width:70px">Mã CĐR</th>
+              <th style="padding:8px 6px">Nội dung chuẩn đầu ra</th>
+              <th style="padding:8px 6px; width:220px">Đáp ứng trên nền tảng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--myelin)">CLO1</td>
+              <td style="padding:10px 6px">Phân tích và hệ thống hóa được bối cảnh lịch sử, tiền đề triết học và sinh lý học dẫn đến sự ra đời của Tâm lý học độc lập năm 1879 (PI 6.1).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bao phủ Bài 1, 2, 3, 4, 18 sơ đồ tư duy SVG & 96 flashcards)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--myelin)">CLO2</td>
+              <td style="padding:10px 6px">Trình bày và so sánh được luận điểm cốt lõi, phương pháp và hạn chế của các đại trường phái: Cấu trúc luận, Chức năng, Phân tâm, Hành vi, Gestalt, Nhân văn & Hoạt động luận (PI 6.1).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bảng ma trận đối sánh 8 trường phái chuyên sâu)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--myelin)">CLO3</td>
+              <td style="padding:10px 6px">Phân tích được sự tiếp nối, phản biện và biến chuyển tư tưởng giữa các giai đoạn và các trường phái tâm lý học phương Đông, phương Tây và Việt Nam (PI 6.2).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bao phủ Bài 1, 5, 6 & hệ thống cây tư duy lịch sử)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,.06)">
+              <td style="padding:10px 6px; font-weight:800; color:var(--myelin)">CLO4</td>
+              <td style="padding:10px 6px">Vận dụng kiến thức lịch sử môn học để giải thích nguồn gốc lý luận của các phương pháp đánh giá, can thiệp tâm lý lâm sàng, học đường và tổ chức hiện đại (PI 6.3).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (90 câu hỏi trắc nghiệm tình huống, bối cảnh ra đời của CBT, ACT, EAP)</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 6px; font-weight:800; color:var(--myelin)">CLO5</td>
+              <td style="padding:10px 6px">Thể hiện thế giới quan duy vật biện chứng, tư duy phản biện học thuật và nắm vững 4 chuẩn mực đạo đức nghề nghiệp tối thượng (Luật Khám bệnh, chữa bệnh 2023).</td>
+              <td style="padding:10px 6px"><span style="color:var(--axon); font-weight:600">✓ Đầy đủ</span> (Bài 6 & quy chuẩn đạo đức hành nghề y tế tâm lý lâm sàng)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:24px; text-align:right">
+      <button class="btn primary" id="okGoalsBtn" style="padding:10px 24px">Đã hiểu – Bắt đầu học</button>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+
+<script>
+const LESSONS = [{"id": "ls1", "part": "Phần I: Khởi nguyên Triết học Cổ đại", "code": "LS.1", "title": "Tổng quan Lịch sử Tâm lý học & Tư tưởng Triết học Phương Đông Cổ đại", "goals": ["Hiểu đúng câu châm ngôn kinh điển của Hermann Ebbinghaus: 'Tâm lý học có một quá khứ dài dằng dặc nhưng chỉ có một lịch sử ngắn ngủi'.", "Nắm vững các tư tưởng tâm lý học Phật giáo: Tứ Diệu Đế, Bát Chánh Đạo, Vô thường, Vô ngã, Duyên khởi, và Thiền Chánh niệm (Mindfulness).", "Phân tích quan điểm Nho giáo về bản tính con người: Tu thân - Tề gia, Đạo Trung dung, Thuyết Tính Thiện (Mạnh Tử) vs Thuyết Tính Ác (Tuân Tử).", "Làm chủ triết lý Đạo giáo của Lão Tử: Đạo và Đức, nguyên lý Vô vi, 'Thượng thiện nhược thủy', 'Vật cực tắc phản', và tư tưởng Tự tri."], "sections": [{"h": "Bản chất Lịch sử Tâm lý học & Mệnh đề Ebbinghaus", "items": ["<b>Mệnh đề kinh điển của Hermann Ebbinghaus (1908):</b> <i>'Psychology has a long past, but only a short history'</i> (Tâm lý học có một quá khứ dài dằng dặc nhưng chỉ có một lịch sử ngắn ngủi). 'Quá khứ dài' là hàng ngàn năm loài người trăn trở về tâm trí, linh hồn và bản tính người trong lòng tôn giáo và triết học; 'Lịch sử ngắn' là từ năm 1879 khi Wilhelm Wundt thành lập phòng thí nghiệm thực nghiệm đầu tiên.", "<b>Tại sao cần học Lịch sử Tâm lý học?</b> (1) Nhận thức sâu sắc cội nguồn và bản chất đa diện của các khái niệm hiện đại; (2) Tránh lặp lại những sai lầm và ngõ cụt phương pháp luận trong quá khứ; (3) Nhìn thấy mối liên hệ mật thiết giữa tâm lý học với triết học, sinh học, y học, văn hóa và bối cảnh xã hội (Zeitgeist - Tinh thần thời đại).", "<b>Hai cách tiếp cận nghiên cứu lịch sử:</b> Tiếp cận Nhân vật lịch sử (Great-person approach - nhấn mạnh thiên tài cá nhân) và Tiếp cận Tinh thần thời đại (Zeitgeist approach - nhấn mạnh các điều kiện văn hóa, kinh tế, khoa học đã chuẩn bị mảnh đất cho các phát kiến ra đời)."]}, {"h": "Tư tưởng Tâm lý học Phật giáo (Buddhism)", "items": ["<b>Khởi nguồn:</b> Thích Ca Mâu Ni (Siddhartha Gautama, ~563 TCN) tại Ấn Độ cổ đại. Phật giáo không phải tôn giáo mặc khải mà là một hệ thống tâm lý học trị liệu sâu sắc về tâm trí và giải thoát khổ đau.", "<b>Tứ Diệu Đế (Bốn Chân lý Cao cả):</b>", "1. <i>Khổ đế (Dukkha):</i> Thực tại về sự khổ đau (Sanh khổ, Lão khổ, Bệnh khổ, Tử khổ, Cầu bất đắc khổ, Ái biệt ly khổ, Oán tằng hội khổ, Ngũ uẩn xí thạnh khổ).", "2. <i>Tập đế (Samudaya):</i> Cội nguồn của nỗi khổ xuất phát từ Tam độc: <b>Tham (Greed/Craving)</b>, <b>Sân (Anger/Aversion)</b>, và <b>Si (Delusion/Ignorance)</b>.", "3. <i>Diệt đế (Nirodha):</i> Sự chấm dứt khổ đau khi dập tắt tham ái, đạt tới trạng thái tâm an lạc thanh tịnh tối hậu (Niết bàn - Nirvana).", "4. <i>Đạo đế (Magga):</i> Con đường thực hành chấm dứt khổ đau qua <b>Bát Chánh Đạo</b> (Chánh kiến, Chánh tư duy, Chánh ngữ, Chánh nghiệp, Chánh mạng, Chánh tinh tấn, Chánh niệm, Chánh định) thuộc 3 trụ cột Giới – Định – Tuệ.", "<b>Các nguyên lý cốt lõi:</b> <i>Vô thường (Anicca)</i> – vạn vật biến dịch không ngừng; <i>Vô ngã (Anatta)</i> – không có một cái 'Tôi' bất biến độc lập, con người là sự hợp thành của Ngũ uẩn (Sắc, Thọ, Tưởng, Hành, Thức); <i>Duyên khởi (Paticcasamuppada)</i> – cái này có thì cái kia có, cái này sinh thì cái kia sinh.", "<b>Ứng dụng hiện đại:</b> Thiền Chánh niệm (Mindfulness Meditation) và Tứ Vô Lượng Tâm (Từ, Bi, Hỷ, Xả) đã trở thành nền tảng của các liệu pháp tâm lý làn sóng thứ ba: Giảm căng thẳng dựa trên chánh niệm (MBSR - Jon Kabat-Zinn), Liệu pháp nhận thức dựa trên chánh niệm (MBCT), Liệu pháp chấp nhận và cam kết (ACT)."]}, {"h": "Tư tưởng Nho giáo về Nhân cách & Bản tính Người (Confucianism)", "items": ["<b>Khổng Tử (551 – 479 TCN):</b> Đặt trọng tâm vào đạo làm người, xây dựng trật tự xã hội hài hòa dựa trên sự tu dưỡng nhân cách cá nhân.", "<b>Phương châm hành động:</b> <i>'Tu thân – Tề gia – Trị quốc – Bình thiên hạ'</i>. Hoàn thiện nhân cách bản thân (Tu thân) là nền tảng khởi đầu cho mọi sự bình an gia đình và trật tự xã hội.", "<b>Ngũ thường:</b> 5 phẩm hạnh đạo đức nền tảng gồm <b>Nhân</b> (lòng thương người), <b>Lễ</b> (chuẩn mực hành vi, tôn ti trật tự), <b>Nghĩa</b> (lẽ phải, bổn phận), <b>Trí</b> (sự sáng suốt, hiểu biết), <b>Tín</b> (sự thành thực, giữ lời hứa).", "<b>Đạo Trung dung:</b> Giữ trạng thái cân bằng, không thái quá, không bất cập trong cảm xúc và hành vi.", "<b>Tranh luận lịch sử về Bản tính người:</b>", "• <i>Mạnh Tử (Thuyết Tính Thiện):</i> 'Nhân chi sơ, tính bản thiện' – Con người sinh ra vốn có mầm mống đạo đức (Tứ đoan: Trắc ẩn, Tu ố, Cung kính, Thị phi); nhiệm vụ giáo dục là nuôi dưỡng và mở rộng bản tính thiện đó.", "• <i>Tuân Tử (Thuyết Tính Ác):</i> 'Nhân chi sơ, tính bản ác' – Con người sinh ra mang bản năng vị kỷ, ham muốn; tính thiện là do học tập và rèn luyện sau này ('thiện giả vi dã'); do đó cần 'Lễ trị' và 'Pháp trị' để uốn nắn hành vi."]}, {"h": "Tư tưởng Đạo giáo & Triết lý Vô vi (Daoism)", "items": ["<b>Lão Tử (~thế kỷ IV TCN) & Đạo Đức Kinh:</b> Tác phẩm gồm 81 chương (Thiên Thượng - Đạo kinh, Thiên Hạ - Đức kinh). 'Đạo' là bản thể nguồn cội của vũ trụ; 'Đức' là biểu hiện cụ thể của Đạo trong vạn vật.", "<b>Nguyên lý Vô vi (Wu-wei):</b> Không phải là không làm gì, mà là hành động không khiên cưỡng, không áp đặt ý chí chủ quan, thuận theo tự nhiên và quy luật vận hành khách quan.", "<b>Quy luật 'Vật cực tắc phản':</b> Sự vật phát triển đến đỉnh điểm cực hạn tất sẽ chuyển hóa thành đối lập ('Cùng tắc biến, biến tắc thông'). Người đạt đạo phải biết giữ mình ở thế khiêm nhường.", "<b>Hình tượng 'Thượng thiện nhược thủy':</b> Đạo giống như nước – nước mềm mại, nuôi dưỡng vạn vật mà không tranh giành, chảy xuống chỗ thấp; nhưng nước có thể bào mòn đá cứng ('Nhu thắng cương, nhược thắng cường').", "<b>Triết lý 'Tự tri' & Trở về sự mộc mạc ('Phục qui ư phác'):</b> <i>'Tri nhân giả trí, tự tri giả minh'</i> (Biết người là khôn ngoan, biết mình mới là sáng suốt); <i>'Thắng nhân giả hữu lực, tự thắng giả cường'</i> (Thắng người là có sức mạnh, thắng chính mình mới là kẻ thực sự mạnh mẽ). Đây là tiền đề tâm lý học về sự tự nhận thức (Self-awareness) và tự chủ (Self-regulation)."]}], "tables": [{"title": "Bảng Đối sánh Ba Tư tưởng Triết học Phương Đông Cổ đại (Phật - Nho - Đạo)", "head": ["Tiêu chí so sánh", "Phật giáo (Buddhism)", "Nho giáo (Confucianism)", "Đạo giáo (Daoism)"], "rows": [["Nhà sáng lập / Đại diện", "Thích Ca Mâu Ni (Siddhartha Gautama)", "Khổng Tử, Mạnh Tử, Tuân Tử", "Lão Tử, Trang Tử"], ["Đối tượng trọng tâm", "Tâm trí, nỗi khổ đau và giải thoát nội tâm", "Quan hệ xã hội, luân lý và đạo làm người", "Quy luật vũ trụ tự nhiên và sự thanh thản"], ["Bản tính con người", "Bản tính Phật (trong sáng), do vô minh mà khổ", "Tính thiện (Mạnh Tử) vs Tính ác (Tuân Tử)", "Hồn nhiên, mộc mạc như khúc gỗ chưa đẽo (Phác)"], ["Phương pháp tu dưỡng", "Thiền định, Bát Chánh Đạo, Chánh niệm", "Tu thân, giữ Lễ, học tập suốt đời, Trung dung", "Vô vi, thuận tự nhiên, tĩnh lặng, tự thắng mình"], ["Đóng góp cho TLH hiện đại", "Liệu pháp Chánh niệm (MBSR, ACT), buông xả", "Tâm lý học xã hội, giáo dục, đạo đức, khí chất", "Liệu pháp thư giãn, chấp nhận, cân bằng tâm lý"]]}, {"title": "So sánh Quan điểm về Bản tính Người: Mạnh Tử vs Tuân Tử", "head": ["Tiêu chí đối chiếu", "Mạnh Tử (Thuyết Tính Thiện)", "Tuân Tử (Thuyết Tính Ác)"], "rows": [["Luận điểm cốt lõi", "'Nhân chi sơ, tính bản thiện'", "'Nhân chi sơ, tính bản ác'"], ["Bản chất ban đầu", "Có sẵn 4 mầm mống đạo đức (Trắc ẩn, Tu ố, Cung kính, Thị phi)", "Mang bản năng tư lợi, ham muốn thụ hưởng tự nhiên"], ["Nguyên nhân cái ác", "Do hoàn cảnh xấu làm hoen ố, đánh mất 'bản tâm'", "Do bản tính tự nhiên không được kiềm chế, uốn nắn"], ["Vai trò của Giáo dục", "Bảo tồn, phát triển và nuôi dưỡng tính thiện sẵn có", "Cải tạo, uốn nắn bản tính ác thành thiện ('tập vi')"], ["Biện pháp quản trị", "Dùng 'Nhân chính' và cảm hóa bằng đạo đức ('Đức trị')", "Dùng 'Lễ trị' kết hợp 'Pháp trị' để đặt ra khuôn khổ"]]}], "tips": ["Mẹo nhớ câu Ebbinghaus: 'Quá khứ dài = ngàn năm suy tư triết học; Lịch sử ngắn = từ khi có phòng thí nghiệm Wundt 1879'.", "Mẹo nhớ Tứ Diệu Đế: 'Khổ (Bệnh) - Tập (Nguyên nhân bệnh: Tham Sân Si) - Diệt (Khỏi bệnh: Niết bàn) - Đạo (Phương thuốc: Bát Chánh Đạo)'.", "Mẹo phân biệt Mạnh Tử và Tuân Tử: 'Mạnh tin người MẠNH về thiện; Tuân bắt TUÂN thủ Lễ-Pháp vì bản tính ác'.", "Mẹo nhớ Đạo giáo: 'Nước chảy chỗ trũng nhưng mòn đá (Nhu thắng cương); Thắng người là lực, thắng mình là CƯỜNG'."], "cards": [["Mệnh đề Hermann Ebbinghaus (1908)", "Tâm lý học có một quá khứ dài dằng dặc (trong triết học) nhưng chỉ có một lịch sử ngắn ngủi (kể từ năm 1879)."], ["Tứ Diệu Đế (Four Noble Truths)", "Bốn chân lý tối thượng của Phật giáo: Khổ đế (thực tại khổ), Tập đế (nguyên nhân là Tham-Sân-Si), Diệt đế (sự dập tắt khổ), Đạo đế (Bát Chánh Đạo)."], ["Tam độc trong Phật giáo", "Ba cội rễ gây khổ đau tâm lý: Tham (ham muốn chiếm hữu), Sân (tức giận, oán thù), Si (mê muội, thiếu sáng suốt)."], ["Chánh niệm (Mindfulness)", "Trạng thái tâm trí ghi nhận trọn vẹn những gì đang diễn ra trong giây phút hiện tại với thái độ cởi mở, không phán xét."], ["Vô thường (Anicca)", "Quy luật vạn vật luôn biến đổi và dịch chuyển không ngừng, không có gì tồn tại vĩnh viễn bất biến."], ["Vô ngã (Anatta)", "Quan điểm không có một cái 'Tôi' cô lập, bất biến; con người là sự tương tác liên tục của Ngũ uẩn (Sắc, Thọ, Tưởng, Hành, Thức)."], ["Tứ Vô Lượng Tâm", "Bốn phẩm hạnh mang lại tâm an lạc: Từ (ban niềm vui), Bi (xoa dịu nỗi đau), Hỷ (vui với hạnh phúc người khác), Xả (buông bỏ chấp niệm)."], ["Phương châm Nho giáo", "Tu thân (sửa mình) -> Tề gia (yên nhà) -> Trị quốc (yên nước) -> Bình thiên hạ (hòa bình thế giới)."], ["Ngũ thường của Khổng Tử", "Năm đức tính nền tảng của người quân tử: Nhân (thương người), Lễ (chuẩn mực), Nghĩa (lẽ phải), Trí (sáng suốt), Tín (uy tín)."], ["Đạo Trung dung", "Nguyên tắc sống giữ trạng thái cân bằng hài hòa, không thái quá (quá mức) và không bất cập (chưa tới)."], ["Thuyết Tính Thiện (Mạnh Tử)", "Quan điểm cho rằng bản tính ban đầu của con người vốn là thiện, giáo dục là nuôi dưỡng và mở rộng tính thiện đó."], ["Thuyết Tính Ác (Tuân Tử)", "Quan điểm cho rằng bản tính nguyên thủy của con người là vị kỷ, thiện là do quá trình rèn luyện, cần Lễ và Pháp để uốn nắn."], ["Đạo Đức Kinh của Lão Tử", "Bộ sách nền tảng Đạo giáo gồm 81 chương bàn về Đạo (bản thể vũ trụ) và Đức (sự biểu hiện trong vạn vật)."], ["Nguyên lý Vô vi (Wu-wei)", "Hành động thuận theo quy luật tự nhiên, không áp đặt ý chí gượng ép, không khiên cưỡng."], ["Quy luật 'Vật cực tắc phản'", "Sự vật phát triển đến độ cùng cực thì sẽ quay ngược lại chuyển hóa thành đối lập ('Cùng tắc biến, biến tắc thông')."], ["Triết lý 'Tự tri' của Lão Tử", "'Tri nhân giả trí, tự tri giả minh; Thắng nhân giả hữu lực, tự thắng giả cường' (Hiểu mình là sáng suốt, thắng mình mới là hùng mạnh)."]], "qs": [["Ai là tác giả của câu nói nổi tiếng: 'Tâm lý học có một quá khứ dài dằng dặc nhưng chỉ có một lịch sử ngắn ngủi'?", ["Wilhelm Wundt", "Hermann Ebbinghaus", "Sigmund Freud", "William James"], 1, "Hermann Ebbinghaus (1908) đã đúc kết mệnh đề này để chỉ quá khứ hàng ngàn năm trong triết học và lịch sử thực nghiệm bắt đầu từ 1879."], ["Theo Phật giáo, cội nguồn sâu xa sinh ra khổ đau của con người (Tập đế) bắt nguồn từ Tam độc nào?", ["Hỉ, Nộ, Ái", "Tham, Sân, Si", "Sinh, Lão, Bệnh", "Sắc, Thọ, Tưởng"], 1, "Tập đế khẳng định cội nguồn khổ đau là do Tham ái (Greed), Sân hận (Anger) và Si mê vô minh (Delusion)."], ["Trong Bát Chánh Đạo của Phật giáo, phương pháp rèn luyện tâm trí chú ý trọn vẹn vào giây phút hiện tại không phán xét được gọi là:", ["Chánh ngữ", "Chánh nghiệp", "Chánh niệm", "Chánh mạng"], 2, "Chánh niệm (Samyak-smṛti / Mindfulness) là sự tỉnh giác, nhận biết rõ ràng mọi hiện tượng đang diễn ra trong thân và tâm ở giây phút hiện tại."], ["Nguyên lý nào trong Phật giáo khẳng định con người không có một bản ngã độc lập, cố định mà do Ngũ uẩn kết hợp thành?", ["Vô thường (Anicca)", "Vô ngã (Anatta)", "Duyên khởi (Pratītyasamutpāda)", "Niết bàn (Nirvana)"], 1, "Vô ngã (Anatta) là giáo lý khẳng định không có một linh hồn hay thực thể 'Cái Tôi' bất biến, vĩnh hằng."], ["Bốn đức tính trong 'Tứ Vô Lượng Tâm' giúp tâm an lạc và giải tỏa xung đột nội tâm gồm:", ["Nhân, Lễ, Nghĩa, Trí", "Từ, Bi, Hỷ, Xả", "Công, Dung, Ngôn, Hạnh", "Trung, Hiếu, Tiết, Nghĩa"], 1, "Tứ Vô Lượng Tâm (Brahmavihāra) bao gồm: Từ (Maitrī - ban vui), Bi (Karuṇā - cứu khổ), Hỷ (Muditā - vui cùng người khác), Xả (Upekṣā - buông bỏ phân biệt)."], ["Điểm xuất phát căn bản trong tiến trình hoàn thiện nhân cách theo quan điểm Nho giáo là:", ["Tề gia", "Trị quốc", "Tu thân", "Bình thiên hạ"], 2, "Khổng Tử chỉ rõ trật tự: 'Tu thân, tề gia, trị quốc, bình thiên hạ' – lấy việc sửa mình (tu thân) làm gốc rễ cho mọi thành tựu."], ["Nhà tư tưởng Nho giáo nào chủ trương 'Nhân chi sơ, tính bản thiện' và tin vào bốn mầm mống đạo đức bẩm sinh (Tứ đoan)?", ["Mạnh Tử", "Tuân Tử", "Hàn Phi Tử", "Lão Tử"], 0, "Mạnh Tử đề xuất Thuyết Tính Thiện, cho rằng con người sinh ra đã có mầm mống của Nhân, Nghĩa, Lễ, Trí."], ["Trái ngược với Mạnh Tử, Tuân Tử cho rằng bản tính con người khi mới sinh ra là gì?", ["Tính thiện", "Tính ác (vị kỷ, tham lợi)", "Tờ giấy trắng hoàn toàn", "Vừa thiện vừa ác ngang nhau"], 1, "Tuân Tử khẳng định 'Nhân chi sơ, tính bản ác', do đó con người cần phải thông qua Lễ và học tập thì mới trở nên tốt đẹp."], ["Nguyên tắc 'Trung dung' trong tư tưởng Nho giáo mang ý nghĩa tâm lý học nào sau đây?", ["Chọn lối sống buông xuôi, thờ ơ với thời cuộc", "Giữ trạng thái cân bằng hài hòa, không thái quá và không bất cập", "Luôn chọn phương án thỏa hiệp mù quáng", "Triệt tiêu mọi cảm xúc vui buồn"], 1, "Trung dung là chuẩn mực giữ cho tâm lý và hành vi luôn ở trạng thái cân bằng, đúng mực, tránh cực đoan."], ["Tác phẩm kinh điển nền tảng của Đạo giáo do Lão Tử trước tác gồm 81 chương có tên là:", ["Nam Hoa Kinh", "Đạo Đức Kinh", "Luận Ngữ", "Kinh Dịch"], 1, "Đạo Đức Kinh (gồm Thiên Thượng - Đạo kinh và Thiên Hạ - Đức kinh) là tác phẩm cốt lõi của Lão Tử."], ["Khái niệm 'Vô vi' (Wu-wei) trong Đạo giáo được hiểu đúng nhất là:", ["Lười biếng, hoàn toàn không làm gì", "Hành động thuận theo tự nhiên, không khiên cưỡng hay áp đặt chủ quan", "Chống lại mọi quy luật xã hội", "Chấp nhận số phận mà không phấn đấu"], 1, "Vô vi nghĩa là hành động phù hợp với quy luật tự nhiên của trời đất ('Đạo pháp tự nhiên'), không can thiệp thô bạo bằng ý chí ích kỷ."], ["Hình tượng nào được Lão Tử dùng để minh họa cho đức tính cao đẹp nhất ('Thượng thiện nhược thủy') trong Đạo Đức Kinh?", ["Ngọn núi cao", "Cây tre uốn mình", "Dòng nước", "Ngọn lửa bốc cao"], 2, "Lão Tử viết: 'Thượng thiện nhược thủy. Thủy thiện lợi vạn vật nhi bất tranh' (Nước là tốt nhất, làm lợi cho muôn vật mà không tranh giành, ở chỗ thấp mà bào mòn được đá cứng)."], ["Quy luật 'Vật cực tắc phản' trong Đạo giáo cảnh báo hiện tượng tâm lý nào?", ["Càng nỗ lực gượng ép đến cực đoan thì sự việc càng đảo chiều sang hướng ngược lại", "Mọi sự vật đều đứng yên bất động", "Cái ác luôn chiến thắng cái thiện", "Con người không bao giờ thay đổi"], 0, "'Vật cực tắc phản' nhấn mạnh tính biện chứng: khi một hiện tượng bị đẩy đến đỉnh điểm thái quá tất sẽ biến đổi thành mặt đối lập."], ["Câu danh ngôn của Lão Tử: 'Tri nhân giả trí, tự tri giả minh; Thắng nhân giả hữu lực, tự thắng giả cường' đề cao năng lực tâm lý nào?", ["Khả năng thao túng người khác", "Sự tự nhận thức (Self-awareness) và tự chủ bản thân", "Sức mạnh cơ bắp và quyền lực chính trị", "Tài hùng biện tranh luận"], 1, "Lão Tử coi việc thấu hiểu chính mình và chiến thắng bản ngã của mình mới là đỉnh cao của sự sáng suốt và sức mạnh nội tâm."], ["Thuật ngữ 'Phục qui ư phác' trong tư tưởng Lão Trang mang hàm ý tâm lý trị liệu nào đối với con người hiện đại?", ["Cố gắng làm giàu vật chất tối đa", "Trở về với sự chất phác, mộc mạc nguyên sơ để tâm hồn được tĩnh lặng", "Rút lui hoàn toàn khỏi đời sống xã hội", "Bắt chước hành vi trẻ thơ một cách máy móc"], 1, "'Phác' là khúc gỗ nguyên sơ chưa đẽo gọt; trở về với 'Phác' là buông bỏ những mưu mô, phù phiếm để tâm trí được bình an, thanh thản."]], "trees": [["Lịch sử Tâm lý học & Triết học Cổ đại", "Tiến trình tư tưởng nhân loại", "nghiên cứu", [["Mệnh đề Hermann Ebbinghaus", "Psychology (1908)", "đặc trưng", [["Quá khứ dài", "hàng ngàn năm trong triết học & tôn giáo", "", []], ["Lịch sử ngắn", "từ phòng thí nghiệm Leipzig 1879 của Wundt", "", []]]], ["Hai góc nhìn Lịch sử", "phương pháp luận", "gồm", [["Nhân vật lịch sử (Great-person)", "vai trò thiên tài cá nhân", "", []], ["Tinh thần thời đại (Zeitgeist)", "bối cảnh văn hóa, kinh tế, khoa học", "", []]]]]], ["Tâm lý học Phật giáo & Nho giáo", "Tư tưởng Phương Đông", "nền tảng", [["Phật giáo (Buddhism)", "trị liệu nội tâm", "cốt lõi", [["Tứ Diệu Đế", "Khổ - Tập (Tham Sân Si) - Diệt - Đạo", "", []], ["Bát Chánh Đạo", "Chánh niệm, Chánh định, Giới-Định-Tuệ", "", []], ["Vô thường & Vô ngã", "vạn vật biến đổi, không bản ngã cố định", "", []], ["Tứ Vô Lượng Tâm", "Từ, Bi, Hỷ, Xả mang lại an lạc", "", []]]], ["Nho giáo (Confucianism)", "đạo đức xã hội", "chủ thuyết", [["Tu thân làm gốc", "Tề gia -> Trị quốc -> Bình thiên hạ", "", []], ["Ngũ thường", "Nhân, Lễ, Nghĩa, Trí, Tín", "", []], ["Đạo Trung dung", "giữ cân bằng hài hòa, tránh thái quá", "", []], ["Tranh luận Bản tính", "Mạnh Tử (Tính Thiện) vs Tuân Tử (Tính Ác)", "", []]]]]], ["Đạo giáo & Triết lý Lão Tử", "Đạo Đức Kinh (81 chương)", "nguyên lý", [["Đạo & Vô vi (Wu-wei)", "thuận theo tự nhiên", "đặc tính", [["Không khiên cưỡng", "hành động thuận quy luật khách quan", "", []], ["Thượng thiện nhược thủy", "nước nuôi muôn vật, nhu thắng cương", "", []]]], ["Quy luật Biện chứng", "vận động tâm lý", "nguyên tắc", [["Vật cực tắc phản", "phát triển cực độ sẽ đảo chiều đối lập", "", []], ["Phục qui ư phác", "trở về sự mộc mạc nguyên sơ", "", []]]], ["Triết lý Tự tri", "tâm lý học tự nhận thức", "chân lý", [["Biết mình", "Tri nhân giả trí, tự tri giả minh", "", []], ["Thắng mình", "Thắng nhân giả hữu lực, tự thắng giả cường", "", []]]]]]]}, {"id": "ls2", "part": "Phần I: Khởi nguyên Triết học Cổ đại", "code": "LS.2", "title": "Tư tưởng Triết học Phương Tây Cổ đại, Trung đại & Thời kỳ Khai sáng", "goals": ["Phân tích đóng góp của Socrates ('Hãy tự biết mình' và phương pháp đối thoại) và Plato (Thuyết Ý niệm và Cấu trúc linh hồn 3 phần).", "Nắm vững tác phẩm 'De Anima' (Về linh hồn) của Aristotle – chuyên khảo tâm lý học đầu tiên của nhân loại và các quy luật liên tưởng.", "Hiểu Thuyết Bốn Thể dịch của Hippocrates và Galen như tiền đề sinh học đầu tiên về khí chất và nhân cách.", "Làm chủ bước ngoặt triết học Khai sáng của René Descartes (Nhị nguyên luận Thân - Tâm, Cogito ergo sum, Phản xạ) và John Locke (Tờ giấy trắng Tabula rasa)."], "sections": [{"h": "Triết học Hy Lạp Cổ đại: Socrates, Plato và Aristotle", "items": ["<b>Socrates (469 – 399 TCN):</b> Chuyển hướng triết học từ nghiên cứu vũ trụ tự nhiên sang nghiên cứu con người. Mệnh đề bất hủ: <i>'Gnothi seauton'</i> (Hãy tự biết mình). Ông sử dụng phương pháp đối thoại hộ sinh (Maieutics / Socratic method) giúp người đối thoại tự truy vấn để sinh nở ra tri thức chân lý từ bên trong.", "<b>Plato (427 – 347 TCN) & Thuyết Ý niệm:</b> Phân chia thế giới thành hai tầng bậc: Thế giới hiện tượng cảm tính (luôn biến đổi, chỉ là ảo ảnh) và Thế giới Ý niệm (chân thực, vĩnh hằng). Trong <i>Ngụ ngôn cái hang (Allegory of the Cave)</i>, con người bị giam cầm trong hang tối, chỉ nhìn thấy bóng đổ của thực tại trên vách đá.", "<b>Cấu trúc Linh hồn 3 phần của Plato:</b> (1) <i>Lý trí (Rational soul)</i> – ngự ở đầu, bất tử, điều khiển; (2) <i>Ý chí / Khí phách (Spirited/Courageous soul)</i> – ngự ở ngực; (3) <i>Dục vọng / Thèm muốn (Appetitive soul)</i> – ngự ở bụng. Đây là tiền đề trực tiếp cho mô hình Siêu tôi (Superego) - Tôi (Ego) - Cái Nó (Id) của Sigmund Freud.", "<b>Aristotle (384 – 322 TCN) & Tác phẩm 'De Anima' (Về Linh hồn):</b> Được xem là <b>cuốn sách giáo khoa tâm lý học đầu tiên trong lịch sử</b>. Ông bác bỏ nhị nguyên của Plato, khẳng định linh hồn và thể xác gắn bó hữu cơ như 'hình thức' (form) và 'chất liệu' (matter).", "<b>Ba cấp độ Linh hồn của Aristotle:</b>", "1. <i>Linh hồn dinh dưỡng (Vegetative/Nutritive soul):</i> Ở thực vật, thực hiện chức năng sinh trưởng, hấp thụ dinh dưỡng và sinh sản.", "2. <i>Linh hồn cảm giác (Sensitive soul):</i> Ở động vật, có thêm khả năng cảm nhận kích thích, khoái cảm, đau đớn và vận động.", "3. <i>Linh hồn lý tính (Rational soul):</i> Duy nhất ở con người, có năng lực tư duy trừu tượng, phán đoán và tự ý thức.", "<b>Các Quy luật Liên tưởng Ý niệm của Aristotle:</b> Đặt nền móng cho tâm lý học học tập và trí nhớ: (1) Quy luật Tương tự (Similarity); (2) Quy luật Tương phản (Contrast); (3) Quy luật Tiếp cận về không - thời gian (Contiguity)."]}, {"h": "Thuyết Bốn Thể dịch Cổ đại: Hippocrates và Galen", "items": ["<b>Hippocrates (~460 – 377 TCN) – 'Cha đẻ Y học':</b> Người đầu tiên tách y học và tâm thần học ra khỏi mê tín quỷ ám, khẳng định não bộ là cơ quan trung ương của tư duy và cảm xúc.", "<b>Bốn thể dịch cơ thể tương ứng với 4 khí chất:</b>", "1. <i>Máu đỏ (Blood - từ tim):</i> Khí chất Hăng hái / Hoạt bát (Sanguine) – vui vẻ, lạc quan, nhiệt tình.", "2. <i>Mật vàng (Yellow bile - từ gan):</i> Khí chất Nóng nảy (Choleric) – bộc trực, dễ nổi giận, quyết đoán.", "3. <i>Mật đen (Black bile - từ lách):</i> Khí chất Ưu tư (Melancholic) – trầm mặc, nhạy cảm, dễ u sầu.", "4. <i>Niêm dịch (Phlegm - từ não/phổi):</i> Khí chất Điềm tĩnh (Phlegmatic) – bình thản, chậm rãi, kiên nhẫn.", "<b>Claudius Galen (129 – 200 SCN):</b> Hoàn thiện mô hình thể dịch thành học thuyết nhân cách đầu tiên, đặt tiền đề cho sinh lý học thần kinh Ivan Pavlov và mô hình nét Hans Eysenck sau này."]}, {"h": "Thời kỳ Trung đại: Thần học Kitô giáo & Thuyết Kinh viện", "items": ["<b>St. Augustine (354 – 430):</b> Chuyển trọng tâm tâm lý học sang trải nghiệm đức tin nội tâm và sự cứu rỗi linh hồn. Ông sử dụng phương pháp <i>tự vấn nội quan sâu sắc</i> (tác phẩm <i>Confessions - Tự thú</i>), khẳng định ý chí tự do (Free will) và sự ân sủng của Thiên Chúa.", "<b>Thomas Aquinas (1225 – 1274):</b> Nhân vật đỉnh cao của triết học kinh viện (Scholasticism). Ông dung hợp triết học duy lý của Aristotle với giáo lý Cơ Đốc giáo, lập luận rằng đức tin và lý trí không mâu thuẫn mà bổ sung cho nhau trong việc thấu hiểu bản tính con người."]}, {"h": "Thời kỳ Khai sáng: René Descartes & Chủ nghĩa Kinh nghiệm Anh", "items": ["<b>René Descartes (1596 – 1650) & Bước ngoặt Hiện đại:</b>", "• <i>Nghi ngờ phương pháp luận:</i> 'Cogito, ergo sum' (Tôi tư duy, nên tôi tồn tại) – điểm tựa chắc chắn duy nhất của nhận thức.", "• <i>Nhị nguyên luận Thân - Tâm (Cartesian Dualism):</i> Thân xác là thực thể vật chất có quảng tính (Res extensa) vận hành như một cỗ máy cơ học; Tâm trí là thực thể tư duy phi vật chất (Res cogitans). Chúng tương tác với nhau tại <b>Tuyến tùng (Pineal gland)</b> ở đáy não.", "• <i>Khái niệm Phản xạ (Reflex):</i> Descartes là người đầu tiên mô tả cơ chế phản xạ cơ học (dòng 'tinh khí động vật' chuyển động trong dây thần kinh rỗng khi ngón chân chạm lửa).", "<b>Chủ nghĩa Kinh nghiệm Anh (British Empiricism) – John Locke (1632 – 1704):</b>", "• Bác bỏ quan niệm của Descartes về các 'ý niệm bẩm sinh'.", "• Đưa ra luận đề nổi tiếng: Tâm trí con người khi mới sinh ra là <b>'Tabula rasa' (Tờ giấy trắng)</b>. Toàn bộ tri thức, ý niệm đều bắt nguồn từ <b>kinh nghiệm</b> thông qua hai cửa ngõ: <i>Cảm giác (Sensation)</i> về thế giới bên ngoài và <i>Phản tư (Reflection)</i> về các hoạt động nội tâm của chính tâm trí.", "<b>David Hume (1711 – 1776):</b> Phân chia nội dung tâm trí thành <i>Ấn tượng (Impressions - sống động, trực tiếp)</i> và <i>Ý niệm (Ideas - bản sao mờ nhạt của ấn tượng)</i>. Khẳng định Bản ngã (Self) thực chất chỉ là một bó các ấn tượng trôi nổi liên tục kết nối qua các quy luật liên tưởng."]}], "tables": [{"title": "Bảng Tổng hợp Bốn Thể dịch & Khí chất (Hippocrates & Galen)", "head": ["Thể dịch chính", "Cơ quan sản sinh", "Nguyên tố tự nhiên", "Khí chất tương ứng", "Đặc điểm tâm lý nổi bật"], "rows": [["Máu đỏ (Blood)", "Tim", "Không khí (Ấm & Ẩm)", "Hăng hái (Sanguine)", "Lạc quan, hoạt bát, hòa đồng, dễ thích nghi"], ["Mật vàng (Yellow bile)", "Gan", "Lửa (Ấm & Khô)", "Nóng nảy (Choleric)", "Quyết liệt, dễ cáu gắt, tham vọng, bộc trực"], ["Mật đen (Black bile)", "Lách", "Đất (Lạnh & Khô)", "Ưu tư (Melancholic)", "Trầm lắng, sâu sắc, dễ u sầu, nhạy cảm cao"], ["Niêm dịch (Phlegm)", "Não / Phổi", "Nước (Lạnh & Ẩm)", "Điềm tĩnh (Phlegmatic)", "Bình thản, kiên nhẫn, chậm chạp, ít dao động"]]}, {"title": "So sánh Chủ nghĩa Duy lý (Descartes) và Chủ nghĩa Kinh nghiệm (John Locke)", "head": ["Tiêu chí đối chiếu", "Chủ nghĩa Duy lý (Rationalism - René Descartes)", "Chủ nghĩa Kinh nghiệm (Empiricism - John Locke)"], "rows": [["Nguồn gốc tri thức", "Lý tính bẩm sinh và tư duy suy diễn thuần túy", "Kinh nghiệm thực nghiệm từ thế giới cảm tính"], ["Trạng thái tâm trí sơ sinh", "Chứa sẵn các 'Ý niệm bẩm sinh' (Chúa, hình học, tự ngã)", "Là 'Tờ giấy trắng' (Tabula rasa) hoàn toàn trống rỗng"], ["Phương pháp nghiên cứu", "Suy luận diễn dịch (Deductive reasoning), nghi ngờ", "Quan sát quy nạp (Inductive), thực nghiệm giác quan"], ["Mối quan hệ Thân - Tâm", "Nhị nguyên luận tương tác (Dualism qua tuyến tùng)", "Nhất nguyên tâm lý, phủ nhận ý niệm bẩm sinh"], ["Ảnh hưởng tới TLH", "Đặt nền móng cho TLH nhận thức, bản năng học thuyết", "Đặt nền móng cho TLH hành vi, học tập và môi trường"]]}], "tips": ["Mẹo nhớ 3 cấp độ linh hồn Aristotle: 'Thực vật = Dinh dưỡng; Động vật = Thêm Cảm giác; Con người = Đỉnh cao Lý tính'.", "Mẹo nhớ Nhị nguyên Descartes: 'Res cogitans (nghĩ) + Res extensa (vật chất) bắt tay nhau tại Tuyến tùng'.", "Mẹo nhớ John Locke: 'Locke khóa cửa từ chối bẩm sinh, mở ra tờ giấy trắng Tabula rasa để kinh nghiệm vẽ lên'.", "Mẹo nhớ 3 phần linh hồn Plato: 'Đầu (Lý trí) - Ngực (Khí phách/Ý chí) - Bụng (Ham muốn) -> Tiền thân của Freud'."], "cards": [["Socrates & 'Gnothi seauton'", "Châm ngôn 'Hãy tự biết mình', sử dụng phương pháp đối thoại hộ sinh (Maieutics) để khơi mở tri thức từ nội tâm."], ["Ngụ ngôn cái hang của Plato", "Hình tượng ẩn dụ về loài người bị giam trong hang tối, chỉ nhìn thấy bóng đổ và lầm tưởng đó là chân lý thực tại."], ["Cấu trúc linh hồn 3 phần (Plato)", "Lý trí (ở đầu, dẫn đường), Ý chí/Khí phách (ở ngực), Dục vọng/Thèm muốn (ở bụng) – tiền thân của mô hình Freud."], ["Tác phẩm 'De Anima' (Aristotle)", "Chuyên khảo tâm lý học đầu tiên trong lịch sử loài người, nghiên cứu về bản chất, chức năng và các dạng linh hồn."], ["3 Cấp độ Linh hồn (Aristotle)", "Linh hồn dinh dưỡng (thực vật: sinh trưởng), Linh hồn cảm giác (động vật: vận động), Linh hồn lý tính (con người: tư duy)."], ["3 Quy luật liên tưởng của Aristotle", "Tương tự (Similarity), Tương phản (Contrast), và Tiếp cận về không - thời gian (Contiguity)."], ["Hippocrates & Thuyết 4 Thể dịch", "Quan điểm cho rằng sức khỏe và tâm lý phụ thuộc vào sự cân bằng 4 dịch: Máu đỏ, Mật vàng, Mật đen, Niêm dịch."], ["Claudius Galen", "Thầy thuốc La Mã cổ đại phát triển học thuyết 4 khí chất tương ứng với 4 thể dịch: Hăng hái, Nóng nảy, Ưu tư, Điềm tĩnh."], ["Khí chất Hăng hái (Sanguine)", "Thể dịch máu đỏ từ tim chiếm ưu thế; tính cách lạc quan, vui vẻ, hướng ngoại, hoạt bát."], ["Khí chất Ưu tư (Melancholic)", "Thể dịch mật đen từ lách chiếm ưu thế; tính cách trầm mặc, nhạy cảm, sâu sắc nhưng dễ u sầu."], ["St. Augustine & 'Confessions'", "Nhà thần học trung đại đặt trọng tâm vào tự vấn nội quan, đức tin và ý chí tự do của linh hồn trước Chúa."], ["Thomas Aquinas", "Nhà triết học kinh viện kết hợp triết học duy lý Aristotle với thần học Cơ Đốc giáo."], ["'Cogito, ergo sum' (Descartes)", "Mệnh đề 'Tôi tư duy, nên tôi tồn tại' – khẳng định tư duy là bằng chứng xác thực tuyệt đối cho sự tồn tại."], ["Nhị nguyên luận Thân - Tâm (Descartes)", "Thân xác là cỗ máy cơ học (quảng tính); Tâm trí là thực thể tư duy phi vật chất; tương tác qua Tuyến tùng."], ["'Tabula rasa' (John Locke)", "Khái niệm tâm trí trẻ sơ sinh như 'Tờ giấy trắng', mọi tri thức đều do kinh nghiệm và giác quan khắc họa lên."], ["David Hume & Sự liên tưởng ý niệm", "Phân chia tâm trí thành Ấn tượng (trực tiếp) và Ý niệm (sao chép mờ nhạt); bản ngã chỉ là một bó các cảm giác liên tục."]], "qs": [["Nhà triết học Hy Lạp cổ đại nào nổi tiếng với phương châm 'Hãy tự biết mình' và phương pháp đối thoại hộ sinh (Maieutics)?", ["Socrates", "Thales", "Plato", "Democritus"], 0, "Socrates chuyển trọng tâm triết học về con người với câu châm ngôn 'Gnothi seauton' (Hãy tự biết mình)."], ["Trong 'Ngụ ngôn cái hang', Plato muốn minh họa luận điểm triết học nào?", ["Thế giới vật chất cảm tính chỉ là ảo ảnh bóng đổ của Thế giới Ý niệm chân thực", "Con người vốn sinh ra trong bóng tối của tội lỗi", "Mọi kiến thức đều bắt nguồn từ kinh nghiệm giác quan", "Thị giác của con người không đáng tin cậy"], 0, "Plato chỉ ra rằng những gì con người thấy bằng giác quan hàng ngày chỉ là ảo ảnh bóng đổ của Thế giới Ý niệm hoàn hảo."], ["Theo Plato, bộ phận nào của linh hồn con người có chức năng điều khiển, mang tính bất tử và ngự trị ở đầu não?", ["Linh hồn dục vọng (Appetitive)", "Linh hồn ý chí (Spirited)", "Linh hồn lý trí (Rational soul)", "Linh hồn cảm giác"], 2, "Plato phân chia linh hồn thành 3 phần: Lý trí (ngự ở đầu), Khí phách/Ý chí (ngự ở ngực), và Ham muốn (ngự ở bụng)."], ["Tác phẩm nào của Aristotle được các nhà sử học công nhận là chuyên khảo tâm lý học đầu tiên trong lịch sử nhân loại?", ["Cộng hòa (The Republic)", "De Anima (Về Linh hồn)", "Đạo đức học Nicomachean", "Chính trị luận"], 1, "De Anima (On the Soul) của Aristotle là tác phẩm đầu tiên hệ thống hóa các hiện tượng tâm lý, cảm giác, trí nhớ và linh hồn."], ["Theo Aristotle, cấp độ linh hồn nào chỉ tồn tại duy nhất ở con người, giúp con người có năng lực tư duy trừu tượng?", ["Linh hồn dinh dưỡng", "Linh hồn cảm giác", "Linh hồn lý tính (Rational soul)", "Linh hồn sinh dưỡng"], 2, "Aristotle phân 3 cấp: Thực vật có linh hồn dinh dưỡng; Động vật có thêm cảm giác; Con người có thêm linh hồn lý tính."], ["Ba quy luật liên tưởng ý niệm kinh điển do Aristotle đề xuất làm nền tảng cho tâm lý học học tập gồm:", ["Đồng hóa, Điều tiết, Cân bằng", "Tương tự, Tương phản, Tiếp cận (không - thời gian)", "Phản xạ, Kích thích, Đáp ứng", "Vô thức, Tiền ý thức, Ý thức"], 1, "Aristotle đề ra 3 quy luật liên tưởng nền tảng: Tương tự (Similarity), Tương phản (Contrast), và Tiếp cận (Contiguity)."], ["Thầy thuốc Hy Lạp cổ đại nào đã bác bỏ quan niệm tâm thần do quỷ ám và đề xuất Thuyết Bốn Thể dịch cơ thể?", ["Galen", "Hippocrates", "Aristotle", "Asclepius"], 1, "Hippocrates ('Cha đẻ Y học') khẳng định bệnh tật tâm thần có nguyên nhân tự nhiên sinh học do mất cân bằng 4 thể dịch."], ["Theo học thuyết của Galen, một người có khí chất Ưu tư (Melancholic) đặc trưng bởi sự chiếm ưu thế của thể dịch nào?", ["Máu đỏ (Blood)", "Mật vàng (Yellow bile)", "Mật đen (Black bile)", "Niêm dịch (Phlegm)"], 2, "Mật đen (từ lách) sinh ra khí chất Ưu tư (Melancholic): trầm lắng, nhạy cảm, sâu sắc và dễ u sầu."], ["Nhà tư tưởng Trung đại nào đã sử dụng phương pháp tự vấn nội quan sâu sắc trong tác phẩm 'Confessions' (Tự thú)?", ["Thomas Aquinas", "St. Augustine", "Descartes", "Spinoza"], 1, "Thánh Augustine (354 - 430) đặt nền tảng cho phương pháp nội quan tâm lý qua việc tự soi chiếu những xung đột nội tâm sâu kín."], ["Mệnh đề 'Cogito, ergo sum' (Tôi tư duy, nên tôi tồn tại) của René Descartes được rút ra từ phương pháp nào?", ["Thực nghiệm sinh học", "Nghi ngờ phương pháp luận triệt để", "Khảo sát ý kiến đám đông", "Quan sát hành vi động vật"], 1, "Descartes nghi ngờ mọi giác quan và tri thức, cho đến khi nhận ra một điều không thể nghi ngờ: chính hành động đang nghi ngờ (tư duy) chứng minh mình đang tồn tại."], ["Theo Nhị nguyên luận của Descartes, Thân xác và Tâm trí tương tác với nhau tại vị trí giải phẫu nào trong não bộ?", ["Hồi hải mã (Hippocampus)", "Tuyến tùng (Pineal gland)", "Vỏ não trước trán", "Cầu não"], 1, "Descartes chọn Tuyến tùng (conarium / pineal gland) vì nó là cấu trúc đơn lẻ nằm chính giữa đáy não."], ["Descartes là người đầu tiên mô tả cơ chế sinh học nào khi giải thích việc ngón chân rụt lại khi chạm phải ngọn lửa?", ["Cơ chế phản xạ cơ học", "Cơ chế ức chế vượt hạn", "Điều kiện hóa cổ điển", "Bản năng sinh tồn vô thức"], 0, "Descartes phác họa sơ đồ phản xạ đầu tiên: kích thích kéo căng sợi dây thần kinh, mở van tuyến não giải phóng 'tinh khí động vật' làm co cơ."], ["Nhà triết học Anh John Locke đã đưa ra thuật ngữ 'Tabula rasa' để mô tả tâm trí con người khi mới sinh ra là:", ["Một khối tri thức bẩm sinh hoàn hảo", "Một 'Tờ giấy trắng' hoàn toàn chưa viết gì", "Một cái cây đã có sẵn mầm mống đạo đức", "Một cỗ máy đã được lập trình sẵn"], 1, "John Locke phủ nhận ý niệm bẩm sinh của Descartes, khẳng định tâm trí trẻ sơ sinh là 'Tabula rasa' (tờ giấy trắng), mọi tri thức đều do kinh nghiệm giác quan mang lại."], ["Theo John Locke, tri thức con người hình thành qua hai nguồn kinh nghiệm cơ bản nào?", ["Trực giác và Thôi miên", "Cảm giác (Sensation) và Phản tư (Reflection)", "Bản năng và Trừng phạt", "Ngủ mơ và Tỉnh thức"], 1, "Locke chia kinh nghiệm thành Cảm giác (tiếp nhận từ giác quan bên ngoài) và Phản tư (tâm trí tự quan sát hoạt động suy ngẫm nội tại của chính mình)."], ["Quan điểm triết học nào cho rằng tri thức chỉ có thể được tạo dựng từ trải nghiệm giác quan và bằng chứng thực nghiệm?", ["Chủ nghĩa Duy lý (Rationalism)", "Chủ nghĩa Kinh nghiệm (Empiricism)", "Chủ nghĩa Thần bí (Mysticism)", "Chủ nghĩa Giáo điều (Dogmatism)"], 1, "Chủ nghĩa Kinh nghiệm (Empiricism - Locke, Berkeley, Hume) coi kinh nghiệm thực nghiệm là nguồn gốc duy nhất của nhận thức chân thực."]], "trees": [["Triết học Phương Tây Cổ đại", "Hy Lạp & La Mã Cổ đại", "đóng góp", [["Socrates & Plato", "duy tâm & ý niệm", "tư tưởng", [["Socrates", "Tự biết mình & Đối thoại hộ sinh", "", []], ["Plato", "Ngụ ngôn cái hang & Linh hồn 3 phần (Lý trí, Ý chí, Ham muốn)", "", []]]], ["Aristotle (De Anima)", "chuyên khảo TLH đầu tiên", "học thuyết", [["3 Cấp linh hồn", "Dinh dưỡng (cây), Cảm giác (thú), Lý tính (người)", "", []], ["3 Luật liên tưởng", "Tương tự, Tương phản, Tiếp cận", "", []]]], ["Hippocrates & Galen", "y học & thể dịch", "mô hình", [["4 Thể dịch", "Máu đỏ, Mật vàng, Mật đen, Niêm dịch", "", []], ["4 Khí chất", "Hăng hái, Nóng nảy, Ưu tư, Điềm tĩnh", "", []]]]]], ["Bước ngoặt Thời kỳ Khai sáng", "Descartes & Locke", "đối lập", [["René Descartes", "Chủ nghĩa Duy lý", "luận đề", [["Cogito ergo sum", "Tôi tư duy nên tôi tồn tại", "", []], ["Nhị nguyên luận", "Thân xác (quảng tính) vs Tâm trí (tư duy)", "", []], ["Tuyến tùng & Phản xạ", "điểm kết nối thân tâm & cơ chế phản xạ", "", []]]], ["John Locke", "Chủ nghĩa Kinh nghiệm", "luận đề", [["Tabula rasa", "Tâm trí là tờ giấy trắng sơ sinh", "", []], ["Kinh nghiệm kép", "Cảm giác (bên ngoài) & Phản tư (bên trong)", "", []], ["Bác bỏ bẩm sinh", "mọi tri thức đều do trải nghiệm hình thành", "", []]]]]], ["Tiến trình Nhận thức luận", "Từ Cổ đại đến Thế kỷ XVIII", "vận động", [["Thời kỳ Cổ đại", "Linh hồn trong triết học Hy Lạp & Thể dịch y học", "", []], ["Thời kỳ Trung đại", "Nội quan đức tin (Augustine) & Kinh viện (Aquinas)", "", []], ["Thời kỳ Khai sáng", "Nhị nguyên duy lý (Descartes) vs Kinh nghiệm liên tưởng (Locke, Hume)", "", []]]]]}, {"id": "ls3", "part": "Phần II: Tiền đề Khoa học & Tâm vật lý học", "code": "LS.3", "title": "Tiền đề Sinh lý học, Thần kinh học, Tâm vật lý & Thuyết Tiến hóa Thế kỷ XIX", "goals": ["Đánh giá vai trò lịch sử của Cốt sọ học (Franz Joseph Gall) và đột phá định vị chức năng não bộ của Paul Broca (1861).", "Hiểu thí nghiệm đo tốc độ dẫn truyền xung thần kinh và thuyết tri giác giác quan của Hermann von Helmholtz.", "Nắm vững sự ra đời của Tâm vật lý học (Psychophysics): Định luật Ernst Weber và Định luật Gustav Fechner (1860).", "Phân tích tác động cách mạng của Thuyết Tiến hóa Charles Darwin (1859, 1872) đối với sự ra đời của Tâm lý học Chức năng và Tâm lý học So sánh."], "sections": [{"h": "Khám phá Não bộ: Franz Joseph Gall & Paul Broca", "items": ["<b>Franz Joseph Gall (1758 – 1828) & Cốt sọ học (Phrenology):</b>", "• Gall cho rằng não bộ là cơ quan của tâm trí và được chia thành nhiều 'vùng chức năng' riêng biệt tương ứng với từng năng lực tinh thần hoặc phẩm chất đạo đức (như tính bác ái, lòng yêu trẻ con, tài âm nhạc).", "• Ông suy diễn sai lầm rằng: Vùng não nào phát triển mạnh sẽ phình to, làm đội sọ lên thành các 'u bướu' (bumps) trên đầu; từ đó sờ nắn hộp sọ có thể đoán được tính cách và trí tuệ.", "• <i>Ý nghĩa lịch sử:</i> Dù Cốt sọ học là một ngụy khoa học bị bác bỏ, Gall là người tiên phong đưa ra ý tưởng mang tính cách mạng: <b>Định vị chức năng não bộ (Localization of brain function)</b> và chứng minh chất xám chứa các tế bào thần kinh điều khiển hành vi.", "<b>Paul Broca (1824 – 1880) & Đột phá Lâm sàng - Giải phẫu:</b>", "• Năm 1861, Broca tiếp nhận bệnh nhân Leborgne (biệt danh 'Tan' vì anh ta chỉ nói được duy nhất từ 'Tan' dù cơ miệng và trí hiểu ngôn ngữ vẫn bình thường).", "• Sau khi bệnh nhân qua đời, khám nghiệm tử thi phát hiện một tổn thương khu trú ở <b>hồi trán dưới của bán cầu não trái</b> (nay gọi là <b>Vùng Broca</b>).", "• <i>Chứng minh lịch sử:</i> Broca đã cung cấp bằng chứng thực nghiệm y khoa đầu tiên chứng minh chức năng ngôn ngữ nói cụ thể được định vị chính xác ở một vùng vỏ não nhất định, mở màn cho ngành Thần kinh học tâm lý (Neuropsychology)."]}, {"h": "Sinh lý học Giác quan: Hermann von Helmholtz", "items": ["<b>Hermann von Helmholtz (1821 – 1894):</b> Một trong những nhà khoa học vĩ đại nhất thế kỷ XIX, người phản bác thuyết 'Sinh lực luận' (Vitalism) thần bí, khẳng định cơ thể sống tuân theo các định luật vật lý - hóa học nghiêm ngặt.", "<b>Đo tốc độ xung thần kinh (1850):</b>", "• Trước Helmholtz, các nhà sinh lý học (như Johannes Müller) tin rằng xung thần kinh di chuyển với tốc độ vô hạn gần bằng ánh sáng và không thể đo lường được.", "• Bằng kỹ thuật cơ - điện tinh vi trên dây thần kinh đùi ếch và người, Helmholtz chứng minh tốc độ dẫn truyền xung thần kinh thực chất khá chậm: chỉ khoảng <b>25 – 30 mét/giây</b>.", "• <i>Ý nghĩa tâm lý học:</i> Chứng minh hoạt động tinh thần không diễn ra tức thời mà chiếm thời gian thực trong thế giới vật chất, mở đường cho phương pháp <b>Đo thời gian phản ứng (Mental chronometry)</b> của F.C. Donders sau này.", "<b>Thuyết Thị giác Ba màu Young - Helmholtz:</b> Khẳng định võng mạc mắt có 3 loại thụ thể nhạy cảm với 3 bước sóng ánh sáng cơ bản (Đỏ, Lục, Lam); mọi màu sắc cảm nhận được là sự pha trộn tín hiệu của 3 thụ thể này.", "<b>Khái niệm 'Suy luận vô thức' (Unconscious inference):</b> Tri giác thị giác không phải cảm giác thuần túy, mà là kết quả não bộ tự động suy luận nhanh chóng dựa trên kinh nghiệm quá khứ."]}, {"h": "Khai sinh Tâm vật lý học: Ernst Weber & Gustav Fechner", "items": ["<b>Tâm vật lý học (Psychophysics):</b> Ngành khoa học nghiên cứu mối quan hệ định lượng có tính quy luật giữa các kích thích vật lý (Physical stimuli) và trải nghiệm tâm lý chủ quan (Psychological sensations) do chúng tạo ra.", "<b>Ernst Heinrich Weber (1795 – 1878) & Ngưỡng Sai biệt:</b>", "• Weber thí nghiệm đo <b>Ngưỡng sai biệt (Difference Threshold / JND - Just Noticeable Difference)</b>: mức chênh lệch nhỏ nhất giữa hai kích thích để một người có thể cảm nhận được sự khác nhau.", "• <b>Định luật Weber:</b> Mức chênh lệch tối thiểu cần thiết ($\\Delta I$) luôn tỷ lệ thuận với cường độ gốc của kích thích ($I$) theo một tỷ lệ không đổi $K$: $\frac{\\Delta I}{I} = K$.", "• Ví dụ: với trọng lượng ($K \u0007pprox 1/40$), nếu nâng vật 40g thì cần thêm 1g để thấy nặng hơn; nhưng nếu nâng vật 400g thì phải thêm ít nhất 10g mới cảm nhận được.", "<b>Gustav Theodor Fechner (1801 – 1887) – 'Cha đẻ Tâm vật lý học':</b>", "• Ngày 22 tháng 10 năm 1860, Fechner thức dậy với một phát kiến vĩ đại: Mối quan hệ giữa Thân (vật chất) và Tâm (tinh thần) có thể được kết nối chính xác bằng công thức toán học logarit.", "• <b>Định luật Weber - Fechner:</b> $S = k \\log I$ (Cường độ cảm giác $S$ tăng theo cấp số cộng khi cường độ kích thích vật lý $I$ tăng theo cấp số nhân).", "• Năm 1860, Fechner xuất bản kiệt tác <i>'Elemente der Psychophysik' (Các yếu tố của Tâm vật lý học)</i>, thiết lập các phương pháp đo lường tâm lý thực nghiệm kinh điển (Phương pháp giới hạn, Phương pháp kích thích hằng định, Phương pháp điều chỉnh). Sự kiện này được xem là một trong những cột mốc khai sinh tâm lý học khoa học."]}, {"h": "Thuyết Tiến hóa của Charles Darwin: Cuộc Cách mạng Tư tưởng", "items": ["<b>Charles Darwin (1809 – 1882) & Tác phẩm 'Nguồn gốc các loài' (1859):</b> Đưa ra thuyết tiến hóa thông qua <b>chọn lọc tự nhiên (Natural selection)</b> dựa trên tính biến dị di truyền và cuộc đấu tranh sinh tồn.", "<b>Tác phẩm 'Sự biểu lộ cảm xúc ở người và động vật' (1872):</b> Cuốn sách tâm lý học tiến hóa đầu tiên, chứng minh rằng các biểu cảm nét mặt của con người (sợ hãi, giận dữ, ghê tởm, ngạc nhiên) có tính phổ quát bẩm sinh và chia sẻ nguồn gốc tiến hóa với động vật linh trưởng nhằm phục vụ chức năng thích nghi sinh tồn.", "<b>Tác động sâu sắc của Thuyết Tiến hóa tới Tâm lý học:</b>", "1. <i>Chuyển dịch trọng tâm:</i> Chuyển từ việc phân tích tĩnh tại cấu trúc ý thức (Structure) sang nghiên cứu <b>chức năng thích ứng (Function)</b> của hành vi và tâm trí đối với môi trường $\rightarrow$ Ra đời <b>Tâm lý học Chức năng (Functionalism)</b>.", "2. <i>Khai sinh Tâm lý học So sánh (Comparative Psychology):</i> Nghiên cứu hành vi động vật để hiểu sâu hơn về hành vi con người (tiền đề trực tiếp của Thuyết Hành vi).", "3. <i>Tâm lý học Phát triển & Khác biệt cá nhân:</i> Khơi nguồn cho nghiên cứu về sự khác biệt giữa các cá thể, sự di truyền trí thông minh (Francis Galton) và quá trình phát triển tâm lý trẻ em."]}], "tables": [{"title": "Bảng So sánh Các Tiền đề Khoa học Thế kỷ XIX Khai sinh Tâm lý học", "head": ["Lĩnh vực tiền đề", "Nhà khoa học tiêu biểu", "Phát kiến / Thành tựu cốt lõi", "Ý nghĩa đối với Tâm lý học"], "rows": [["Giải phẫu thần kinh", "Franz Joseph Gall & Paul Broca", "Định vị vùng chức năng não bộ (Vùng ngôn ngữ Broca 1861)", "Chứng minh tâm lý gắn liền với các vùng vỏ não cụ thể"], ["Sinh lý học giác quan", "Hermann von Helmholtz", "Đo tốc độ xung thần kinh (~30m/s), Thuyết ba màu thị giác", "Đưa hoạt động tâm trí vào thế giới vật lý có thể đo lường thời gian"], ["Tâm vật lý học", "Ernst Weber & Gustav Fechner", "Định luật Weber (ΔI/I = K) & Định luật Fechner (S = k log I)", "Lần đầu tiên dùng toán học đo lường chính xác trải nghiệm tinh thần"], ["Sinh học tiến hóa", "Charles Darwin", "Thuyết chọn lọc tự nhiên (1859), Biểu lộ cảm xúc (1872)", "Chuyển hướng TLH sang nghiên cứu chức năng thích nghi và hành vi"]]}, {"title": "So sánh Định luật Weber và Định luật Fechner trong Tâm vật lý học", "head": ["Tiêu chí đối chiếu", "Định luật Ernst Weber", "Định luật Gustav Fechner"], "rows": [["Năm công bố", "Thập niên 1830", "Năm 1860 (trong 'Elemente der Psychophysik')"], ["Công thức toán học", "ΔI / I = K", "S = k log I"], ["Ý nghĩa hiện tượng", "Ngưỡng sai biệt tỷ lệ thuận với cường độ kích thích ban đầu", "Cảm giác tăng theo cấp số cộng khi kích thích tăng theo cấp số nhân"], ["Phạm vi đo lường", "Chỉ đo mức chênh lệch tối thiểu nhận biết được (JND)", "Mô tả toàn bộ thang đo định lượng trải nghiệm cảm giác"], ["Vị thế lịch sử", "Quy luật định lượng thực nghiệm đầu tiên của tâm lý học", "Được coi là cột mốc khai sinh chính thức ngành Tâm vật lý học"]]}], "tips": ["Mẹo nhớ Fechner: 'Fechner phát minh ngày 22/10/1860 (ngày Tâm vật lý học): Thân và Tâm gặp nhau ở hàm Logarit!'.", "Mẹo nhớ Helmholtz: 'Helmholtz kéo đứt niềm tin tốc độ vô hạn, đo xung thần kinh chậm rì 30m/s'.", "Mẹo nhớ Paul Broca: 'Bệnh nhân Tan tổn thương thùy trán trái -> mất khả năng NÓI (Broca = Nói; Wernicke = Hiểu)'.", "Mẹo nhớ Darwin: 'Từ cấu trúc (Wundt) sang chức năng thích nghi sinh tồn (James) là nhờ Darwin'."], "cards": [["Cốt sọ học (Phrenology) của Gall", "Học thuyết giả khoa học suy đoán tính cách qua việc sờ nắn u bướu sọ đầu, nhưng mở đường cho ý niệm định vị chức năng não."], ["Định vị chức năng não bộ", "Nguyên lý cho rằng các chức năng tâm lý và hành vi cụ thể được điều khiển bởi các khu vực giải phẫu riêng biệt trong não."], ["Khám phá Vùng Broca (1861)", "Paul Broca phát hiện tổn thương hồi trán dưới bán cầu trái gây mất ngôn ngữ vận động (bệnh nhân Tan), chứng minh định vị não."], ["Hermann von Helmholtz", "Đo tốc độ xung thần kinh (~25–30 m/s), chứng minh quá trình tâm lý diễn ra trong thời gian vật lý có thể đo lường."], ["Thuyết Thị giác Ba màu Young-Helmholtz", "Võng mạc có 3 loại tế bào nón cảm thụ 3 màu cơ bản: Đỏ, Lục, Lam; mọi màu sắc là sự pha trộn tỷ lệ giữa chúng."], ["Suy luận vô thức (Unconscious Inference)", "Khái niệm của Helmholtz cho rằng tri giác là kết quả não bộ tự động suy luận nhanh dựa trên kinh nghiệm quá khứ."], ["Tâm vật lý học (Psychophysics)", "Khoa học nghiên cứu mối quan hệ định lượng giữa kích thích vật lý và trải nghiệm tâm lý chủ quan do Fechner khai sinh 1860."], ["Ngưỡng sai biệt (JND)", "Mức chênh lệch tối thiểu giữa hai kích thích để giác quan có thể phát hiện sự khác nhau trong 50% số lần thử."], ["Định luật Weber (ΔI / I = K)", "Mức chênh lệch tối thiểu cần thiết để nhận biết sự khác biệt tỷ lệ thuận với cường độ gốc của kích thích theo hằng số K."], ["Định luật Weber-Fechner (S = k log I)", "Cường độ cảm giác tâm lý tăng theo cấp số cộng khi cường độ kích thích vật lý tăng theo cấp số nhân."], ["Gustav Theodor Fechner (1801–1887)", "Nhà vật lý kiêm triết học Đức xuất bản 'Elemente der Psychophysik' (1860), đặt nền móng đo lường thực nghiệm tâm lý."], ["'Nguồn gốc các loài' (Darwin, 1859)", "Tác phẩm đề xuất thuyết tiến hóa qua chọn lọc tự nhiên, tạo cuộc cách mạng chuyển dịch trọng tâm sang chức năng tâm lý."], ["'Biểu lộ cảm xúc ở người và động vật' (1872)", "Công trình của Darwin chứng minh tính phổ quát và nguồn gốc tiến hóa thích nghi sinh tồn của cảm xúc."], ["Tâm lý học So sánh (Comparative Psychology)", "Phân nhánh nghiên cứu hành vi và tâm trí động vật nhằm so sánh và hiểu sâu hơn về bản tính con người, chịu ảnh hưởng từ Darwin."], ["Tâm lý học Chức năng (Functionalism)", "Trường phái tâm lý học Mỹ chịu ảnh hưởng thuyết Darwin, nghiên cứu tâm trí giúp sinh vật thích ứng với môi trường ra sao."], ["Đo thời gian phản ứng (Mental Chronometry)", "Phương pháp do F.C. Donders phát triển dựa trên đo tốc độ xung thần kinh của Helmholtz để suy ra thời gian xử lý tâm trí."]], "qs": [["Mặc dù học thuyết Cốt sọ học (Phrenology) của Franz Joseph Gall bị bác bỏ là ngụy khoa học, nó đã đóng góp ý tưởng cách mạng nào cho tâm thần học?", ["Thuyết nhị nguyên thân tâm", "Ý niệm về Định vị chức năng não bộ (Localization of function)", "Thuyết điều kiện hóa cổ điển", "Khái niệm vô thức tập thể"], 1, "Gall là người đầu tiên kiên quyết bảo vệ luận điểm rằng các chức năng tinh thần cụ thể được định vị ở các vùng vỏ não riêng biệt."], ["Năm 1861, Paul Broca đã khám nghiệm não bộ của bệnh nhân Leborgne ('Tan') và phát hiện tổn thương ở vùng nào gây ra chứng mất ngôn ngữ vận động?", ["Thùy chẩm bán cầu phải", "Hồi trán dưới của bán cầu não trái (Vùng Broca)", "Hồi thái dương trên bán cầu trái", "Tiểu não"], 1, "Broca chứng minh vùng hồi trán dưới của bán cầu trái chịu trách nhiệm sản xuất ngôn ngữ nói."], ["Trước thế kỷ XIX, các nhà khoa học tin rằng tốc độ dẫn truyền xung thần kinh là vô hạn. Ai là người đầu tiên đo được tốc độ này khoảng 25 - 30 m/s?", ["Johannes Müller", "Hermann von Helmholtz", "Ernst Weber", "Gustav Fechner"], 1, "Hermann von Helmholtz (1850) đã dùng máy đo điện cơ chứng minh xung thần kinh di chuyển với tốc độ hữu hạn (~30 m/s)."], ["Theo Thuyết ba màu thị giác Young - Helmholtz, võng mạc mắt người có 3 loại thụ thể nhạy cảm với 3 màu cơ bản nào?", ["Đỏ, Vàng, Xanh lam", "Đỏ, Lục (Xanh lá), Lam (Xanh dương)", "Trắng, Đen, Xám", "Vàng, Lục, Tím"], 1, "Thuyết Young-Helmholtz khẳng định có 3 loại tế bào nón tương ứng với 3 dải sóng ánh sáng: Đỏ, Lục và Lam."], ["Ngành khoa học nào nghiên cứu mối quan hệ định lượng giữa các kích thích vật lý và trải nghiệm tâm lý chủ quan?", ["Tâm lý học thần kinh", "Tâm vật lý học (Psychophysics)", "Tâm lý học tiến hóa", "Tâm lý học cấu trúc"], 1, "Tâm vật lý học (Psychophysics) do Gustav Fechner sáng lập nhằm kết nối toán học giữa thế giới vật chất và tinh thần."], ["Định luật Weber được biểu diễn bằng công thức nào dưới đây (với I là cường độ kích thích, ΔI là mức chênh lệch tối thiểu, K là hằng số)?", ["ΔI / I = K", "S = k log I", "E = mc²", "F = m.a"], 0, "Định luật Weber khẳng định tỷ lệ giữa ngưỡng sai biệt ΔI và cường độ ban đầu I là một hằng số K không đổi (ΔI / I = K)."], ["Một người đang cầm vật nặng 100g, biết hằng số Weber đối với trọng lượng là K = 1/50 (0.02). Cần thêm ít nhất bao nhiêu gam để người đó nhận thấy nặng hơn?", ["1g", "2g", "5g", "10g"], 1, "Áp dụng định luật Weber: ΔI = I * K = 100 * 0.02 = 2g."], ["Năm 1860, Gustav Fechner đã công bố cuốn sách đặt nền móng chính thức cho Tâm vật lý học có tên là:", ["De Anima", "Elemente der Psychophysik (Các yếu tố của Tâm vật lý học)", "Nguồn gốc các loài", "Các nguyên lý của Tâm lý học"], 1, "Cuốn sách 'Elemente der Psychophysik' (1860) của Fechner được xem là cột mốc lịch sử mở ra kỷ nguyên đo lường thực nghiệm tâm lý."], ["Định luật Weber - Fechner phát biểu rằng cường độ cảm giác tâm lý (S) tăng theo tỷ lệ nào so với cường độ kích thích vật lý (I)?", ["Tăng theo cấp số nhân (hàm số mũ)", "Tăng theo logarit của cường độ kích thích (S = k log I)", "Tăng tỷ lệ nghịch tuyệt đối", "Giảm theo hàm bậc hai"], 1, "Công thức Fechner: S = k log I (Cảm giác tăng theo cấp số cộng khi kích thích tăng theo cấp số nhân)."], ["Tác phẩm nào của Charles Darwin xuất bản năm 1859 đã tạo ra cuộc cách mạng tư tưởng làm thay đổi vĩnh viễn diện mạo tâm lý học?", ["Sự biểu lộ cảm xúc ở người và động vật", "Nguồn gốc các loài (On the Origin of Species)", "Dòng dõi loài người", "Hành trình trên tàu Beagle"], 1, "'Nguồn gốc các loài' (1859) với thuyết chọn lọc tự nhiên đã chuyển trọng tâm nghiên cứu sang chức năng thích nghi của tâm trí."], ["Trong tác phẩm 'Sự biểu lộ cảm xúc ở người và động vật' (1872), Darwin đã chứng minh điều gì về các biểu cảm nét mặt của con người?", ["Hoàn toàn do văn hóa từng vùng dạy cho trẻ", "Mang tính bẩm sinh, phổ quát và có nguồn gốc tiến hóa thích nghi sinh tồn", "Chỉ xuất hiện sau tuổi dậy thì", "Không có liên hệ gì với động vật linh trưởng"], 1, "Darwin chứng minh các biểu cảm cơ bản (sợ hãi, giận dữ, ghê tởm) mang tính phổ quát bẩm sinh xuyên văn hóa nhằm phục vụ chức năng sinh tồn."], ["Ảnh hưởng lớn nhất của Thuyết Tiến hóa Darwin đối với sự hình thành trường phái Tâm lý học Chức năng (Functionalism) tại Mỹ là:", ["Chuyển từ phân tích cấu trúc ý thức tĩnh tại sang tìm hiểu chức năng thích ứng của tâm trí với môi trường", "Bác bỏ việc sử dụng thực nghiệm", "Khẳng định con người không có ý thức", "Loại bỏ hoàn toàn vai trò của não bộ"], 0, "Các nhà chức năng luận (William James) chịu ảnh hưởng sâu sắc từ Darwin: tâm trí tồn tại là vì nó giúp sinh vật thích nghi và sống còn."], ["Ngành tâm lý học nào ra đời trực tiếp từ quan điểm của Darwin về sự liên tục tiến hóa giữa các loài?", ["Tâm lý học so sánh (Comparative psychology)", "Tâm lý học cấu trúc", "Phân tâm học", "Tâm lý học hiện sinh"], 0, "Tâm lý học so sánh nghiên cứu hành vi của các loài động vật khác nhau để rút ra quy luật chung và hiểu rõ bản tính con người."], ["Nhà sinh lý học người Hà Lan F.C. Donders đã phát triển phương pháp nào để đo lường thời gian diễn ra các quá trình tâm trí?", ["Phương pháp nội quan tôn giáo", "Phương pháp đo thời gian phản ứng (Mental chronometry)", "Phương pháp phân tích giấc mơ", "Phương pháp thôi miên"], 1, "Donders trừ thời gian phản ứng đơn giản khỏi thời gian phản ứng phức tạp để tính ra thời gian não bộ cần để đưa ra lựa chọn (Thời gian tâm lý)."], ["Khái niệm 'Suy luận vô thức' (Unconscious inference) của Hermann von Helmholtz giải thích điều gì về tri giác?", ["Tri giác hoàn toàn là một ảo giác vô nghĩa", "Não bộ tự động kết hợp kích thích cảm giác với kinh nghiệm quá khứ để suy ra hình ảnh thực tại mà ta không hề ý thức được", "Mọi tri giác đều bị điều khiển bởi xung năng tính dục", "Con người chỉ tri giác được khi bị thôi miên"], 1, "Helmholtz cho rằng não bộ liên tục thực hiện các phép suy luận vô thức siêu tốc dựa trên kinh nghiệm tích lũy để diễn giải hình ảnh thị giác."]], "trees": [["Tiền đề Thần kinh & Não bộ", "Thế kỷ XIX", "khám phá", [["Franz Joseph Gall", "Cốt sọ học (Phrenology)", "đóng góp", [["Sai lầm u bướu sọ", "đo tính cách qua hình dáng hộp sọ", "", []], ["Đột phá định vị não", "ý niệm các vùng vỏ não đảm nhiệm chức năng riêng", "", []]]], ["Paul Broca (1861)", "Lâm sàng & Giải phẫu", "chứng minh", [["Bệnh nhân Tan", "tổn thương hồi trán dưới bán cầu trái", "", []], ["Vùng Broca", "bằng chứng y khoa đầu tiên về trung khu ngôn ngữ nói", "", []]]]]], ["Tâm vật lý học & Sinh lý học", "Đo lường hiện tượng tâm trí", "phát kiến", [["Hermann von Helmholtz", "tốc độ xung thần kinh", "kết quả", [["Tốc độ hữu hạn", "chỉ ~25 - 30 m/s (chấm dứt huyền thoại tốc độ tức thời)", "", []], ["Thuyết Ba màu", "thụ thể võng mạc: Đỏ, Lục, Lam", "", []]]], ["Ernst Weber & Gustav Fechner", "Tâm vật lý học (1860)", "công thức", [["Định luật Weber", "ΔI / I = K (ngưỡng sai biệt tỷ lệ thuận)", "", []], ["Định luật Fechner", "S = k log I (cảm giác tăng theo logarit kích thích)", "", []]]]]], ["Cách mạng Thuyết Tiến hóa Darwin", "Charles Darwin (1859, 1872)", "chuyển hóa", [["Chọn lọc tự nhiên", "biến dị & thích nghi sinh tồn", "", []], ["Biểu lộ cảm xúc", "tính phổ quát bẩm sinh phục vụ thích nghi", "", []], ["Mở đường cho TLH", "Tâm lý học Chức năng & Tâm lý học So sánh động vật", "", []]]]]}, {"id": "ls4", "part": "Phần III: Tâm lý học Độc lập & Đầu thế kỷ XX", "code": "LS.4", "title": "Sự ra đời của Tâm lý học Độc lập: Cấu trúc luận, Chức năng luận & Đo lường Trí tuệ", "goals": ["Phân tích cột mốc lịch sử năm 1879 tại Leipzig: Wilhelm Wundt và sự ra đời của Tâm lý học như một khoa học độc lập.", "Hiểu phương pháp Nội quan thực nghiệm (Experimental Introspection) và Tâm lý học Cấu trúc (Structuralism) của Edward Titchener.", "Làm chủ trường phái Tâm lý học Chức năng (Functionalism) của William James: Dòng ý thức (Stream of consciousness) và Thuyết cảm xúc James-Lange.", "Nắm vững khởi nguyên của việc đo lường trí tuệ và sự khác biệt cá nhân: Francis Galton và Thang đo Alfred Binet (1905)."], "sections": [{"h": "Wilhelm Wundt & Cột mốc Leipzig năm 1879", "items": ["<b>Wilhelm Maximilian Wundt (1832 – 1920) – 'Cha đẻ của Tâm lý học Hiện đại':</b>", "• <b>Cột mốc lịch sử 1879:</b> Tại Đại học Leipzig (Đức), Wundt chính thức thành lập <b>phòng thí nghiệm tâm lý học thực nghiệm đầu tiên trên thế giới</b>. Sự kiện này đánh dấu việc Tâm lý học chính thức tách khỏi Triết học để trở thành một ngành khoa học độc lập có đối tượng và phương pháp riêng.", "• <i>Đối tượng của Tâm lý học:</i> Wundt định nghĩa tâm lý học là khoa học nghiên cứu về <b>trải nghiệm ý thức trực tiếp (Immediate conscious experience)</b> của con người.", "• <b>Phương pháp Nội quan thực nghiệm (Experimental Introspection):</b> Không phải là sự tự chiêm nghiệm chủ quan thông thường, mà là quy trình quan sát nội tâm có kiểm soát nghiêm ngặt trong phòng thí nghiệm; nghiệm thể được huấn luyện kỹ lưỡng để báo cáo các cảm giác thô ngay khi tiếp nhận kích thích vật lý chuẩn hóa.", "• <b>Tác phẩm 'Völkerpsychologie' (Tâm lý học Dân tộc, 10 tập):</b> Wundt khẳng định các quá trình tâm lý cấp cao (ngôn ngữ, tư duy, phong tục, huyền thoại) không thể đo được trong phòng thí nghiệm mà phải nghiên cứu bằng phương pháp lịch sử - văn hóa so sánh."]}, {"h": "Tâm lý học Cấu trúc: Edward Bradford Titchener", "items": ["<b>Edward Bradford Titchener (1867 – 1927):</b> Học trò người Anh của Wundt, đưa tâm lý học Đức sang trường Đại học Cornell (Mỹ) và sáng lập trường phái <b>Tâm lý học Cấu trúc (Structuralism)</b>.", "<b>Mục tiêu của Cấu trúc luận:</b> Tương tự như hóa học phân tích các hợp chất thành các nguyên tố hóa học trong bảng tuần hoàn, Titchener muốn phân tích cấu trúc của ý thức thành các <b>thành tố tâm lý căn bản nhất (Mental elements)</b>.", "<b>Ba thành tố cơ bản của tâm trí:</b>", "1. <i>Cảm giác (Sensations):</i> Các yếu tố cơ bản của tri giác (thị giác, thính giác, xúc giác...). Titchener đã phân loại hơn 44,000 phẩm chất cảm giác riêng biệt.", "2. <i>Hình ảnh (Images):</i> Các yếu tố của ý niệm và ký ức trong tâm trí.", "3. <i>Tình cảm / Cảm xúc (Affections):</i> Các yếu tố của cảm xúc, chỉ có 1 chiều kích: Dễ chịu (Pleasant) hoặc Khó chịu (Unpleasant).", "<b>Hạn chế & Suy tàn:</b> Phương pháp nội quan của Titchener quá cứng nhắc, mang tính chủ quan cao (các phòng lab khác nhau đưa ra kết quả khác nhau), và bỏ qua các lĩnh vực quan trọng như tâm lý trẻ em, hành vi động vật, người rối loạn tâm thần."]}, {"h": "Tâm lý học Chức năng: William James & Các học giả Mỹ", "items": ["<b>William James (1842 – 1910) – 'Cha đẻ Tâm lý học Hoa Kỳ':</b>", "• Năm 1890, xuất bản tác phẩm kinh điển <i>'The Principles of Psychology' (Các nguyên lý của Tâm lý học)</i> – cuốn sách gối đầu giường định hình diện mạo tâm lý học phương Tây.", "• Phản bác kịch liệt Cấu trúc luận của Titchener: James cho rằng tâm trí không phải là những viên gạch cảm giác rời rạc ghép lại.", "• <b>Khái niệm 'Dòng Ý thức' (Stream of Consciousness):</b> Ý thức con người là một dòng chảy liên tục, không ngừng biến đổi, có tính cá nhân và tính chọn lọc cao. Cắt nhỏ ý thức để phân tích giống như dùng dao cắt một dòng sông – nó sẽ giết chết bản chất của dòng sông đó.", "• <b>Thuyết Cảm xúc James - Lange:</b> Cảm xúc là sự cảm nhận các biến đổi cơ thể sinh lý diễn ra trước đó: <i>'Chúng ta cảm thấy buồn vì chúng ta khóc, giận dữ vì chúng ta tấn công, sợ hãi vì chúng ta run rẩy'</i> (Kích thích $\\rightarrow$ Phản ứng cơ thể $\\rightarrow$ Cảm xúc chủ quan).", "• <b>Chủ nghĩa Thực dụng (Pragmatism):</b> Một ý niệm hoặc lý thuyết chỉ đúng đắn khi nó mang lại giá trị thực tiễn hữu ích trong cuộc sống.", "<b>Trường phái Chức năng luận Chicago & Columbia:</b> John Dewey (Ứng dụng vào giáo dục tiến bộ, phản bác cung phản xạ máy móc), James Rowland Angell, Harvey Carr."]}, {"h": "Khởi nguyên Đo lường Trí tuệ: Francis Galton & Alfred Binet", "items": ["<b>Francis Galton (1822 – 1911) & Nghiên cứu Khác biệt Cá nhân:</b>", "• Em họ của Charles Darwin, tiên phong nghiên cứu về <b>Sự khác biệt cá nhân (Individual differences)</b> và di truyền trí tuệ (tác phẩm <i>'Hereditary Genius'</i> 1869).", "• Phát triển các phương pháp đo lường sinh trắc học (Antropometric lab), bảng câu hỏi điều tra (Questionnaires), từ liên tưởng, và đặt nền móng cho <b>Hệ số tương quan (Correlation)</b> sau này được Karl Pearson hoàn thiện.", "• Khởi xướng phong trào 'Ưu sinh học' (Eugenics) mang nhiều tranh cãi về mặt đạo đức xã hội.", "<b>Alfred Binet (1857 – 1911) & Thang đo Trí tuệ Đầu tiên (1905):</b>", "• Được Bộ Giáo dục Pháp giao nhiệm vụ tìm ra công cụ phát hiện những học sinh gặp khó khăn trong học tập để đưa vào các lớp học hỗ trợ đặc biệt.", "• Cùng với Théodore Simon công bố <b>Thang đo Binet - Simon (1905)</b>: gồm 30 bài tập chuẩn hóa đo lường các chức năng tâm lý cấp cao (khả năng phán đoán, hiểu ngôn ngữ, suy luận logic) thay vì chỉ đo giác quan đơn thuần như Galton.", "• Đưa ra khái niệm <b>Tuổi trí tuệ (Mental Age - MA)</b>: so sánh năng lực của trẻ với mức trung bình của lứa tuổi thực tế (Chronological Age - CA).", "• Sau đó, Lewis Terman (Đại học Stanford) cải tiến thành <b>Thang đo Stanford - Binet (1916)</b> và William Stern đưa ra công thức chỉ số thông minh: $IQ = \\frac{MA}{CA} \\times 100$."]}], "tables": [{"title": "Bảng So sánh Hai Trường phái Tiên phong: Cấu trúc luận vs Chức năng luận", "head": ["Tiêu chí đối chiếu", "Tâm lý học Cấu trúc (Structuralism)", "Tâm lý học Chức năng (Functionalism)"], "rows": [["Nhà sáng lập tiêu biểu", "Wilhelm Wundt (tiền đề), Edward Titchener", "William James, John Dewey, James Angell"], ["Trung tâm học thuật", "Đại học Leipzig (Đức), Đại học Cornell (Mỹ)", "Đại học Harvard, Đại học Chicago, Đại học Columbia"], ["Câu hỏi nghiên cứu cốt lõi", "Ý thức được cấu tạo từ những thành tố nào? (WHAT)", "Tâm trí hoạt động như thế nào và để làm gì? (HOW & WHY)"], ["Quan niệm về ý thức", "Các mảnh ghép tĩnh tại (Cảm giác, Hình ảnh, Tình cảm)", "Là một 'Dòng ý thức' (Stream) liên tục, thích ứng"], ["Phương pháp nghiên cứu chính", "Nội quan thực nghiệm nghiêm ngặt trong phòng lab", "Đa dạng: quan sát, trắc nghiệm, so sánh, thực dụng"], ["Di sản để lại", "Khẳng định phương pháp thực nghiệm khoa học chuẩn mực", "Mở đường cho TLH ứng dụng, giáo dục, hành vi và trắc nghiệm"]]}, {"title": "So sánh Tiếp cận Đo lường Trí tuệ: Francis Galton vs Alfred Binet", "head": ["Đặc điểm đối chiếu", "Francis Galton (Anh)", "Alfred Binet (Pháp)"], "rows": [["Cơ sở lý thuyết", "Trí tuệ gắn liền với độ nhạy cảm giác và di truyền sinh học", "Trí tuệ là năng lực phức hợp cấp cao (phán đoán, suy luận, thích nghi)"], ["Nội dung bài kiểm tra", "Đo thời gian phản ứng, thị lực, thính lực, lực bóp bàn tay", "Giải quyết tình huống, hiểu ngôn ngữ, lặp lại chuỗi số, định nghĩa từ"], ["Mục đích ban đầu", "Chứng minh sự vượt trội di truyền của các dòng họ quý tộc", "Xác định trẻ em gặp khó khăn học tập để hỗ trợ giáo dục đặc biệt"], ["Đóng góp phương pháp", "Kỹ thuật thống kê tương quan (Pearson r), bảng câu hỏi", "Khái niệm Tuổi trí tuệ (Mental Age) và Thang đo chuẩn hóa đầu tiên (1905)"]]}], "tips": ["Mẹo nhớ mốc 1879: '1879: Wundt mở lab tại Leipzig, Tâm lý học chính thức có giấy khai sinh'.", "Mẹo nhớ Titchener: 'Titchener chia nhỏ tâm trí thành 3 viên gạch: Cảm giác, Hình ảnh, Tình cảm'.", "Mẹo nhớ William James: 'James ví ý thức như Dòng sông không thể cắt khúc; Cảm xúc = Run rẩy trước rồi mới Sợ hãi'.", "Mẹo nhớ IQ Binet: 'Binet đo trí tuệ thật sự bằng phán đoán; Stern ra công thức: IQ = (Tuổi trí tuệ / Tuổi thực) x 100'."], "cards": [["Cột mốc Leipzig năm 1879", "Wilhelm Wundt thành lập phòng thí nghiệm thực nghiệm đầu tiên tại Đại học Leipzig (Đức), khai sinh Tâm lý học khoa học."], ["Wilhelm Wundt (1832–1920)", "'Cha đẻ Tâm lý học hiện đại', định nghĩa tâm lý học là nghiên cứu trải nghiệm ý thức trực tiếp bằng phương pháp nội quan thực nghiệm."], ["Nội quan thực nghiệm (Wundt)", "Phương pháp tự quan sát và báo cáo phản ứng giác quan trong điều kiện phòng thí nghiệm được kiểm soát chuẩn hóa nghiêm ngặt."], ["Tác phẩm 'Völkerpsychologie'", "Bộ sách 10 tập của Wundt nghiên cứu tâm lý học dân tộc, văn hóa, ngôn ngữ và phong tục mà phòng lab không đo được."], ["Tâm lý học Cấu trúc (Titchener)", "Trường phái phân tích ý thức thành các thành tố cơ bản nhất: Cảm giác (Sensations), Hình ảnh (Images), và Tình cảm (Affections)."], ["Edward Bradford Titchener", "Học trò của Wundt, đưa Cấu trúc luận sang Mỹ (Cornell), xây dựng hệ thống 44,000 phẩm chất cảm giác nhưng sớm bị suy tàn."], ["William James (1842–1910)", "'Cha đẻ Tâm lý học Mỹ', tác giả 'The Principles of Psychology' (1890), sáng lập trường phái Tâm lý học Chức năng."], ["Dòng ý thức (Stream of Consciousness)", "Khái niệm của William James khẳng định ý thức là dòng chảy liên tục, không thể phân chia cơ học thành các mảnh ghép rời rạc."], ["Thuyết Cảm xúc James-Lange", "Khẳng định phản ứng cơ thể diễn ra trước, cảm xúc là sự nhận biết các biến đổi cơ thể đó: 'Ta buồn vì ta khóc, ta sợ vì ta run'."], ["Tâm lý học Chức năng (Functionalism)", "Trường phái nghiên cứu chức năng thích nghi của tâm trí và hành vi đối với môi trường sống, ảnh hưởng từ thuyết tiến hóa Darwin."], ["John Dewey & Phê phán Cung phản xạ", "Học giả trường phái chức năng Chicago, khẳng định hành vi là một vòng lặp liên tục thích ứng chứ không phải kích thích - phản ứng cơ học."], ["Francis Galton & Khác biệt Cá nhân", "Tiên phong nghiên cứu sự khác biệt giữa các cá thể, di truyền trí thông minh, phát triển bảng câu hỏi và phép tương quan thống kê."], ["Alfred Binet & Thang đo 1905", "Nhà tâm lý học Pháp cùng Théodore Simon tạo ra thang đo trí tuệ chuẩn hóa đầu tiên để giúp đỡ học sinh chậm tiến."], ["Tuổi trí tuệ (Mental Age - MA)", "Khái niệm do Binet đề xuất: mức độ phát triển nhận thức của một đứa trẻ tương ứng với mức trung bình của một lứa tuổi thực tế."], ["Công thức chỉ số IQ của William Stern", "IQ = (Tuổi trí tuệ MA / Tuổi thực tế CA) x 100, đo lường tốc độ phát triển trí tuệ của trẻ so với bạn cùng trang lứa."], ["Thang đo Stanford-Binet (1916)", "Lewis Terman chuẩn hóa thang đo Binet tại Mỹ, trở thành bài trắc nghiệm trí tuệ cá nhân kinh điển hàng đầu thế giới."]], "qs": [["Sự kiện lịch sử nào đánh dấu sự ra đời chính thức của Tâm lý học với tư cách là một môn khoa học độc lập?", ["Năm 1859 khi Darwin xuất bản Nguồn gốc các loài", "Năm 1879 khi Wilhelm Wundt mở phòng thí nghiệm tại Đại học Leipzig (Đức)", "Năm 1900 khi Freud xuất bản Diễn giải giấc mơ", "Năm 1913 khi Watson công bố Tuyên ngôn hành vi"], 1, "Năm 1879, Wilhelm Wundt thành lập phòng thí nghiệm tâm lý học thực nghiệm đầu tiên tại Leipzig, tách tâm lý học khỏi triết học."], ["Wilhelm Wundt định nghĩa đối tượng nghiên cứu chính của tâm lý học là gì?", ["Hành vi công khai có thể quan sát được", "Các xung năng vô thức bị đè nén", "Trải nghiệm ý thức trực tiếp (Immediate conscious experience)", "Cấu trúc giải phẫu của tế bào thần kinh"], 2, "Wundt coi tâm lý học là khoa học về trải nghiệm ý thức trực tiếp của con người ở thời điểm hiện tại."], ["Phương pháp nghiên cứu cốt lõi mà Wilhelm Wundt và Edward Titchener sử dụng trong phòng thí nghiệm để phân tích tâm trí là:", ["Phương pháp Nội quan thực nghiệm (Experimental Introspection)", "Phương pháp thôi miên", "Phương pháp đo điện não đồ", "Phương pháp trắc nghiệm phóng chiếu"], 0, "Nội quan thực nghiệm là phương pháp người tham gia tự quan sát và báo cáo lại các cảm giác thô một cách có kiểm soát."], ["Nhà tâm lý học nào đã đưa tâm lý học thực nghiệm từ Đức sang Mỹ và sáng lập trường phái Tâm lý học Cấu trúc (Structuralism)?", ["William James", "Edward Bradford Titchener", "John B. Watson", "G. Stanley Hall"], 1, "Edward Titchener mang tư tưởng của Wundt sang Đại học Cornell và phát triển thành trường phái Cấu trúc luận."], ["Theo Cấu trúc luận của Titchener, tâm trí con người được cấu thành từ 3 yếu tố cơ bản nào?", ["Id, Ego và Superego", "Cảm giác (Sensations), Hình ảnh (Images) và Tình cảm (Affections)", "Ý thức, Tiền ý thức và Vô thức", "Kích thích, Phản xạ và Thói quen"], 1, "Titchener khẳng định mọi trải nghiệm tâm thức phức tạp đều có thể quy về 3 thành tố: Cảm giác, Hình ảnh trong tâm trí, và Tình cảm."], ["Lý do chính khiến trường phái Cấu trúc luận của Titchener nhanh chóng suy tàn sau khi ông qua đời là:", ["Phương pháp nội quan mang tính chủ quan cao và các phòng thí nghiệm khác nhau cho ra kết quả mâu thuẫn", "Chi phí thiết bị quá đắt đỏ", "Bị chính quyền cấm đoán", "Không thể giải thích được các phản xạ cơ bắp"], 0, "Nội quan phụ thuộc quá nhiều vào báo cáo chủ quan của nghiệm thể, thiếu tính khách quan và khả năng tái lập khoa học."], ["Khái niệm 'Dòng ý thức' (Stream of consciousness) do ai đề xướng nhằm bác bỏ quan niệm cắt xẻ ý thức của Cấu trúc luận?", ["Sigmund Freud", "William James", "John Dewey", "Edward Thorndike"], 1, "William James (1890) khẳng định ý thức là một dòng chảy liên tục, biến đổi, không thể chia cắt thành các thành tố tĩnh tại."], ["Thuyết Cảm xúc James - Lange đưa ra quan điểm chấn động nào về thứ tự xuất hiện của cảm xúc và phản ứng cơ thể?", ["Nhận thức xuất hiện trước, sinh lý xuất hiện sau", "Phản ứng sinh lý cơ thể xảy ra trước, sự nhận biết phản ứng đó chính là cảm xúc ('Ta sợ vì ta run')", "Cảm xúc và biến đổi cơ thể xảy ra hoàn toàn độc lập", "Cảm xúc do người khác cấy vào tâm trí"], 1, "Thuyết James-Lange: Kích thích -> Phản ứng sinh lý cơ thể -> Nhận biết cảm xúc (Ví dụ: gặp gấu -> cơ thể run rẩy, tim đập nhanh -> cảm thấy sợ hãi)."], ["Cuốn sách kinh điển 'The Principles of Psychology' (1890) được coi là tác phẩm nền tảng của tâm lý học phương Tây do ai viết?", ["Wilhelm Wundt", "William James", "Francis Galton", "Ivan Pavlov"], 1, "William James xuất bản cuốn sách 2 tập đồ sộ này sau 12 năm biên soạn, trở thành kinh điển của nền tâm lý học hiện đại."], ["Trường phái Tâm lý học Chức năng (Functionalism) tập trung trả lời câu hỏi cốt lõi nào?", ["Ý thức gồm những thành tố gì?", "Tâm trí và hành vi hoạt động như thế nào để giúp sinh vật thích ứng với môi trường?", "Vô thức ẩn giấu những xung năng tính dục nào?", "Não bộ xử lý thông tin nhị phân ra sao?"], 1, "Chức năng luận chịu ảnh hưởng của thuyết tiến hóa Darwin, nghiên cứu cách thức tâm trí phục vụ cho sự thích nghi và sinh tồn."], ["Ai là người tiên phong nghiên cứu về sự khác biệt cá nhân, di truyền trí tuệ và phát triển bảng câu hỏi điều tra tâm lý?", ["Francis Galton", "Alfred Binet", "Charles Spearman", "Lewis Terman"], 0, "Sir Francis Galton (em họ Darwin) là người đầu tiên đo lường sự khác biệt cá nhân và lập phòng thí nghiệm sinh trắc học."], ["Mục tiêu ban đầu của Alfred Binet khi xây dựng bài kiểm tra trí tuệ đầu tiên vào năm 1905 tại Pháp là gì?", ["Tìm ra những đứa trẻ thiên tài để đào tạo lãnh đạo", "Phát hiện học sinh gặp khó khăn trong học tập để đưa vào các lớp hỗ trợ đặc biệt", "Tuyển chọn quân nhân trong quân đội", "Xếp hạng chỉ số thông minh giữa các chủng tộc"], 1, "Bộ Giáo dục Pháp yêu cầu Binet thiết kế bài kiểm tra để hỗ trợ giáo dục đặc biệt cho trẻ em chậm tiến, mang mục đích nhân văn."], ["Khái niệm 'Tuổi trí tuệ' (Mental Age - MA) do Alfred Binet đề xuất có ý nghĩa là gì?", ["Tuổi tính theo ngày tháng năm sinh trên giấy khai sinh", "Mức độ phát triển năng lực nhận thức của trẻ tương đương với mức trung bình của một lứa tuổi nhất định", "Độ tuổi của não bộ khi đo bằng máy chụp cộng hưởng từ", "Số năm trẻ đã được đi học ở trường"], 1, "Nếu một đứa trẻ 8 tuổi giải được các câu hỏi của trẻ 10 tuổi trung bình, đứa trẻ đó có Tuổi trí tuệ MA = 10."], ["Nhà tâm lý học người Đức William Stern đã đưa ra công thức tính Chỉ số Thông minh (IQ) đầu tiên là:", ["IQ = (Tuổi trí tuệ MA / Tuổi thực tế CA) x 100", "IQ = Tuổi thực tế - Tuổi trí tuệ", "IQ = Tuổi trí tuệ x Tuổi thực tế", "IQ = (Điểm số / 100) x Tuổi"], 0, "Công thức tỷ lệ kinh điển của William Stern: IQ = (Mental Age / Chronological Age) * 100."], ["Điểm khác biệt căn bản giữa thang đo trí tuệ của Alfred Binet và phương pháp của Francis Galton là:", ["Galton đo các năng lực phức hợp còn Binet đo giác quan", "Binet đo các chức năng tâm lý cấp cao (phán đoán, suy luận) còn Galton chỉ đo giác quan và thời gian phản ứng thô", "Binet chỉ dùng bảng hỏi còn Galton dùng trắc nghiệm giấy", "Hai ông hoàn toàn giống nhau về phương pháp"], 1, "Binet nhận ra rằng đo trí thông minh thực sự phải đánh giá năng lực tư duy, phán đoán và giải quyết vấn đề, chứ không phải độ tinh của thính giác hay lực bóp tay."]], "trees": [["Wilhelm Wundt & Khai sinh TLH 1879", "Đại học Leipzig (Đức)", "thành lập", [["Phòng thí nghiệm 1879", "cột mốc lịch sử độc lập", "nguyên lý", [["Đối tượng", "trải nghiệm ý thức trực tiếp", "", []], ["Nội quan thực nghiệm", "tự quan sát trong phòng thí nghiệm", "", []]]], ["Völkerpsychologie", "tâm lý học văn hóa - xã hội", "nghiên cứu", [["Chức năng cấp cao", "ngôn ngữ, phong tục, huyền thoại", "", []], ["Phương pháp so sánh", "lịch sử văn hóa nhân loại", "", []]]]]], ["Cấu trúc luận vs Chức năng luận", "Hai trường phái tiên phong", "đối chiếu", [["Cấu trúc luận (Titchener)", "Phân tích mảnh ghép ý thức", "gồm 3 thành tố", [["Cảm giác (Sensations)", "44,000 phẩm chất giác quan", "", []], ["Hình ảnh (Images)", "yếu tố của ý niệm & ký ức", "", []], ["Tình cảm (Affections)", "dễ chịu vs khó chịu", "", []]]], ["Chức năng luận (William James)", "Thích ứng sinh tồn (thuyết Darwin)", "luận điểm", [["Dòng ý thức (Stream)", "liên tục chảy, không thể cắt rời", "", []], ["Thuyết James-Lange", "phản ứng cơ thể sinh ra cảm xúc", "", []], ["Thực dụng (Pragmatism)", "giá trị hữu ích trong đời sống", "", []]]]]], ["Khởi nguyên Đo lường Trí tuệ", "Thế kỷ XIX - Đầu XX", "phát triển", [["Francis Galton", "Khác biệt cá nhân & Di truyền", "đóng góp", [["Sinh trắc học", "thời gian phản ứng, giác quan thô", "", []], ["Thống kê tương quan", "tiền thân hệ số Pearson r", "", []]]], ["Alfred Binet & Simon (1905)", "Thang đo trí tuệ chuẩn hóa", "sáng kiến", [["Chức năng cấp cao", "đo khả năng phán đoán, suy luận", "", []], ["Tuổi trí tuệ (MA)", "so với tuổi thực tế (CA) -> Chỉ số IQ", "", []]]]]]]}, {"id": "ls5", "part": "Phần IV: Các Đại Trường phái Thế kỷ XX", "code": "LS.5", "title": "Các Đại Trường phái Tâm lý học Thế kỷ XX", "goals": ["Làm chủ Phân tâm học (Sigmund Freud, Carl Jung, Alfred Adler): Vô thức, Cấu trúc nhân cách và Cơ chế phòng vệ.", "Nắm vững trường phái Tâm lý học Hành vi (John B. Watson, B.F. Skinner, Albert Bandura) từ S-R đến S-O-R.", "Hiểu nguyên lý cốt lõi của Tâm lý học Gestalt: Hiện tượng Phi, 'Cái toàn thể lớn hơn tổng số các bộ phận' và Học tập ngộ giác (Insight).", "Phân tích Tâm lý học Nhân văn - Hiện sinh (Rogers, Maslow, Frankl) và Tâm lý học Hoạt động Xô Viết (Vygotsky, Leontiev, Rubinstein)."], "sections": [{"h": "Phân tâm học: Sigmund Freud, Carl Jung & Alfred Adler", "items": ["<b>Sigmund Freud (1856 – 1939) & Cuộc cách mạng Vô thức:</b>", "• Đưa ra mô hình tảng băng tâm trí: Phần Ý thức (Conscious) chỉ là phần nổi nhỏ bé; phần chìm khổng lồ bên dưới là <b>Vô thức (Unconscious)</b> chứa đựng những ham muốn bản năng (Libido, Thanatos), ký ức đau buồn và xung đột bị dồn nén.", "• <b>Cấu trúc Nhân cách ba thành tố:</b> <i>Id (Bản năng/Cái Nó)</i> – vận hành theo Nguyên tắc Khoái cảm (Pleasure principle); <i>Ego (Bản ngã/Cái Tôi)</i> – vận hành theo Nguyên tắc Thực tế (Reality principle); <i>Superego (Siêu bản ngã/Cái Siêu Tôi)</i> – đại diện cho lương tâm và chuẩn mực đạo đức xã hội.", "• <b>Cơ chế Phòng vệ của Ego:</b> Kìm nén (Repression), Phóng chiếu (Projection), Thăng hoa (Sublimation), Phản ứng nghịch đảo (Reaction formation), Thoái lui (Regression)...", "<b>Carl Gustav Jung (1875 – 1961) & Tâm lý học Phân tích:</b> Bác bỏ việc Freud quy mọi động lực về tình dục; bổ sung khái niệm <b>Vô thức tập thể (Collective unconscious)</b> – kho tàng ký ức di truyền chung của toàn nhân loại qua các thời đại, biểu hiện qua các <b>Nguyên mẫu (Archetypes)</b>: Persona (Mặt nạ), Shadow (Bóng tối), Anima/Animus (Tính nữ/Tính nam), Self (Bản ngã hoàn thiện).", "<b>Alfred Adler (1870 – 1937) & Tâm lý học Cá nhân:</b> Nhấn mạnh động lực cơ bản của con người là vượt qua <b>Mặc cảm tự ti (Inferiority complex)</b> để vươn tới sự ưu việt và hoàn thiện; lý thuyết về Thứ tự sinh trong gia đình và Cảm thức cộng đồng (Social interest)."]}, {"h": "Tâm lý học Hành vi: Watson, Thorndike, Skinner & Bandura", "items": ["<b>John Broadus Watson (1878 – 1958) & Tuyên ngôn Hành vi (1913):</b>", "• Bác bỏ hoàn toàn việc nghiên cứu 'ý thức' và phương pháp 'nội quan' vì không thể quan sát khách quan.", "• Định nghĩa tâm lý học là khoa học về <b>Hành vi (Behavior)</b> có thể quan sát, đo lường và kiểm soát được.", "• <b>Mô hình S - R (Kích thích - Phản ứng):</b> Hành vi là chuỗi phản ứng trước các kích thích môi trường. <i>Thí nghiệm gây sợ hãi ở Bé Albert (1920)</i> chứng minh cảm xúc sợ hãi có thể được hình thành qua điều kiện hóa.", "<b>Edward Thorndike (1874 – 1949) & Định luật Hiệu quả (Law of Effect):</b> Hành vi mang lại kết quả thỏa mãn sẽ có xu hướng lặp lại; hành vi dẫn đến khó chịu sẽ bị loại bỏ.", "<b>B.F. Skinner (1904 – 1990) & Hành vi Tạo tác (Operant Conditioning):</b>", "• Tập trung vào hệ quả của hành vi: <b>Củng cố dương (Positive reinforcement)</b>, <b>Củng cố âm (Negative reinforcement)</b>, và <b>Trừng phạt (Punishment)</b>. Thiết kế Hộp Skinner (Skinner Box) nghiên cứu hành vi bồ câu và chuột.", "<b>Albert Bandura (1925 – 2021) & Thuyết Học tập Xã hội (Social Learning Theory):</b> Mở rộng mô hình S - R thành <b>S - O - R (có vai trò của Nhận thức sinh vật - Organism)</b>. <i>Thí nghiệm Búp bê Bobo (1961)</i> chứng minh con người học tập qua <b>Quan sát và Bắt chước hình mẫu (Observational learning/Modeling)</b> mà không cần trực tiếp trải qua củng cố; khái niệm <i>Niềm tin vào năng lực bản thân (Self-efficacy)</i>."]}, {"h": "Tâm lý học Gestalt: Wertheimer, Koffka & Köhler", "items": ["<b>Khởi nguồn tại Đức (1912):</b> Max Wertheimer công bố nghiên cứu về <b>Hiện tượng Phi (Phi phenomenon)</b> – ảo giác chuyển động quang học khi hai ánh sáng nhấp nháy luân phiên (tiền đề phim ảnh). Hiện tượng này chứng minh trải nghiệm tri giác không phải là sự cộng dồn cơ học các cảm giác riêng lẻ.", "<b>Khẩu hiệu kinh điển:</b> <i>'The whole is other than the sum of its parts'</i> (Cái toàn thể là một cái gì đó khác hẳn và lớn hơn tổng số các bộ phận cấu thành).", "<b>Các Quy luật Tổ chức Tri giác Gestalt:</b> Quy luật Hình - Nền (Figure-Ground), Quy luật Tương tự (Similarity), Quy luật Gần gũi (Proximity), Quy luật Khép kín (Closure), Quy luật Liên tục (Good continuation), Quy luật Đồng vận (Common fate), và Quy luật Mang tính quy chuẩn (Prägnanz).", "<b>Wolfgang Köhler (1887 – 1967) & Học tập Ngộ giác (Insight Learning):</b> Thí nghiệm trên đảo Tenerife với tinh tinh Sultan (xếp chồng các thùng gỗ và nối các que gậy để với nải chuối). Chứng minh động vật có khả năng <b>Thấu hiểu bừng sáng cấu trúc vấn đề (Insight)</b> chứ không đơn thuần chỉ thử và sai mù quáng như Thorndike nhận định."]}, {"h": "Tâm lý học Nhân văn, Hiện sinh & Hoạt động luận Xô Viết", "items": ["<b>Tâm lý học Nhân văn – 'Lực lượng thứ Ba' (Third Force):</b> Ra đời thập niên 1950–1960 phản đối tính tất định sinh học bi quan của Phân tâm học và tính cơ học thụ động coi người như chuột của Thuyết Hành vi.", "• <b>Abraham Maslow (1908 – 1970):</b> Đề xuất <b>Tháp Nhu cầu (Hierarchy of Needs)</b> từ nhu cầu sinh lý, an toàn, thuộc về, lòng tự trọng đến đỉnh cao là <b>Nhu cầu Tự hiện thực hóa bản thân (Self-Actualization)</b>.", "• <b>Carl Rogers (1902 – 1987):</b> Khai sinh <b>Liệu pháp Thân chủ trọng tâm (Person-Centered Therapy)</b>; con người sinh ra có xu hướng tự vươn lên thành một 'Nhân vị vận hành đầy đủ' (Fully functioning person) nếu được sống trong môi trường có <i>Sự thấu cảm (Empathy)</i>, <i>Tính chân thành (Congruence)</i> và <i>Sự chấp nhận vô điều kiện (Unconditional positive regard)</i>.", "• <b>Viktor Frankl (1905 – 1997) & Thuyết Hiện sinh:</b> Sống sót qua các trại tập trung diệt chủng của Đức Quốc xã, xuất bản <i>'Đi tìm lẽ sống' (Man's Search for Meaning)</i> và sáng lập <b>Liệu pháp Ý nghĩa (Logotherapy)</b>: động lực sâu xa nhất của đời người là tìm kiếm ý nghĩa cho sự tồn tại.", "<b>Tâm lý học Hoạt động Xô Viết (Soviet Activity Theory):</b>", "• Dựa trên nền tảng triết học duy vật biện chứng và lịch sử của Karl Marx.", "• <b>Lev Vygotsky (1896 – 1934):</b> Thuyết Lịch sử - Xã hội về các chức năng tâm lý cấp cao (ngôn ngữ, tư duy logic bắt nguồn từ công cụ giao tiếp xã hội được nội tâm hóa); khái niệm <b>Vùng phát triển gần nhất (ZPD)</b> và Giàn giáo giáo dục.", "• <b>A.N. Leontiev (1903 – 1979):</b> Xây dựng cấu trúc vĩ mô của <b>Hoạt động (Activity)</b>: Hoạt động (thúc đẩy bởi Động cơ) $\\rightarrow$ Hành động (hướng tới Mục đích) $\\rightarrow$ Thao tác (thực hiện theo Điều kiện).", "• <b>S.L. Rubinstein (1889 – 1960):</b> Đề xướng nguyên lý nền tảng: <i>'Sự thống nhất giữa Ý thức và Hoạt động'</i> – tâm lý hình thành, biểu hiện và biến đổi thông qua hoạt động thực tiễn."]}], "tables": [{"title": "Bảng Ma trận Đối sánh Toàn diện Các Trường phái Tâm lý học Thế kỷ XX", "head": ["Trường phái", "Nhân vật đại diện", "Đối tượng nghiên cứu", "Phương pháp chính", "Quan niệm về con người"], "rows": [["Phân tâm học (Psychoanalysis)", "Sigmund Freud, Carl Jung, Alfred Adler", "Vô thức, xung năng dồn nén, cơ chế phòng vệ", "Phân tích giấc mơ, liên tưởng tự do, ca bệnh", "Bị chi phối bởi xung năng bản năng vô thức"], ["Hành vi luận (Behaviorism)", "John Watson, B.F. Skinner, Albert Bandura", "Hành vi công khai có thể quan sát (S-R, S-O-R)", "Thực nghiệm nghiêm ngặt có kiểm soát, đo đạc", "Sản phẩm của môi trường và cơ chế củng cố"], ["Gestalt (Hình thái)", "Max Wertheimer, Kurt Koffka, Wolfgang Köhler", "Cấu trúc toàn thể của tri giác và tư duy ngộ giác", "Thực nghiệm hiện tượng luận, quan sát ngộ giác", "Chủ thể chủ động tổ chức thông tin thành chỉnh thể"], ["Nhân văn & Hiện sinh", "Carl Rogers, Abraham Maslow, Viktor Frankl", "Tiềm năng con người, tự hiện thực hóa, ý nghĩa sống", "Thấu cảm, lắng nghe sâu, đối thoại thân chủ", "Có ý chí tự do, hướng thiện và khao khát phát triển"], ["Hoạt động luận Xô Viết", "L. Vygotsky, A.N. Leontiev, S.L. Rubinstein", "Tâm lý cấp cao, ý thức qua hoạt động thực tiễn", "Thực nghiệm hình thành, nghiên cứu văn hóa - lịch sử", "Chủ thể xã hội hình thành qua lao động & giao tiếp"]]}, {"title": "So sánh Tiếp cận Hành vi Cổ điển (Watson/Skinner) và Nhận thức Xã hội (Bandura)", "head": ["Tiêu chí đối chiếu", "Hành vi Cổ điển (Watson / Skinner)", "Nhận thức Xã hội (Albert Bandura)"], "rows": [["Mô hình công thức", "S - R (Kích thích - Phản ứng)", "S - O - R (Kích thích - Chủ thể nhận thức - Phản ứng)"], ["Vai trò của Nhận thức", "Coi tâm trí như 'Chiếc hộp đen' (Black box) không cần xét", "Nhận thức, suy nghĩ và niềm tin giữ vai trò trung gian quyết định"], ["Cách thức học tập", "Phải trực tiếp trải nghiệm củng cố và điều kiện hóa", "Học tập qua quan sát hình mẫu (Modeling) và củng cố gián tiếp"], ["Khái niệm then chốt", "Củng cố dương, củng cố âm, trừng phạt, tạo tác", "Tự điều chỉnh (Self-regulation), Niềm tin năng lực (Self-efficacy)"]]}], "tips": ["Mẹo nhớ 3 thành tố Freud: 'Id đòi sướng ngay; Superego đòi đạo đức chuẩn; Ego đứng giữa phân xử theo thực tế'.", "Mẹo nhớ Gestalt: 'Một bản nhạc không phải từng nốt nhạc cộng lại, mà là toàn thể giai điệu (The whole > sum of parts)'.", "Mẹo nhớ Nhân văn: 'Khác với Freud (người bệnh hoạn) và Skinner (người như chuột), Maslow và Rogers coi con người là hoa nở hướng thiện'.", "Mẹo nhớ Hoạt động Xô Viết: 'Tâm lý không tự rơi từ trời xuống, mà được nhào nặn qua đôi tay Hoạt động và Giao tiếp'."], "cards": [["Mô hình Tảng băng Tâm trí (Freud)", "Ý thức là phần nổi nhỏ bé trên mặt nước; Vô thức là khối băng khổng lồ chìm bên dưới chứa xung năng và xung đột dồn nén."], ["Cấu trúc Nhân cách (Freud)", "Id (Cái Nó: nguyên tắc khoái cảm), Ego (Cái Tôi: nguyên tắc thực tế), Superego (Cái Siêu Tôi: nguyên tắc đạo đức)."], ["Cơ chế Phòng vệ (Defense Mechanisms)", "Chiến lược vô thức của Ego nhằm giảm thiểu lo hãi: Kìm nén (Repression), Phóng chiếu, Thăng hoa, Thoái lui."], ["Vô thức Tập thể (Carl Jung)", "Tầng sâu của tâm thức chứa đựng ký ức di truyền chung của toàn nhân loại qua tiến hóa, biểu hiện qua các Nguyên mẫu (Archetypes)."], ["Mặc cảm Tự ti (Alfred Adler)", "Cảm giác yếu kém bẩm sinh của con người từ thời thơ ấu, là động lực thúc đẩy cá nhân vươn lên hoàn thiện và tự khẳng định."], ["Tuyên ngôn Hành vi 1913 (Watson)", "Tuyên bố tâm lý học phải loại bỏ ý thức và nội quan, chỉ nghiên cứu hành vi khách quan có thể quan sát và đo lường."], ["Thí nghiệm Bé Albert (Watson, 1920)", "Chứng minh phản ứng cảm xúc sợ hãi (sợ chuột trắng) có thể được hình thành qua cơ chế điều kiện hóa cổ điển."], ["Hành vi Tạo tác (B.F. Skinner)", "Hành vi được định hình và duy trì bởi các hệ quả môi trường: Củng cố (làm tăng hành vi) và Trừng phạt (làm giảm hành vi)."], ["Học tập Quan sát (Albert Bandura)", "Con người có khả năng học hỏi hành vi mới bằng cách quan sát và bắt chước hình mẫu (Thí nghiệm búp bê Bobo 1961)."], ["Hiện tượng Phi (Max Wertheimer, 1912)", "Ảo ảnh quang học nhìn thấy chuyển động liên tục từ các ánh sáng nhấp nháy rời rạc, khai sinh Tâm lý học Gestalt."], ["Nguyên lý Toàn thể của Gestalt", "'Cái toàn thể khác và lớn hơn tổng số các bộ phận' (The whole is other than the sum of its parts)."], ["Học tập Ngộ giác (Wolfgang Köhler)", "Sự thấu hiểu bừng sáng đột ngột về cấu trúc vấn đề (thí nghiệm tinh tinh Sultan nối gậy lấy chuối)."], ["Tháp Nhu cầu (Abraham Maslow)", "Mô hình 5 bậc nhu cầu: Sinh lý -> An toàn -> Xã hội/Thuộc về -> Tự trọng -> Tự hiện thực hóa bản thân (Self-Actualization)."], ["Liệu pháp Thân chủ trọng tâm (Rogers)", "Tiếp cận trị liệu dựa trên 3 điều kiện cốt lõi: Thấu cảm (Empathy), Chân thành (Congruence), và Chấp nhận vô điều kiện."], ["Vùng Phát triển Gần nhất (ZPD - Vygotsky)", "Khoảng cách giữa trình độ phát triển thực tế (tự làm) và trình độ phát triển tiềm năng (làm được dưới sự hướng dẫn của người lớn)."], ["Cấu trúc Hoạt động (A.N. Leontiev)", "Cấu trúc 3 tầng: Hoạt động (thúc đẩy bởi Động cơ) -> Hành động (hướng tới Mục đích) -> Thao tác (thực hiện theo Điều kiện)."]], "qs": [["Trong mô hình tảng băng tâm trí của Sigmund Freud, phần nào của tâm trí chứa đựng những ham muốn bản năng và xung đột bị dồn nén mạnh mẽ nhất?", ["Ý thức (Conscious)", "Tiền ý thức (Preconscious)", "Vô thức (Unconscious)", "Tiềm năng nhận thức"], 2, "Freud khẳng định Vô thức (Unconscious) là khối băng chìm khổng lồ chi phối phần lớn hành vi và cảm xúc của con người."], ["Thành tố nào trong cấu trúc nhân cách của Freud vận hành theo 'Nguyên tắc Khoái cảm' (Pleasure Principle), đòi hỏi thỏa mãn ngay lập tức mọi ham muốn?", ["Cái Tôi (Ego)", "Cái Siêu Tôi (Superego)", "Cái Nó (Id)", "Cái Lý trí"], 2, "Id (Cái Nó) là phần nguyên thủy sơ sinh, vận hành theo nguyên tắc khoái cảm không màng đến luân lý hay thực tế."], ["Khái niệm 'Vô thức tập thể' (Collective Unconscious) chứa đựng các biểu tượng nguyên mẫu (Archetypes) là đóng góp của ai?", ["Sigmund Freud", "Carl Gustav Jung", "Alfred Adler", "Karen Horney"], 1, "Carl Jung mở rộng phân tâm học với khái niệm Vô thức tập thể – kho tàng kinh nghiệm di truyền của toàn thể nhân loại."], ["Theo Alfred Adler, động lực tâm lý căn bản thúc đẩy sự phát triển nhân cách của con người là gì?", ["Năng lượng xung năng tính dục (Libido)", "Nỗ lực bù trừ và vượt qua Mặc cảm Tự ti (Inferiority Complex) để vươn tới sự ưu việt", "Nỗi sợ hãi cái chết", "Nhu cầu bắt chước người lớn"], 1, "Adler cho rằng con người sinh ra ai cũng có mặc cảm tự ti, và khát vọng vượt qua tự ti để vươn lên chính là động lực sống."], ["Trong bản 'Tuyên ngôn Hành vi' (1913), John B. Watson đã đưa ra chủ trương cách mạng nào đối với Tâm lý học?", ["Tâm lý học phải tập trung khám phá giấc mơ", "Tâm lý học phải loại bỏ ý thức và nội quan, chỉ nghiên cứu hành vi công khai có thể quan sát khách quan", "Tâm lý học phải hợp nhất với tôn giáo", "Tâm lý học chỉ nghiên cứu cảm giác thô"], 1, "Watson định nghĩa lại tâm lý học là 'khoa học về hành vi', lấy kích thích môi trường (S) và phản ứng (R) làm đối tượng đo lường."], ["Thí nghiệm gây sợ hãi có điều kiện ở Bé Albert (1920) của Watson và Rayner đã chứng minh điều gì?", ["Mọi nỗi sợ đều do di truyền bẩm sinh", "Các phản ứng cảm xúc sợ hãi có thể được hình thành thông qua cơ chế điều kiện hóa cổ điển", "Trẻ em không bao giờ biết sợ động vật", "Thôi miên là phương pháp duy nhất chữa lành nỗi sợ"], 1, "Watson kết hợp tiếng đập thanh sắt chói tai với con chuột trắng, khiến bé Albert từ thích thú chuyển sang hoảng sợ chuột trắng."], ["Theo B.F. Skinner, sự kiện nào dưới đây làm TĂNG tần suất xuất hiện của một hành vi trong tương lai?", ["Trừng phạt dương", "Củng cố (bao gồm cả củng cố dương và củng cố âm)", "Trừng phạt âm", "Dập tắt hành vi"], 1, "Củng cố (Reinforcement) dù là thưởng thêm cái tốt (dương) hay gỡ bỏ cái khó chịu (âm) đều có chung bản chất là làm tăng hành vi."], ["Thí nghiệm Búp bê Bobo (1961) nổi tiếng của Albert Bandura đã minh chứng cho hình thức học tập nào?", ["Điều kiện hóa phản xạ cổ điển của Pavlov", "Học tập qua quan sát và bắt chước hình mẫu (Observational learning/Modeling)", "Thử và sai mù quáng", "Học tập dưới sự thôi miên"], 1, "Trẻ em quan sát người lớn đánh đập búp bê Bobo sau đó đã bắt chước lại y hệt những hành vi bạo lực đó mà không cần nhận phần thưởng trực tiếp."], ["Nghiên cứu về Hiện tượng Phi (Phi phenomenon - ảo giác chuyển động từ các ánh sáng nhấp nháy rời rạc) của Max Wertheimer (1912) đã khai sinh trường phái nào?", ["Tâm lý học Cấu trúc", "Tâm lý học Gestalt", "Tâm lý học Hành vi", "Tâm lý học Hoạt động"], 1, "Hiện tượng Phi chứng minh tri giác chuyển động là một chỉnh thể hoàn toàn mới, khai sinh trường phái Gestalt tại Đức."], ["Khẩu hiệu nổi tiếng định hình toàn bộ lý thuyết của trường phái Tâm lý học Gestalt là:", ["Hành vi là tấm gương của tâm trí", "Cái toàn thể khác và lớn hơn tổng số các bộ phận cấu thành (The whole is other than the sum of parts)", "Con người là sản phẩm của vô thức", "Tất cả bắt nguồn từ phản xạ có điều kiện"], 1, "Gestalt khẳng định não bộ luôn có xu hướng tự động tổ chức các cảm giác thô thành một chỉnh thể có cấu trúc hoàn chỉnh."], ["Trong các thí nghiệm trên đảo Tenerife với tinh tinh Sultan, Wolfgang Köhler phát hiện động vật giải quyết vấn đề nhờ cơ chế nào?", ["Thử và sai máy móc hàng trăm lần", "Thấu hiểu bừng sáng đột ngột về cấu trúc vấn đề (Học tập ngộ giác - Insight learning)", "Bắt chước các con vật xung quanh", "Do huấn luyện viên ép buộc"], 1, "Sultan sau một hồi quan sát đã bất ngờ có khoảnh khắc 'Eureka', xếp chồng các hộp gỗ và nối gậy để khều nải chuối trên cao."], ["Tại sao Tâm lý học Nhân văn (Carl Rogers, Abraham Maslow) lại được gọi là 'Lực lượng thứ Ba' (Third Force) trong tâm lý học?", ["Vì ra đời vào Thế chiến thứ ba", "Vì ra đời để phản đối cả thuyết tất định bi quan của Phân tâm học lẫn thuyết máy móc của Thuyết Hành vi", "Vì có sự tham gia của 3 trường đại học lớn", "Vì chỉ chữa trị cho 3 đối tượng"], 1, "Nhân văn học phản bác hai lực lượng thống trị trước đó (Phân tâm học coi người bị chi phối bởi vô thức; Hành vi coi người như máy móc)."], ["Đỉnh cao nhất trong Tháp Nhu cầu của Abraham Maslow mà con người luôn khao khát vươn tới là:", ["Nhu cầu Sinh lý", "Nhu cầu An toàn", "Nhu cầu Được tôn trọng", "Nhu cầu Tự hiện thực hóa bản thân (Self-Actualization)"], 3, "Tự hiện thực hóa bản thân là mức độ cao nhất: phát huy tối đa mọi tiềm năng, tài năng và phẩm chất tốt đẹp vốn có của cá nhân."], ["Khái niệm 'Vùng phát triển gần nhất' (Zone of Proximal Development - ZPD) của Lev Vygotsky chỉ điều gì?", ["Khoảng cách địa lý giữa trường học và gia đình", "Khoảng cách giữa năng lực trẻ tự làm được và năng lực trẻ làm được dưới sự hướng dẫn giúp đỡ của người có kinh nghiệm", "Thời gian trẻ tập trung chú ý", "Tốc độ phản xạ của tế bào thần kinh"], 1, "ZPD là không gian giáo dục tối ưu nơi việc dạy học 'đi trước sự phát triển', dẫn dắt đứa trẻ vươn tới tiềm năng cao hơn."], ["Theo A.N. Leontiev (Tâm lý học Hoạt động Xô Viết), một Hoạt động (Activity) trong đời sống con người được thúc đẩy và định hướng bởi yếu tố nào?", ["Kích thích vật lý", "Động cơ (Motive)", "Thao tác ngẫu nhiên", "Bản năng sinh học mù quáng"], 1, "Leontiev xác lập cấu trúc vĩ mô: Hoạt động được thúc đẩy bởi Động cơ; Hành động hướng tới Mục đích; Thao tác tuân theo Điều kiện."]], "trees": [["Phân tâm học & Tâm lý học Chiều sâu", "Thế kỷ XX", "đại diện", [["Sigmund Freud", "Khám phá Vô thức", "cấu trúc", [["Tảng băng tâm trí", "Ý thức (nổi) vs Vô thức (chìm khổng lồ)", "", []], ["Nhân cách 3 phần", "Id (khoái cảm), Ego (thực tế), Superego (đạo đức)", "", []], ["Cơ chế phòng vệ", "Kìm nén, Phóng chiếu, Thăng hoa, Thoái lui", "", []]]], ["Carl Jung & Alfred Adler", "Mở rộng phân tâm", "luận điểm", [["Carl Jung", "Vô thức tập thể & Các Nguyên mẫu (Archetypes)", "", []], ["Alfred Adler", "Mặc cảm tự ti & Động lực vươn tới ưu thế", "", []]]]]], ["Hành vi luận & Gestalt", "Nghiên cứu khách quan & Chỉnh thể", "đối chiếu", [["Tâm lý học Hành vi", "Watson, Skinner, Bandura", "tiến hóa", [["Watson (1913)", "Tuyên ngôn hành vi & Mô hình S - R khách quan", "", []], ["Skinner", "Hành vi tạo tác (Củng cố & Trừng phạt)", "", []], ["Bandura (S-O-R)", "Học tập quan sát hình mẫu & Tự hiệu quả (Self-efficacy)", "", []]]], ["Tâm lý học Gestalt", "Wertheimer, Koffka, Köhler", "nguyên lý", [["Hiện tượng Phi", "ảo ảnh chuyển động khai sinh Gestalt (1912)", "", []], ["Toàn thể > Bộ phận", "tri giác có tính cấu trúc chỉnh thể", "", []], ["Học tập Ngộ giác", "thấu hiểu bừng sáng (tinh tinh Sultan)", "", []]]]]], ["Lực lượng thứ Ba & Hoạt động Xô Viết", "Nhân văn & Văn hóa - Xã hội", "phát triển", [["Tâm lý học Nhân văn", "Rogers, Maslow, Frankl", "tư tưởng", [["Maslow", "Tháp nhu cầu & Tự hiện thực hóa bản thân", "", []], ["Rogers", "Thân chủ trọng tâm (Thấu cảm, Chân thành, Chấp nhận)", "", []], ["Frankl", "Liệu pháp Ý nghĩa (Logotherapy) tìm lẽ sống", "", []]]], ["Tâm lý học Hoạt động Xô Viết", "Vygotsky, Leontiev, Rubinstein", "cốt lõi", [["Lev Vygotsky", "Nguồn gốc lịch sử - xã hội & Vùng ZPD", "", []], ["A.N. Leontiev", "Cấu trúc: Hoạt động - Hành động - Thao tác", "", []], ["S.L. Rubinstein", "Nguyên lý thống nhất Ý thức và Hoạt động", "", []]]]]]]}, {"id": "ls6", "part": "Phần IV: Lịch sử Tâm lý học Việt Nam & Xu hướng Đương đại", "code": "LS.6", "title": "Lịch sử Tâm lý học Việt Nam & Các Xu hướng Đương đại", "goals": ["Phân tích tư tưởng tâm lý học dân gian truyền miệng và đóng góp nhân tâm của các bậc tiền nhân (Nguyễn Trãi, Hải Thượng Lãn Ông, Chủ tịch Hồ Chí Minh).", "Nắm vững 4 giai đoạn phát triển lịch sử của Tâm lý học Việt Nam: trước 1945, 1945-1975 (chia cắt hai miền), 1975-1986 (thống nhất) và 1986 đến nay (Đổi mới).", "Làm chủ công lao và trước tác kinh điển của ba trụ cột đặt nền móng: Bác sĩ Nguyễn Khắc Viện (Trung tâm N-T), GS.VS. Phạm Minh Hạc (Hoạt động luận Mác-xít), GS. Trần Trọng Thủy (Thực nghiệm & Trắc nghiệm).", "Phân tích hệ sinh thái tâm lý học ứng dụng thế kỷ XXI (Lâm sàng, Học đường, Tổ chức/EAP), chuẩn mực đạo đức nghề nghiệp và Luật Khám bệnh, chữa bệnh 2023."], "sections": [{"h": "Tư tưởng Tâm lý học trong Lịch sử Văn hóa Dân tộc Việt Nam", "items": ["<b>Tâm lý học dân gian đúc kết qua văn học truyền miệng:</b> Ca dao, dân ca, tục ngữ, truyện cổ tích phản ánh sâu sắc nhận thức của nhân dân ta về quy luật tâm lý: (1) <i>Ý chí và nghị lực:</i> 'Có chí thì nên', 'Chớ thấy sóng cả mà ngã tay chèo'; (2) <i>Môi trường xã hội hình thành nhân cách:</i> 'Gần mực thì đen, gần đèn thì rạng', 'Ở bầu thì tròn, ở ống thì dài'; (3) <i>Đạo nghĩa cộng đồng và lòng nhân ái:</i> 'Thương người như thể thương thân', 'Lá lành đùm lá rách', 'Bầu ơi thương lấy bí cùng'; (4) <i>Quan hệ giữa nhận thức và cảm xúc:</i> 'Yêu nhau trăm sự chẳng đo, ghét nhau một hột bồ hòn cũng vương'.", "<b>Nguyễn Trãi (1380 - 1442) & Tư tưởng 'Tâm công' (Đánh vào lòng người):</b> Đỉnh cao tư tưởng nhân văn Đại Việt: 'Việc nhân nghĩa cốt ở yên dân'. Trong kháng chiến chống quân Minh, Nguyễn Trãi chủ trương 'Tâm công vi thượng, công thành vi hạ' (Đánh vào lòng người là kế thượng sách, đánh vào thành lũy là kế hạ sách). Ông hiểu thấu tâm lý khát vọng độc lập của nhân dân và tâm lý hoang mang, sa sút tinh thần của quân xâm lược, biến sức mạnh tinh thần chính nghĩa thành sức mạnh vật chất tất thắng.", "<b>Đại danh y Hải Thượng Lãn Ông - Lê Hữu Trác (1724 - 1791) & Y học Tâm thân:</b> Đặt nền móng cho tâm lý y học cổ truyền Việt Nam qua học thuyết <i>Thể - Thần</i>: Thể (thể xác) và Thần (tâm lý, tinh thần) có quan hệ hữu cơ gắn bó mật thiết. Ông chỉ rõ: 'Thất tình' (7 cảm xúc thái quá: hỷ, nộ, ưu, tư, bi, khủng, kinh) làm tổn thương lục phủ ngũ tạng (giận hại can, lo hại tỳ, sợ hại thận). Do đó, người thầy thuốc giỏi trước hết phải biết an định tâm thần, gỡ bỏ ưu phiền cho bệnh nhân trước khi dùng thuốc.", "<b>Chủ tịch Hồ Chí Minh (1890 - 1969) & Nhân cách Con người Mới:</b> Người đặt nền tảng khoa học cho việc rèn luyện và hoàn thiện nhân cách đạo đức cách mạng: Coi 'Đức' là gốc, 'Tài' là điều kiện phát huy; đề cao nguyên lý nêu gương và phương pháp tự phê bình, phê bình như một cơ chế tâm lý tự ý thức, tự hoàn thiện nhân cách theo các giá trị cốt lõi 'Cần, Kiệm, Liêm, Chính, Chí công vô tư'."]}, {"h": "Bốn Giai đoạn Lịch sử Hình thành & Phát triển của Tâm lý học Việt Nam Hiện đại", "items": ["<b>Giai đoạn 1: Trước năm 1945 (Thời kỳ Pháp thuộc & Bước đầu du nhập):</b> Tâm lý học thực nghiệm và sư phạm phương Tây bắt đầu du nhập qua các trường Sư phạm Đông Dương và Y Dược Đông Dương phục vụ công tác dạy học và y tế thực dân. Các học giả Nguyễn Văn Vĩnh, Phạm Quỳnh, Phan Khôi dịch thuật và phổ biến các khái niệm tâm lý phương Tây. Đặc biệt năm 1938, học giả <b>Đào Duy Anh</b> xuất bản <i>Việt Nam văn hóa sử cương</i>, dành một chương sâu sắc phân tích tâm lý, tính cách của các giai tầng người Việt bằng phương pháp khoa học xã hội.", "<b>Giai đoạn 2: 1945 - 1975 (Thời kỳ Kháng chiến & Đất nước Chia cắt):</b><br>• <i>Miền Bắc:</i> Năm 1954, thành lập Tổ bộ môn Tâm lý - Giáo dục học tại ĐH Sư phạm Hà Nội. Tiếp thu trực tiếp và có hệ thống trường phái <b>Tâm lý học Hoạt động luận Mác-xít từ Liên Xô</b> (Vygotsky, Leontiev, Rubinstein, Luria) dựa trên phương pháp luận duy vật biện chứng. Nghiên cứu tập trung phục vụ giáo dục nhà trường và tâm lý chiến sĩ cách mạng.<br>• <i>Miền Nam:</i> Tiếp nhận sâu sắc các trường phái tâm lý học phương Tây (Phân tâm học Freud, Tâm lý học Nhân văn Carl Rogers, Hành vi học Skinner và các bộ công cụ trắc nghiệm trí tuệ, nhân cách Hoa Kỳ) tại ĐH Sài Gòn, ĐH Vạn Hạnh, ĐH Đà Lạt.", "<b>Giai đoạn 3: 1975 - 1986 (Thống nhất Đất nước & Khẳng định Nền tảng Hoạt động luận):</b> Hai miền thống nhất nền học thuật trên nền tảng duy vật biện chứng và duy vật lịch sử. Tập trung nghiên cứu tâm lý học lứa tuổi, tâm lý học sư phạm phục vụ cải cách giáo dục toàn diện. Năm 1990, <b>Hội Khoa học Tâm lý - Giáo dục Việt Nam</b> chính thức được thành lập, gắn kết các nhà nghiên cứu trên toàn quốc.", "<b>Giai đoạn 4: 1986 - Nay (Thời kỳ Đổi mới & Hội nhập Quốc tế Sâu rộng):</b> Đánh dấu bước phát triển vượt bậc với việc thành lập các khoa Tâm lý học độc lập: Khoa Tâm lý học ĐH KHXH&NV Hà Nội (1995), ĐH KHXH&NV TP.HCM (1997). Hội nhập toàn diện với Hiệp hội Tâm lý học Quốc tế (IUPsyS) và Hiệp hội Tâm lý học Hoa Kỳ (APA). Mở rộng đa dạng các chuyên ngành: Tâm lý học Lâm sàng, Tham vấn & Trị liệu, Tâm lý học Tổ chức - Nhân sự (I/O), Tâm lý học Học đường."]}, {"h": "Những Nhà Tâm lý học Tiêu biểu & Cống hiến Đặt Nền móng", "items": ["<b>Bác sĩ Nguyễn Khắc Viện (1913 - 1997) – Cánh chim đầu đàn Tâm lý học Lâm sàng & Trẻ em:</b> Năm 1989, ông sáng lập <b>Trung tâm N-T</b> (Nghiên cứu Tâm lý Trẻ em - mang tên ông), cơ sở đầu tiên tại Việt Nam chẩn đoán, trị liệu cho trẻ tự kỷ, chậm phát triển, rối loạn cảm xúc. Ông tiên phong đưa phương pháp <i>Tâm vận động</i> (Psychomotricity), kịch nghệ trị liệu, dưỡng sinh và văn hóa dân tộc vào can thiệp tâm bệnh học trẻ em.", "<b>GS.VS. Phạm Minh Hạc (1935 - Nay) – Khai mở Lý thuyết Hoạt động luận Mác-xít:</b> Viện sĩ Viện Hàn lâm Khoa học Giáo dục Nga, nguyên Bộ trưởng Bộ Giáo dục. Tác giả chuyên khảo kinh điển <i>'Hành vi và Hoạt động'</i> (1983). Người có công hệ thống hóa lý thuyết Hoạt động duy vật biện chứng, chủ trì các đề tài trọng điểm quốc gia về hệ giá trị và nhân cách con người Việt Nam trong thời kỳ công nghiệp hóa, hiện đại hóa.", "<b>GS. Trần Trọng Thủy (1937 - 2005) – Tiên phong Thực nghiệm & Đo lường Tâm lý:</b> Đặt nền móng cho Tâm lý học Thực nghiệm và Khoa học Trắc nghiệm Tâm lý (Psychometrics) tại Việt Nam. Tác giả công trình kinh điển <i>'Khoa học chẩn đoán tâm lý'</i> (1992); người đầu tiên tiến hành chuẩn hóa và thích nghi các bộ trắc nghiệm quốc tế (Raven, Binet-Simon, Wechsler) trên mẫu trẻ em và học sinh Việt Nam.", "<b>Các thế hệ học giả tiếp nối:</b> GS. Phạm Hoàng Gia, PGS. Vũ Dũng (nguyên Viện trưởng Viện Tâm lý học), GS. Nguyễn Ngọc Phú, PGS.TS. Trần Thị Minh Đức, PGS.TS. Huỳnh Văn Sơn... tiếp tục mở rộng nghiên cứu tâm lý học xã hội, gia đình, giới tính, giao tiếp và can thiệp khủng hoảng tâm lý đương đại."]}, {"h": "Hệ sinh thái Tâm lý học Ứng dụng & Cột mốc Pháp lý Đạo đức Thế kỷ XXI", "items": ["<b>Tâm lý học Lâm sàng & Sức khỏe Tâm thần:</b> Chuyển mình từ điều trị tập trung bằng hóa dược sang can thiệp đa ngành. Bùng nổ các liệu pháp can thiệp dựa trên chứng cứ (Evidence-based): Trị liệu Nhận thức - Hành vi (CBT), Trị liệu Chấp nhận & Cam kết (ACT), Trị liệu Gia đình Hệ thống (Family Systems Therapy). Hợp tác đào tạo Thạc sĩ Tâm lý Lâm sàng uy tín giữa ĐH KHXH&NV với ĐH Vanderbilt (Hoa Kỳ) và AUF (Pháp).", "<b>Tâm lý học Học đường & Thông tư 31/2017/TT-BGDĐT:</b> Bộ GD&ĐT ban hành Thông tư số 31/2017/TT-BGDĐT hướng dẫn triển khai phòng tham vấn tâm lý trong tất cả các trường phổ thông trên toàn quốc: giải tỏa áp lực học đường, phòng chống bạo lực và bắt nạt, hỗ trợ giáo dục hòa nhập và định hướng nghề nghiệp tương lai.", "<b>Tâm lý học Tổ chức - Nhân sự (I/O) & Chương trình EAP:</b> Doanh nghiệp hiện đại chú trọng sức khỏe tinh thần nhân viên qua <i>Employee Assistance Program (EAP)</i>: giải tỏa căng thẳng công việc (burnout), cải thiện động lực, xây dựng văn hóa doanh nghiệp và tối ưu hóa quản trị nhân sự trong kỷ nguyên chuyển đổi số.", "<b>Cột mốc Pháp lý Lịch sử – Luật Khám bệnh, Chữa bệnh 2023:</b> Có hiệu lực từ 01/01/2024, lần đầu tiên Luật công nhận <b>Chức danh Chuyên viên Tâm lý Lâm sàng</b> là một chức danh người hành nghề y tế có điều kiện được cấp giấy phép hành nghề. Đòi hỏi 4 nguyên tắc đạo đức cốt lõi: Tôn trọng quyền tự quyết & phẩm giá thân chủ; Đảm bảo năng lực chuyên môn và giám sát (Supervision); Giữ gìn bí mật thông tin (trừ nguy cơ đe dọa tính mạng thân chủ hoặc người khác); Tính trung thực và liêm chính nghề nghiệp."]}], "tables": [{"title": "Bảng Niên biểu các Mốc son Lịch sử Tâm lý học Hiện đại Việt Nam", "head": ["Thời gian", "Sự kiện & Dấu mốc Lịch sử", "Ý nghĩa & Tác động Học thuật"], "rows": [["Trước 1945", "Tâm lý học phương Tây du nhập qua các trường thuộc địa Pháp; Đào Duy Anh xuất bản 'Việt Nam văn hóa sử cương' (1938)", "Mở đầu cho việc sử dụng phương pháp khoa học xã hội phân tích tâm lý, tính cách người Việt"], ["1954", "Thành lập Tổ Tâm lý - Giáo dục học tại ĐH Sư phạm Hà Nội ngay sau ngày hòa bình lập lại", "Đặt nền móng đào tạo thế hệ cán bộ giảng dạy tâm lý học chuyên nghiệp cho miền Bắc"], ["1983", "GS.VS. Phạm Minh Hạc xuất bản chuyên khảo kinh điển 'Hành vi và Hoạt động'", "Định hình khung lý thuyết Tâm lý học Hoạt động duy vật biện chứng tại Việt Nam"], ["1989", "Bác sĩ Nguyễn Khắc Viện sáng lập Trung tâm Nghiên cứu Tâm lý Trẻ em (Trung tâm N-T)", "Khai sinh ngành Tâm lý học Lâm sàng và Trị liệu Tâm vận động trẻ em tại Việt Nam"], ["1990", "Hội Khoa học Tâm lý - Giáo dục Việt Nam chính thức được thành lập", "Tổ chức nghề nghiệp quy mô toàn quốc đầu tiên kết nối các nhà khoa học tâm lý và giáo dục"], ["1992", "GS. Trần Trọng Thủy xuất bản giáo trình 'Khoa học Chẩn đoán Tâm lý'", "Đặt nền móng cho trắc nghiệm tâm lý học chuẩn hóa (Psychometrics) tại Việt Nam"], ["1995 - 1997", "Thành lập Khoa Tâm lý học tại ĐH KHXH&NV Hà Nội (1995) và ĐH KHXH&NV TP.HCM (1997)", "Chuyển đổi tâm lý học từ môn phụ trợ sư phạm thành ngành khoa học nhân văn độc lập"], ["2023 - 2024", "Luật Khám bệnh, chữa bệnh (sửa đổi) công nhận chức danh nghề nghiệp 'Chuyên viên Tâm lý Lâm sàng'", "Mốc son lịch sử hợp thức hóa pháp lý nghề nghiệp chăm sóc sức khỏe tâm thần tại Việt Nam"]]}, {"title": "Bảng So sánh: Tâm lý học Sư phạm Truyền thống vs. Tâm lý học Ứng dụng Hiện đại tại Việt Nam", "head": ["Tiêu chí So sánh", "Tâm lý học Sư phạm Truyền thống (Thế kỷ XX)", "Tâm lý học Ứng dụng Hiện đại (Thế kỷ XXI)"], "rows": [["Mục tiêu trọng tâm", "Phục vụ trực tiếp việc dạy học, giáo dục phẩm chất và phương pháp sư phạm", "Phục vụ sức khỏe tâm thần toàn diện, quản trị doanh nghiệp, phát triển cá nhân và xã hội"], ["Đối tượng can thiệp", "Chủ yếu là học sinh, sinh viên và giáo viên trong trường phổ thông", "Mọi nhóm dân số: trẻ tự kỷ, người mắc rối loạn tâm thần, người lao động công sở, gia đình"], ["Phương pháp tiếp cận", "Lý thuyết hoạt động, giảng dạy nội dung giáo khoa, quan sát sư phạm", "Đa trường phái: CBT, ACT, Tâm động học, Khoa học Thần kinh, Trị liệu Hệ thống"], ["Môi trường làm việc", "Trường học, trường đại học, viện nghiên cứu sư phạm", "Bệnh viện, phòng khám, trung tâm tham vấn tư nhân, doanh nghiệp đa quốc gia (EAP), viện nghiên cứu"], ["Tính pháp lý & Đạo đức", "Quy định theo nội quy ngành giáo dục", "Chứng chỉ hành nghề y tế, chuẩn mực bảo mật thông tin, giám sát chuyên môn (supervision) bắt buộc"]]}], "tips": ["Mẹo nhớ 3 bậc tiền bối tâm lý Việt Nam: 'Nguyễn Khắc Viện = Lâm sàng & Trẻ em (N-T); Phạm Minh Hạc = Thuyết Hoạt động & Con người; Trần Trọng Thủy = Thực nghiệm & Đo lường chẩn đoán'.", "Mẹo phân biệt hai miền trước 1975: 'Miền Bắc theo định hướng Hoạt động luận Mác-xít Liên Xô; Miền Nam tiếp thu Phân tâm học, Nhân văn và trắc nghiệm thực chứng Âu - Mỹ'.", "Hiểu sâu 'Tâm công' của Nguyễn Trãi: 'Tâm công vi thượng' nghĩa là đánh vào lòng người, khơi gợi lòng yêu nước và ý thức chính nghĩa để thu phục nhân tâm hiệu quả gấp vạn lần vũ lực quân sự.", "Lưu ý thi cử về Luật Khám bệnh, chữa bệnh 2023: 'Lần đầu tiên chức danh Chuyên viên Tâm lý Lâm sàng được xếp vào chức danh y tế hành nghề có điều kiện, cần chứng chỉ hành nghề và giám sát chuyên môn'."], "cards": [["Tư tưởng 'Tâm công' (đánh vào lòng người) và 'Yên dân' trong lịch sử Việt Nam gắn liền với danh nhân nào?", "Anh hùng dân tộc, Danh nhân văn hóa thế giới Nguyễn Trãi (1380 - 1442)."], ["Đại danh y Hải Thượng Lãn Ông Lê Hữu Trác có đóng góp tâm lý y học nào nổi tiếng?", "Học thuyết Thể - Thần và Y học tâm thân: chỉ rõ 'thất tình' (7 cảm xúc thái quá) làm tổn thương lục phủ ngũ tạng, người thầy thuốc phải an định tâm lý cho bệnh nhân trước."], ["Tác phẩm nào xuất bản năm 1938 của Đào Duy Anh có chương riêng phân tích tâm lý, tính cách người Việt?", "'Việt Nam văn hóa sử cương' - mốc son phân tích tâm lý dân tộc học bằng phương pháp khoa học đầu tiên."], ["Tổ môn Tâm lý - Giáo dục học đầu tiên tại miền Bắc được thành lập năm nào, ở đâu?", "Năm 1954, tại Trường Đại học Sư phạm Hà Nội ngay sau ngày giải phóng thủ đô."], ["Trường phái tâm lý học nào giữ vị trí nền tảng phương pháp luận tại miền Bắc giai đoạn 1954 - 1975?", "Tâm lý học Hoạt động Mác-xít Liên Xô (Vygotsky, Leontiev, Rubinstein, Luria) dựa trên chủ nghĩa duy vật biện chứng."], ["Học giả nào được tôn vinh là người khai sinh ngành Tâm lý học Lâm sàng và Trẻ em tại Việt Nam?", "Bác sĩ Nguyễn Khắc Viện (1913 - 1997) với việc sáng lập Trung tâm N-T năm 1989."], ["Trung tâm N-T do Bác sĩ Nguyễn Khắc Viện thành lập là viết tắt của từ gì?", "Nghiên cứu Tâm lý Trẻ em (Nhi đồng - Trẻ em)."], ["Phương pháp can thiệp kết hợp vận động cơ thể và tâm lý do BS. Nguyễn Khắc Viện áp dụng là gì?", "Tâm vận động (Psychomotricity), kết hợp kịch trị liệu, dưỡng sinh và văn hóa dân tộc."], ["Ai là tác giả chuyên khảo kinh điển 'Hành vi và Hoạt động' (1983) và là Viện sĩ Viện HLKHGD Nga?", "GS.VS. Phạm Minh Hạc - người đặt nền móng lý thuyết Hoạt động luận tại Việt Nam."], ["GS. Trần Trọng Thủy có đóng góp lớn nhất trong lĩnh vực nào của Tâm lý học Việt Nam?", "Tâm lý học thực nghiệm và Khoa học chẩn đoán tâm lý (chuẩn hóa trắc nghiệm Raven, Binet, Wechsler trên trẻ em VN)."], ["Hội Khoa học Tâm lý - Giáo dục Việt Nam chính thức được thành lập vào năm nào?", "Năm 1990 - tổ chức nghề nghiệp toàn quốc đầu tiên của giới tâm lý học Việt Nam."], ["Hai khoa Tâm lý học độc lập đầu tiên tại các trường đại học lớn của Việt Nam được thành lập khi nào?", "Khoa Tâm lý học ĐH KHXH&NV Hà Nội (1995) và ĐH KHXH&NV TP.HCM (1997)."], ["Chương trình Hỗ trợ Nhân viên (EAP) trong doanh nghiệp thuộc chuyên ngành tâm lý học nào?", "Tâm lý học Tổ chức và Nhân sự (Industrial and Organizational Psychology - I/O Psychology)."], ["Mốc pháp lý mang tính lịch sử công nhận 'Chuyên viên Tâm lý Lâm sàng' là chức danh y tế hành nghề có điều kiện là gì?", "Luật Khám bệnh, chữa bệnh sửa đổi năm 2023 (chính thức có hiệu lực từ ngày 01/01/2024)."], ["Thông tư số 31/2017/TT-BGDĐT của Bộ Giáo dục & Đào tạo quy định về vấn đề gì?", "Hướng dẫn thực hiện công tác tư vấn tâm lý cho học sinh trong các trường phổ thông tại Việt Nam."], ["Bốn nguyên tắc đạo đức nghề nghiệp tối thượng của nhà tâm lý học là gì?", "1. Tôn trọng quyền và phẩm giá thân chủ; 2. Năng lực chuyên môn; 3. Trách nhiệm nghề nghiệp; 4. Tính chính trực và bảo mật."]], "qs": [["Câu tục ngữ 'Gần mực thì đen, gần đèn thì rạng' trong kho tàng dân gian Việt Nam phản ánh quy luật tâm lý nào?", ["Tâm lý con người hoàn toàn do gen di truyền quyết định bẩm sinh", "Môi trường giao tiếp xã hội và hoàn cảnh sống có vai trò quyết định sự hình thành nhân cách", "Ý thức con người không chịu ảnh hưởng của các quan hệ xã hội", "Sự phát triển tâm lý chỉ phụ thuộc vào cấu trúc của hệ thần kinh"], 1, "Câu tục ngữ khẳng định vai trò then chốt của môi trường văn hóa - xã hội và các mối quan hệ giao tiếp đối với việc hình thành và phát triển tâm lý, đạo đức nhân cách con người."], ["Tư tưởng 'Tâm công' (đánh vào lòng người) trong nghệ thuật quân sự và chính trị của Nguyễn Trãi thể hiện bản chất gì?", ["Sử dụng bạo lực tối đa để trấn áp tinh thần kẻ thù", "Chinh phục niềm tin, tình cảm và ý thức chính nghĩa của quần chúng nhân dân để tạo sức mạnh tất thắng", "Áp dụng thuyết Thể dịch của Hippocrates để đoán bệnh binh lính", "Bỏ qua công tác tư tưởng, chỉ tập trung vào trang bị vũ khí"], 1, "Nguyễn Trãi chủ trương 'Việc nhân nghĩa cốt ở yên dân' và 'Tâm công' - dùng chính nghĩa, lòng nhân ái để thu phục lòng người, tạo sức mạnh đại đoàn kết dân tộc."], ["Học thuyết 'Thể - Thần' và quan điểm về 'Thất tình làm hại ngũ tạng' là đóng góp tâm lý y học của ai?", ["Tuệ Tĩnh", "Hải Thượng Lãn Ông Lê Hữu Trác", "Nguyễn Đình Chiểu", "Lê Quý Đôn"], 1, "Hải Thượng Lãn Ông chỉ ra rằng tâm và thân có mối quan hệ hữu cơ: 7 trạng thái cảm xúc thái quá (hỷ, nộ, ái, ố, lạc, cụ, dục...) làm tổn hại tạng phủ, do đó người thầy thuốc phải an định tâm thần trước."], ["Tác phẩm 'Việt Nam văn hóa sử cương' (1938) có đóng góp đặc biệt gì cho sự phát triển của tâm lý học nước nhà?", ["Lần đầu tiên dịch trọn vẹn bộ sách Phân tâm học của Freud sang tiếng Việt", "Tác phẩm khoa học đầu tiên của người Việt dành một chương nghiên cứu tâm lý, tính cách của dân tộc Việt Nam", "Thành lập phòng thực nghiệm tâm lý học đầu tiên tại Hà Nội", "Đề xuất mô hình tháp nhu cầu 5 tầng cho người Việt Nam"], 1, "Học giả Đào Duy Anh trong 'Việt Nam văn hóa sử cương' đã dành một phần sâu sắc nghiên cứu tính cách và tâm lý người Việt trên cơ sở xã hội - văn hóa học."], ["Sau năm 1954, nền Tâm lý học tại miền Bắc Việt Nam phát triển dựa trên nền tảng phương pháp luận nào?", ["Thuyết Hành vi cổ điển của John B. Watson", "Tâm lý học Hoạt động luận Mác-xít từ Liên Xô dựa trên chủ nghĩa duy vật biện chứng", "Tâm lý học Hiện sinh của Jean-Paul Sartre", "Thuyết Nhị nguyên luận tâm - vật của Descartes"], 1, "Tâm lý học miền Bắc giai đoạn 1954 - 1975 tiếp thu có hệ thống từ Liên Xô trường phái Hoạt động luận Mác-xít (Vygotsky, Leontiev, Rubinstein), coi tâm lý là sự phản ánh hiện thực khách quan vào não thông qua hoạt động."], ["Bác sĩ Nguyễn Khắc Viện đã sáng lập cơ sở trị liệu tâm lý trẻ em nổi tiếng nào vào năm 1989?", ["Viện Sức khỏe Tâm thần Bạch Mai", "Trung tâm Nghiên cứu Tâm lý Trẻ em (Trung tâm N-T)", "Bệnh viện Tâm thần Trung ương 1", "Khoa Tâm lý học ĐH Sư phạm Hà Nội"], 1, "Năm 1989, BS. Nguyễn Khắc Viện sáng lập Trung tâm N-T, đặt nền móng cho Tâm lý học lâm sàng và chẩn đoán can thiệp trẻ em tại Việt Nam."], ["Phương pháp trị liệu nào được Bác sĩ Nguyễn Khắc Viện đặc biệt tiên phong ứng dụng cho trẻ em rối loạn tâm lý?", ["Liệu pháp sốc điện (ECT)", "Tâm vận động (Psychomotricity) kết hợp kịch trị liệu và dưỡng sinh", "Thôi miên phân tâm cổ điển", "Cô lập cảm giác hoàn toàn"], 1, "BS. Nguyễn Khắc Viện là người tiên phong đưa Tâm vận động (vận động cơ thể kết hợp cảm xúc, giao tiếp) và thở dưỡng sinh vào điều trị trẻ chậm phát triển và tự kỷ."], ["Chuyên khảo 'Hành vi và Hoạt động' (1983) là tác phẩm của nhà khoa học nào?", ["GS.VS. Phạm Minh Hạc", "GS. Trần Trọng Thủy", "GS. Nguyễn Ngọc Phú", "PGS. Vũ Dũng"], 0, "GS.VS. Phạm Minh Hạc là tác giả công trình kinh điển 'Hành vi và Hoạt động' (1983), hệ thống hóa xuất sắc lý thuyết hoạt động duy vật biện chứng tại Việt Nam."], ["Đóng góp học thuật nổi bật nhất của GS. Trần Trọng Thủy cho Tâm lý học Việt Nam là gì?", ["Thành lập trường phái Phân tâm học Việt Nam", "Đặt nền móng cho Tâm lý học Thực nghiệm và Khoa học Trắc nghiệm Tâm lý (Psychometrics)", "Biên soạn từ điển Triết học đầu tiên", "Phát triển liệu pháp Thôi miên lâm sàng"], 1, "GS. Trần Trọng Thủy là chuyên gia hàng đầu về Tâm lý học thực nghiệm và trắc nghiệm chuẩn hóa trí tuệ (Raven, Binet-Simon) với cuốn sách kinh điển 'Khoa học chẩn đoán tâm lý' (1992)."], ["Hội Khoa học Tâm lý - Giáo dục Việt Nam chính thức được thành lập vào năm nào?", ["1975", "1986", "1990", "2000"], 2, "Hội Khoa học Tâm lý - Giáo dục Việt Nam được thành lập năm 1990 theo quyết định của Hội đồng Bộ trưởng, kết nối các nhà khoa học tâm lý và giáo dục toàn quốc."], ["Khoa Tâm lý học độc lập đầu tiên tại miền Bắc được thành lập năm 1995 tại cơ sở đào tạo nào?", ["Trường Đại học Sư phạm Hà Nội", "Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội", "Học viện Báo chí và Tuyên truyền", "Đại học Y Hà Nội"], 1, "Năm 1995, Khoa Tâm lý học trực thuộc Trường ĐH Khoa học Xã hội và Nhân văn (ĐHQG Hà Nội) được thành lập, đánh dấu bước phát triển độc lập của ngành."], ["Chương trình EAP (Employee Assistance Program) trong các doanh nghiệp hiện nay là ứng dụng trực tiếp của phân ngành tâm lý nào?", ["Tâm lý học Tội phạm", "Tâm lý học Thần kinh nhận thức", "Tâm lý học Tổ chức và Nhân sự (I/O Psychology)", "Tâm lý học Dân tộc học"], 2, "EAP là chương trình chăm sóc sức khỏe tinh thần và tư vấn tâm lý cho người lao động, thuộc phạm vi Tâm lý học Tổ chức và Công nghiệp/Nhân sự (I/O Psychology)."], ["Mốc pháp lý quan trọng nào lần đầu tiên công nhận 'Chuyên viên Tâm lý Lâm sàng' là chức danh hành nghề y tế có điều kiện tại Việt Nam?", ["Luật Giáo dục sửa đổi 2019", "Luật Trẻ em 2016", "Luật Khám bệnh, chữa bệnh sửa đổi năm 2023 (hiệu lực từ 01/01/2024)", "Thông tư liên tịch Bộ LĐ-TB&XH năm 2010"], 2, "Luật Khám bệnh, chữa bệnh (sửa đổi 2023, hiệu lực 2024) lần đầu tiên chính thức công nhận Chuyên viên Tâm lý Lâm sàng trong danh mục chức danh người hành nghề y tế được cấp giấy phép."], ["Theo chuẩn đạo đức của nhà tâm lý học thực hành, khi thân chủ tiết lộ hành vi sắp đe dọa trực tiếp tính mạng bản thân hoặc người khác, nhà tâm lý cần làm gì?", ["Giữ bí mật tuyệt đối trong mọi tình huống để bảo vệ niềm tin của thân chủ", "Được phép phá vỡ giới hạn bảo mật (Duty to Warn / Protect) để phối hợp cứu sống thân chủ hoặc người bị hại", "Đăng thông tin lên mạng xã hội để cảnh báo mọi người", "Ngừng tham vấn ngay lập tức mà không hỗ trợ thêm bất cứ điều gì"], 1, "Trong quy chuẩn đạo đức nghề nghiệp, giới hạn bảo mật được miễn trừ khi có nguy cơ đe dọa tính mạng trực tiếp (tự sát, giết người) hoặc xâm hại trẻ em (Nghĩa vụ cảnh báo và bảo vệ - Duty to Warn/Protect)."], ["Đặc trưng nổi bật nhất của xu hướng phát triển Tâm lý học Việt Nam trong thế kỷ XXI là gì?", ["Hoàn toàn quay trở lại nghiên cứu tư tưởng triết học thời phong kiến", "Đóng cửa các khoa tâm lý và chỉ đào tạo trong trường y khoa", "Chuyển mình mạnh mẽ sang Tâm lý học ứng dụng đa ngành, hội nhập quốc tế và chuẩn hóa hành lang pháp lý nghề nghiệp", "Loại bỏ hoàn toàn các thang đo trắc nghiệm tâm lý phương Tây"], 2, "Tâm lý học Việt Nam thế kỷ XXI nổi bật với sự phát triển mạnh mẽ của các chuyên ngành ứng dụng (lâm sàng, học đường, tổ chức), ứng dụng công nghệ, hội nhập quốc tế và chuẩn hóa pháp lý đạo đức hành nghề."]], "trees": [["Lịch sử Tâm lý học Việt Nam", "Tiến trình 4 giai đoạn", "tiến trình", [["Trước 1945", "Dân gian & Bước đầu du nhập", "đặc điểm", [["Tâm lý dân gian", "Ca dao, tục ngữ, tinh thần tương thân tương ái", "", []], ["Y học tâm thân", "Hải Thượng Lãn Ông: Thể - Thần & thất tình", "", []], ["Đào Duy Anh (1938)", "'Việt Nam văn hóa sử cương' phân tích tính cách", "", []]]], ["1945 - 1975", "Thời kỳ đất nước chia cắt", "hai miền", [["Miền Bắc (1954)", "ĐHSP Hà Nội, tiếp thu Hoạt động luận Mác-xít Liên Xô", "", []], ["Miền Nam", "Tiếp thu Phân tâm, Nhân văn, Trắc nghiệm Âu - Mỹ", "", []]]], ["1975 - 1986", "Thống nhất đất nước", "kết quả", [["Nền tảng Mác-xít", "Đồng nhất phương pháp luận duy vật biện chứng", "", []], ["Hội TL-GD (1990)", "Thành lập Hội Khoa học Tâm lý - Giáo dục VN", "", []]]], ["1986 - Nay", "Thời kỳ Đổi mới & Hội nhập", "thành tựu", [["Khoa độc lập", "ĐH KHXH&NV Hà Nội (1995), TP.HCM (1997)", "", []], ["Ứng dụng đa ngành", "Lâm sàng, Học đường, Tổ chức doanh nghiệp", "", []], ["Luật KCB 2023", "Công nhận Chuyên viên Tâm lý Lâm sàng y tế", "", []]]]]], ["Ba Trụ Cột Đặt Nền Móng", "Thế kỷ XX", "học giả", [["BS. Nguyễn Khắc Viện", "Tiên phong Lâm sàng & Trẻ em", "cống hiến", [["Trung tâm N-T (1989)", "Trung tâm Nghiên cứu Tâm lý Trẻ em đầu tiên", "", []], ["Tâm vận động", "Phương pháp Psychomotricity, kịch trị liệu, dưỡng sinh", "", []]]], ["GS.VS. Phạm Minh Hạc", "Lý thuyết Hoạt động luận Mác-xít", "cống hiến", [["Chuyên khảo 1983", "'Hành vi và Hoạt động' định hình lý thuyết", "", []], ["Con người Việt Nam", "Nghiên cứu hệ giá trị thời kỳ công nghiệp hóa", "", []]]], ["GS. Trần Trọng Thủy", "Thực nghiệm & Trắc nghiệm Đo lường", "cống hiến", [["Chẩn đoán tâm lý", "Giáo trình 'Khoa học chẩn đoán tâm lý' (1992)", "", []], ["Chuẩn hóa thang đo", "Thích nghi trắc nghiệm Raven, Binet, Wechsler trên trẻ em VN", "", []]]]]], ["Hệ sinh thái TLH Ứng dụng & Đạo đức", "Thế kỷ XXI", "lĩnh vực", [["Lâm sàng & Trị liệu", "Chăm sóc sức khỏe tâm thần", "mô hình", [["Liệu pháp can thiệp", "CBT, ACT, Tâm động học, Trị liệu Gia đình", "", []], ["Luật KCB 2023", "Chứng chỉ hành nghề chuyên viên tâm lý lâm sàng", "", []]]], ["Học đường & Giáo dục", "Tham vấn tâm lý trường học", "chính sách", [["Thông tư 31/2017", "Quy định phòng tham vấn tâm lý học đường toàn quốc", "", []], ["Can thiệp sớm", "Chống bạo lực, giải tỏa stress thi cử, hướng nghiệp", "", []]]], ["Tổ chức & Doanh nghiệp", "I/O Psychology", "ứng dụng", [["Chương trình EAP", "Hỗ trợ tinh thần nhân viên, chống burnout công sở", "", []], ["Đánh giá năng lực", "Trắc nghiệm nhân sự, tối ưu hóa lãnh đạo và văn hóa", "", []]]], ["Đạo đức Nghề nghiệp", "4 nguyên tắc tối thượng", "chuẩn mực", [["Tôn trọng phẩm giá", "Bảo mật thông tin & Tôn trọng quyền tự quyết", "", []], ["Năng lực & Giám sát", "Hành nghề trong phạm vi năng lực, supervision định kỳ", "", []]]]]]]}];
+const BYID = {};
+LESSONS.forEach(l => { BYID[l.id] = l; });
+
+/* ---------- Storage & State ---------- */
+const STORE_KEY = "lstlh_review_v1";
+let S = { q: {}, c: {}, exam: [] };
+try {
+  const saved = localStorage.getItem(STORE_KEY);
+  if(saved) S = JSON.parse(saved);
+} catch(e) {}
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch(e){}
+}
+
+let state = { view: "home", tab: "sum" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function mastery(l) {
+  let ok = 0, done = 0;
+  l.qs.forEach((q, idx) => {
+    const st = S.q[l.id + "-" + idx];
+    if(st && st.done) { done++; if(st.ok) ok++; }
+  });
+  return { ok, done, total: l.qs.length, pct: l.qs.length ? Math.round(ok / l.qs.length * 100) : 0 };
+}
+
+function wrongIds() {
+  const res = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      const qid = l.id + "-" + idx;
+      if(S.q[qid] && S.q[qid].done && !S.q[qid].ok) res.push(qid);
+    });
+  });
+  return res;
+}
+
+function cardStats(l) {
+  let known = 0;
+  l.cards.forEach((c, idx) => {
+    if(S.c[l.id + "-" + idx] === "known") known++;
+  });
+  return { known, total: l.cards.length };
+}
+
+/* ---------- Navigation ---------- */
+function go(v, tab) {
+  state.view = v;
+  if(tab) state.tab = tab;
+  $("#side").classList.remove("open");
+  renderSide();
+  renderMain();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderSide() {
+  const c = $("#sideLessons");
+  let curPart = "";
+  let html = "";
+  LESSONS.forEach(l => {
+    if(l.part !== curPart) {
+      curPart = l.part;
+      html += `<div class="part-label">${esc(curPart)}</div>`;
+    }
+    const on = state.view === l.id ? "on" : "";
+    const m = mastery(l);
+    html += `
+    <button class="lesson-btn ${on}" data-go="${l.id}" data-tab="sum">
+      <span class="code">${l.code}</span>
+      <span class="name">${esc(l.title)}</span>
+      <span class="mini"><i style="width:${m.pct}%"></i></span>
+    </button>`;
+  });
+  c.innerHTML = html;
+  $(".nav-home").classList.toggle("on", state.view === "home");
+}
+
+// Global click delegation for all navigation elements (nav-home, brand, lessons, exam, axon map)
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-go]");
+  if(btn) {
+    const g = btn.getAttribute("data-go");
+    const t = btn.getAttribute("data-tab") || (g === "home" ? "sum" : state.tab);
+    go(g, t);
+  }
+});
+
+/* ---------- Home View ---------- */
+function renderHome(m) {
+  const totQ = LESSONS.reduce((a, l) => a + l.qs.length, 0);
+  const totC = LESSONS.reduce((a, l) => a + l.cards.length, 0);
+  let ok = 0, done = 0;
+  LESSONS.forEach(l => { const s = mastery(l); ok += s.ok; done += s.done; });
+
+  let segs = LESSONS.map(l => {
+    const s = mastery(l);
+    return `<button class="seg" data-go="${l.id}" data-tab="sum" title="${esc(l.code + ' ' + l.title)}: ${s.pct}% đúng">
+      <span class="fill" style="width:${s.pct}%"></span>
+      <span class="lbl">${l.code}</span>
+    </button>`;
+  }).join("");
+
+  m.innerHTML = `
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Tâm lý học Phát triển – Góc ôn tập & Tự học</h2>
+      <p>Nền tảng ôn tập tương tác hoàn chỉnh dựa trên chương trình học phần của <b>Khoa Tâm lý học, ĐH KHXH&NV TP.HCM</b> (Đề cương TLH026 - TS. Nguyễn Thị Vân, TS. Lê Thị Mai Liên, ThS. Lê Ngọc Bảo Trâm): ${LESSONS.length} bài học trọng tâm, tích hợp <b>Sơ đồ tư duy SVG</b>, ${totC} thẻ flashcards 3D và ${totQ} câu hỏi trắc nghiệm có giải thích chi tiết toàn diện.</p>
+      <div class="lead-q">“Giáo dục đi trước sự phát triển, dẫn dắt và kéo sự phát triển theo sau.” – Lev Vygotsky</div>
+    </div>
+    <div class="exam-card">
+      <h3>Cấu trúc môn học & Đánh giá</h3>
+      <div class="exam-facts">
+        <div class="fact"><strong>10%</strong><span>Thuyết trình nhóm</span></div>
+        <div class="fact"><strong>30%</strong><span>Bài tập giữa kỳ (Trò chơi/Video)</span></div>
+        <div class="fact"><strong>60%</strong><span>Cuối kỳ (Trắc nghiệm)</span></div>
+        <div class="fact"><strong>${totQ}</strong><span>Câu hỏi trắc nghiệm toàn khóa</span></div>
+      </div>
+      <div class="exam-foot">Chuyên cần tối thiểu 80% • Đầy đủ 6 giai đoạn phát triển vòng đời</div>
+    </div>
+  </div>
+  </section>
+
+  <h3 style="font-size:18px; margin:32px 0 14px; font-weight:750">Danh sách bài học trọng tâm</h3>
+  <div class="grid-lessons">
+    ${LESSONS.map(l => {
+      const s = mastery(l);
+      const cs = cardStats(l);
+      return `
+      <div class="lcard" data-go="${l.id}" data-tab="sum">
+        <span class="code">${l.code}</span>
+        <div class="t">${esc(l.title)}</div>
+        <div class="meta">
+          <span>${l.qs.length} câu trắc nghiệm • ${cs.known}/${cs.total} thẻ nhớ</span>
+          <strong>${s.pct}%</strong>
+        </div>
+        <div class="bar"><i style="width:${s.pct}%"></i></div>
+      </div>`;
+    }).join("")}
+  </div>`;
+  bindNavClicks(m);
+}
+
+/* ---------- Mindmap SVG Engine ---------- */
+const MMC = ["#3B4A8C", "#D98A1F", "#1E8C86", "#C8366E", "#7A5BC7", "#2A7FB8", "#6F8A2E", "#B0683A", "#4F6D7A"];
+
+function treeSVG(root, ci0) {
+  const LH = 36, PX = 14, NX = 12;
+  const tw = (t, px, b) => t.length * px * (b ? 0.6 : 0.53);
+  let leaves = 0, cc = 0;
+  const nodes = [];
+
+  (function walk(n, d, parent, ci) {
+    if (d === 1 || d === 2) ci = cc++;
+    const o = { t: n[0], note: n[1] || "", rel: n[2] || "", d, parent, ci, kids: [] };
+    o.w = tw(o.t, PX, 1) + (o.note ? tw(" – " + o.note, NX) : 0) + 28;
+    o.rw = o.rel ? tw(o.rel, 12) + 20 : 0;
+    nodes.push(o);
+
+    const ch = n[3] || [];
+    if (!ch.length) {
+      o.y = leaves * LH + LH / 2 + 8;
+      leaves++;
+    }
+    ch.forEach(c => o.kids.push(walk(c, d + 1, o, ci)));
+    if (ch.length) o.y = (o.kids[0].y + o.kids[o.kids.length - 1].y) / 2;
+    return o;
+  })(root, 0, null, 0);
+
+  const maxD = Math.max(...nodes.map(n => n.d));
+  const colX = [12];
+  for (let d = 0; d < maxD; d++) {
+    const at = nodes.filter(n => n.d === d);
+    colX[d + 1] = colX[d] + Math.max(...at.map(n => n.w)) + Math.max(56, Math.max(...at.map(n => n.rw)) + 44);
+  }
+
+  const W = Math.max(...nodes.map(n => colX[n.d] + n.w)) + 24;
+  const H = Math.max(leaves * LH + 24, 70);
+
+  let edges = "", body = "";
+  nodes.forEach(n => {
+    const x = colX[n.d], col = MMC[(n.ci + ci0) % MMC.length];
+    if (n.kids.length) {
+      const sx = x + n.w;
+      let ex = sx;
+      if (n.rel) {
+        const px = sx + 8;
+        body += `<rect x="${px}" y="${n.y - 11}" width="${n.rw}" height="22" rx="11" fill="var(--surface)" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="1.2"/><text x="${px + n.rw / 2}" y="${n.y + 4.3}" text-anchor="middle" font-size="11.5" font-style="italic" fill="${n.d === 0 ? "var(--muted)" : col}">${esc(n.rel)}</text>`;
+        edges += `<path d="M${sx},${n.y} H${px}" stroke="${n.d === 0 ? "var(--muted)" : col}" stroke-width="2"/>`;
+        ex = px + n.rw;
+      }
+      n.kids.forEach(k => {
+        const kc = MMC[(k.ci + ci0) % MMC.length];
+        const kx = colX[k.d];
+        const mx = (ex + kx) / 2;
+        edges += `<path d="M${ex},${n.y} C${mx},${n.y} ${mx},${k.y} ${kx},${k.y}" fill="none" stroke="${kc}" stroke-width="2" opacity=".75"/>`;
+      });
+    }
+
+    const fill = n.d === 0 ? "var(--ink)" : n.d === 1 ? col : "var(--surface)";
+    const tcol = n.d === 0 ? "var(--paper)" : n.d === 1 ? "#fff" : "var(--ink)";
+    body += `<rect x="${x}" y="${n.y - 14}" width="${n.w}" height="28" rx="${n.d < 2 ? 14 : 8}" fill="${fill}" ${n.d >= 2 ? `stroke="${col}" stroke-width="1.5"` : ""}/>`;
+    body += `<text x="${x + 14}" y="${n.y + 5}" font-size="${PX}" fill="${tcol}"><tspan font-weight="700">${esc(n.t)}</tspan>${n.note ? `<tspan font-size="${NX}" ${n.d >= 2 ? `fill="var(--muted)"` : `fill-opacity=".85"`}> – ${esc(n.note)}</tspan>` : ""}</text>`;
+  });
+
+  return `<svg viewBox="0 0 ${Math.ceil(W)} ${H}" style="min-width:${Math.round(W * 0.72)}px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ tư duy: ${esc(root[0])}" font-family="inherit">${edges}${body}</svg>`;
+}
+
+function renderTrees(l) {
+  if (!l.trees || !l.trees.length) return "";
+  return l.trees.map((t, i) => `
+    <div class="tree">
+      <div class="mm-scroll">${treeSVG(t, i * 2)}</div>
+    </div>
+  `).join("");
+}
+
+/* ---------- Lesson View ---------- */
+function renderLesson(m, l) {
+  const tabs = [
+    { id: "sum", label: "Tóm tắt cốt lõi" },
+    { id: "tbl", label: "Bảng so sánh", count: l.tables.length },
+    { id: "fc",  label: "Thẻ ghi nhớ", count: l.cards.length },
+    { id: "q",   label: "Trắc nghiệm", count: l.qs.length },
+    { id: "tip", label: "Mẹo nhớ", count: l.tips.length }
+  ];
+
+  let tabNav = tabs.map(t => `
+    <button class="tab ${state.tab === t.id ? "on" : ""}" data-tab="${t.id}">
+      ${t.label}${t.count !== undefined ? `<span class="count">${t.count}</span>` : ""}
+    </button>
+  `).join("");
+
+  m.innerHTML = `
+  <div class="lhead">
+    <div class="bigcode">${l.code}</div>
+    <div>
+      <div class="part">${esc(l.part)}</div>
+      <h2>${esc(l.title)}</h2>
+    </div>
+  </div>
+
+  <div class="goals">
+    <h4>Mục tiêu bài học cần đạt</h4>
+    <ul>${l.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+  </div>
+
+  <div class="tabs">${tabNav}</div>
+  <div id="tabBody"></div>`;
+
+  m.querySelectorAll(".tab").forEach(b => {
+    b.onclick = () => {
+      state.tab = b.getAttribute("data-tab");
+      m.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      renderTabBody(l);
+    };
+  });
+
+  renderTabBody(l);
+}
+
+function renderTabBody(l) {
+  const tb = $("#tabBody");
+  if(state.tab === "sum") renderTabSum(tb, l);
+  else if(state.tab === "tbl") renderTabTbl(tb, l);
+  else if(state.tab === "fc") renderTabFc(tb, l);
+  else if(state.tab === "q") renderTabQ(tb, l);
+  else if(state.tab === "tip") renderTabTip(tb, l);
+}
+
+/* Tab: Tóm tắt (Summary + Mindmap Trees + Content Blocks + Tables + Tips) */
+function renderTabSum(tb, l) {
+  let treeSection = "";
+  if (l.trees && l.trees.length) {
+    treeSection = `
+    <div class="mm-wrap">
+      <div class="mm-head">
+        <h4>Sơ đồ tư duy dạng nhánh cây (SVG Mindmap Tree)</h4>
+        <span class="muted" style="font-size:12.5px">Kéo ngang để xem toàn bộ cấu trúc phân nhánh</span>
+      </div>
+      ${renderTrees(l)}
+    </div>`;
+  }
+
+  let blocks = l.sections.map((s, idx) => `
+    <details class="block" ${idx < 2 ? "open" : ""}>
+      <summary>${esc(s.h)}</summary>
+      <ul>
+        ${s.items.map(it => `<li>${it}</li>`).join("")}
+      </ul>
+    </details>
+  `).join("");
+
+  let tablesPreview = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+
+  let tipsPreview = `
+    <h4 style="margin:24px 0 10px; font-size:15px; font-weight:750">Mẹo ghi nhớ nhanh</h4>
+    <div class="tips-wrap">
+      ${l.tips.map(tp => `
+        <div class="tip-card">
+          <span class="tip-badge">Pro-tip</span>
+          <div class="tip-body">${tp}</div>
+        </div>
+      `).join("")}
+    </div>`;
+
+  tb.innerHTML = treeSection + blocks + tablesPreview + tipsPreview;
+}
+
+/* Tab: Bảng so sánh */
+function renderTabTbl(tb, l) {
+  if(!l.tables || !l.tables.length) {
+    tb.innerHTML = `<div class="empty">Bài này chưa có bảng so sánh tổng hợp.</div>`;
+    return;
+  }
+  tb.innerHTML = l.tables.map(t => `
+    <div class="tblwrap">
+      <h4>${esc(t.title)}</h4>
+      <table class="data">
+        <thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+        <tbody>
+          ${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  `).join("");
+}
+
+/* Tab: Thẻ ghi nhớ Flashcards */
+let fcIdx = 0;
+function renderTabFc(tb, l) {
+  if(!l.cards || !l.cards.length) {
+    tb.innerHTML = `<div class="empty">Chưa có thẻ ghi nhớ.</div>`;
+    return;
+  }
+  if(fcIdx >= l.cards.length) fcIdx = 0;
+  const c = l.cards[fcIdx];
+  const cid = l.id + "-" + fcIdx;
+  const isKnown = S.c[cid] === "known";
+
+  tb.innerHTML = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Thẻ <b>${fcIdx + 1}</b> / ${l.cards.length} • Phím tắt: <b>Space</b> (lật), <b>1</b> (quên), <b>2</b> (thuộc), <b>←/→</b> (chuyển)</span>
+    <span class="chip-btn">${isKnown ? "✓ Đã thuộc" : "○ Cần ôn"}</span>
+  </div>
+
+  <div class="fc-stage">
+    <div class="fc" id="fcCard" tabindex="0" role="button" aria-label="Bấm hoặc gõ Space để lật thẻ">
+      <div class="fc-inner">
+        <div class="fc-face front">
+          <div class="fc-tag">Thuật ngữ / Khái niệm</div>
+          <div class="fc-text">${esc(c[0])}</div>
+          <div class="fc-hint">Bấm để xem định nghĩa & cơ chế</div>
+        </div>
+        <div class="fc-face back">
+          <div class="fc-tag">Bản chất Sinh lý & Giải phẫu</div>
+          <div class="fc-text" style="font-size:16px; font-weight:550">${esc(c[1])}</div>
+          <div class="fc-hint">Bấm để lật lại mặt trước</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-controls">
+      <button class="btn ghost" id="fcPrev">← Thẻ trước</button>
+      <button class="btn ${!isKnown ? "primary" : "ghost"}" id="fcAgain">Quên / Cần ôn lại (1)</button>
+      <button class="btn ${isKnown ? "primary" : "ghost"}" id="fcKnow">Đã thuộc (2)</button>
+      <button class="btn ghost" id="fcNext">Thẻ tiếp →</button>
+    </div>
+  </div>`;
+
+  const cardEl = $("#fcCard");
+  cardEl.onclick = () => cardEl.classList.toggle("flip");
+
+  $("#fcPrev").onclick = () => { if(fcIdx > 0) { fcIdx--; renderTabFc(tb, l); } };
+  $("#fcNext").onclick = () => { if(fcIdx < l.cards.length - 1) { fcIdx++; renderTabFc(tb, l); } };
+  $("#fcAgain").onclick = () => {
+    S.c[cid] = "again";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+  $("#fcKnow").onclick = () => {
+    S.c[cid] = "known";
+    save();
+    if(fcIdx < l.cards.length - 1) fcIdx++;
+    renderTabFc(tb, l);
+    renderSide();
+  };
+}
+
+/* Tab: Trắc nghiệm */
+function renderTabQ(tb, l) {
+  if(!l.qs || !l.qs.length) {
+    tb.innerHTML = `<div class="empty">Chưa có câu hỏi trắc nghiệm.</div>`;
+    return;
+  }
+  const m = mastery(l);
+  let html = `
+  <div class="toolbar">
+    <span class="muted" style="font-size:13.5px">Đã làm: <b>${m.done}/${m.total}</b> câu • Đúng: <b>${m.ok}</b> (${m.pct}%)</span>
+    <button class="btn ghost" id="resetQBtn" style="font-size:12.5px; padding:6px 12px">↺ Làm lại bài này</button>
+  </div>`;
+
+  html += l.qs.map((q, idx) => {
+    const qid = l.id + "-" + idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1}.</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  tb.innerHTML = html;
+
+  tb.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const qidx = parseInt(qid.split("-")[1], 10);
+      const q = l.qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    };
+  });
+
+  $("#resetQBtn").onclick = () => {
+    if(confirm("Bạn muốn xóa kết quả trắc nghiệm của bài này để luyện lại từ đầu?")) {
+      l.qs.forEach((_, idx) => { delete S.q[l.id + "-" + idx]; });
+      save();
+      renderTabQ(tb, l);
+      renderSide();
+    }
+  };
+}
+
+/* Tab: Mẹo nhớ */
+function renderTabTip(tb, l) {
+  if(!l.tips || !l.tips.length) {
+    tb.innerHTML = `<div class="empty">Chưa có mẹo nhớ.</div>`;
+    return;
+  }
+  tb.innerHTML = `
+  <div class="tips-wrap">
+    ${l.tips.map(tp => `
+      <div class="tip-card">
+        <span class="tip-badge">Pro-tip</span>
+        <div class="tip-body">${tp}</div>
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+/* ---------- Exam Simulation View ---------- */
+function renderExam(m) {
+  let allQ = [];
+  LESSONS.forEach(l => {
+    l.qs.forEach((q, idx) => {
+      allQ.push({ q, lid: l.id, idx, code: l.code });
+    });
+  });
+
+  if(!S.exam || !S.exam.length) {
+    allQ.sort(() => Math.random() - 0.5);
+    S.exam = allQ.slice(0, 30);
+  }
+
+  let doneCount = 0, okCount = 0;
+  S.exam.forEach(item => {
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid];
+    if(st && st.done) { doneCount++; if(st.ok) okCount++; }
+  });
+
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px">
+    <h2>Phòng Thi thử Trắc nghiệm HĐTK Cấp cao</h2>
+    <p>Đề thi mô phỏng gồm <b>30 câu hỏi ngẫu nhiên</b> từ toàn bộ 6 bài học. Phản hồi kết quả và giải thích chi tiết ngay khi chọn đáp án.</p>
+    <div style="margin-top:14px; font-weight:700">Đã hoàn thành: ${doneCount}/30 câu • Điểm số: ${doneCount ? Math.round(okCount / doneCount * 100) : 0}% (${okCount}/${doneCount})</div>
+  </div>
+  <div class="toolbar">
+    <button class="btn primary" id="newExamBtn">🔄 Tạo đề thi mới ngẫu nhiên</button>
+  </div>`;
+
+  html += S.exam.map((item, exIdx) => {
+    const q = item.q;
+    const qid = item.lid + "-" + item.idx;
+    const st = S.q[qid] || {};
+    const answered = st.done;
+
+    const optHtml = q[1].map((opt, oidx) => {
+      let cls = "opt";
+      if(answered) {
+        if(oidx === q[2]) cls += " correct";
+        else if(oidx === st.chosen) cls += " wrong";
+      }
+      return `<button class="${cls}" data-qid="${qid}" data-oidx="${oidx}" ${answered ? "disabled" : ""}>
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    const expHtml = answered ? `
+      <div class="exp">
+        <b>${st.ok ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</b> ${esc(q[3])}
+        <div style="margin-top:4px; font-size:12px; color:var(--muted)">Thuộc: <b>${item.code} – ${esc(BYID[item.lid].title)}</b></div>
+      </div>` : "";
+
+    return `
+    <div class="qcard ${answered ? "answered" : ""}">
+      <div class="qtxt"><span class="qnum">Câu ${exIdx + 1} (${item.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderExam(m);
+      renderSide();
+    };
+  });
+
+  $("#newExamBtn").onclick = () => {
+    if(confirm("Tạo đề thi mới ngẫu nhiên 30 câu khác?")) {
+      S.exam = [];
+      renderExam(m);
+    }
+  };
+}
+
+/* ---------- Wrong Questions View ---------- */
+function renderWrong(m) {
+  const wids = wrongIds();
+  let html = `
+  <div style="margin-bottom:20px">
+    <button class="btn ghost" data-go="home">← Trở về tổng quan</button>
+  </div>
+  <div class="hero-card" style="margin-bottom:24px; background:#4A1E2E">
+    <h2>Ôn tập các câu đã làm sai</h2>
+    <p>Hiện bạn đang có <b>${wids.length} câu làm sai</b> cần khắc phục. Hãy làm lại cẩn thận để biến điểm yếu thành điểm mạnh trước kỳ thi!</p>
+  </div>`;
+
+  if(!wids.length) {
+    html += `<div class="empty">🎉 Tuyệt vời! Bạn không có câu hỏi nào bị làm sai.</div>`;
+    m.innerHTML = html;
+    bindNavClicks(m);
+    return;
+  }
+
+  html += wids.map((qid, idx) => {
+    const [lid, qidxStr] = qid.split("-");
+    const qidx = parseInt(qidxStr, 10);
+    const l = BYID[lid];
+    const q = l.qs[qidx];
+
+    const optHtml = q[1].map((opt, oidx) => {
+      return `<button class="opt" data-qid="${qid}" data-oidx="${oidx}">
+        <span style="opacity:.6">${String.fromCharCode(65 + oidx)}.</span>
+        <span>${esc(opt)}</span>
+      </button>`;
+    }).join("");
+
+    return `
+    <div class="qcard">
+      <div class="qtxt"><span class="qnum">Câu ${idx + 1} (${l.code}).</span>${esc(q[0])}</div>
+      <div class="opts">${optHtml}</div>
+      <div class="exp" style="margin-top:10px">
+        <b>Gợi ý đáp án đúng:</b> ${String.fromCharCode(65 + q[2])}. ${esc(q[1][q[2]])}<br>
+        <b>Giải thích:</b> ${esc(q[3])}
+      </div>
+    </div>`;
+  }).join("");
+
+  m.innerHTML = html;
+  bindNavClicks(m);
+
+  m.querySelectorAll(".opt").forEach(b => {
+    b.onclick = () => {
+      const qid = b.getAttribute("data-qid");
+      const chosen = parseInt(b.getAttribute("data-oidx"), 10);
+      const [lid, qidxStr] = qid.split("-");
+      const qidx = parseInt(qidxStr, 10);
+      const q = BYID[lid].qs[qidx];
+      const ok = chosen === q[2];
+      S.q[qid] = { done: true, ok, chosen };
+      save();
+      renderWrong(m);
+      renderSide();
+    };
+  });
+}
+
+/* ---------- Main Render Entrypoint ---------- */
+function renderMain() {
+  const m = $("#main");
+  if(state.view === "home") renderHome(m);
+  else if(state.view === "exam") renderExam(m);
+  else if(state.view === "wrong") renderWrong(m);
+  else if(BYID[state.view]) renderLesson(m, BYID[state.view]);
+  else renderHome(m);
+}
+
+/* ---------- Search Modal ---------- */
+const searchBtn = $("#searchBtn");
+const searchBtnTop = $("#searchBtnTop");
+if(searchBtn) searchBtn.onclick = openSearch;
+if(searchBtnTop) searchBtnTop.onclick = openSearch;
+
+function openSearch() {
+  const mask = document.createElement("div");
+  mask.className = "modal-mask";
+  mask.innerHTML = `
+  <div class="modal">
+    <div class="modal-head">
+      <input type="text" class="modal-input" id="modalInput" placeholder="Nhập thuật ngữ cần tìm (vd: Pavlov, Amygdala, Synapse, LTP, Giao cảm...)..." autofocus>
+      <button class="btn ghost" id="closeSearch">✕</button>
+    </div>
+    <div class="modal-results" id="modalRes">
+      <div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm thuật ngữ trong toàn bộ 6 bài học.</div>
+    </div>
+  </div>`;
+  document.body.appendChild(mask);
+
+  const input = $("#modalInput");
+  const res = $("#modalRes");
+  $("#closeSearch").onclick = () => mask.remove();
+  mask.onclick = e => { if(e.target === mask) mask.remove(); };
+
+  const run = () => {
+    const q = input.value.trim().toLowerCase();
+    if(q.length < 2) {
+      res.innerHTML = `<div class="empty">Gõ ít nhất 2 ký tự để tìm kiếm...</div>`;
+      return;
+    }
+
+    const matches = [];
+    LESSONS.forEach(l => {
+      l.sections.forEach(s => {
+        s.items.forEach(it => {
+          if(it.toLowerCase().includes(q) || s.h.toLowerCase().includes(q)) {
+            matches.push({ type: "Lý thuyết", title: s.h, desc: it.replace(/<[^>]+>/g, ''), lid: l.id });
+          }
+        });
+      });
+      l.cards.forEach(c => {
+        if(c[0].toLowerCase().includes(q) || c[1].toLowerCase().includes(q)) {
+          matches.push({ type: "Thẻ nhớ", title: c[0], desc: c[1], lid: l.id });
+        }
+      });
+      l.qs.forEach(question => {
+        if(question[0].toLowerCase().includes(q) || question[3].toLowerCase().includes(q)) {
+          matches.push({ type: "Câu trắc nghiệm", title: question[0], desc: "Giải thích: " + question[3], lid: l.id });
+        }
+      });
+    });
+
+    if(!matches.length) {
+      res.innerHTML = `<div class="empty">Không tìm thấy nội dung nào chứa từ khóa "${esc(q)}".</div>`;
+      return;
+    }
+
+    res.innerHTML = matches.slice(0, 30).map(m => `
+      <div class="item" data-go="${m.lid}" data-tab="sum">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px">
+          <span class="w">${esc(m.title)}</span>
+          <span class="chip-btn" style="padding:2px 8px; font-size:11px">${m.type}</span>
+        </div>
+        <div style="font-size:13.5px; line-height:1.45; color:var(--ink)">${esc(m.desc)}</div>
+        <div class="from">Thuộc bài: <b>${BYID[m.lid].code} – ${esc(BYID[m.lid].title)}</b></div>
+      </div>
+    `).join("");
+
+    res.querySelectorAll("[data-go]").forEach(item => {
+      item.onclick = () => {
+        const lid = item.getAttribute("data-go");
+        mask.remove();
+        go(lid, "sum");
+      };
+    });
+  };
+
+  input.oninput = run;
+  run();
+}
+
+/* ---------- Theme toggle & Mobile menu ---------- */
+$("#menuBtn").onclick = () => $("#side").classList.toggle("open");
+$("#themeBtn").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("lstlh_theme", next); } catch(e){}
+};
+try {
+  const savedTheme = localStorage.getItem("lstlh_theme");
+  if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+} catch(e){}
+
+// Keyboard shortcuts for flashcard
+window.addEventListener("keydown", (e) => {
+  if(state.tab === "fc") {
+    if(e.code === "Space") {
+      const f = $("#fcCard");
+      if(f) { e.preventDefault(); f.classList.toggle("flip"); }
+    } else if(e.key === "1") {
+      const b = $("#fcAgain"); if(b) b.click();
+    } else if(e.key === "2") {
+      const b = $("#fcKnow"); if(b) b.click();
+    } else if(e.code === "ArrowRight") {
+      const b = $("#fcNext"); if(b) b.click();
+    } else if(e.code === "ArrowLeft") {
+      const b = $("#fcPrev"); if(b) b.click();
+    }
+  }
+});
+
+// Global event delegation for navigation and goals modal
+document.addEventListener("click", (e) => {
+  const goBtn = e.target.closest("[data-go]");
+  if (goBtn) {
+    e.preventDefault();
+    go(goBtn.dataset.go, goBtn.dataset.tab);
+    return;
+  }
+  if (e.target.closest("#goalsBtn")) {
+    e.preventDefault();
+    const modal = $("#goalsModal");
+    if(modal) modal.style.display = "flex";
+    return;
+  }
+  if (e.target.closest("#closeGoalsModal") || e.target.closest("#okGoalsBtn") || e.target === $("#goalsModal")) {
+    const modal = $("#goalsModal");
+    if(modal) modal.style.display = "none";
+    return;
+  }
+});
+
+// Initial boot
+go("home");
+</script>
+
+<!-- ================= STUDY TIME TRACKER & HUB NAVIGATION ================= -->
+<script>
+(function() {
+  const COURSE_ID = 'lstlh';
+  const TIME_KEY = 'study_time_' + COURSE_ID;
+  const LAST_KEY = 'last_accessed_' + COURSE_ID;
+  
+  let lastActive = Date.now();
+  let accumulatedSeconds = parseInt(localStorage.getItem(TIME_KEY) || '0', 10);
+  
+  // Set last accessed time
+  localStorage.setItem(LAST_KEY, Date.now().toString());
+
+  // Listen to user activity
+  const markActive = () => { lastActive = Date.now(); };
+  ['mousemove', 'keydown', 'scroll', 'touchstart', 'click'].forEach(evt => {
+    window.addEventListener(evt, markActive, { passive: true });
+  });
+
+  // Ticking interval every 1 second
+  setInterval(() => {
+    const isVisible = document.visibilityState === 'visible';
+    const isRecentlyActive = (Date.now() - lastActive) < 180000; // 3 minutes timeout
+    
+    if (isVisible && isRecentlyActive) {
+      accumulatedSeconds += 1;
+      if (accumulatedSeconds % 5 === 0) {
+        localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+        localStorage.setItem(LAST_KEY, Date.now().toString());
+      }
+    }
+  }, 1000);
+
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem(TIME_KEY, accumulatedSeconds.toString());
+    localStorage.setItem(LAST_KEY, Date.now().toString());
+  });
+
+  // Handle URL mode parameter (e.g., ?mode=exam)
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get('mode');
+    if (mode === 'exam') {
+      setTimeout(() => {
+        const btn = document.querySelector('[data-go="exam"]');
+        if (btn) btn.click();
+      }, 350);
+    }
+  });
+})();
+</script>
+<!-- ======================================================================= -->
+
+</body>
+</html>
