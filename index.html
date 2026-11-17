@@ -807,7 +807,7 @@
         <div class="hero-tag">🏛️ Trung tâm điều phối học tập & Ôn thi trắc nghiệm</div>
         <h2 class="hero-title">Chào mừng bạn đến với Không gian Tự học Chuyên sâu Tâm lý học</h2>
         <p class="hero-desc">
-          Nền tảng tích hợp đầy đủ 5 học phần nền tảng cử nhân: <b>Tâm lý học Đại cương</b>, <b>Giải phẫu & Sinh lý HĐTK Cấp cao</b>, <b>Tâm lý học Nhân cách</b>, <b>Tâm lý học Phát triển</b> và <b>Lịch sử Tâm lý học</b>. Tự động ghi nhận thời gian học thực tế, theo dõi tiến độ 494 thẻ flashcards 3D và ngân hàng 760 câu hỏi trắc nghiệm có giải thích chi tiết.
+          Nền tảng tích hợp đầy đủ 5 học phần nền tảng cử nhân: <b>Tâm lý học Đại cương</b>, <b>Giải phẫu & Sinh lý HĐTK Cấp cao</b>, <b>Tâm lý học Nhân cách</b>, <b>Tâm lý học Phát triển</b> và <b>Lịch sử Tâm lý học</b>. Tự động ghi nhận thời gian học thực tế, theo dõi tiến độ 502 thẻ flashcards 3D và ngân hàng 770 câu hỏi trắc nghiệm có giải thích chi tiết.
         </p>
       </div>
 
@@ -847,7 +847,7 @@
             <span>FLASHCARDS THUỘC LÒNG</span>
             <span class="stat-icon">🧠</span>
           </div>
-          <div class="stat-value" id="globalCardsCount">0 / 494</div>
+          <div class="stat-value" id="globalCardsCount">0 / 502</div>
           <div class="stat-sub" id="globalCardsPct">0% thuộc lòng (Spaced Rep.)</div>
           <div class="stat-progress">
             <div class="stat-fill" id="cardsFillBar" style="width: 0%; background: linear-gradient(90deg, var(--rose), var(--amber));"></div>
@@ -860,7 +860,7 @@
             <span>TRẮC NGHIỆM ĐÃ VƯỢT QUA</span>
             <span class="stat-icon">📝</span>
           </div>
-          <div class="stat-value" id="globalQuizCount">0 / 760</div>
+          <div class="stat-value" id="globalQuizCount">0 / 770</div>
           <div class="stat-sub" id="globalExamScore">Điểm thi thử TB: Chưa thi</div>
           <div class="stat-progress">
             <div class="stat-fill" id="quizFillBar" style="width: 0%; background: linear-gradient(90deg, var(--amber), var(--myelin));"></div>
@@ -1151,11 +1151,11 @@
             </div>
             <div class="stats-trio">
               <div class="stat-trio-item">
-                <strong id="cards-lstlh">0 / 96</strong>
+                <strong id="cards-lstlh">0 / 104</strong>
                 <span>Thẻ thuộc</span>
               </div>
               <div class="stat-trio-item">
-                <strong id="quiz-lstlh">0 / 90</strong>
+                <strong id="quiz-lstlh">0 / 100</strong>
                 <span>Câu đúng</span>
               </div>
               <div class="stat-trio-item">
@@ -1172,6 +1172,9 @@
           </a>
           <a href="./lstlg_index.html?mode=exam" class="btn-action-sub" title="Làm 10 đề thi thử chuẩn hóa (40 câu / 40 phút)">
             📝 Thi thử
+          </a>
+          <a href="./tuluanlstlh.index.html" class="btn-action-sub" title="Cẩm nang bài làm tự luận chuyên sâu chuẩn in ấn A4 (Hergenhahn, Worchel, Brennan)" style="border-color:var(--amber); color:var(--amber); font-weight:700;">
+            📑 Ôn Tự luận
           </a>
         </div>
       </div>
@@ -1283,7 +1286,7 @@
   <footer class="footer">
     <div class="wrap">
       <p>© 2026 Psychology Study Hub • Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM</p>
-      <p style="margin-top: 4px; font-size: 11.5px; color: var(--submuted);">Hệ thống ôn thi tương tác độc quyền • 5 Chuyên đề • 31 Bài học • 494 Thẻ Flashcards • 760 Câu hỏi Trắc nghiệm</p>
+      <p style="margin-top: 4px; font-size: 11.5px; color: var(--submuted);">Hệ thống ôn thi tương tác độc quyền • 5 Chuyên đề • 31 Bài học • 502 Thẻ Flashcards • 770 Câu hỏi Trắc nghiệm</p>
     </div>
   </footer>
 
@@ -1397,14 +1400,14 @@
         storeKey: 'lstlh_review_v1',
         timeKey: 'study_time_lstlh',
         lastAccessKey: 'last_accessed_lstlh',
-        totalCards: 96,
-        totalQuiz: 90,
+        totalCards: 104,
+        totalQuiz: 100,
         colorVar: 'var(--amber)'
       }
     ];
 
-    const GRAND_TOTAL_CARDS = 494;
-    const GRAND_TOTAL_QUIZ = 760;
+    const GRAND_TOTAL_CARDS = 502;
+    const GRAND_TOTAL_QUIZ = 770;
 
     // Format seconds into human readable string
     function formatDuration(sec) {
